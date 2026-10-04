@@ -45,6 +45,8 @@ import { GuideHost } from './ui/guide.js';
 import { installDeviceSupport } from './ui/device.js';
 import { LoadoutHost } from './screens/loadout.js';
 import { installLoadoutSync } from './ui/loadoutSync.js';
+import { installSkinsSync } from './ui/skins.js';
+import { PreloadHost } from './ui/preload.js';
 
 const RESTORE_GRACE_MS = 1500;
 const JOIN_DELAY_MS = 350;
@@ -275,6 +277,7 @@ function App() {
     <${UiHosts} />
     <${GuideHost} />
     <${LoadoutHost} />
+    <${PreloadHost} />
   </div>`;
 }
 
@@ -328,6 +331,9 @@ async function boot() {
 
   wireNet();
   installLoadoutSync({ net });
+  // 干员皮肤 (docs/SKINS.md): keeps the server's copy of this browser's skins current, and reloads the asset
+  // manifest when anyone on this server installs one (the section itself is rendered by screens/loadout.js).
+  installSkinsSync({ net });
   net.attachBrowserHooks();
   // Audio: unlock on first gesture, BGM follows the route / match phase (js/audio.js).
   installAudio({ getManifest: () => data.get('assets'), subscribe: store.subscribe, getState: store.get, selectRoute, settings: settingsStore.get() });

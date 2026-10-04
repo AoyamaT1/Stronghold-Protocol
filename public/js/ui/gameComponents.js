@@ -11,9 +11,10 @@ import {
 
 const cx = (...p) => p.flat().filter(Boolean).join(' ');
 
-/** Data files the in-match screens use. */
+/** Data files the in-match screens use. `skins` (docs/SKINS.md) belongs here because the 干员调配 overlay is
+ * reachable during a match (briefing / INFO_CHECK) and its 皮肤 section reads the catalogue. */
 export const GAME_FILES = ['config', 'assets', 'chess', 'bonds', 'items', 'bands', 'enemies', 'bosses', 'stages', 'tokens',
-  'choices', 'effects', 'garrisons', 'factions', 'local'];
+  'choices', 'effects', 'garrisons', 'factions', 'local', 'skins'];
 
 /**
  * Load every in-match data file; returns lookups (sync, null until loaded).

@@ -62,7 +62,7 @@ export const NET_DEFAULTS = Object.freeze({
  * Intents that also draw from the per-connection heavy bucket: g.watch (its reply is a large state resend, m.field) and
  * room.loadout (a ≤ 160-entry map validated against the game data; the client debounces its edits).
  */
-export const HEAVY_TYPES = new Set(['g.watch', 'room.loadout']);
+export const HEAVY_TYPES = new Set(['g.watch', 'room.loadout', 'room.skins', 'room.skin.install']);
 
 /** Close codes (see header). */
 export const CLOSE = Object.freeze({ REPLACED: 4001, HELLO_TIMEOUT: 4002, POLICY: 1008, SHUTDOWN: 1001 });
@@ -105,6 +105,8 @@ export class Session {
     this.resyncAt = -Infinity;
     /** @type {Record<string, { skill: number, module: string|null }> | null} checked operator loadout (lobby-owned, DESIGN §16) */
     this.loadout = null;
+    /** @type {Record<string, string> | null} chosen operator skins (lobby-owned, docs/SKINS.md): PUBLIC, unlike the loadout */
+    this.skins = null;
     /** @type {string} client address of the latest connection (logging) */
     this.addr = '?';
     /** @type {string | null} per-network limit key of the latest connection (null = not limited), see clientAddress */

@@ -226,11 +226,12 @@ describe('static http server', () => {
     const gzEtag = (await httpReq(srv.port, '/js/app.js', { headers: { 'accept-encoding': 'gzip' } })).headers.etag;
     assert.notEqual(gzEtag, etag, 'gzip variant has its own ETag');
 
-    // unversioned art/fonts/vendor: cached for a day (files can be rewritten in place by the asset tools)
+    // unversioned art/fonts/vendor: cached for 30 days (files can be rewritten in place by the asset tools; the
+    // client's preload panel, ui/preload.js, refills this cache and can force a re-download with cache:'reload')
     const asset = await httpReq(srv.port, '/assets/img/a.png');
-    assert.equal(asset.headers['cache-control'], 'public, max-age=86400');
+    assert.equal(asset.headers['cache-control'], 'public, max-age=2592000');
     const font = await httpReq(srv.port, '/fonts/f.woff2');
-    assert.equal(font.headers['cache-control'], 'public, max-age=86400');
+    assert.equal(font.headers['cache-control'], 'public, max-age=2592000');
     const assetV = await httpReq(srv.port, '/assets/img/a.png?v=abc');
     assert.match(assetV.headers['cache-control'], /immutable/);
     const assetRoot = await httpReq(srv.port, '/assets');

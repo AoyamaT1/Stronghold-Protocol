@@ -941,3 +941,14 @@
   --bk-c: var(--red-premium);
 }
 .crash__box h2 { font-size: .3rem; }
+
+/* ---- 预加载面板的临时地址警告 (docs/DEPLOY.md §2.2, ui/preload.js) ---------------------------------------------
+   Shown when the page sits on a rotating tunnel hostname: the HTTP cache is keyed by origin, so a preload there is
+   discarded on the next restart — for the host and for every friend. Warning beats letting it look like a bug. */
+.set-hint.lo-warn {
+  display: block; padding: .08rem .12rem; line-height: 1.7;
+  color: var(--amber, #f2bd3e);
+  background: rgba(242, 189, 62, .08);
+  border-left: 3px solid var(--amber, #f2bd3e);
+}
+.set-hint.lo-warn code { font-size: .12rem; color: var(--text-lo); }

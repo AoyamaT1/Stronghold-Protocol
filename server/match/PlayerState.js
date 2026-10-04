@@ -112,6 +112,10 @@ export class PlayerState {
     /** operator loadout (DESIGN §16): frozen { [baseChessId]: { skill, module } }, {} = every chess on its defaults */
     this.loadout = Object.freeze({});
     if (!this.isBot && seat.loadout) this.setLoadout(seat.loadout);
+    /** 皮肤 (docs/SKINS.md): frozen { [chessId]: skinId }, {} = every chess on its default model. Unlike the
+     * loadout these are PUBLIC (a teammate sees your skin), so they travel in Match.publicView(). */
+    this.skins = Object.freeze({});
+    if (!this.isBot && seat.skins) this.setSkins(seat.skins);
     this.shop = { level: 1, upgradePrice: this.gd.upgradeBase(1) ?? 0, slots: [], frozen: false, freeRefreshes: 0 };
     /** reward offers queue (merge rewards, special refreshes): { tier, source, label, slots: [{ kind, id, price, sold }] } */
     this.offers = [];
@@ -229,6 +233,33 @@ export class PlayerState {
     for (const [id, e] of Object.entries(res.loadout)) out[id] = Object.freeze({ skill: e.skill, module: e.module ?? null });
     this.loadout = Object.freeze(out);
     return true;
+  }
+
+  /**
+   * 皮肤 (docs/SKINS.md): replace this player's skin choices. `{ [chessId]: skinId }`; the ids come from
+   * data/skins.json on the client. Validation is deliberately light — an unknown or mismatched skinId cannot do
+   * anything but fall back to the operator's default model in spineEntry() — so only the shape and the chess id
+   * are checked here, and a malformed entry is dropped rather than rejecting the whole selection.
+   * @param {Record<string, string>|null} skins
+   * @returns {boolean} whether anything was accepted
+   */
+  setSkins(skins) {
+    if (this.isBot) return false;
+    const out = {};
+    if (skins && typeof skins === 'object' && !Array.isArray(skins)) {
+      for (const [id, skinId] of Object.entries(skins)) {
+        if (typeof skinId !== 'string' || !skinId) continue;
+        // Same gate the loadout uses (checkLoadout): a base, visible chess record. The key is the CHESS id
+        // (`chess_char_1_01_a`), which is what board pieces and the prep view carry — not the operator id.
+        const rec = this.gd.chess(id);
+        if (!rec || rec.isGolden || rec.visible === false || rec.isHidden || rec.isDiy || (rec.baseId && rec.baseId !== id)) continue;
+        out[id] = skinId;
+      }
+    }
+    this.skins = Object.freeze(out);
+    // skins are PUBLIC (a teammate sees your skin): markPrivate also flags the public view, so the change goes out
+    this.dirty();
+    return Object.keys(out).length > 0;
   }
 
   /** The skill index / module a chess record fights with under this player's loadout (DESIGN §16). */
@@ -1541,6 +1572,13 @@ export class PlayerState {
         const lo = this.loadoutFor(this.gd.chess(piece.id));
         u.skillIndex = lo.skillIndex;
         u.moduleId = lo.moduleId;
+        // 皮肤 (docs/SKINS.md): this player's choice for this chess, carried the same way the loadout is so it
+        // reaches the sim, the snapshot and every teammate's renderer. Absent = the operator's default model.
+        // setSkins stores only BASE chess ids, so a merged (golden) piece — whose id is its own — is looked up by
+        // baseId: a skin chosen before the merge survives it instead of silently reverting to the default model.
+        const baseId = (this.gd.chess(piece.id) || {}).baseId || piece.id;
+        const skin = this.skins[baseId] || this.skins[piece.id];
+        if (skin) u.skin = skin;
         if (carry && carry.has(piece.uid)) u.carryState = carry.get(piece.uid);
         units.push(u);
       } else if (piece.kind === 'token') {
@@ -1567,6 +1605,10 @@ export class PlayerState {
 
   pieceView(p, rc = null) {
     const rec = p.kind === 'item' ? this.gd.item(p.id) : p.kind === 'token' ? this.gd.token(p.id) : this.gd.chess(p.id);
+    // 皮肤 (docs/SKINS.md): the prep board / hand / temp views carry the skin too, so a piece shows it before it is
+    // deployed; baseId again, for a golden piece (setSkins keeps base ids only)
+    const baseId = (rec && rec.baseId) || p.id;
+    const skin = p.kind === 'chess' ? (this.skins[baseId] || this.skins[p.id] || null) : null;
     const v = {
       uid: p.uid,
       kind: p.kind,
@@ -1576,6 +1618,7 @@ export class PlayerState {
       items: p.kind === 'chess' ? (p.items || []).map((it) => ({ uid: it.uid, id: it.id })) : [],
       count: p.kind === 'token' ? (p.count || 1) : 1,
       ownerUid: p.kind === 'token' ? p.ownerUid ?? null : null,
+      ...(skin ? { skin } : {}),
     };
     if (rc) { v.row = rc[0]; v.col = rc[1]; v.dir = pieceDir(p); }
     return v;

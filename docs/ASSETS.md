@@ -137,7 +137,11 @@ All paths are URL paths relative to the site root, for example `/assets/char/ava
   generator: 'tools/fetch-assets.mjs',
   stats: { files, bytes, chars, charsWithBack, enemies, enemiesWithSpine, tokens, tokensWithSpine,
            spineModels, bonds, items, bands, skills, ui, sfxUnits },
-  chars:   { [charId]: { avatar, avatarE2?, portrait, portraitE2?, spine: { front: Spine, back?: Spine } } },
+  chars:   { [charId]: { avatar, avatarE2?, portrait, portraitE2?, spine: { front: Spine, back?: Spine },
+                         // 干员皮肤 (docs/SKINS.md): one entry per INSTALLED skin, keyed by the official skinId.
+                         // Installed on demand by tools/install-skins.mjs, never wholesale — an absent `skins` means
+                         // none, which is the default.
+                         skins?: { [skinId]: { avatar?, name, group, spine: { front: Spine, back?: Spine } } } } },
   enemies: { [enemyId]: { icon, spine?: Spine, spineAliasOf?: enemyId,
                           spineLocal?: { group, skel, atlas, textures, …Spine } } },
                           // spineLocal: an optional local-client model; file names in a data/local-assets.json group,

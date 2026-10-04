@@ -14,7 +14,12 @@ import { data } from '../data.js';
 import { audio } from '../audio.js';
 import { settingsStore } from './settings.js';
 
-const LOAD_TIMEOUT_MS = 12000;
+// The render engine is several MB of modules (PixiJS, pixi-spine, three.js and the whole render/ tree) pulled in
+// through import(); on a cold cache over a slow or tunnelled link that needs far longer than the original 12 s.
+// Timing out drops the player into the simplified DOM view for the rest of the match — and a reload "fixes" it
+// only because the modules are cached by then. The panel in ui/preload.js warms the *asset* cache; this raise
+// covers the code it cannot reach (module imports are not part of data/assets.json).
+const LOAD_TIMEOUT_MS = 45000;
 const METHODS = ['setStage', 'setCamera', 'setPrep', 'enterBattle', 'pushSnapshot', 'pushEvents', 'highlightTiles', 'on', 'resize', 'destroy'];
 // direction-step hooks (ui/facingWheel.js): optional — the wheel falls back to the engine's dev hooks when absent;
 // setPen (enemy preview pen list), prepField ({ kind, side, mirror } of the Final Assault prep), stripesUnder (the view

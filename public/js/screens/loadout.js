@@ -28,6 +28,9 @@ import {
   changedCount, skillLabel, moduleBadge, attrRows, skillTags,
 } from '../ui/loadoutModel.js';
 import { loadoutStore, openLoadout, closeLoadout, setEntries } from '../ui/loadoutSync.js';
+// 皮肤 (docs/SKINS.md): a self-contained section — everything it does lives in ui/skinPicker.js, so this screen
+// only names it. That matters because this file is one upstream is likely to rewrite.
+import { SkinSection } from '../ui/skinPicker.js';
 
 export { openLoadout, closeLoadout };
 
@@ -290,6 +293,7 @@ function Detail({ m, chess, golden, entries, onChange, onReset, locked }) {
         </div>
         ${modOpt ? html`<${ModuleInfo} m=${m} golden=${golden} opt=${modOpt} />` : null}
       </section>` : null}
+      <${SkinSection} chess=${chess} />
       ${locked ? html`<p class="lo-locknote"><${Icon} name="info" />本局的调配已锁定，修改将在下一局生效</p>` : null}
     </div>
   </aside>`;

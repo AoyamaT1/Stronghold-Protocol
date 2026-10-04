@@ -1,0 +1,5 @@
+{
+ "version": 1,
+ "note": "已安装的皮肤 id 列表（docs/SKINS.md）。默认空：素材管线只会下载这里列出的皮肤，其余 174 套留在 docs/research/08-skins.json 里，由 tools/install-skins.mjs 按需安装。这个文件是「装了什么」的唯一真源。",
+ "installed": []
+}

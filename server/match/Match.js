@@ -427,6 +427,27 @@ export class Match {
     return res;
   }
 
+  /**
+   * room.skins during the match (docs/SKINS.md): replace a player's chosen operator skins.
+   *
+   * Accepted in ANY phase, unlike the loadout directly above. The loadout is locked at INFO_CHECK because it
+   * changes what a unit does; a skin changes only what it looks like, and it is public — a teammate picking a
+   * different model mid-match is harmless. `markPublic` carries it to everyone on the next broadcast.
+   * @param {string} playerId
+   * @param {Record<string, string> | null} skins
+   * @returns {{ ok: true } | { error: string, detail?: string }}
+   */
+  setSkins(playerId, skins) {
+    const ps = this.players.get(playerId);
+    if (!ps || ps.isBot || ps.left) return fail(ERR.NOT_IN_ROOM);
+    let res = OK;
+    this.guard(() => {
+      ps.setSkins(skins);
+      this.markPublic();
+    });
+    return res;
+  }
+
   onDisconnect(playerId) {
     const ps = this.players.get(playerId);
     if (!ps || ps.isBot || this.disposed) return;
@@ -707,7 +728,9 @@ export class Match {
 
   markPublic() { this._pubDirty = true; }
   /** A player's state changed: its m.private and (throttled, deduplicated) m.public (level, board, bonds…). */
-  markPrivate(ps) { if (ps) { this._privDirty.add(ps); this._pubDirty = true; } }
+  // `_privDirty` is created after the player states (the PlayerState constructor may already mark itself dirty —
+  // setSkins does, seat.skins carrying a choice into a new match), so the guard is load-bearing, not defensive
+  markPrivate(ps) { if (ps && this._privDirty) { this._privDirty.add(ps); this._pubDirty = true; } }
 
   /** Send pending m.private (per player, only when changed) and m.public (throttled ≤ 10/s). */
   flush(forcePublic = false) {
@@ -831,6 +854,10 @@ export class Match {
         fieldId: this.fieldOf(ps),
         status: this.statusOf(ps),
         autoplay: ps.autoplay,
+        // 干员皮肤 (docs/SKINS.md): public on purpose — this is how a teammate sees your skin, and the reason the
+        // renderer reads info.skin off the unit rather than off the local player. Omitted when empty, which is
+        // the normal case: skins are installed one at a time, on demand, and most players install none.
+        ...(Object.keys(ps.skins).length ? { skins: ps.skins } : {}),
         // the LP this round's own battle will cost at settlement so far (COMBAT / 联防 only, omitted when 0)
         ...this._pendingLpView(ps),
       })),
@@ -890,6 +917,9 @@ export class Match {
         id: piece.uid, uid: piece.uid, kind: piece.kind === 'token' ? 'token' : 'op', side: 'ally', ownerId: ps.playerId, defId: piece.id,
         name: rec ? rec.name : piece.id, tier: rec && Number.isInteger(rec.tier) ? rec.tier : 1, golden: !!(rec && rec.isGolden),
         spine: assets.spine || (rec && rec.charId) || piece.id, avatar: assets.avatar || (rec && rec.charId) || piece.id,
+        // 皮肤 (docs/SKINS.md): built per player (ownerId above), so a scouted teammate's board shows THEIR skin.
+        // baseId first: setSkins stores base chess ids only, and a scouted board can field the merged (golden) piece
+        skin: piece.kind === 'chess' ? (ps.skins?.[rec?.baseId || piece.id] || ps.skins?.[piece.id]) : undefined,
         x: c, y: r, dir: pieceDir(piece), facing: pieceDir(piece) === 'LEFT' ? -1 : 1, maxHp: rec && rec.stats && Number.isFinite(rec.stats.maxHp) ? rec.stats.maxHp : 1,
         skillIndex: lo && Number.isInteger(lo.skillIndex) ? lo.skillIndex : undefined,
         moduleId: lo && typeof lo.moduleId === 'string' ? lo.moduleId : undefined,

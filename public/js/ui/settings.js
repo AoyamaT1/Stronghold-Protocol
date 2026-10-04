@@ -1,6 +1,6 @@
 // Player settings (BGM/SFX volume, mute, damage numbers, render quality): a tiny observable store
 // persisted in localStorage (`sp.pref.settings`), applied to the audio manager on every change, plus
-// the settings modal.
+// the settings modal. The modal is also where 素材预加载 (ui/preload.js) is opened from.
 
 import { useState } from '../../vendor/hooks.module.js';
 import { html, Modal, Button, Icon, MicroLabel } from './components.js';
@@ -8,6 +8,7 @@ import { createStore, useStore, loadPref, savePref } from '../store.js';
 import { sanitizeSettings } from './gameLogic.js';
 import { audio } from '../audio.js';
 import { openGuide } from './guide.js';
+import { PreloadButton } from './preload.js';
 import { detectFeatures } from './device.js';
 
 /** Settings store: { bgm, sfx, muted, damageNumbers, quality }. */
@@ -70,6 +71,10 @@ export function SettingsModal({ open, onClose }) {
           ${QUALITY.map(([id, label]) => html`<button key=${id} type="button" role="radio" aria-checked=${s.quality === id ? 'true' : 'false'}
             class=${s.quality === id ? 'is-on' : ''} onClick=${() => updateSettings({ quality: id })}>${label}</button>`)}
         </div>
+      </div>
+      <div class="set-row">
+        <span class="set-row__label">素材预加载<${MicroLabel}>PRELOAD<//></span>
+        <${PreloadButton} size="sm" />
       </div>
       ${touchUi
         ? html`<p class="set-hint">触屏操作：点击单位选中（撤退 / 出售）· 长按单位或卡牌查看详情 · 拖动部署后滑动选择朝向</p>`

@@ -111,9 +111,12 @@ export const COMPRESSIBLE = new Set([
 const GZIP_MIN_BYTES = 512;
 const GZIP_CACHE_MAX_FILE = 8 << 20;      // larger files are gzip-streamed on the fly
 const GZIP_CACHE_MAX_TOTAL = 96 << 20;
-// Asset URLs carry no content hash yet, and tools/fetch-assets.mjs / tools/vendor.mjs can rewrite files in
-// place (atlas + png + skel must stay consistent), so "long" is one day; revalidation after that is a cheap 304.
-const LONG_CACHE = 'public, max-age=86400';          // 1 day
+// Asset URLs carry no content hash, and tools/fetch-assets.mjs / tools/vendor.mjs can rewrite files in place
+// (atlas + png + skel must stay consistent), so a cached copy can outlive an update. "Long" is 30 days because
+// the client's preload panel (ui/preload.js) deliberately fills the cache: a one-day copy would expire between
+// sessions, costing a conditional request per file — hundreds of round trips on a tunnelled link. A stale copy
+// is recovered with that panel's 「清缓存重下」 (fetch with cache:'reload'), not by shortening this.
+const LONG_CACHE = 'public, max-age=2592000';        // 30 days
 const IMMUTABLE_CACHE = 'public, max-age=31536000, immutable';
 const LONG_CACHE_DIRS = ['assets', 'fonts', 'vendor']; // first path segment under public/
 const MAX_URL_LENGTH = 4096;
