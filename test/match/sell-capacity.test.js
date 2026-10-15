@@ -30,8 +30,7 @@ function equip(m, ps, owner, count) {
 }
 
 function fillStorage(ps) {
-  // Fill storage independently of the equipment-stock limit; the sold operator's real equipment remains unchanged.
-  while ([...ps.hand, ...ps.temp].some((p) => p === null)) assert.ok(ps.acquireItem('chess_item_2_03_e_b', { silent: true }));
+  while ([...ps.hand, ...ps.temp].some((p) => p === null)) assert.ok(ps.acquireItem(EQUIPMENT, { silent: true }));
 }
 
 function swapIntoTemp(m, ps, piece) {

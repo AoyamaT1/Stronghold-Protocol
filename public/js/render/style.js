@@ -143,6 +143,16 @@ export const HIT_TINT = Object.freeze({ phys: 0xffd9a0, arts: 0xc77dff, true: 0x
  *   once   a one-off cast, not an attack rhythm: the shooter's attack clip plays once at its own speed (render/spine.js
  *          SpineActor.attack / windUp) — 暴鸰's bomb drop
  */
+/** 丰川祥子's notes (fx/notes.js): glyph size per source in tiles — skill notes are a bit bigger/brighter than the talent's. */
+export const NOTE_SIZE = Object.freeze({
+  talent: Object.freeze({ head: 0.42, width: 0.38, halo: 0.72, haloA: 0.75 }),
+  skill: Object.freeze({ head: 0.52, width: 0.47, halo: 0.95, haloA: 0.88 }),
+});
+/** The note's EFFECT colour (halo, trail motes, parting sparks): rgb(197,62,70). */
+export const NOTE_FX = 0xc53e46;
+/** The note GLYPH's own colour: a pale tint of NOTE_FX so it doesn't sink into its own halo. */
+export const NOTE_INK = Object.freeze({ talent: 0xffe0e3, skill: 0xffeef1 });
+
 export const PROJ = Object.freeze({
   arrow: { look: 'tracer', speed: 14, tint: 0xfff6dc, glow: 0xffc45a, len: 1.05, width: 0.2, head: 0.36, muzzle: 0xffd27a, hit: 'spark' },
   bolt: { look: 'orb', speed: 11, tint: 0xf4e2ff, glow: 0xb36bff, len: 0.6, width: 0.34, head: 0.52, trail: 0xa35cff, muzzle: 0xc77dff, hit: 'arts' },
@@ -155,6 +165,10 @@ export const PROJ = Object.freeze({
   // 暴鸰's bomb (sim content/enemies/fly.js kitBombd; official projectile_bombd, speed 5): dropped from the drone, it falls
   // onto its target with a low arc and bursts where the sim's 'explode' blast goes off
   droneBomb: { look: 'shell', speed: 5, once: true, tint: 0xffe2c8, glow: 0xff5a3a, len: 0.6, width: 0.3, head: 0.5, trail: 0xff7a4a, arc: 0.35, smoke: 0x2e2824, hit: 'boom' },
+  // 丰川祥子's 音符 (b.snap `proj`, no 'atk' event): a floating music glyph + halo, no trail. `note` = her talent's,
+  // `noteSkill` = a skill's (bigger / brighter). fx/notes.js draws them; `look: 'note'` is what it keys on.
+  note: { look: 'note', speed: 2, tint: NOTE_INK.talent, glow: NOTE_FX, trail: NOTE_FX, ...NOTE_SIZE.talent, hit: 'arts' },
+  noteSkill: { look: 'note', speed: 2, tint: NOTE_INK.skill, glow: NOTE_FX, trail: NOTE_FX, ...NOTE_SIZE.skill, hit: 'arts' },
 });
 
 /** Status keys (b.ev 'status' + UF flags) → icon atlas key (render/textures.js) and colour. */

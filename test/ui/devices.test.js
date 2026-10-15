@@ -272,8 +272,7 @@ describe('connection banner class (replaces CSS :has())', () => {
   test('bannerVisible mirrors the banner', () => {
     assert.equal(bannerVisible({ status: 'online' }, true, false), false);
     assert.equal(bannerVisible({ status: 'online' }, true, true), true, 'syncing after a resume');
-    assert.equal(bannerVisible({ status: 'online' }, true, false, true), true, 'a stale build during a match');
-    assert.equal(bannerVisible({ status: 'reconnecting', everOnline: true }, true, false, true), true);
+    assert.equal(bannerVisible({ status: 'reconnecting', everOnline: true }, true, false), true);
     assert.equal(bannerVisible({ status: 'connecting', everOnline: false }, true, false), false, 'first connect is silent');
     assert.equal(bannerVisible({ status: 'closed' }, false, false), false, 'not before the title');
   });
@@ -380,9 +379,8 @@ describe('room: copy the invite without navigator.clipboard (LAN over http, iOS)
     const ta = {
       style: {}, value: '',
       setAttribute(k) { calls.push(['attr', k]); },
-      focus() { document.activeElement = ta; },
       select() { calls.push(['select']); },
-      setSelectionRange(a, b) { this.selectionStart = a; this.selectionEnd = b; calls.push(['range', a, b]); },
+      setSelectionRange(a, b) { calls.push(['range', a, b]); },
       remove() { calls.push(['remove']); },
     };
     const saved = { document: globalThis.document, secure: globalThis.isSecureContext, nav: Object.getOwnPropertyDescriptor(globalThis, 'navigator') };

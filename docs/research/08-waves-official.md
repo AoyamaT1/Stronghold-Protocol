@@ -347,32 +347,16 @@ Example B. Types DOT / TIMES / ELEMENT.
 
 The raw BFS chains and smoothed waypoints are in scratch `lanes_official.txt`.
 
-**Remake deviation (user playtest #2, 2026-09-29; narrowed after the community report D5, 2026-10-03).** The user
-reported the 战场#01 lower-gate enemies walking up the col-9 floor lane, where no operator can block them.
-`server/sim/grid.js` keeps every official route LENGTH and the official route itself unless the 2026-09-29
-road-over-floor preference route (equal-length ties to the chain with the fewest non-blockable floor / gate tiles,
-smoothing that never cuts across floor its grid route does not walk, the corner tiles of a diagonal step included)
-crosses strictly fewer non-blockable tiles and no more 深水区 (GitHub #375, 0.2.2: the 深水区 is non-blockable too, and
-on 战场#08(下半) the patrolling leaders had waded through two water tiles to dodge one floor tile); in that comparison a
-segment that only touches a floor tile's corner does not cross it. Used alone (0.1.0) the preference also bent official diagonals into L shapes — the D5 report after
-0.1.0: on 战场#04 the lower-gate enemies walked (9,10) → (9,8) → (10,8) instead of the official diagonal (9,10) →
-(10,7), which only brushes the corner of the floor (10,9). Lanes that still differ from the table above (21 of the 154
-stage × gate × field routes, test/sim/pathing-official.test.js):
-- act1 m01 #01, lower gate: (9,10) → (9,8) → **col 8 road up** → (12,8) → row 12 → col 4 → E (official: (9,9) → (12,8)
-  through the floor (10,9)); the 联防 partner routes pass the same exit.
-- Boss fields: the exits from (2,10) on 战场#01 / #02 avoid part of the arena's central floor; 战场#02's 联防 partner
-  lower gate avoids (12,17); the inactive 战场#07 (上半) 联防 partner upper gate takes row 9 instead of row 12's floor.
-- The inactive 战场#05 (上半): its 深水区 refuses deployment (player report #3 after 0.1.0) and the sim does not model the
-  特制水上平台 canoes over it (they only enter the prep's deploy map), so the water counts as non-blockable and 7 of its
-  routes take the floor lanes beside it (one non-blockable tile fewer than the official routes).
-  Floor the terrain forces stays (gates, (12,9) beside the upper gate, the col-9 floor where walls or a crate block the
-  road: #02 lower (10,9)/(11,9), #04 upper (11,9), #05 upper (11,9)/(10,9), #07 lower (10,9)).
+**Remake deviation (user playtest #2, 2026-09-29).** The user reported the 战场#01 lower-gate enemies walking up the
+col-9 floor lane, where no operator can block them. `server/sim/grid.js` keeps every official route LENGTH but breaks
+ties between equal-length routes towards the fewest non-blockable (floor / gate) tiles, and its smoothing never cuts
+across floor the grid route does not walk. Lanes that change against the table above:
+- act1 m01 #01, lower gate: (9,10) → (9,8) → **col 8 road up** → (12,8) → row 12 → col 4 → E (was col 9 floor).
+- act1 m04 #04, lower gate: (9,10) → (9,8) → (10,8) → **row 10** → (10,4) → (9,4) → E (no longer cuts across (10,9)).
+- Boss fields: the exits from (2,10) take the road on 战场#01 / #04 and the right half of 战场#05, and cross less floor on
+  战场#02 / #07. Floor the terrain forces stays (gates, (12,9) beside the upper gate, the col-9 floor where walls or a
+  crate block the road: #02 lower (10,9)/(11,9), #04 upper (11,9), #05 upper (11,9)/(10,9), #07 lower (10,9)).
   Full audit: test/sim/pathing-blockable.test.js.
-- Official again since D5 (0.1.0 took L routes there): 战场#04's lower gate (normal, 联防) and boss exits, the boss exit
-  (5,10) of 战场#05(下半), the boss exit (2,10) of 战场#07(下半) and the inactive 战场#06(上半). The diagonal first
-  step out of the (2,10) exit of 战场#07(下半) (and #06(上半)) passes its side tiles (2,9) / (2,11) at exactly
-  √0.5 ≈ 0.70711, just beyond the ground block radius 0.70709997 (PRTS 游戏数据基础 §阻挡半径), so an operator standing
-  there no longer catches those enemies; every other blocking tile of the 154 routes is unchanged.
 
 ### 3.3 What we do and the root cause of "upper-gate enemies walk the lower lane"
 
@@ -552,10 +536,10 @@ Everything in `docs/BALANCE.md` §4 (the tuned tables) and the `tools/balance.mj
 2. **Stat scaling and balance.**
    - Delete every `enemyHpMul`, `enemyAtkMul` and `bossHpMul` in `data/tuning.json`. Keep the `titles` block.
    - Remove the `soloMul` in `bountySpawns`.
-   - `config.bossHpScale`: co-op pool = `bloodPoint[difficulty]` with no alive-player factor; solo stays a flagged config value. (2026-10-01: × alive / 4 available behind `aliveScaling`, off, see §6 #7.) (2026-10-06: replaced by the owner's decision adopting PR #209 — `bloodPoint` × the players alive at the fight's start, solo × 1; `perPlayer: false` restores the fixed pool; DESIGN §25.13.4.)
+   - `config.bossHpScale`: co-op pool = `bloodPoint[difficulty]` with no alive-player factor; solo stays a flagged config value. (2026-10-01: × alive / 4 available behind `aliveScaling`, off, see §6 #7.)
    - Keep `enemyScale` (PRTS table) and the 终极 speed ×1.15 from R3.
    - Re-run `tools/balance.mjs --tuning off` only to report, not to tune.
-3. **Pathing** (`server/sim/grid.js`, `server/sim/ai.js`, `server/sim/Battle.js` — since 0.2.0 `server/sim/battle/spawns.js` / `tiles.js`):
+3. **Pathing** (`server/sim/grid.js`, `server/sim/ai.js`, `server/sim/Battle.js`):
    - Add `Grid.flowField(dest)` as in §3.4, cached per `(dest, version)`.
    - `planLeg` for WALK: follow the smoothed parents from the enemy's tile to the leg target and re-plan on version change. That is the same trigger as today.
    - Crates: `setObstacle` marks a cost-1000 obstacle-like tile, not an impassable one. The existing "blocked enemy attacks the crate" logic stays.
@@ -582,7 +566,7 @@ Everything in `docs/BALANCE.md` §4 (the tuned tables) and the `tools/balance.mj
 | # | Question | Default |
 |---|---|---|
 | 1 | Do 射击台 (act1 m03 (10,3)/(10,4)) and 土石结构 block ground movement? | Block [ASSUMED] |
-| 2 | Leader HP pool in solo, and in co-op with fewer than 4 alive players | co-op `bloodPoint` (× alive / 4 behind `aliveScaling`, off — ask the user, 2026-10-01); solo config value (flagged). Answered 2026-10-06 (the owner, PR #209): `bloodPoint` × the players alive at the fight's start, solo × 1 (DESIGN §25.13.4) |
+| 2 | Leader HP pool in solo, and in co-op with fewer than 4 alive players | co-op `bloodPoint` (× alive / 4 behind `aliveScaling`, off — ask the user, 2026-10-01); solo config value (flagged) |
 | 3 | Unit of `maxPlayTime` | Real seconds (×2 game) [ASSUMED] |
 | 4 | Exact 联防 predelay formula (`_CalculateActionPredelayConsiderUid`) | 0.5 s per owner [ASSUMED] |
 | 5 | DEF reduction in the 70 % / 80 % bases | HP/ATK only (下半 text) |

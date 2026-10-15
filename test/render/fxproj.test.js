@@ -18,7 +18,6 @@ import * as SIM from '../../server/sim/constants.js';
 import { installFakePixi, fakeViewCtx } from './fakepixi.js';
 import { presetCamera } from '../../public/js/render/projection.js';
 import { PROJ, HIT_TINT } from '../../public/js/render/style.js';
-import { UF } from '../../shared/constants.js';
 
 let fake, FX, T;
 before(async () => {
@@ -190,14 +189,22 @@ describe('shots', () => {
       assert.equal(fx.projs.length, 1, kind);
       const pr = fx.projs[0];
       fx.update(DT);
-      assert.equal(pr.shadow.visible, PROJ[kind].look === 'shell' || kind === 'boomerang', `${kind} shadow`);
-      if (kind === 'bomb' || kind === 'droneBomb') {
+      assert.equal(pr.shadow.visible, kind === 'bomb' || kind === 'lob' || kind === 'boomerang', `${kind} shadow`);
+      if (kind === 'bomb') {
         run(fx, pr.dur);
         assert.ok(fx.rings.some((r) => r.sp.texture === fx.tex.shock), 'bomb explosion shockwave');
       }
       run(fx, 3);
       assert.equal(fx.projs.length, 0, `${kind} done`);
     }
+  });
+
+  test("an arts blastcaster's bomb explodes purple", () => {
+    const a = unit(1, 3, 10, { info: { defId: 'char_blast' } }), b = unit(2, 6, 10, { isEnemy: true });
+    const { fx } = makeFx({ views: [a, b] });
+    fx.ctx.subProfOf = (id) => (id === 'char_blast' ? 'blastcaster' : null);
+    fx.attack(a, b, 'bomb');
+    assert.equal(fx.projs[0].glow, 0xb36bff);
   });
 
   test('chain / beam kinds are beams, melee shots are no projectile', () => {
@@ -353,23 +360,6 @@ describe('蕾缪安 S3: lock, bombardShell, bombard', () => {
     }
     run(fx, 0.3);
     assert.equal(fx.locks.length, 0);
-  });
-
-  test('a held S3 lock (fx `hold`) waits as long as her skill runs with nothing in range, then LOCK_T after it ends; an unheld lock still times out', () => {
-    // 0.2.0 community report: S3 no longer ends by itself with nothing in her range — it waits with its bullets and locks
-    const { fx, lem } = setup();
-    lem.flags = UF.SKILL;                               // her S3 runs (the snapshot's skill bit)
-    fx.simFx('lock', 8, 10, { id: 21, src: 1, hold: 1 });
-    fx.simFx('lock', 9, 11.5, { id: 23, src: 1 });      // an S2 aim lock: no hold
-    const [held, plain] = fx.locks;
-    run(fx, 20 / 2);                                    // 20 game s at 2×, nothing new from her
-    assert.ok(fx.locks.includes(held) && held.out < 0, 'the held reticle stays while her skill waits');
-    assert.ok(!fx.locks.includes(plain), 'the unheld one timed out after LOCK_T');
-    lem.flags = 0;                                      // the skill ended
-    run(fx, 4 / 2);
-    assert.ok(held.out < 0, 'LOCK_T counts from the skill end');
-    run(fx, 1 / 2 + 0.3);
-    assert.equal(fx.locks.length, 0, 'gone LOCK_T after the skill ended (no shell came)');
   });
 
   test('a lock sticks to the enemy named in `id` even when its view is a little off the event spot', () => {

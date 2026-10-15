@@ -16,36 +16,6 @@ export const hasChrome = () => existsSync(CHROME);
 
 const CHROME_ARGS = ['--no-sandbox', '--no-first-run', '--autoplay-policy=no-user-gesture-required', '--disable-background-timer-throttling',
   '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows', '--mute-audio', '--force-device-scale-factor=1'];
-/** The CDP protocol timeout of every Client's browser: one DevTools call that takes longer fails (a hung page fails fast). */
-export const PROTOCOL_TIMEOUT_MS = 90000;
-
-/**
- * `page.waitForFunction` for a wait that may outlast PROTOCOL_TIMEOUT_MS. Puppeteer awaits the whole poll inside ONE
- * `Runtime.callFunctionOn`, so a predicate that is still false when the protocol timeout strikes rejects the wait with the
- * bare "Waiting failed" (cause: "Runtime.callFunctionOn timed out") long before the wait's own `timeout` — e.g. an own
- * battle at 1× that lasts longer than 90 s. This polls the same predicate in slices shorter than the protocol timeout until
- * `timeout`: the condition and the deadline stay the same. Resolves to the predicate's JSHandle, rejects with a
- * TimeoutError once `timeout` is over and at once with any other error.
- * @param {{ waitForFunction: Function }} page
- * @param {Function|string} fn
- * @param {{ timeout?: number, polling?: number|string, slice?: number }} [opts]
- * @param {...any} args passed to `fn` as with page.waitForFunction
- */
-export async function waitForFunctionLong(page, fn, { timeout = 30000, polling = 250, slice = PROTOCOL_TIMEOUT_MS / 3 } = {}, ...args) {
-  const deadline = Date.now() + timeout;
-  for (;;) {
-    try {
-      return await page.waitForFunction(fn, { timeout: Math.max(1, Math.min(slice, deadline - Date.now())), polling }, ...args);
-    } catch (e) {
-      if (e?.name !== 'TimeoutError') throw e;
-      if (Date.now() >= deadline) {
-        const err = new Error(`Waiting failed: ${timeout}ms exceeded`, { cause: e });
-        err.name = 'TimeoutError';
-        throw err;
-      }
-    }
-  }
-}
 
 /** A free TCP port on 127.0.0.1. */
 export function freePort() {
@@ -60,12 +30,9 @@ export function freePort() {
  * Start the real server (`node server/index.js`, or test/e2e/fastServer.mjs with `fast` speed-ups) on a free port (or
  * `port`: e.g. the port of a server just stopped — a server restart the open clients reconnect to).
  * @param {{ port?: number, fast?: { timerScale?: number, combatSpeed?: number, startRound?: 'boss'|'hidden'|number, kit?: number, chess?: string[],
- *   items?: string[], idleBots?: boolean, kits?: string[][], botChess?: string[], autoPlace?: boolean, eliminate?: number[], stage?: string,
- *   finishAfter?: number, slowSpawns?: string } }} [opts]
+ *   items?: string[], idleBots?: boolean, kits?: string[][], botChess?: string[], autoPlace?: boolean, eliminate?: number[] } }} [opts]
  *   kits: per-human starter kits (seat order); botChess: the AI seats' kit; autoPlace: the kits go onto the board at the
- *   first prep; eliminate: humans (seat order) eliminated at the jump; stage: the stage of every match; finishAfter: the
- *   match ends (RESULT) once that round has settled; slowSpawns: '<humanIdx>:<factor>' — that human's normal battles
- *   spawn at factor × the scheduled times — fastServer.mjs hooks
+ *   first prep; eliminate: humans (seat order) eliminated at the jump — fastServer.mjs hooks
  * @returns {Promise<{ base: string, port: number, logs: string[], stop: (o?: { hard?: boolean }) => Promise<void> }>}
  */
 export async function startRealServer(opts = {}) {
@@ -88,10 +55,6 @@ export async function startRealServer(opts = {}) {
     if (opts.fast.botChess?.length) env.SP_BOT_CHESS = opts.fast.botChess.join(',');
     if (opts.fast.autoPlace) env.SP_AUTO_PLACE = '1';
     if (opts.fast.eliminate?.length) env.SP_ELIMINATE = opts.fast.eliminate.join(',');
-    if (opts.fast.stage) env.SP_STAGE = String(opts.fast.stage);
-    if (opts.fast.level) env.SP_START_LEVEL = String(opts.fast.level);
-    if (opts.fast.finishAfter) env.SP_FINISH_AFTER = String(opts.fast.finishAfter);
-    if (opts.fast.slowSpawns) env.SP_SLOW_SPAWNS = String(opts.fast.slowSpawns);
   }
   const child = spawn(process.execPath, [entry], { cwd: ROOT, env, stdio: ['ignore', 'pipe', 'pipe'] });
   const logs = [];
@@ -107,13 +70,6 @@ export async function startRealServer(opts = {}) {
       if (res.ok) break;
     } catch { /* not up yet */ }
     if (Date.now() - t0 > 20000) { child.kill('SIGKILL'); throw new Error(`server did not start:\n${logs.join('\n')}`); }
-    await sleep(150);
-  }
-  // the content-hash index (server/http/assetIndex.js, built ~1 s after the start): wait for it, so a page loads the
-  // served manifest's /assets/~<hash>/… URLs like a player's would (none: SP_ASSET_INDEX=0); bounded, never fatal
-  for (const t1 = Date.now(); Date.now() - t1 < 20000;) {
-    const h = await fetch(`${base}/healthz?traffic=1`).then((r) => r.json(), () => null);
-    if (!h || !h.assetHashes || h.assetHashes.ready) break;
     await sleep(150);
   }
   return {
@@ -139,7 +95,7 @@ export class Client {
 
   async open(query = '') {
     mkdirSync(OUT, { recursive: true });
-    this.browser = await this.puppeteer.launch({ executablePath: CHROME, headless: true, args: CHROME_ARGS, protocolTimeout: PROTOCOL_TIMEOUT_MS });
+    this.browser = await this.puppeteer.launch({ executablePath: CHROME, headless: true, args: CHROME_ARGS, protocolTimeout: 90000 });
     const [first] = await this.browser.pages();
     const page = first || await this.browser.newPage();
     this.page = page;
@@ -196,42 +152,18 @@ export class Client {
     throw new Error(`${this.label}: timed out waiting for ${what} (last: ${JSON.stringify(last)})`);
   }
 
-  async close() {
-    const child = this.browser?.process();
-    await this.browser?.close().catch(() => {});
-    // Chrome's crash/update helpers can inherit stderr after the launched browser exits. Release only our
-    // exited child's pipes; otherwise readline keeps the test alive after all its assertions have finished.
-    if (child && (child.exitCode != null || child.signalCode != null)) {
-      for (const stream of child.stdio) stream?.destroy?.();
-    }
-  }
+  async close() { await this.browser?.close().catch(() => {}); }
 
   /** Real mouse click on the `nth` visible, uncovered element matching `sel` whose text includes `text`. */
   async click(sel, text = null, { timeout = 15000, optional = false, nth = 0, button = 'left', any = false } = {}) {
     const t0 = Date.now();
     while (Date.now() - t0 < timeout) {
       const pt = await this.point(sel, text, nth, any);
-      if (pt) {
-        await this.page.mouse.click(pt.x, pt.y, { button });
-        // 准备 with funds left asks first (剩余资金). Accept it so a test that means "start the fight" is not stuck in PREP.
-        if (sel === '.readybtn') await this.confirmFundsLeft();
-        return true;
-      }
+      if (pt) { await this.page.mouse.click(pt.x, pt.y, { button }); return true; }
       await sleep(150);
     }
     if (optional) return false;
     throw new Error(`${this.label}: nothing clickable for ${sel}${text ? ` "${text}"` : ''}`);
-  }
-
-  /** If the 剩余资金 confirm is up, press 准备就绪. No dialog is a no-op. */
-  async confirmFundsLeft() {
-    await sleep(250);
-    const open = await this.page.evaluate(() => {
-      const t = document.querySelector('.modal__title');
-      return !!(t && t.textContent.includes('剩余资金'));
-    });
-    if (!open) return false;
-    return this.click('.modal__actions button', '准备就绪', { timeout: 4000 });
   }
 
   /** Centre of the nth visible, enabled (unless `any`), uncovered match (or null). */
@@ -286,23 +218,12 @@ export class Client {
   viewKind() { return this.page.evaluate(() => globalThis.__SP_VIEW__?.kind ?? null); }
   viewStats() { return this.page.evaluate(() => { try { return globalThis.__SP_VIEW__?.raw?.stats?.() ?? null; } catch { return null; } }); }
 
-  /** Client point to grab a prep piece (`at` = fraction of the piece rect's height, from the top). Waits (up to 2.5 s)
-   *  until the piece is drawn and holds still: a piece bought this frame has no rect yet, and one still sliding to its
-   *  tile (0.22 s) would be grabbed over a neighbouring tile — picking is by the tile under the pointer. */
-  async piecePoint(uid, at = 0.72) {
-    const read = () => this.page.evaluate((uid, at) => {
+  /** Client point to grab a prep piece (`at` = fraction of the piece rect's height, from the top). */
+  piecePoint(uid, at = 0.72) {
+    return this.page.evaluate((uid, at) => {
       const r = globalThis.__SP_VIEW__?.pieceScreenRect(uid);
-      if (!r || !(r.width >= 4)) return null;
-      const x = r.left + r.width / 2, y = r.top + r.height * at;
-      return x >= 0 && y >= 0 && x <= innerWidth && y <= innerHeight ? { x, y } : null;
+      return r && r.width > 0 ? { x: r.left + r.width / 2, y: r.top + r.height * at } : null;
     }, uid, at);
-    let last = null;
-    for (const end = Date.now() + 2500; Date.now() < end; await sleep(80)) {
-      const p = await read();
-      if (p && last && Math.abs(p.x - last.x) < 1.5 && Math.abs(p.y - last.y) < 1.5) return p;
-      last = p;
-    }
-    return last;
   }
 
   /** Record the view's pieceDrop events (for diagnostics) and return + clear them. */
@@ -353,48 +274,25 @@ export class Client {
     await m.up();
   }
 
-  /**
-   * An empty legal tile for a piece: the client's own legality (gameLogic/placement.js boardTargets over the screen's
-   * placement context — the stage's deploy tiles under the player's terrain 机变 cards and devices, the boss field's
-   * half in a boss round), so a tile a round's 机变 card took away is never chosen; the data's plain deploy tiles
-   * (melee on melee tiles, ranged anywhere) when that module cannot be read.
-   */
+  /** An empty legal tile for a piece (mirrors the deploy rules: melee on melee tiles, ranged anywhere). */
   freeTileFor(uid, { prefer = 'gate' } = {}) {
-    return this.page.evaluate(async (uid, prefer) => {
+    return this.page.evaluate((uid, prefer) => {
       const { store, data } = globalThis.__SP__;
       const s = store.get();
       const priv = s.match.private;
-      const pub = s.match.public;
-      const st = data.lookup('stages', pub.stageId);
+      const st = data.lookup('stages', s.match.public.stageId);
       const piece = [...priv.hand, ...priv.temp, ...priv.board].find((p) => p && p.uid === uid);
       if (!piece || !st?.deployTiles?.normal) return null;
-      const order = (list) => {
-        const a = list.slice();
-        if (prefer === 'gate') a.sort((x, y) => (y[1] - x[1]) || (x[0] - y[0]));
-        else a.sort((x, y) => (x[1] - y[1]) || (y[0] - x[0]));
-        return a;
-      };
-      const used = new Set(priv.board.map((p) => `${p.row},${p.col}`));
-      try {
-        const P = await import('/js/ui/gameLogic/placement.js');
-        const C = await import('/js/ui/gameLogic/camera.js');
-        const ctx = P.placementContext({
-          priv, stage: st, editable: true, field: C.deployFieldOf(pub, s.me?.playerId ?? s.me),
-          getChess: (id) => data.lookup('chess', id), getToken: (id) => data.lookup('tokens', id),
-          getItem: (id) => data.lookup('items', id), getEffect: (id) => data.lookup('effects', id), backups: data.get('backups'),
-        });
-        const legal = P.boardTargets(ctx, uid).legal.filter(([r, c]) => !used.has(`${r},${c}`));
-        if (legal.length) { const [r, c] = order(legal)[0]; return { row: r, col: c }; }
-        return null;
-      } catch { /* the plain deploy tiles below */ }
       const rec = piece.kind === 'token' ? data.lookup('tokens', piece.id) : data.lookup('chess', piece.id);
       const melee = rec?.position === 'MELEE';
       const dt = st.deployTiles.normal;
       const tiles = melee ? dt.melee : [...dt.rangedOnly, ...dt.melee];
+      const used = new Set(priv.board.map((p) => `${p.row},${p.col}`));
       const free = tiles.filter(([r, c]) => !used.has(`${r},${c}`));
       if (!free.length) return null;
-      const [r, c] = order(free)[0];
-      return { row: r, col: c };
+      if (prefer === 'gate') free.sort((a, b) => (b[1] - a[1]) || (a[0] - b[0]));
+      else free.sort((a, b) => (a[1] - b[1]) || (b[0] - a[0]));
+      return { row: free[0][0], col: free[0][1] };
     }, uid, prefer);
   }
 

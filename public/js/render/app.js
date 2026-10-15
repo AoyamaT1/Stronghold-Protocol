@@ -145,6 +145,7 @@ import { IDENTITY, bossPrepField, tilesToDisp, leaderStand } from './prepfield.j
 import { pickOnTile, pickBattle, hitTiles } from './pick.js';
 import { promotionsOf } from './promote.js';
 import { ensurePixi } from './app/pixi.js';
+import { skinFor } from '../ui/skins.js';
 import { pieceDirOf, pickUnitOf } from './app/pick.js';
 import { CAMERA_MS, BOARD3D_STABLE_MS, BOARD3D_RETRY_MS, PEN_CAMERA_MS, RANGE_GROUPS, LEADER_HIT_STYLE, DRAG_HOLD_TILES, CHAIN_KINDS, DROP_PENDING_MS, DEPLOY_REPLAY_MS } from './app/tune.js';
 import { boardPreference, switchableBox, bandFor, fieldRows, boardArea, viewKind, penShown, leaderShown } from './app/view.js';
@@ -357,6 +358,16 @@ export async function createFieldView(host, options = {}) {
     fieldRect: () => (mode === 'battle' && battleMeta ? battleMeta.rect : null),
     subProfOf: (defId, info = null) => ((info && info.standInFor && data.standIn(defId)) || (info && info.diy && data.diy(defId, info.diy)) || data.chess(defId))?.subProfessionId || null,
     view: (id) => views.get(id) || null,
+    // the field views, for content-owned notes (render/fx/notes.js `_noteOwner` resolves the unit a note was fired by,
+    // so two 丰川祥子 never share one launch-sound limiter key). Keyed by unit id; x/y are read off the view.
+    units: () => views,
+    // the range class of an attacker (data.chess(defId).attackKind): a ranged profile with no projectile visual of its
+    // own (丰川祥子's note-carrying attack, ai.js `noAttackVis`) is no melee slash either (fx/projectiles.js attack)
+    rangedOf: (defId, info = null) => {
+      const rec = (info && info.standInFor && data.standIn(defId)) || (info && info.diy && data.diy(defId, info.diy))
+        || data.chess(defId) || data.token(defId);
+      return !!(rec && rec.attackKind === 'ranged');
+    },
     screenSize: size,
     fieldTop: () => {
       const R = camRect();
@@ -710,9 +721,13 @@ export async function createFieldView(host, options = {}) {
     const pick = chess && chess.isDiy ? diyPicks[chess.baseId || chess.chessId] : null;
     const dr = pick ? data.diy(piece.id, pick) : null;
     const rec = si || dr || chess;
+    const baseId = chess?.baseId || piece.id;
     return {
       kind: 'op', side: 'ally', defId: piece.id,
       spine: rec?.assets?.spine || rec?.charId || null, avatar: rec?.assets?.avatar || rec?.charId || null,
+      // 皮肤 (docs/SKINS.md): present when the prep unit came from the server (Match.prepView); a golden piece's own
+      // id is not a skin key (setSkins only accepts base chess ids), so fall back to this client's own choice
+      skin: piece.skin ?? skinFor(baseId) ?? skinFor(piece.id) ?? null,
       tier: chess?.tier || piece.tier || 1, golden: !!(piece.golden || chess?.isGolden), dir,
       ...(si ? { standInFor: si.standInFor } : null),
       ...(dr ? { diy: { charId: pick.charId, skillIndex: pick.skillIndex ?? null, uniEquipId: pick.uniEquipId ?? null } } : null),
@@ -796,7 +811,7 @@ export async function createFieldView(host, options = {}) {
       e.key = key;
       const info = pieceInfo(e.piece, e.area);
       // (the model is part of it: a piece whose body changes — a merge, an own 补位 / 自选 setting arriving — is rebuilt)
-      const sig = `${info.kind}|${info.defId}|${info.golden ? 1 : 0}|${info.spine || ''}`;
+      const sig = `${info.kind}|${info.defId}|${info.golden ? 1 : 0}|${info.spine || ''}|${info.skin || ''}`;
       let v = views.get(key);
       if (v && v._sig !== sig) { dropView(key); v = null; }
       const w = slotWorld(e);
@@ -1767,6 +1782,18 @@ export async function createFieldView(host, options = {}) {
     // a struggling device (load level ≥ 2) may refresh a big crowd more rarely (10 Hz at worst)
     return Math.min(loadLevel >= 2 ? 6 : 4, Math.max(2, Math.ceil(n / (base * 0.75))));
   }
+
+  let paused = false;
+  function setPaused(on) {
+    const next = Boolean(on);
+    if (paused === next) return;
+    paused = next;
+    if (!paused) {
+      lastNow = performance.now();
+      if (interp) interp.lastNow = performance.now() / 1000;
+    }
+  }
+
   function frame() {
     if (destroyed) return;
     const now = performance.now();
@@ -1783,10 +1810,10 @@ export async function createFieldView(host, options = {}) {
     }
     const dtRaw = (now - lastNow) / 1000;
     lastNow = now;
-    const dt = Math.min(0.1, Math.max(0, dtRaw));
-    if (dtRaw < 0.25) frameMs = frameMs * 0.9 + dtRaw * 1000 * 0.1;
+    const dt = paused ? 0 : Math.min(0.1, Math.max(0, dtRaw));
+    if (!paused && dtRaw < 0.25) frameMs = frameMs * 0.9 + dtRaw * 1000 * 0.1;
     fps = 1000 / Math.max(1, frameMs);
-    adaptLoad(dtRaw);
+    if (!paused) adaptLoad(dtRaw);
     vp.width = Math.max(1, host.clientWidth || 1); vp.height = Math.max(1, host.clientHeight || 1);
     clock += dt;
     if ((globalThis.devicePixelRatio || 1) !== lastDpr) { lastDpr = globalThis.devicePixelRatio || 1; resize(); }
@@ -1799,11 +1826,14 @@ export async function createFieldView(host, options = {}) {
       tiles.project(cam);
       updateBackdrop(clock);
       if (mode === 'battle') {
-        const renderT = interp.update(now / 1000);
+        const renderT = paused ? interp.renderT : interp.update(now / 1000);
         if (Number.isFinite(renderT)) {
-          processEvents(renderT);
+          if (!paused) processEvents(renderT);
           syncBattle(renderT);
-          windUpAttacks(renderT);
+          if (!paused) windUpAttacks(renderT);
+          // content-owned projectiles (丰川祥子's notes) have no 'atk' event: drawn from the snapshot's `proj` list
+          // instead (render/fx/notes.js syncNotes — an empty list fades them all out)
+          fx.syncNotes(interp.projAt(renderT));
         }
       } else if (mode === 'prep') {
         for (const [key, pd] of pending) {
@@ -1908,6 +1938,8 @@ export async function createFieldView(host, options = {}) {
     enterBattle,
     pushSnapshot,
     pushEvents,
+    setPaused,
+    get paused() { return paused; },
     /**
      * Client-side combat glue (DESIGN §14): battle frames come from the local simulation (public/js/battle/runner.js)
      * every animation frame instead of the network, so the render clock trails them by ~2 frames (not the 100 ms

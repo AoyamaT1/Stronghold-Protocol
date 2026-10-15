@@ -869,7 +869,54 @@ const FX_DRAW = {
     g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.5, 'rgba(255,255,255,1)'); g.addColorStop(1, 'rgba(255,255,255,0)');
     c.fillStyle = g; c.fillRect(x + 1, y, w - 2, h);
   }],
+  // 丰川祥子's note glyphs (fx/notes.js NOTE_FRAMES): 八分音符 note, 十六分音符 note16, 高音谱号 treble. Drawn white
+  // (tinted at draw time). The y=256 row is free in the 1024×512 FX atlas.
+  note: [128, 256, 128, 128, (c, x, y, w) => drawNote(c, x, y, w, 1)],
+  note16: [256, 256, 128, 128, (c, x, y, w) => drawNote(c, x, y, w, 2)],
+  treble: [384, 256, 128, 128, (c, x, y, w) => drawTreble(c, x, y, w)],
 };
+
+/** 音符 (八分/十六分) — one FX atlas cell; `flags` = number of flags off the stem (1 = 八分, 2 = 十六分). */
+function drawNote(c, x, y, w, flags) {
+  const cx = x + w / 2, cy = y + w / 2;
+  radial(c, cx, cy, w * 0.42, [[0, 'rgba(255,255,255,0.42)'], [0.5, 'rgba(255,255,255,0.14)'], [1, 'rgba(255,255,255,0)']]);
+  c.save(); c.translate(cx, cy);
+  c.fillStyle = 'rgba(255,255,255,0.97)';
+  c.save(); c.translate(-12, 27); c.rotate(-0.36); c.beginPath(); c.ellipse(0, 0, 24, 17, 0, 0, Math.PI * 2); c.fill(); c.restore();
+  c.lineCap = 'round'; c.lineWidth = 7; c.strokeStyle = 'rgba(255,255,255,0.97)';
+  c.beginPath(); c.moveTo(10, 26); c.lineTo(10, -36); c.stroke();
+  for (let k = 0; k < flags; k++) {
+    const drop = k * 19;
+    c.beginPath(); c.moveTo(13, -37 + drop); c.quadraticCurveTo(40, -28 + drop, 45, -1 + drop);
+    c.quadraticCurveTo(33, -21 + drop, 13, -14 + drop); c.closePath(); c.fill();
+  }
+  radial(c, -14, 29, 12, [[0, 'rgba(255,255,255,1)'], [1, 'rgba(255,255,255,0)']]);
+  c.restore();
+}
+
+/** 高音谱号 (treble / G clef) — one FX atlas cell; a stroked drawing. */
+function drawTreble(c, x, y, w) {
+  const cx = x + w / 2, cy = y + w / 2;
+  radial(c, cx, cy, w * 0.42, [[0, 'rgba(255,255,255,0.42)'], [0.5, 'rgba(255,255,255,0.14)'], [1, 'rgba(255,255,255,0)']]);
+  c.save(); c.translate(cx, cy);
+  c.strokeStyle = 'rgba(255,255,255,0.97)'; c.lineCap = 'round'; c.lineJoin = 'round';
+  c.lineWidth = 6;
+  c.beginPath();
+  c.moveTo(-18, 46);
+  c.quadraticCurveTo(-8, 46, -4, 38);
+  c.quadraticCurveTo(2, 12, 3, -20);
+  c.quadraticCurveTo(4, -36, 3, -44);
+  c.stroke();
+  c.lineWidth = 7;
+  c.beginPath();
+  c.moveTo(3, -44);
+  c.bezierCurveTo(22, -40, 24, -18, 6, -8);
+  c.bezierCurveTo(26, -2, 30, 22, 10, 34);
+  c.bezierCurveTo(-10, 45, -26, 30, -22, 12);
+  c.bezierCurveTo(-19, 2, -8, -6, 2, -8);
+  c.stroke();
+  c.restore();
+}
 
 function radial(c, cx, cy, r, stops) {
   const g = c.createRadialGradient(cx, cy, 0, cx, cy, r);

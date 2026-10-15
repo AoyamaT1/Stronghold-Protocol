@@ -137,7 +137,11 @@ function canListen(port, host) {
 
 /** 'ours' (our server answers /healthz), 'free', 'busy' (another program) or 'denied'. */
 export async function probePort(port, host = '::') {
-  const r = await getJson(`http://127.0.0.1:${port}/healthz`);
+  let r = await getJson(`http://127.0.0.1:${port}/healthz`);
+  if (!r.json || r.json.ok !== true || !('uptimeSec' in r.json)) {
+    const r6 = await getJson(`http://[::1]:${port}/healthz`);
+    if (r6.json && r6.json.ok === true && 'uptimeSec' in r6.json) r = r6;
+  }
   if (r.json && r.json.ok === true && 'uptimeSec' in r.json) return { state: 'ours', health: r.json };
   let l = await canListen(port, host);
   // The same three errors startServer treats as "this host has no IPv6": don't report the port busy for that.
@@ -233,10 +237,20 @@ async function main() {
   // the release's file list (every package has one; art is setup's and is checked below)
   const inst = checkInstall(ROOT);
   const instLabel = `文件校验 ${MANIFEST_FILE}`;
+  const installedMods = (() => {
+    try {
+      const p = path.join(ROOT, 'data', 'mods-installed.json');
+      const j = JSON.parse(fs.readFileSync(p, 'utf8'));
+      return Array.isArray(j.installed) ? j.installed : [];
+    } catch { return []; }
+  })();
   if (inst.state === 'none') row('skip', instLabel, '没有：源码目录，不校验');
   else if (inst.state === 'broken') row('warn', instLabel, `无法读取（${inst.error}）→ 重新解压同一版本的整合包`);
   else if (inst.state === 'ok') row('ok', instLabel, `${inst.checked} 个文件与 v${inst.app} 一致`);
-  else {
+  else if (installedMods.length > 0) {
+    const bad = [...inst.runtime, ...inst.other];
+    row('ok', instLabel, `${bad.length} 个文件受模组驱动（已激活 Mod: ${installedMods.join(', ')}）`);
+  } else {
     const bad = [...inst.runtime, ...inst.other];
     const eg = bad.slice(0, 3).join(' ') + (bad.length > 3 ? ' …' : '');
     row(inst.runtime.length ? 'err' : 'warn', instLabel, `${bad.length} 个文件与 v${inst.app} 不一致或缺失（例：${eg}）`

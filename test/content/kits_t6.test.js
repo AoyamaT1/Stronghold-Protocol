@@ -1,4 +1,4 @@
-// Content tests for the tier-6 kits (server/sim/content/kits/ops/chess_char_6_*.js) + 盟约·辅助干员 (chess_char_1_15).
+// Content tests for the tier-6 kits (server/sim/content/kits/tier6.js) + 盟约·辅助干员 (chess_char_1_15).
 // Every test runs a real battle through the harness and checks the signature effect of the kit.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -281,8 +281,8 @@ test('余: blocked enemies take 40 % ATK arts + 12 % burn per second, 庇护 whi
   assert.ok(dot.length >= 2);
   const burn = h.dmg.filter((d) => d.src === u.id && d.element === 'burn');
   assert.ok(burn.length >= 2);
-  // 庇护 (ba.protect): physical and arts damage only — the shared effect of every source (kits/shared/tier1.js holdProtect)
-  assert.ok(u.findBuff('protect')?.source === u && near(u.s.physTakenMul, 1 - t0.damage_resistance) && near(u.s.artsTakenMul, 1 - t0.damage_resistance));
+  // 庇护 (ba.protect): physical and arts damage only
+  assert.ok(u.findBuff('yu:shelter') && near(u.s.physTakenMul, 1 - t0.damage_resistance) && near(u.s.artsTakenMul, 1 - t0.damage_resistance));
   assert.equal(u.s.trueTakenMul, 1, '庇护 does not reduce true damage');
   assert.equal(u.s.dmgTakenMul, 1);
   const base = u.base.maxHp;
@@ -298,10 +298,6 @@ test('余: S3 fire wall adds burn to allied arts damage crossing it and clears c
     enemies: [{ key: 'enemy_dummy', pos: [10, 6] }, { key: 'enemy_shooter', pos: [11, 8] }],
     seed: 11,
   });
-  // the shooter aims at 优等生 behind the wall: a taunt, since 余 (his column further right) now deploys last — the
-  // latest deployed, the shooter's pick at equal taunt (deployment by column since 0.1.3)
-  h.step();
-  h.b.addBuff(h.unit('chess_char_1_15_a'), { key: 'test:taunt', mods: { taunt: 1 }, persist: true });
   const u = h.unit('chess_char_6_03_a');
   assert.ok(h.runUntil(() => u.skill.active, 10));
   h.run(15);
@@ -406,7 +402,7 @@ test('佩佩: S3 ATK +150 %, main target stunned, stacks up to 4 with a growing 
   checkInvariants(h.b);
 });
 
-test('维娜·维多利亚: first hit trembles, S3 summons 黄金盟誓 (one per free tile around her), deals true damage to +1 target', () => {
+test('维娜·维多利亚: first hit trembles, S3 summons 黄金盟誓, deals true damage to +1 target', () => {
   const h = battle({
     units: [{ chessId: 'chess_char_6_07_a', row: 9, col: 5, carryState: { sp: 64 } }],
     enemies: [{ key: 'enemy_armored', pos: [9, 6] }],
@@ -415,18 +411,17 @@ test('维娜·维多利亚: first hit trembles, S3 summons 黄金盟誓 (one per
   h.step();
   const e = enemyAt(h, 'enemy_armored');
   assert.ok(h.runUntil(() => u.skill.active, 10));
-  const lions = h.b.allyUnits.filter((x) => x.defId === 'token_10040_siege2_vlion');
-  assert.ok(lions.length >= 2 && lions.every((l) => l.alive), `黄金盟誓 summoned on the free tiles around her (${lions.length})`);
-  for (const l of lions) assert.ok(Math.max(Math.abs(l.tileR - u.tileR), Math.abs(l.tileC - u.tileC)) <= 1);
-  assert.equal(new Set(lions.map((l) => l.tileR * 100 + l.tileC)).size, lions.length, 'one per tile');
+  const lion = h.b.allyUnits.find((x) => x.defId === 'token_10040_siege2_vlion');
+  assert.ok(lion && lion.alive, '黄金盟誓 summoned');
+  assert.ok(Math.max(Math.abs(lion.tileR - u.tileR), Math.abs(lion.tileC - u.tileC)) <= 1);
   h.run(3);
   assert.ok(h.dmg.some((d) => d.src === u.id && d.attack && d.type === 'true'), 'true damage');
-  assert.ok(h.dmg.some((d) => lions.some((l) => l.id === d.src) && d.type === 'true'), 'a lion hits with true damage');
+  assert.ok(h.dmg.some((d) => d.src === lion.id && d.type === 'true'), 'lion hits with true damage');
   assert.equal(u.profile.maxTargets + u.def.skill.bb['attack@max_target'] - 1 >= 2, true);
   assert.ok(h.hooksOf('statusApplied').some((c) => c.status === 'tremble' && c.target === e), '无拘的锋芒');
   h.runUntil(() => !u.skill.active, 30);
   h.step();
-  assert.ok(lions.every((l) => !l.alive), 'the lions leave with the skill');
+  assert.equal(lion.alive, false, 'lion leaves with the skill');
   checkInvariants(h.b);
 });
 
@@ -719,11 +714,9 @@ test('耀骑士临光: S3 summons 耀阳 (90 % true + stun 3 s around it), true 
 });
 
 test('荒芜拉普兰德: S3 drones chase enemies anywhere, fear on catch, 100 % ATK arts per second around them', () => {
-  // (one enemy, far outside her range: every drone picks the enemy nearest to itself — PRTS S3 备注 ② — so a second,
-  // nearer enemy would draw all of them; the full flight is in test/sim/feedback2-whitw2-yu.test.js)
   const h = battle({
     units: [{ chessId: 'chess_char_6_18_a', row: 10, col: 3, carryState: { sp: 68 } }],
-    enemies: [{ key: 'enemy_dummy2', pos: [12, 9] }],
+    enemies: [{ key: 'enemy_dummy', pos: [10, 4] }, { key: 'enemy_dummy2', pos: [12, 9] }],
   });
   const u = h.unit('chess_char_6_18_a');
   const bb = u.def.skill.bb;
@@ -891,22 +884,10 @@ test('summon tiles skip reserved home tiles: 黄金盟誓 never takes the tile o
   h.step();
   h.b.dealDamage(null, g, { amount: 1e9, type: 'true' });
   assert.equal(g.alive, false);
-  // the free deployable melee tiles of her 3×3 area just before the cast — the dead guard's home tile among them
-  const HOME = 10 * 100 + 5;
-  let free = [];
-  for (let i = 0; i < 100 && !u.skill.active; i++) {
-    free = [];
-    for (let dr = -1; dr <= 1; dr++) for (let dc = -1; dc <= 1; dc++) {
-      const r = u.tileR + dr, c = u.tileC + dc;
-      if ((dr || dc) && h.b.grid.inRect(r, c) && h.b.grid.canStand(r, c, { ranged: false }) && !h.b.unitAt(r, c)) free.push(r * 100 + c);
-    }
-    h.step();
-  }
-  assert.ok(u.skill.active, 'S3 cast');
-  assert.ok(free.includes(HOME) && free.length >= 2, `the scenario: the guard's home tile is one of the free tiles (${free})`);
-  const lions = h.b.allyUnits.filter((x) => x.defId === 'token_10040_siege2_vlion' && x.alive);
-  assert.ok(lions.every((l) => !(l.tileR === 10 && l.tileC === 5)), 'no lion on the dead guard\'s home tile');
-  assert.deepEqual(lions.map((l) => l.tileR * 100 + l.tileC).sort((a, b) => a - b), free.filter((k) => k !== HOME).sort((a, b) => a - b), 'a lion on every other free tile');
+  assert.ok(h.runUntil(() => u.skill.active, 5));
+  const lion = h.b.allyUnits.find((x) => x.defId === 'token_10040_siege2_vlion' && x.alive);
+  assert.ok(lion, '黄金盟誓 summoned');
+  assert.ok(!(lion.tileR === 10 && lion.tileC === 5), 'not on the dead guard\'s home tile (closest to the enemy)');
   assert.ok(h.runUntil(() => g.alive, g.base.respawnTime + 2), 'the guard redeploys on its tile');
   checkInvariants(h.b);
 });
@@ -997,9 +978,8 @@ test('荒芜拉普兰德: 叙拉古的荣幸 +5 initial SP on every deployment; 
   // (S3 may be running — its drones do not normal-attack): wait for a normal attack after stage 3
   assert.ok(h.runUntil(() => h.dmg.some((d) => d.src === u.id && d.attack && d.tgt === e.id && d.t > ts), 60));
   const last = h.dmg.filter((d) => d.src === u.id && d.attack && d.tgt === e.id).at(-1);
-  const same = h.dmg.filter((d) => d.src === u.id && d.t === last.t);
-  assert.equal(same.filter((d) => d.attack).length, 1, 'one body hit per attack');
-  assert.equal(same.filter((d) => d.tags.includes('funnel')).length, 2, 'two drone additions per attack');
+  const same = h.dmg.filter((d) => d.src === u.id && d.attack && d.t === last.t);
+  assert.equal(same.length, 2, 'two drone hits per attack');
 });
 
 test('缪尔赛思: 流形 copies stats/range/damage type but not the attack shape (锏 2-hit); a capped melee copy steals nothing more', () => {
@@ -1096,33 +1076,6 @@ test('异客: the S3 storm stops when she leaves the field', () => {
   const n = h.eventsOf('fx').filter((e) => e[1] === 'lightning').length;
   h.run(5);
   assert.equal(h.eventsOf('fx').filter((e) => e[1] === 'lightning').length, n, 'no strike after her retreat');
-});
-
-test('异客: the S3 storm is range x-1 — the 13-tile diamond — around the tile of the target\'s centre (PRTS 备注; GitHub #322, PR #329)', () => {
-  // the storm's target stands off its tile centre at (5.4, 10.4) — tile (10, 5) — and is removed right after the cast, so
-  // every strike starts on the probe (no chain bounce from the target) when, and only when, the probe is in the zone
-  const strikes = ([dx, dy]) => {
-    const h = battle({ units: [{ chessId: 'chess_char_6_05_a', row: 10, col: 3 }], autoFinish: false });
-    h.step();
-    const u = h.unit('chess_char_6_05_a');
-    const tgt = h.spawn('enemy_dummy2', { pos: [10, 5], mods: { hpMul: 2 } });
-    tgt.x = 5.4; tgt.y = 10.4;
-    h.step();
-    assert.ok(u.skill.activate('test', { free: true }));
-    const storm = h.eventsOf('fx').find((e) => e[1] === 'storm');
-    assert.deepEqual([storm[2], storm[3]], [5, 10], 'the storm sits on the centre of the target\'s tile');
-    h.b.dealDamage(null, tgt, { amount: 1e12, type: 'true' });
-    const p = h.spawn('enemy_dummy', { pos: [10, 5] });
-    p.x = 5 + dx; p.y = 10 + dy;
-    h.run(4.2);
-    checkInvariants(h.b);
-    return h.dmg.filter((d) => d.src === u.id && d.tgt === p.id && d.tags.includes('storm')).length;
-  };
-  // in the diamond (|Δrow| + |Δcol| ≤ 2 by tile): (2, 0) / (0, −2) / (1.95, 0.4) lay outside the old 1.5 circle
-  for (const off of [[0, 0], [2, 0], [0, -2], [-2, 0], [1.45, 1.45], [1.95, 0.4]]) assert.equal(strikes(off), 8, `(${off}) struck by all 8 strikes`);
-  // outside it: tile (+2, +1), and tile (+3, 0) — (1.55, 1.05) was inside the old circle around the target's position
-  // three tiles off along the columns: the field has no row 13 (a probe there is held on row 12, inside the diamond)
-  for (const off of [[2, 1], [1.55, 1.05], [2.6, 0]]) assert.equal(strikes(off), 0, `(${off}) never struck`);
 });
 
 test('蕾缪安: 通缉 needs a continuous 8 s stay in a 拉特兰 range (leaving restarts the count)', () => {

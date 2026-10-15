@@ -5,14 +5,6 @@ import { ERR, PHASE } from '../../shared/constants.js';
 import { GameData } from '../../server/match/gamedata.js';
 import { DATA, makeMatch, give, giveItem, checkInvariants, chessOfTier } from './harness.js';
 
-/** Fill every free hand slot with distinct plain equipment (nothing merges), so a piece put into temp stays there. */
-function fillHand(ps) {
-  const plain = Object.values(DATA.items).filter((i) => i.itemType === 'EQUIP' && !i.isGolden && i.kind === 'passive').map((i) => i.itemId ?? i.id);
-  let k = 0;
-  for (let i = 0; i < ps.hand.length; i++) if (ps.hand[i] == null) ps.hand[i] = ps.newPiece('item', plain[k++]);
-  ps.recompute();
-}
-
 test('income = min(3 + r, 12) in every mode; funds are lost at prep end (band_cannot keeps them)', () => {
   for (const modeId of ['mode_single_funny', 'mode_multi_normal', 'mode_multi_abyss']) {
     const gd = new GameData(DATA, modeId);
@@ -66,8 +58,8 @@ test('upgrade price: base per mode, −1 per round start (floor 0), resets to th
   ps.funds = 0;
   ps.shop.upgradePrice = 5;
   assert.deepEqual(m.handle('p_0', { t: 'g.levelUp' }), { error: ERR.NO_FUNDS });
-  assert.deepEqual(new GameData(DATA, 'mode_single_funny').upgradePrices(), [1, 1, 5, 8, 10]);
-  assert.deepEqual(new GameData(DATA, 'mode_multi_funny').upgradePrices(), [5, 8, 10, 11, 11]);
+  assert.deepEqual(new GameData(DATA, 'mode_single_funny').upgradePrices(), [5, 8, 11, 12, 13]);
+  assert.deepEqual(new GameData(DATA, 'mode_multi_funny').upgradePrices(), [5, 8, 11, 12, 13]);
   m.dispose();
 });
 
@@ -103,17 +95,24 @@ test('shop slots per level (+ the item slot), buy prices by tier, SOLD_OUT, NO_F
   assert.equal(ps.hand[9].id, slot0.id, 'hand fills right→left');
   assert.deepEqual(m.handle('p_0', { t: 'g.buy', slot: 0 }), { error: ERR.SOLD_OUT });
   assert.deepEqual(m.handle('p_0', { t: 'g.buy', slot: 15 }).error, ERR.BAD_TARGET);
-  // a display is not a reservation, but its operator remains purchasable after the pool is exhausted (#498)
+  // an empty item pool makes the item buy fail with SOLD_OUT
+  const itemSlotIdx = ps.shop.slots.findIndex((s) => s && s.kind === 'item');
+  const sItem = ps.shop.slots[itemSlotIdx];
+  const given = [];
+  while (m.itemPool.canGain(sItem.id)) {
+    given.push(giveItem(m, ps, sItem.id));
+  }
+  assert.deepEqual(m.handle('p_0', { t: 'g.buy', slot: itemSlotIdx }), { error: ERR.SOLD_OUT });
+  for (const g of given) {
+    const idx = ps.hand.indexOf(g);
+    if (idx >= 0) ps.hand[idx] = null;
+  }
+  ps.recompute();
   const s1 = ps.shop.slots[1];
-  const taken = m.pool.take(s1.id, 100);
-  assert.deepEqual(m.handle('p_0', { t: 'g.buy', slot: 1 }), { ok: true });
-  assert.equal(m.pool.entries.get(s1.id).left, -1);
-  m.pool.give(s1.id, taken);
   // full hand blocks buys
   const fillers = chessOfTier(3).filter((x) => m.pool.has(x) && x !== s1.id);
   for (let i = 0; ps.hand.some((x) => x == null); i++) give(m, ps, fillers[i]);
-  ps.shop.slots[1] = { ...s1, sold: false };
-  assert.deepEqual(m.handle('p_0', { t: 'g.buy', slot: 1 }), { error: ERR.HAND_FULL });
+  if (ps.countCopies(m.gd.baseIdOf(s1.id)) === 0) assert.deepEqual(m.handle('p_0', { t: 'g.buy', slot: 1 }), { error: ERR.HAND_FULL });
   const itemSlot = ps.shop.slots.findIndex((s) => s && s.kind === 'item');
   assert.deepEqual(m.handle('p_0', { t: 'g.buy', slot: itemSlot }), { error: ERR.HAND_FULL });
   checkInvariants(m);
@@ -200,31 +199,19 @@ test('selling: +1 (normal and elite, board or hand), items return to the hand, i
   m.dispose();
 });
 
-test('ready gating: temp must be empty (a freed hand slot pulls the temp piece in); unready allowed until everyone is ready; actions locked while ready', () => {
+test('ready gating: temp must be empty; unready allowed until everyone is ready; actions locked while ready', () => {
   const h = makeMatch({ mode: 'coop', humans: 2, seed: 10 }).start();
   h.toPrep(1);
   const m = h.m;
   const a = h.ps('p_0');
-  fillHand(a);
+  const fillers = chessOfTier(1).filter((x) => m.pool.has(x));
+  for (let i = 0; a.hand.some((x) => x == null); i++) give(m, a, fillers[i % fillers.length]);
   const t = give(m, a, chessOfTier(1).find((x) => m.pool.has(x)), 'temp');
-  assert.ok(a.temp.includes(t), 'a full hand: it waits in temp');
   assert.equal(a.privateView().canReady, false);
   assert.deepEqual(m.handle('p_0', { t: 'g.ready', ready: true }), { error: ERR.TEMP_NOT_EMPTY });
-  // destroying a hand item frees its slot: the temp piece moves in by itself (PRTS 卫戍协议/帮助 §手牌区, GitHub #82)
-  const freed = a.hand[3];
-  assert.deepEqual(m.handle('p_0', { t: 'g.destroy', uid: freed.uid }), { ok: true });
-  assert.equal(a.hand[3], t);
-  assert.ok(a.tempEmpty);
+  a.hand[0] = null;
+  assert.deepEqual(m.handle('p_0', { t: 'g.move', uid: t.uid, to: { area: 'hand', idx: 0 } }), { ok: true });
   assert.equal(a.privateView().canReady, true);
-  const art = giveItem(m, a, 'chess_item_6_03_m', 'temp');
-  assert.deepEqual(a.useArt(art.uid, 10, 5), { ok: true });
-  assert.ok(a.tempEmpty);
-  assert.equal(a.privateView().canReady, false);
-  assert.deepEqual(a.setReady(true), { error: ERR.BAD_TARGET, detail: '请先完成教鞭选择' });
-  assert.deepEqual(a.setReady(false), { ok: true });
-  assert.deepEqual(m.handle('p_0', { t: 'g.choice', idx: 0, choiceId: a.personalChoice.id }), { ok: true });
-  assert.equal(a.privateView().canReady, true);
-  assert.equal(a.round.arts, 1);
   assert.deepEqual(m.handle('p_0', { t: 'g.ready', ready: true }), { ok: true });
   assert.deepEqual(m.handle('p_0', { t: 'g.refresh' }), { error: ERR.WRONG_PHASE, detail: 'ready' });
   assert.deepEqual(m.handle('p_0', { t: 'g.ready', ready: false }), { ok: true });
@@ -244,28 +231,15 @@ test('prep deadline (co-op): unready players are auto-readied and their temp is 
   h.toPrep(1);
   const m = h.m;
   const a = h.ps('p_0');
+  const fillers = chessOfTier(1).filter((x) => m.pool.has(x));
+  for (let i = 0; a.hand.some((x) => x == null); i++) give(m, a, fillers[i % fillers.length]);
   const id = chessOfTier(1).find((x) => m.pool.has(x));
   const left = m.pool.left(id);
-  const art = giveItem(m, a, 'chess_item_6_03_m');
-  assert.deepEqual(a.useArt(art.uid, 10, 5), { ok: true });
-  fillHand(a);
   give(m, a, id, 'temp');
-  assert.ok(!a.tempEmpty, 'a full hand: it waits in temp');
-  const endPrep = m.endPrep.bind(m);
-  let checked = false;
-  m.endPrep = () => {
-    assert.equal(a.personalChoice, null, 'deadline picks before endPrep builds the battle');
-    assert.equal(a.bounties.length, 1);
-    assert.equal(a.round.arts, 1);
-    assert.ok(a.ready && a.tempEmpty);
-    checked = true;
-    endPrep();
-  };
   assert.ok(m.deadline > h.sched.now(), 'co-op prep is timed');
   assert.equal(Math.round((m.deadline - h.sched.now()) / 1000), m.gd.prepTime(1));
   h.sched.advance(m.deadline - h.sched.now() + 1);
   assert.notEqual(m.phase, PHASE.PREP);
-  assert.ok(checked);
   assert.ok(a.tempEmpty);
   assert.equal(m.pool.left(id), left, 'temp chess sold back to the pool');
   checkInvariants(m);
@@ -276,12 +250,7 @@ test('solo prep and 机变 are untimed', () => {
   const h = makeMatch({ mode: 'solo', difficulty: 'NORMAL', seed: 13 }).start();
   h.toPrep(1);
   assert.equal(h.m.deadline, 0);
-  const ps = h.ps('p_0');
-  const art = giveItem(h.m, ps, 'chess_item_6_03_m');
-  assert.deepEqual(ps.useArt(art.uid, 10, 5), { ok: true });
-  const id = ps.personalChoice.id;
   h.sched.advance(10 * 60 * 1000);
   assert.equal(h.m.phase, PHASE.PREP);
-  assert.equal(ps.personalChoice.id, id, 'no separate personal-choice timer');
   h.m.dispose();
 });

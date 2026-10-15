@@ -117,6 +117,14 @@ export function normalizeSnapshot(snap) {
     }
   }
   const ammo = countList(snap.ammo, units), wolves = countList(snap.wolves, units), coins = countList(snap.coins, units);
+  const resonance = countList(snap.resonance, units);   // 边狱【金枝共鸣】全队池 [n, cap]
+  let sanity = null;
+  if (Array.isArray(snap.sanity)) {
+    for (const e of snap.sanity) {
+      if (!Array.isArray(e) || !units.has(e[0]) || typeof e[1] !== 'number' || !Number.isFinite(e[1])) continue;
+      (sanity || (sanity = new Map())).set(e[0], Math.max(-45, Math.min(45, Math.round(e[1]))));
+    }
+  }
   let neg = null;
   if (Array.isArray(snap.neg)) {
     for (const e of snap.neg) {
@@ -147,7 +155,23 @@ export function normalizeSnapshot(snap) {
       (standCut || (standCut = new Map())).set(e[0], e[1]);
     }
   }
-  return { t, units, down, ammo, wolves, coins, neg, stand, standCut, raw: snap };
+  let proj = null;
+  if (Array.isArray(snap.proj)) {
+    for (const p of snap.proj) {
+      if (!Array.isArray(p) || !(typeof p[0] === 'number' || typeof p[0] === 'string')) continue;
+      if (typeof p[1] !== 'number' || typeof p[2] !== 'number' || !Number.isFinite(p[1]) || !Number.isFinite(p[2])) continue;
+      (proj || (proj = [])).push([p[0], p[1], p[2], typeof p[3] === 'string' ? p[3] : 'note']);
+    }
+  }
+  let fever = null;
+  if (Array.isArray(snap.fever)) {
+    for (const f of snap.fever) {
+      if (!Array.isArray(f) || !(typeof f[0] === 'number' || typeof f[0] === 'string')) continue;
+      if (typeof f[1] !== 'number' || !Number.isFinite(f[1])) continue;
+      (fever || (fever = new Map())).set(f[0], clamp(f[1], 0, 100));
+    }
+  }
+  return { t, units, down, ammo, wolves, coins, neg, resonance, sanity, stand, standCut, proj, fever, raw: snap };
 }
 
 /**
@@ -337,6 +361,38 @@ export class SnapshotBuffer {
   }
 
   /**
+   * The content-owned projectiles (丰川祥子's 音符, `snap.proj` = [[id, x, y, kind]]) shown at `time`, with x/y
+   * interpolated between the two bracketing snapshots like a unit's (fx/notes.js syncNotes). null when none.
+   */
+  projAt(time = this.renderT) {
+    const s = this.snaps;
+    if (!s.length || !Number.isFinite(time)) return null;
+    let ia = this._indexAt(time);
+    if (ia < 0) ia = 0;
+    const A = s[ia];
+    const a = A.proj;
+    if (!a || !a.length) return null;
+    const B = ia + 1 < s.length ? s[ia + 1] : null;
+    const b = B && B.proj && B.proj.length ? B.proj : null;
+    const span = B ? B.t - A.t : 0;
+    const alpha = b && span > 0 ? clamp((time - A.t) / span, 0, 1) : 0;
+    if (!b || alpha <= 0) return a;
+    if (alpha >= 1) return b;
+    const map = this._projIdx || (this._projIdx = new Map());
+    map.clear();
+    for (const p of b) map.set(p[0], p);
+    const out = [];
+    for (const p of a) {
+      const q = map.get(p[0]);
+      if (!q) { out.push(p); continue; }
+      const dx = q[1] - p[1], dy = q[2] - p[2];
+      if (dx * dx + dy * dy > this.teleport * this.teleport) { out.push(q); continue; }
+      out.push([p[0], p[1] + dx * alpha, p[2] + dy * alpha, q[3]]);
+    }
+    return out;
+  }
+
+  /**
    * Interpolated state at `time` (default renderT). Fills and returns `out` (a Map id → sample object reused
    * across calls: `{ id, x, y, hp, maxHp, sp, spMax, flags, anim, vx, vy, seen, el, elFill, elUntil, elDur, ammo, wolves,
    * neg }` — `el` = the shown element gauge (null: none), `ammo` / `wolves` / `neg` the HP-bar readouts (null / null / 0:
@@ -404,6 +460,8 @@ export class SnapshotBuffer {
       o.wolves = A.wolves ? A.wolves.get(id) || null : null;
       o.coins = A.coins?.get(id) ?? null;
       o.neg = A.neg ? A.neg.get(id) || 0 : 0;
+      o.resonance = A.resonance ? A.resonance.get(id) || null : null;
+      o.sanity = A.sanity ? (A.sanity.has(id) ? A.sanity.get(id) : null) : null;
       o.seen = stamp;
     }
     for (const id of out.keys()) if (!A.units.has(id)) out.delete(id);

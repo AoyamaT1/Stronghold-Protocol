@@ -5,6 +5,7 @@
 // the player state).
 
 import { ERR, PHASE, layerGainRoom } from '../../../shared/constants.js';
+import { topCoreBondByLayers } from '../bondsMeta.js';
 import { freeSlot } from '../board.js';
 import { OK, fail } from './common.js';
 
@@ -64,9 +65,29 @@ export class PlayerEconomy {
     return Number.isFinite(p) ? Math.max(0, Math.round(p)) : slot.basePrice;
   }
 
+  /**
+   * Shop-assist weight for a chess roll, or null (base behaviour). When config.assist.topCoreBondShopBoost > 0 (the
+   * mods/assist-topbond mod), members of this player's currently active, highest-layer core bond (主盟约) draw with their
+   * copy weight × (1 + boost) — e.g. 0.2 ⇒ ×1.2, "+20% 刷新概率". Membership is read from a chess's own `bonds`, so the
+   * player's 自选 stock (extra entries) is biased too; no active core bond ⇒ no bias. Recomputed each roll off this.bonds.
+   */
+  _shopWeight() {
+    const assist = this.gd.config && this.gd.config.assist;
+    const boost = assist && Number(assist.topCoreBondShopBoost);
+    if (!(boost > 0)) return null;
+    const target = topCoreBondByLayers(this.gd, this.bonds);
+    if (!target) return null;
+    const mul = 1 + boost;
+    const gd = this.gd;
+    return (id) => {
+      const c = gd.chess(id);
+      return c && Array.isArray(c.bonds) && c.bonds.includes(target) ? mul : 1;
+    };
+  }
+
   _rollChessSlot() {
     // the slotted 自选 pieces join the draw once the 调度中心 reaches their slot's level (player/diy.js diyRollEntries)
-    const id = this.m.pool.roll(this.m.rngShop, { maxTier: this.shop.level, extra: this.diyRollEntries() });
+    const id = this.m.pool.roll(this.m.rngShop, { maxTier: this.shop.level, extra: this.diyRollEntries(), weight: this._shopWeight() });
     return id ? { kind: 'chess', id, basePrice: this.gd.chessPrice(id), frozen: false, sold: false } : null;
   }
 

@@ -22,7 +22,7 @@ import { makeBattle, chessRec, enemyRec, checkInvariants } from '../helpers/batt
 import { getDefaultSource, hasGeneratedData } from '../../server/sim/simdata.js';
 import { effectiveProfile } from '../../server/sim/ai.js';
 import { PUSH_TILES, PUSH_TILES_EFFECT, PULL_STOP_RADIUS, ASPD_MIN, COLS } from '../../server/sim/constants.js';
-import { alliesInGridOf } from '../../server/sim/content/kits/shared/tier1.js';
+import { alliesInGridOf } from '../../server/sim/content/kits/tier1.js';
 import { Unit } from '../../server/sim/units.js';
 import { spawnYanyou, TOKEN_IDS } from '../../server/sim/content/tokens.js';
 
@@ -410,8 +410,7 @@ test('#14 特效 pushes (PRTS 推与拉: one frame less of travel than 弹道 on
   approx(e.x, 4 + PUSH_TILES_EFFECT[1], 1e-6, '特效 column');
 });
 
-test('#14 锏 S3 归于宁静 slashes air units and pulls a non-static one (PRTS 备注 "※可对空。不会拖拽自身中心半径0.6708范围内的敌人")', REAL, () => {
-  // a synthetic dynamic flyer: the air units of the mode are all 静态刚体 — hit, never moved (test/sim/feedback1b-displacement.test.js)
+test('#14 锏 S3 归于宁静 slashes and pulls air units too (PRTS 备注 "※可对空。不会拖拽自身中心半径0.6708范围内的敌人")', REAL, () => {
   const id = 'chess_char_6_19_a';
   const h = makeBattle({
     defs: { enemies: { enemy_fly: foe('enemy_fly', { speed: 0, mass: 0, motion: 'FLY' }), enemy_near: foe('enemy_near', { speed: 0, mass: 0 }) } },
@@ -581,8 +580,8 @@ test('#18 安洁莉娜 兼职工作 is an HP-regen attribute (PRTS 备注 "不�
   assert.ok(!ag.skill.active, 'skill off');
   const w = h.b.allyUnits.find((x) => x.defId === 'token_10028_vigil_wolf' && x.alive);
   assert.ok(w.s.flags.noHeal, '狼群 holds 禁疗');
-  assert.equal(w.findBuff('aglina:parttime')?.mods.hpRegen, 25, '禁疗 does not stop the regen attribute (20 + the potential step)');
-  assert.ok(w.s.hpRegen >= 25);
+  assert.equal(w.findBuff('aglina:parttime')?.mods.hpRegen, 20, '禁疗 does not stop the regen attribute');
+  assert.ok(w.s.hpRegen >= 20);
   assert.ok(!y.findBuff('aglina:parttime') && !y.findBuff('aglina:field'), '孤立: no ally talent selects 炎佑');
   assert.ok(h.unit('chess_char_3_19_a').findBuff('aglina:field'), 'the operators get 加速力场');
 });

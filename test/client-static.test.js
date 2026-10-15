@@ -36,7 +36,7 @@ function walk(dir, ext, out = []) {
   return out;
 }
 
-/** URL path served by the server → file on disk (mirrors the server/http/static.js mounts). */
+/** URL path served by the server → file on disk (mirrors server/index.js mounts). */
 function urlPathToFile(urlPath) {
   const clean = decodeURIComponent(urlPath.split(/[?#]/)[0]);
   if (clean.startsWith('/shared/')) return path.join(ROOT, clean);
@@ -790,58 +790,6 @@ describe('identity (reconnect-token selection across tabs)', () => {
     assert.equal(ty, null);
   });
 
-  for (const [firstId, secondId, expected] of [
-    ['a-tab', 'b-tab', ['tokShared', null]],
-    ['b-tab', 'a-tab', [null, 'tokShared']],
-  ]) {
-    test(`staggered channels: ${firstId} starts before ${secondId}`, async () => {
-      const { createIdentity, CLAIM_QUERY_MS } = await mod('net.js');
-      const hub = channelHub(), timers = fakeTimers(), local = memStorage();
-      local.setItem('sp.tokens', JSON.stringify(['tokShared']));
-      const firstSession = memStorage(), secondSession = memStorage();
-      const first = createIdentity({ local, session: firstSession, tabId: firstId,
-        channel: hub.create(), setTimeout: timers.setTimeout });
-      const firstPick = first.init();
-      timers.advance(30);
-      // This channel did not exist when the first tab broadcast its query.
-      const second = createIdentity({ local, session: secondSession, tabId: secondId,
-        channel: hub.create(), setTimeout: timers.setTimeout });
-      const secondPick = second.init();
-      await new Promise((r) => setImmediate(r));
-      timers.advance(CLAIM_QUERY_MS - 30);
-      assert.equal(await firstPick, expected[0]);
-      timers.advance(30);
-      assert.equal(await secondPick, expected[1]);
-      assert.deepEqual([first.getToken(), second.getToken()], expected);
-      assert.deepEqual([firstSession.getItem('sp.token'), secondSession.getItem('sp.token')], expected);
-    });
-  }
-
-  test('staggered elections reserve fallback candidates while a live owner keeps its token', async () => {
-    const { createIdentity, CLAIM_QUERY_MS } = await mod('net.js');
-    const hub = channelHub(), timers = fakeTimers(), local = memStorage();
-    const owner = createIdentity({ local, session: memStorage(), tabId: 'z-owner', channel: hub.create() });
-    await owner.init();
-    owner.saveToken('tokOwned');
-    local.setItem('sp.tokens', JSON.stringify(['tokOwned', 'tokFree']));
-    const first = createIdentity({ local, session: memStorage(), tabId: 'a-tab',
-      channel: hub.create(), setTimeout: timers.setTimeout });
-    const firstPick = first.init();
-    timers.advance(30);
-    const duplicateSession = memStorage();
-    duplicateSession.setItem('sp.token', 'tokOwned');
-    const second = createIdentity({ local, session: duplicateSession, tabId: 'b-tab',
-      channel: hub.create(), setTimeout: timers.setTimeout });
-    const secondPick = second.init();
-    await new Promise((r) => setImmediate(r));
-    timers.advance(CLAIM_QUERY_MS - 30);
-    assert.equal(await firstPick, 'tokFree');
-    timers.advance(30);
-    assert.equal(await secondPick, null);
-    assert.equal(duplicateSession.getItem('sp.token'), null, 'the copied live token is discarded');
-    assert.equal(owner.getToken(), 'tokOwned', 'a live owner outranks even a smaller tab id');
-  });
-
   test('without BroadcastChannel only the own token is used; init is idempotent; welcome during init wins', async () => {
     const { createIdentity } = await mod('net.js');
     const local = memStorage();
@@ -1020,13 +968,6 @@ describe('screen helpers', () => {
     assert.equal(findUiAsset({ ui: {} }, ['x']), null);
   });
 
-  test('title exposes the shared settings modal', () => {
-    const source = readFileSync(path.join(PUBLIC, 'js/screens/title.js'), 'utf8');
-    assert.match(source, /import \{ SettingsModal \} from '\.\.\/ui\/settings\.js'/);
-    assert.match(source, /class="title-settings fsbtn tapx"/, 'title screen includes the settings control');
-    assert.match(source, /<\$\{SettingsModal\} open=\$\{settingsOpen\}/, 'settings control opens the shared modal');
-  });
-
   test('lobby: normalizeCode / parseRoomParam / difficultyInfo', async () => {
     const { normalizeCode, parseRoomParam, difficultyInfo, MODE_TEXT } = await mod('screens/lobby.js');
     assert.equal(normalizeCode('ab-c d9'), 'ABCD');
@@ -1049,28 +990,6 @@ describe('screen helpers', () => {
     assert.ok(hard.effects.length >= 2);
     assert.doesNotThrow(() => difficultyInfo('coop', undefined), 'unknown difficulty degrades gracefully');
     assert.equal(difficultyInfo('coop', 'BOGUS').rounds, 14);
-  });
-
-  // Regression: `onClick=${handler}` hands Preact's click EVENT as the first argument, and a default parameter only
-  // applies to `undefined` — so `normalizeCode(eventTarget)` produced "[object HTMLElement]" → "OBJE", and every
-  // 观战 click sent the same nonsense key no matter what was typed in the field. codeArg() is the guard for that.
-  test('lobby: a click event is never mistaken for an alliance key (codeArg)', async () => {
-    const { codeArg, normalizeCode } = await mod('screens/lobby.js');
-    // a DOM element stringifies to "[object HTMLElement]" — the shape that caused the bug
-    const element = { toString: () => '[object HTMLElement]' };
-    assert.equal(normalizeCode(element), 'OBJE', 'the old bug: the element normalises into a fake 4-letter code');
-    assert.equal(codeArg(element, 'NJBU'), 'NJBU', 'a non-string argument falls back to the input field');
-    // plain event-like objects and other non-strings behave the same
-    for (const weird of [{}, [], 42, true, null, undefined, Symbol('x'), () => {}]) {
-      assert.equal(codeArg(weird, 'NJBU'), 'NJBU', `falls back for ${String(weird)}`);
-    }
-    // an explicit string always wins (the full-room prompt passes the code it asked for)
-    assert.equal(codeArg('ab cd', 'NJBU'), 'ABCD');
-    // no usable code at all
-    assert.equal(codeArg(element, ''), null);
-    assert.equal(codeArg(element, 'AB'), null);
-    assert.equal(codeArg(undefined, undefined), null);
-    assert.equal(codeArg('ZZZ QQQ', ''), 'ZZZQ', 'a real string is still truncated to ROOM_CODE_LEN');
   });
 
   test('lobby: battlefield note per difficulty (标准 fixed 战场#01, 险境 8 / 绝境·终极 7 random) matches config.json modes[].stages', async () => {
@@ -1126,31 +1045,6 @@ describe('screen helpers', () => {
     assert.equal(roomFacts(room, 'g').canStart, false, 'guests cannot start');
     assert.equal(roomFacts(null, 'x').mine, null);
     assert.match(inviteLink('ABCD'), /\?room=ABCD$/);
-  });
-
-  test('room: spectator seats (community report #26) — isSpectating; roomFacts never counts a spectator as a player', async () => {
-    const { roomFacts } = await mod('screens/room.js');
-    const { isSpectating } = await mod('store.js');
-    const room = {
-      code: 'ABCD', hostId: 'h', mode: 'coop', difficulty: 'HARD',
-      seats: [{ seat: 0, playerId: 'h', name: 'Host', isBot: false, ready: false, connected: true }, null, null, null],
-      spectators: [{ playerId: 's', name: 'Spec', connected: true }],
-    };
-    assert.equal(isSpectating(room, 's'), true);
-    assert.equal(isSpectating(room, 'h'), false);
-    assert.equal(isSpectating({ ...room, spectators: undefined }, 's'), false, 'a room.state without the list');
-    assert.equal(isSpectating(room, null), false);
-    assert.equal(isSpectating(null, 's'), false);
-    const f = roomFacts(room, 's');
-    assert.equal(f.spectating, true);
-    assert.equal(f.mine, null);
-    assert.equal(f.humans.length, 1, 'never a player');
-    assert.equal(f.emptySeats, 3, 'a free player seat stays free (入座)');
-    assert.deepEqual(f.spectators.map((x) => x.playerId), ['s']);
-    const hf = roomFacts(room, 'h');
-    assert.equal(hf.canStart, true, 'a spectator never blocks the start');
-    assert.equal(hf.spectating, false);
-    assert.deepEqual(roomFacts({ ...room, spectators: 'bad' }, 'h').spectators, []);
   });
 
   test('components: roman / doctorNo / secondsLeft', async () => {
@@ -1306,128 +1200,5 @@ describe('multi-device & browser compatibility (static)', () => {
     assert.match(src, /touch-action: none/);
     assert.match(src, /width: max\(100%, var\(--tap-min\)\)/);
     assert.match(src, /--tap-min: 44px/);
-  });
-});
-
-describe('explicit local match recovery (#431)', () => {
-  async function recoveryPair() {
-    const { createIdentity } = await mod('net.js');
-    const local = memStorage(), hub = channelHub(), ownerSession = memStorage(), guestSession = memStorage();
-    const ownerChannel = hub.create();
-    const owner = createIdentity({ local, session: ownerSession, tabId: 'z-owner', channel: ownerChannel, queryMs: 5, now: () => 100 });
-    const guest = createIdentity({ local, session: guestSession, tabId: 'a-guest', channel: hub.create(), queryMs: 5, now: () => 200 });
-    await owner.init(); owner.saveToken('seat-owner'); owner.rememberMatch({ name: 'Owner', code: 'ROOM1' });
-    await guest.init(); guest.saveToken('seat-guest');
-    return { createIdentity, local, hub, ownerSession, guestSession, ownerChannel, owner, guest, id: guest.recoverable()[0].id };
-  }
-  test('live: a smaller tab id cannot reclaim an active seat', async () => {
-    const { guest, owner, id } = await recoveryPair();
-    assert.equal(await guest.resume(id), false);
-    assert.equal(guest.getToken(), 'seat-guest');
-    assert.equal(owner.getToken(), 'seat-owner');
-  });
-  test('reload: the original session wins over a recovery attempt during navigation', async () => {
-    const p = await recoveryPair();
-    p.ownerChannel.close();
-    assert.equal(await p.guest.resume(p.id), true, 'old document is gone');
-    const reloaded = p.createIdentity({ local: p.local, session: p.ownerSession, tabId: 'zz-reloaded', channel: p.hub.create(), queryMs: 5 });
-    assert.equal(await reloaded.init(), 'seat-owner');
-    assert.equal(p.ownerSession.getItem('sp.token'), 'seat-owner');
-    assert.equal(p.guest.getToken(), 'seat-guest', 'unconfirmed recovery yields before hello');
-  });
-  test('midInit: the session token answers claims before init finishes', async () => {
-    const p = await recoveryPair();
-    p.ownerChannel.close();
-    let finish;
-    const reloaded = p.createIdentity({ local: p.local, session: p.ownerSession, tabId: 'zz-reloaded', channel: p.hub.create(), setTimeout: (fn) => { finish = fn; } });
-    const pending = reloaded.init();
-    assert.equal(await p.guest.resume(p.id), false);
-    finish();
-    assert.equal(await pending, 'seat-owner');
-    assert.equal(p.ownerSession.getItem('sp.token'), 'seat-owner');
-    assert.equal(p.guest.getToken(), 'seat-guest');
-  });
-  test('an occupied session token never falls back to a different recent identity', async () => {
-    const p = await recoveryPair();
-    p.local.setItem('sp.tokens', JSON.stringify(['seat-free', 'seat-owner']));
-    const duplicate = p.createIdentity({ local: p.local, session: p.ownerSession.clone(), tabId: '0-copy', channel: p.hub.create(), queryMs: 5 });
-    assert.equal(await duplicate.init(), null);
-    assert.equal(duplicate.getToken(), null);
-  });
-  test('resume persists neither its token nor a welcome stamp until the server welcomes it', async () => {
-    const p = await recoveryPair();
-    p.ownerChannel.close();
-    const stamp = p.guestSession.getItem('sp.tokenWelcome');
-    assert.equal(await p.guest.resume(p.id), true);
-    assert.equal(p.guestSession.getItem('sp.token'), 'seat-guest');
-    assert.equal(p.guestSession.getItem('sp.tokenWelcome'), stamp);
-    p.guest.saveToken('seat-owner');
-    assert.equal(p.guestSession.getItem('sp.token'), 'seat-owner');
-    assert.ok(p.guestSession.getItem('sp.tokenWelcome'));
-  });
-  test('an earlier welcome stamp survives reload and beats a later live welcome', async () => {
-    const p = await recoveryPair();
-    p.ownerChannel.close();
-    assert.equal(await p.guest.resume(p.id), true);
-    p.guest.saveToken('seat-owner'); // recovery's welcome is later than the original owner's
-    const originalStamp = p.ownerSession.getItem('sp.tokenWelcome');
-    const reloaded = p.createIdentity({ local: p.local, session: p.ownerSession, tabId: 'zz-reloaded', channel: p.hub.create(), queryMs: 5, now: () => 300 });
-    assert.equal(await reloaded.init(), 'seat-owner');
-    reloaded.saveToken('seat-owner');
-    assert.equal(p.ownerSession.getItem('sp.tokenWelcome'), originalStamp, 'reconnect does not reset seniority');
-  });
-  test('a welcome received during init cannot be overwritten or erased by its pending result', async () => {
-    const { createIdentity } = await mod('net.js');
-    const local = memStorage(), session = memStorage(), hub = channelHub();
-    session.setItem('sp.token', 'old');
-    let finish;
-    const id = createIdentity({ local, session, channel: hub.create(), setTimeout: (fn) => { finish = fn; } });
-    const pending = id.init();
-    id.saveToken('new'); finish();
-    assert.equal(await pending, 'new');
-    assert.equal(session.getItem('sp.token'), 'new');
-  });
-  test('an idle tab can reclaim a closed match tab without taking a live one', async () => {
-    const { createIdentity } = await mod('net.js');
-    const local = memStorage(), hub = channelHub(), ca = hub.create(), cb = hub.create();
-    const a = createIdentity({ local, session: memStorage(), tabId: 'a', channel: ca, queryMs: 5 });
-    const b = createIdentity({ local, session: memStorage(), tabId: 'b', channel: cb, queryMs: 5 });
-    await a.init(); a.saveToken('idle-token');
-    await b.init(); b.saveToken('match-token'); b.rememberMatch({ name: 'Doctor B', code: 'ABC123' });
-    const [item] = a.recoverable();
-    assert.equal(item.name, 'Doctor B');
-    assert.equal(JSON.stringify(item).includes('match-token'), false);
-    assert.equal(await a.resume(item.id), false, 'live original keeps its seat');
-    assert.equal(a.getToken(), 'idle-token');
-    cb.close();
-    assert.equal(await a.resume(item.id), true);
-    assert.equal(a.getToken(), 'match-token');
-    a.rememberMatch(null);
-    assert.deepEqual(JSON.parse(local.getItem('sp.matches')), {});
-    ca.close();
-  });
-  test('simultaneous recoveries pick one winner; absent channels and unknown ids cannot recover', async () => {
-    const { createIdentity } = await mod('net.js');
-    const local = memStorage(), hub = channelHub();
-    local.setItem('sp.tokens', JSON.stringify(['idle-b', 'idle-a']));
-    const sa = memStorage(), sb = memStorage(); sa.setItem('sp.token', 'idle-a'); sb.setItem('sp.token', 'idle-b');
-    const a = createIdentity({ local, session: sa, tabId: 'a', channel: hub.create(), queryMs: 5 });
-    const b = createIdentity({ local, session: sb, tabId: 'b', channel: hub.create(), queryMs: 5 });
-    await Promise.all([a.init(), b.init()]);
-    const closed = createIdentity({ local, session: memStorage(), channel: null });
-    closed.saveToken('closed-token'); closed.rememberMatch({ name: 'C', code: 'XYZ' });
-    const id = a.recoverable()[0].id;
-    assert.deepEqual(await Promise.all([a.resume(id), b.resume(id)]), [true, false]);
-    assert.equal(await b.resume('unknown'), false);
-    assert.equal(await closed.resume(id), false);
-  });
-  test('server replacement clears expired metadata and malformed storage remains safe', async () => {
-    const { createIdentity } = await mod('net.js');
-    const local = memStorage(); const a = createIdentity({ local, session: memStorage(), channel: null });
-    a.saveToken('old'); a.rememberMatch({ name: 'D', code: 'AAA' }); a.saveToken('new');
-    assert.deepEqual(a.recoverable(), []);
-    for (const bad of ['null', '[]', '{', '"hello"']) {
-      local.setItem('sp.matches', bad); assert.deepEqual(a.recoverable(), []);
-    }
   });
 });

@@ -172,6 +172,25 @@ export function negView(u) {
   return v > 0 ? Math.min(1, Math.max(0.01, r2(v))) : null;
 }
 
+/** 边狱公司【理智值】HUD readout: an ally op's `mem.limbusSanity` (−45..45), or null. */
+export function sanityView(u) {
+  const s = u && u.mem ? u.mem.limbusSanity : undefined;
+  if (!u || u.side !== 'ally' || typeof s !== 'number') return null;
+  return Math.max(-45, Math.min(45, Math.round(s)));
+}
+
+/**
+ * 边狱公司【金枝共鸣】HUD readout (全队共享池): `[n, cap]` of a limbus op whose bond mirrors the team resonance onto
+ * `mem.limbusResonance` / `mem.limbusResonanceCap` (sim/bonds.js applyResonance). Every fielded sinner carries the same
+ * pair — the shared gauge shows under each of them. Null without an active covenant.
+ */
+export function resonanceView(u) {
+  const n = u && u.mem ? u.mem.limbusResonance : undefined;
+  const cap = u && u.mem ? u.mem.limbusResonanceCap : undefined;
+  if (!u || u.side !== 'ally' || typeof n !== 'number' || !(cap >= 1)) return null;
+  return [Math.max(0, Math.min(cap, Math.round(n))), Math.round(cap)];
+}
+
 /** Units included in a snapshot: deployed & visible, plus recently dead ones (DIE animation). */
 export function snapshotUnits(units, t) {
   const out = [];

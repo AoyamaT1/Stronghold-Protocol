@@ -669,6 +669,10 @@ function MatchScreen() {
     setCam(field.kind === 'hidden' ? 'boss' : field.kind, layerCamera(field, k, sidesOf(field)[myId] || 'L'));
   }, [view, watchWho, field, phase]);
 
+  useEffect(() => {
+    view?.setPaused?.(paused);
+  }, [view, paused]);
+
   // graceful degradation: without WebGL / the render engine the DOM view takes over — say so once per match
   useEffect(() => {
     if (viewKind !== 'fallback') return;
@@ -1328,8 +1332,9 @@ function MatchScreen() {
   // (client-side combat: only in 各自行动 — 联防 observers just watch the 联防 field, research 09 §3.1)
   const myDone = combat && (cc ? phase === PHASE.COMBAT && (meP?.status === 'done' || localDone) : meP?.status === 'done');
   live.current.localDone = localDone;
-  // the solo pause button: only while the own battle still runs (the server refuses it afterwards)
-  const canPause = pauseAvailable(pub, { solo, alive, done: meP?.status === 'done' || localDone });
+  const allowCoopPause = Boolean(gd.config?.coopPause);
+  // the pause button: solo runs, or co-op when allowCoopPause is enabled
+  const canPause = pauseAvailable(pub, { solo, alive, done: meP?.status === 'done' || localDone, allowCoopPause });
   live.current.canPause = canPause;
   // client-side combat: observing a teammate's battle (research 09 §3.1) and the 联防 / 最终攻势 camera halves
   // (an eliminated player auto-observes a teammate's normal field — research 09 "keep-watching" — without asking)
@@ -1557,7 +1562,7 @@ function MatchScreen() {
     ${facing && view ? html`<${FacingWheel} key=${`${facing.uid}:${facing.row},${facing.col}`} view=${view} row=${facing.row} col=${facing.col}
       grid=${facing.grid} name=${facing.name} onPreview=${previewFacing} onCommit=${commitFacing} onCancel=${cancelFacing} />` : null}
 
-    ${paused ? html`<${PausedOverlay} canResume=${solo} busy=${pauseBusy} onResume=${() => togglePause(false)} onExit=${() => setExitOpen(true)} />` : null}
+    ${paused ? html`<${PausedOverlay} canResume=${solo || allowCoopPause} busy=${pauseBusy} onResume=${() => togglePause(false)} onExit=${() => setExitOpen(true)} pausedBy=${pub?.pausedBy} />` : null}
 
     ${replace ? html`<${EquipReplaceDialog} request=${replace.request} getItem=${gd.item}
       onConfirm=${(uid) => closeReplace(uid)} onCancel=${() => closeReplace(null)} />` : null}

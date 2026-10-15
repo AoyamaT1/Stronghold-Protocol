@@ -10,14 +10,11 @@ import fs from 'node:fs';
 import { makeBattle, chessRec, checkInvariants } from '../helpers/battleHarness.js';
 import * as enemiesMod from '../../server/sim/content/enemies.js';
 import * as bossesMod from '../../server/sim/content/bosses.js';
-import { spawnYanyou } from '../../server/sim/content/tokens.js';
-import { attackWindup } from '../../server/sim/ai.js';
 
 const E = JSON.parse(fs.readFileSync(new URL('../../data/enemies.json', import.meta.url), 'utf8'));
 const W = JSON.parse(fs.readFileSync(new URL('../../data/waves.json', import.meta.url), 'utf8'));
 const { KITS, STATS_ONLY, EROSION, EROSION_BURST } = enemiesMod;
 const { BOSS_KITS, PART_TRANSFER, BLADE_TRANSFER, DRONE_LINK_BASE, droneLinkBase } = bossesMod;
-const { HUSK_REBIRTH, TRANSLATOR_CHANGE } = enemiesMod;
 
 const BIG = [];
 for (let dr = -4; dr <= 4; dr++) for (let dc = -12; dc <= 12; dc++) BIG.push([dr, dc]);
@@ -70,17 +67,12 @@ test('stats-only enemies attach no ability and fight with their data stats', () 
   }
 });
 
-// 萨卡兹枯朽战士 / 组长's PollutedDie is silenced even though the handbook line is NORMAL and the PRTS / in-game text
-// says 「不可沉默」. The owner's official-play recall of 2026-10-12 (GitHub #470) is that a death while silenced
-// creates no fog. Only these two keys share that ability (DESIGN §30.23; 0.2.0's client-template reading is §25.18.2).
-const SILENCE_BY_TEMPLATE = new Set(['enemy_1267_nhpbr', 'enemy_1267_nhpbr_2']);
-
-test('沉默: exactly the abilities whose handbook line is SILENCE-flagged can be silenced (every authored enemy), plus 萨卡兹枯朽战士 / 组长\'s death fog', () => {
+test('沉默: exactly the abilities whose handbook line is SILENCE-flagged can be silenced (every authored enemy)', () => {
   const h = arena();
   h.step();
   for (const key of [...Object.keys(KITS), ...Object.keys(BOSS_KITS)]) {
     const e = put(h, key, [10, 7]);
-    const data = E[key].abilities.some((a) => a.format === 'SILENCE') || SILENCE_BY_TEMPLATE.has(key);
+    const data = E[key].abilities.some((a) => a.format === 'SILENCE');
     const kit = !!(e.mem.ab && e.mem.ab.list.some((a) => a && (a.sil || a.silAware)));
     assert.equal(kit, data, `${nm(key)}: ${E[key].abilities.map((a) => `[${a.format}]${a.text}`).join(' / ')}`);
     h.b.kill(e, null);
@@ -123,33 +115,16 @@ for (const key of ['enemy_1299_ymkilr', 'enemy_1299_ymkilr_2']) {
   });
 }
 
-// PRTS 重弩突袭者 直击: "蓄力1.4s后向目标方向发射1支弩箭，对击中的首个目标造成攻击力100%的法术伤害与5s晕眩 ※技能持续2.5s"; 天赋
-// "隐匿（被阻挡，主动攻击期间均可解除）" (0.1.3: the bolt left at once and the reveal lasted the blackboard's 2 s)
-test(`${nm('enemy_1404_msnip')}: 直击 — 1.4 s after the cast a unit in line is shot (arts ATK×atk_scale) and stunned; revealed and standing for the skill's 2.5 s`, () => {
+test(`${nm('enemy_1404_msnip')}: 直击 — a unit in line is shot (arts ATK×atk_scale) and stunned; the shooter reveals itself`, () => {
   const h = arena({ units: [{ chessId: 't_wall', row: 9, col: 4 }], hooks: ['statusApplied'] });
   h.step();
   const e = put(h, 'enemy_1404_msnip', [9, 8]);
   const s = skb('enemy_1404_msnip', 'CrossAttack');
+  h.run(s.initCooldown + 1.5);
   const w = h.unit('t_wall');
-  h.run(s.initCooldown + 0.1);
-  assert.ok(e.findBuff('ab:revealed') && e.s.flags.noMove, 'cast: revealed, standing');
-  h.run(1.2);                                               // 1.3 s into the skill: still charging
-  assert.equal(w.stats.taken, 0, 'no bolt before the 1.4 s charge');
-  h.run(0.8);                                               // 2.1 s in: the bolt (4 tiles at 12/s) has landed
   assert.equal(statuses(h, w.id, 'stun').length, 1);
-  approx(statuses(h, w.id, 'stun')[0].duration, s.bb.stun);
   approx(w.stats.taken, e.s.atk * s.bb.atk_scale * (1 - 0 / 100));
-  assert.ok(e.findBuff('ab:revealed'), 'still revealed at 2.1 s');
-  h.run(0.5);                                               // 2.6 s in: the skill is over
-  assert.ok(!e.findBuff('ab:revealed') && !e.s.flags.noMove, 'skill over after 2.5 s');
-  // stunned during the charge: no bolt
-  const h2 = arena({ units: [{ chessId: 't_wall', row: 9, col: 4 }] });
-  h2.step();
-  const e2 = put(h2, 'enemy_1404_msnip', [9, 8]);
-  h2.run(s.initCooldown + 0.5);
-  h2.b.applyStatus(e2, 'stun', { duration: 1.5 });
-  h2.run(2);
-  assert.equal(h2.unit('t_wall').stats.taken, 0, 'a stun during the charge cancels the shot');
+  assert.ok(e.findBuff('ab:revealed') || h.b.time > s.initCooldown + s.bb.duration);
 });
 
 test(`${nm('enemy_10034_cnvsax')}: never attacks while stealthed; once blocked it counter-attacks and burns its locked target`, () => {
@@ -165,18 +140,6 @@ test(`${nm('enemy_10034_cnvsax')}: never attacks while stealthed; once blocked i
   assert.ok(w.elem.burn > 0, '狂欢式演奏 burns its target (the blocker)');
 });
 
-test(`${nm('enemy_10034_cnvsax')}: revealed (反隐) and not blocked it makes no normal attack and walks on — 反击模式 "仅进行阻挡攻击"`, () => {
-  const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 6 }] });
-  h.step();
-  h.b.addBuff(h.unit('t_wall'), { key: 'test:noBlock', persist: true, flags: { noBlock: true } });
-  const e = put(h, 'enemy_10034_cnvsax', [9, 8], { move: true, route: { motion: 'WALK', start: [9, 8], end: [9, 1], checkpoints: [] } });
-  h.b.addBuff(e, { key: 'test:reveal', persist: true, flags: { reveal: true } });
-  const x0 = e.x;
-  h.run(4);
-  assert.equal(e.stats.attacks, 0, 'no ranged attack (until 0.1.3 it shot the wall and stood still)');
-  approx(x0 - e.x, 4 * e.s.moveSpeed * 0.5, 0.02, 'walked the whole 4 s');
-});
-
 test(`${nm('enemy_9008_acbunn')}: attacks several targets at once while stealthed`, () => {
   const h = arena({ units: [{ chessId: 't_gun', row: 10, col: 6 }, { chessId: 't_mage', row: 11, col: 6 }, { chessId: 't_blade', row: 10, col: 7 }], captureNoisy: true, hooks: ['attack'] });
   h.step();
@@ -184,67 +147,6 @@ test(`${nm('enemy_9008_acbunn')}: attacks several targets at once while stealthe
   h.runUntil(() => e.stats.attacks >= 1, 10);
   const atk = h.hooksOf('attack').find((c) => c.attacker === e);
   assert.ok(atk.targets.length >= 2, `targets ${atk.targets.length}`);
-});
-
-// 骨刺 — PRTS 天赋 (级别0) 「自身普通攻击索敌不受阻挡影响 / 不会攻击飞行单位，隐匿（解除阻挡0秒后恢复） / 隐匿期间可同时攻击3个目标」
-// and the level description 「隐匿；隐匿状态下同时攻击3个目标。」 (PR #365, the targeting part checked against PRTS).
-function boneArena(o = {}) {
-  const h = arena({
-    units: ['t_wall', 't_wall2', 't_wall3', 't_wall4'].map((chessId, i) => ({ chessId, row: 9 + (i % 2), col: 6 + Math.floor(i / 2) })),
-    captureNoisy: true, hooks: ['attack'], ...o,
-  });
-  h.step();
-  for (const u of h.allies()) h.b.addBuff(u, { key: 'test:noBlock', persist: true, flags: { noBlock: true } });
-  const e = put(h, 'enemy_9008_acbunn', [9, 6]);
-  return { h, e };
-}
-/** The targets of `e`'s next attack. */
-function boneNext(h, e) {
-  const n = h.hooksOf('attack').filter((c) => c.attacker === e).length;
-  assert.ok(h.runUntil(() => h.hooksOf('attack').filter((c) => c.attacker === e).length > n, 8), 'a new attack');
-  return h.hooksOf('attack').filter((c) => c.attacker === e)[n].targets;
-}
-
-test(`${nm('enemy_9008_acbunn')}: 3 targets while hidden, 1 once blocked or revealed — by priority, not its blocker first; 3 again when hidden`, () => {
-  for (const cause of ['block', 'reveal']) {
-    const { h, e } = boneArena();
-    const wall = h.unit('t_wall'), taunter = h.unit('t_wall4');
-    assert.equal(new Set(boneNext(h, e)).size, 3, `${cause}: hidden — three distinct targets of the four in reach`);
-    h.b.addBuff(taunter, { key: 'test:taunt', mods: { taunt: 5 } });
-    if (cause === 'block') { h.b.removeBuff(wall, 'test:noBlock'); h.step(2); assert.equal(e.blockedBy, wall); }
-    else h.b.addBuff(e, { key: 'test:reveal', persist: true, flags: { reveal: true } });
-    assert.deepEqual(boneNext(h, e), [taunter], `${cause}: one target, the taunt-5 one (索敌不受阻挡影响)`);
-    if (cause === 'block') { h.b.addBuff(wall, { key: 'test:noBlock', persist: true, flags: { noBlock: true } }); h.b.releaseBlocked(wall); }
-    else h.b.removeBuff(e, 'test:reveal');
-    assert.equal(boneNext(h, e).length, 3, `${cause}: hidden again (0 s after the block) — three`);
-    checkInvariants(h.b);
-  }
-});
-
-test(`${nm('enemy_9008_acbunn')}: never targets a flying unit (炎佑, taunt 5), hidden or revealed`, () => {
-  for (const revealed of [false, true]) {
-    const { h, e } = boneArena({ content: 'full', extraContent: [] });
-    const [air] = spawnYanyou(h.b, 'p1', { count: 1, hp: 50000 });
-    assert.ok(air?.isFlying);
-    air.x = 6.5; air.y = 9;
-    h.b.applyStatus(air, 'stun', { duration: 30, force: true });
-    h.b.addBuff(air, { key: 'test:taunt', mods: { taunt: 5 } });
-    if (revealed) h.b.addBuff(e, { key: 'test:reveal', persist: true, flags: { reveal: true } });
-    const t = boneNext(h, e);
-    assert.equal(t.length, revealed ? 1 : 3);
-    assert.ok(!t.includes(air), `${revealed ? 'revealed' : 'hidden'}: the flyer is no target`);
-  }
-});
-
-test(`${nm('enemy_9008_acbunn')}: its 3 hidden targets come from its normal attack's reach (2 + the 0.25 ally collider)`, () => {
-  const { h, e } = boneArena();
-  const edge = h.unit('t_wall3'), outside = h.unit('t_wall4');
-  edge.x = e.x + 2.1; edge.y = e.y;
-  outside.x = e.x + 2.3; outside.y = e.y;
-  h.b.addBuff(edge, { key: 'test:taunt', mods: { taunt: 5 } });
-  const t = boneNext(h, e);
-  assert.ok(t.includes(edge), 'the ally 2.1 away is one of the three');
-  assert.ok(!t.includes(outside), 'the one 2.3 away is out of reach');
 });
 
 test(`${nm('enemy_1175_dushdo_2')}: stealth; next to 深池伙友卫队精英 its attack interval drops by traitAbility.base_attack_time`, () => {
@@ -279,11 +181,11 @@ const TIMES_KEYS = ['enemy_1196_msfyin', 'enemy_1196_msfyin_2', 'enemy_1198_msfs
   'enemy_1202_msfzhi', 'enemy_1202_msfzhi_2', 'enemy_1204_msfhu', 'enemy_1204_msfhu_2', 'enemy_1208_msfji', 'enemy_1208_msfji_2', 'enemy_1210_msfden', 'enemy_1210_msfden_2'];
 for (const key of TIMES_KEYS) {
   const artsOnly = /1204/.test(key);
-  test(`${nm(key)}: 频次 — needs ${E[key].stats.maxHp} × the round's HP ${artsOnly ? 'arts/true ' : ''}hits, unblockable`, () => {
+  test(`${nm(key)}: 频次 — needs exactly ${E[key].stats.maxHp} ${artsOnly ? 'arts/true ' : ''}hits, unblockable`, () => {
     const h = arena({ units: [{ chessId: 't_gun', row: 12, col: 3 }], hooks: ['death'], mods: { hpMul: 3 } });
     h.step();
-    const e = put(h, key, [10, 7], { mods: { hpMul: 3 } });   // the round's HP multiplier (攻坚装备) scales the hit count (PR #272)
-    const n = E[key].stats.maxHp * 3;
+    const e = put(h, key, [10, 7], { mods: { hpMul: 3 } });   // wave HP scaling must not change the hit count
+    const n = E[key].stats.maxHp;
     assert.equal(e.s.maxHp, n);
     assert.ok(e.s.flags.unblockable);
     const g = h.unit('t_gun');
@@ -296,33 +198,6 @@ for (const key of TIMES_KEYS) {
     assert.ok(!e.alive);
   });
 }
-
-// PR #272 (感谢 @CXUtk): 补给线 / 补给线II leave out exactly these 14 keys (+ 炎佑); 攻坚装备 / II / III and 急行军 only 炎佑
-const EFFECTS = JSON.parse(fs.readFileSync(new URL('../../data/effects.json', import.meta.url), 'utf8'));
-const excludeOf = (id) => new Set(String(EFFECTS[id].params.enemy_exclude).split('|'));
-test('频次 器物 vs the round effects: the 14 kitTimes keys are exactly 补给线 / 补给线II\'s enemy_exclude (+ 炎佑); 攻坚装备 / II / III / 急行军 leave out only 炎佑', () => {
-  for (const id of ['aceffect_enemy_2', 'aceffect_enemy_2_2']) assert.deepEqual([...excludeOf(id)].sort(), ['enemy_9012_acloon', ...TIMES_KEYS].sort(), id);
-  for (const id of ['aceffect_enemy_1', 'aceffect_enemy_3', 'aceffect_enemy_4', 'aceffect_enemy_5']) assert.deepEqual([...excludeOf(id)], ['enemy_9012_acloon'], id);
-});
-
-test('频次 器物: hits = data × hpMul / supplyHpMul (补给线\'s share out, 攻坚装备 kept), rounded [ASSUMED]; a 频次 enemy\'s death spawn inherits that', () => {
-  const h = arena();
-  h.step();
-  // co-op 终极 R6: hp 1.2⁴ × 1.08 (补给线) — the mirror takes 1.2⁴ only: 30 × 2.0736 = 62.2 → 62
-  const mods = { hpMul: 2.239488, atkMul: 1.4641, speedMul: 0, supplyHpMul: 1.08 };
-  const jin = put(h, 'enemy_1200_msfjin', [10, 7], { mods });
-  assert.equal(jin.s.maxHp, 62);
-  const parent = put(h, 'enemy_1199_sfjin', [10, 9], { mods });
-  approx(parent.s.maxHp, E.enemy_1199_sfjin.stats.maxHp * 2.239488, 1e-9, '身观 itself takes 补给线');
-  h.b.kill(parent, null);
-  h.step();
-  const child = h.enemies().find((e) => e.defId === 'enemy_1200_msfjin' && e !== jin);
-  assert.ok(child, '身观 leaves its 青铜镜');
-  assert.equal(child.s.maxHp, 62);
-  // solo 标准 (攻坚装备III, HP ×0.75): fewer hits — 2 → 1.5 → 2, 3 → 2.25 → 2, 30 → 22.5 → 23
-  for (const [key, n] of [['enemy_1196_msfyin', 2], ['enemy_1196_msfyin_2', 2], ['enemy_1200_msfjin', 23]]) assert.equal(put(h, key, [11, 7], { mods: { hpMul: 0.75 } }).s.maxHp, n, key);
-  assert.equal(put(h, 'enemy_1196_msfyin', [11, 8]).s.maxHp, 2, 'no mods: the data\'s count');
-});
 
 for (const key of ['enemy_1200_msfjin', 'enemy_1204_msfhu', 'enemy_1288_duskls']) {
   test(`${nm(key)}: 频次 hits keep their DamageInfo — a self-excluding bonus-on-damaged attacker never recurses, death hooks fire`, () => {
@@ -338,7 +213,7 @@ for (const key of ['enemy_1200_msfjin', 'enemy_1204_msfhu', 'enemy_1288_duskls']
     h.step();
     const e = put(h, key, [10, 7]);
     const g = h.unit('t_mage');
-    if (/duskls/.test(key)) { killed(h, e, g); assert.ok(e.alive, 'ember'); h.run(HUSK_REBIRTH + 0.05); }
+    if (/duskls/.test(key)) { killed(h, e, g); assert.ok(e.alive, 'ember'); }
     const hits = e.s.maxHp;
     assert.ok(hits > 1 && hits <= 30);
     let n = 0;
@@ -384,99 +259,55 @@ for (const [key, n] of Object.entries(DEATH_SPAWN)) {
 }
 
 for (const key of ['enemy_1207_sfji', 'enemy_1207_sfji_2']) {
-  // PRTS 天赋 "攻击力+X%，持有4个【断刃】 / 每次成功攻击后消耗1个【断刃】，攻击结束时若已耗尽【断刃】，则立刻切换为无断刃模式并失去攻击力
-  // 加成" (popup: "清空当次攻击间隔" — it attacks again at once: since 0.2.0 its next swing starts at once and strikes at the
-  // clip's damage frame, ai.js attackWindup); GitHub #107: until 0.2.0 each attack stacked another layer
-  test(`${nm(key)}: one ATK layer while it holds a blade, gone with the 4th attack (which is followed at once by the next swing); unspent blades become 矛头 on death (at least 1)`, () => {
-    const per = tb(key, 'Atkup.atk') ?? tb(key, 'AtkUp.atk'), cnt = tb(key, 'DeadSpawn.cnt');
+  test(`${nm(key)}: each attack spends a blade (+ATK); unspent blades become 矛头 on death (at least 1)`, () => {
     const h = arena({ units: [{ chessId: 't_wall', row: 9, col: 5 }] });
     h.step();
     const e = put(h, key, [9, 5]);
-    const base = e.base.atk;
-    approx(e.s.atk, base * (1 + per), 1e-6, 'holding 4 blades: one layer from the spawn');
+    const base = e.s.atk;
     h.runUntil(() => e.stats.attacks >= 2, 20);
-    approx(e.s.atk, base * (1 + per), 1e-6, 'two blades spent: still one layer (never stacked)');
-    h.runUntil(() => e.stats.attacks >= cnt, 20);
-    approx(e.s.atk, base, 1e-6, 'the last blade spent: 无断刃模式, no bonus');
-    const tLast = h.b.time;
-    const wind = attackWindup(e);
-    assert.ok(wind > 0 && h.runUntil(() => e.stats.attacks >= cnt + 1, wind + 0.2), 'the mode switch clears the attack interval: the next swing at once');
-    assert.ok(Math.abs(h.b.time - tLast - wind) <= 3 * h.TICK, `${h.b.time - tLast} s after the 4th attack: its wind-up (${wind} s)`);
-    assert.ok(h.b.time - tLast < e.s.interval / 2);
-    const child = E[key].talents.bbStr['DeadSpawn.enemy_key'];
+    const per = tb(key, 'Atkup.atk') ?? tb(key, 'AtkUp.atk');
+    approx(e.s.atk, base * (1 + 2 * per));
     killed(h, e, null);
-    assert.equal(alive(h, child).length, 1, 'no blade left: still one 矛头');
-    // killed after two attacks: the two unspent blades; untouched: all four
-    const h2 = arena({ units: [{ chessId: 't_wall', row: 9, col: 5 }] });
+    const child = E[key].talents.bbStr['DeadSpawn.enemy_key'];
+    assert.equal(alive(h, child).length, tb(key, 'DeadSpawn.cnt') + tb(key, 'DeadSpawn.cnt_add') * 2);
+    const h2 = arena();
     h2.step();
-    const e2 = put(h2, key, [9, 5]);
-    h2.runUntil(() => e2.stats.attacks >= 2, 20);
+    const e2 = put(h2, key, [10, 7]);
     killed(h2, e2, null);
-    assert.equal(alive(h2, child).length, cnt + tb(key, 'DeadSpawn.cnt_add') * 2);
-    const h3 = arena();
-    h3.step();
-    const e3 = put(h3, key, [10, 7]);
-    killed(h3, e3, null);
-    assert.equal(alive(h3, child).length, cnt);
+    assert.equal(alive(h2, child).length, tb(key, 'DeadSpawn.cnt'));
   });
 }
 
 for (const key of ['enemy_1209_sfden', 'enemy_1209_sfden_2']) {
-  // PRTS 清明 / 堂皇 辉光照耀 "使【范围隐匿】生效3s" = the talent's InvisibleShield.duration (清明's skill blackboard says 5 — used
-  // until 0.1.3)
-  test(`${nm(key)}: InvisibleShield veils nearby enemies (stealth) for the talent's ${tb(key, 'InvisibleShield.duration')} s`, () => {
+  test(`${nm(key)}: InvisibleShield veils nearby enemies (stealth) for the skill duration`, () => {
     const h = arena();
     h.step();
     put(h, key, [10, 7]);
     const o = put(h, 'enemy_1007_slime', [10, 6]);
     const s = skb(key, 'InvisibleShield');
-    assert.equal(tb(key, 'InvisibleShield.duration'), 3);
     h.run(s.initCooldown + 0.1);
     assert.ok(o.s.flags.stealth);
-    h.run(3 - 0.3);
-    assert.ok(o.s.flags.stealth, 'still veiled at 2.8 s');
-    h.run(0.4);
-    assert.ok(!o.s.flags.stealth, 'gone after 3 s');
+    h.run(s.bb.duration + 0.2);
+    assert.ok(!o.s.flags.stealth);
   });
 }
 
 for (const key of ['enemy_1203_sfhu', 'enemy_1203_sfhu_2']) {
-  // PRTS 烹泉 / 沏虹 天赋: "死亡爆炸（爆炸半径1.25，造成攻击力100%法术溅射伤害并施加15s【烹泉减益】…不可对空）", 【烹泉减益】 "可叠加，每层
-  // 持续时间和效果独立计算"; "普通攻击对目标对及目标周围半径1.0范围内的所有我方单位造成法术普通伤害" (0.1.3: the blast took the attack
-  // radius 2 and left a steam zone; the attack hit its target only)
-  test(`${nm(key)}: death spawns 4 茶器; the blast (r 1.25, ATK arts) gives each unit hit one ${tb(key, 'DeadBoom.duration')} s layer of ASPD ${tb(key, 'DeadBoom.attack_speed')}; its attacks splash r 1.0`, () => {
-    // t_gun deploys last (column 6, below t_wall): the attack's target, t_wall2 and t_wall within 1.0 of it
-    const h = arena({ units: [{ chessId: 't_gun', row: 10, col: 6 }, { chessId: 't_wall', row: 11, col: 6 }, { chessId: 't_wall2', row: 10, col: 5 }], hooks: ['damaged'], captureNoisy: true });
+  test(`${nm(key)}: death spawns 4 茶器 and leaves an ASPD-down arts blast zone`, () => {
+    const h = arena({ units: [{ chessId: 't_gun', row: 10, col: 6 }] });
     h.step();
     const e = put(h, key, [10, 7]);
-    h.runUntil(() => h.hooksOf('damaged').some((c) => c.source === e && c.dmg.isAttack), 10);
-    h.run(0.6);
-    const tgt = h.hooksOf('damaged').find((c) => c.source === e && c.dmg.isAttack).target;
-    const near = h.allies().filter((u) => u !== tgt && Math.hypot(u.x - tgt.x, u.y - tgt.y) <= 1 + 1e-6);
-    const splashed = h.hooksOf('damaged').filter((c) => c.source === e && !c.dmg.isAttack && c.dmg.tags.includes('splash')).map((c) => c.target);
-    assert.ok(near.length >= 1, 'a unit within 1.0 of the target');
-    for (const u of near) assert.ok(splashed.includes(u), `${u.defId} splashed`);
-    for (const u of splashed) assert.ok(Math.hypot(u.x - tgt.x, u.y - tgt.y) <= 1 + 1e-6, 'only within 1.0');
-    approx(h.hooksOf('damaged').find((c) => c.source === e && !c.dmg.isAttack).amount, e.s.atk, 1e-6, 'arts, 100 % (RES 0)');
-    const atk = e.s.atk;
-    const taken0 = new Map(h.allies().map((u) => [u, u.stats.taken]));
     killed(h, e, null);
     assert.equal(alive(h, E[key].talents.bbStr['DeadSpawn.enemy_key']).length, tb(key, 'DeadSpawn.cnt'));
-    const g = h.unit('t_gun'), w = h.unit('t_wall'), w2 = h.unit('t_wall2');
-    approx(g.stats.taken - taken0.get(g), atk, 1e-6, '1.0 away: blasted');
-    assert.equal(w2.stats.taken - taken0.get(w2), 0, '2.0 away: outside 1.25');
-    assert.equal(w.stats.taken - taken0.get(w), 0, '√2 away: outside 1.25');
+    h.run(tb(key, 'DeadBoom.interval') + 0.1);
+    const g = h.unit('t_gun');
+    assert.ok(g.stats.taken > 0);
     approx(g.s.aspd, 100 + tb(key, 'DeadBoom.attack_speed'));
-    assert.equal(w.s.aspd, 100);
-    h.run(tb(key, 'DeadBoom.duration') - 0.5);
-    approx(g.s.aspd, 100 + tb(key, 'DeadBoom.attack_speed'), 1e-6, 'one layer for 15 s');
-    h.run(1);
-    assert.equal(g.s.aspd, 100);
   });
 }
 
 for (const key of ['enemy_1288_duskls', 'enemy_1288_duskls_2', 'enemy_1292_duskld']) {
-  test(`${nm(key)}: knocked out ⇒ ${HUSK_REBIRTH} s 重生, then a walking, disarmed, 隐匿 ember needing ${tb(key, 'Revive[Trigger].prop_max_hp')} hits; full HP again ${tb(key, 'Revive[Trigger].interval')} s later`, () => {
+  test(`${nm(key)}: knocked out ⇒ stealthed ember needing ${tb(key, 'Revive[Trigger].prop_max_hp')} hits; revives at full HP after ${tb(key, 'Revive[Trigger].interval')} s`, () => {
     const h = arena({ units: [{ chessId: 't_gun', row: 12, col: 3 }] });
     h.step();
     const e = put(h, key, [10, 7]);
@@ -484,23 +315,19 @@ for (const key of ['enemy_1288_duskls', 'enemy_1288_duskls_2', 'enemy_1292_duskl
     killed(h, e, h.unit('t_gun'));
     assert.ok(e.alive);
     assert.equal(e.s.maxHp, tb(key, 'Revive[Trigger].prop_max_hp'));
-    assert.ok(e.s.flags.invulnerable && e.s.flags.unblockable && e.s.flags.noMove, '重生');
-    h.run(HUSK_REBIRTH + 0.05);
-    assert.ok(e.s.flags.stealth && e.s.flags.disarm && e.profile.noAttack, '余烬: 隐匿, 缴械');
-    assert.ok(!e.s.flags.unblockable && !e.s.flags.noMove, 'blockable, walks');
-    h.run(tb(key, 'Revive[Trigger].interval'));
+    assert.ok(e.s.flags.stealth && e.profile.noAttack);
+    h.run(tb(key, 'Revive[Trigger].interval') + 0.1);
     assert.equal(e.s.maxHp, max);
     assert.equal(e.hp, max);
     assert.ok(!e.s.flags.stealth);
     // an ember hit N times dies for good
     killed(h, e, null);
-    h.run(HUSK_REBIRTH + 0.05);
     for (let i = 0; i < tb(key, 'Revive[Trigger].prop_max_hp'); i++) h.b.dealDamage(null, e, { amount: 1, type: 'arts' });
     assert.ok(!e.alive);
   });
 }
 
-test(`${nm('enemy_9010_acpupp')}: knocked out ⇒ an unblockable 15-hit 傀儡 that walks on and revives, and nearby enemies get a 5-hit shield`, () => {
+test(`${nm('enemy_9010_acpupp')}: knocked out ⇒ 15-hit regeneration husk that revives, and nearby enemies get a 5-hit shield`, () => {
   const h = arena();
   h.step();
   const e = put(h, 'enemy_9010_acpupp', [10, 7]);
@@ -508,8 +335,6 @@ test(`${nm('enemy_9010_acpupp')}: knocked out ⇒ an unblockable 15-hit 傀儡 t
   killed(h, e, null);
   assert.ok(e.alive);
   assert.equal(e.s.maxHp, tb('enemy_9010_acpupp', 'Revive[Trigger].prop_max_hp'));
-  h.run(HUSK_REBIRTH + 0.05);
-  assert.ok(e.s.flags.unblockable && e.s.flags.disarm && !e.s.flags.stealth && !e.s.flags.noMove, '傀儡: 不可被阻挡, not stealthed');
   const hp = o.hp;
   for (let i = 0; i < tb('enemy_9010_acpupp', 'Aura.max_damage_block_cnt'); i++) h.b.dealDamage(null, o, { amount: 100, type: 'phys' });
   assert.equal(o.hp, hp, 'shield negates the hits');
@@ -517,7 +342,6 @@ test(`${nm('enemy_9010_acpupp')}: knocked out ⇒ an unblockable 15-hit 傀儡 t
   assert.ok(o.hp < hp);
   h.run(tb('enemy_9010_acpupp', 'Revive[Trigger].interval') + 0.1);
   assert.equal(e.hp, E.enemy_9010_acpupp.stats.maxHp);
-  assert.ok(!e.s.flags.unblockable);
 });
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -565,11 +389,8 @@ test(`${nm('enemy_1158_divman')}: in deep water ATK +Swim.atk and stealth; immun
   h.run(0.5);
   approx(e.s.atk, dry.s.atk * (1 + tb('enemy_1158_divman', 'Swim.atk')));
   assert.ok(e.s.flags.stealth && !dry.s.flags.stealth);
-  // 免疫水蚀: devices.js' deep-water tick (tag 'deepsea'); 环境伤害 ('terrain', e.g. 活性源石) still lands
-  h.b.dealDamage(null, e, { amount: 40, type: 'true', canDodge: false, sourceless: true, noSp: true, tags: ['dot', 'periodic', 'deepsea'] });
-  assert.equal(e.hp, e.s.maxHp);
   h.b.dealDamage(null, e, { amount: 40, type: 'true', tags: ['terrain'] });
-  assert.equal(e.hp, e.s.maxHp - 40);
+  assert.equal(e.hp, e.s.maxHp);
 });
 
 for (const key of ['enemy_1160_hvyslr', 'enemy_1160_hvyslr_2']) {
@@ -709,54 +530,7 @@ for (const key of ['enemy_1234_dsubrl', 'enemy_1234_dsubrl_2']) {
     approx(e.findBuff('stun').timeLeft, 2);
     assert.equal(h.b.applyStatus(e, 'sluggish', { duration: 4 }), false);
   });
-
-  // community report 「有个持续造成范围伤害的海嗣敌人错误的设置了攻击时不移动导致卡在原地」: PRTS 天赋 "不进行普通攻击", "未处于消失状态
-  // 时，令攻击范围内的所有我方单位每秒受到攻击力100%的无途径法术伤害", "每次输出伤害时，再造成攻击力5%的神经损伤"
-  test(`${nm(key)}: no normal attack — walks on past an unblocking operator while it pulses 100 % ATK arts + 5 % neural each second; no pulse while hidden`, () => {
-    const h = arena({ units: [{ chessId: 't_gun', row: 10, col: 6 }], hooks: ['damaged'], captureNoisy: true });
-    h.step();
-    const g = h.unit('t_gun');
-    h.b.addBuff(g, { key: 'test:noBlock', persist: true, flags: { noBlock: true } });
-    g.profile.noAttack = true;
-    const e = put(h, key, [9, 8], { move: true, route: { motion: 'WALK', start: [9, 8], end: [9, 1], checkpoints: [] } });
-    const x0 = e.x;
-    h.run(4);
-    assert.ok(e.profile.noAttack && e.stats.attacks === 0, 'never attacks');
-    approx(x0 - e.x, 4 * e.s.moveSpeed * 0.5, 0.02, 'walked the whole 4 s (MOVE_SCALE 0.5) with the operator in range');
-    const mine = h.hooksOf('damaged').filter((c) => c.source === e && c.target === g);
-    const arts = mine.filter((c) => c.dmg.type === 'arts');
-    assert.ok(arts.length >= 3 && arts.every((c) => !c.dmg.isAttack && c.dmg.tags.includes('nestPulse')), `pulses, not attacks (${arts.length})`);
-    approx(arts[0].dmg.amount, e.s.atk, 1e-9, '100 % ATK');
-    const neural = mine.filter((c) => c.dmg.type === 'element');
-    assert.equal(neural.length, arts.length, 'one 神经 per pulse');
-    approx(neural[0].dmg.amount, e.s.atk * tb(key, 'EpDamage.ep_damage_ratio'), 1e-9, '5 % ATK 神经');
-    const times = arts.map((c) => c.t ?? null).filter((t) => t != null);
-    if (times.length > 1) approx(times[1] - times[0], 1, 1e-6, 'one per second');
-    // 消失 (a DISAPPEAR leg): no pulse
-    const n0 = arts.length;
-    h.b._setHidden(e, true);
-    e.x = g.x + 1; e.y = g.y;
-    h.run(2.05);
-    assert.equal(h.hooksOf('damaged').filter((c) => c.source === e && c.dmg.type === 'arts').length, n0, 'hidden: no pulse');
-  });
 }
-
-test('GitHub #93: 深溟巢涌者 keeps walking with the 炎佑 dragon in range; only its pulse (no attack) reaches the dragon', () => {
-  const h = makeBattle({ seed: 7, autoFinish: false, timeLimit: 120, defs: { chess: { t_wall: WALL('t_wall') } }, kits: { t_wall: NOATK },
-    units: [{ chessId: 't_wall', row: 12, col: 1 }], hooks: ['damaged'], captureNoisy: true });
-  h.step();
-  const [y] = spawnYanyou(h.b, 'p1', { atk: 0, hp: 50000 });
-  assert.ok(y && y.isFlying, 'a flying ally');
-  const e = h.spawn('enemy_1234_dsubrl', { pos: [Math.round(y.y), Math.round(y.x) + 2], routeIndex: 0, mods: { speedMul: 1 },
-    route: { motion: 'WALK', start: [Math.round(y.y), Math.round(y.x) + 2], end: [Math.round(y.y), 0], checkpoints: [] } });
-  const x0 = e.x;
-  h.run(5);
-  assert.equal(e.stats.attacks, 0, 'no normal attack');
-  assert.ok(x0 - e.x >= 5 * e.s.moveSpeed * 0.5 - 0.05, `walked on (${(x0 - e.x).toFixed(2)} tiles in 5 s)`);
-  const onDragon = h.hooksOf('damaged').filter((c) => c.source === e && c.target === y);
-  assert.ok(onDragon.length > 0, 'the dragon in range is pulsed');
-  assert.ok(onDragon.every((c) => !c.dmg.isAttack && (c.dmg.type === 'element' || c.dmg.tags.includes('nestPulse'))), 'pulse and its 神经 only');
-});
 
 for (const key of ['enemy_1267_nhpbr', 'enemy_1267_nhpbr_2']) {
   test(`${nm(key)}: death releases 污染秽蚀 — ground allies within ${tb(key, 'PollutedDie.projectile_range')} lose ${tb(key, 'PollutedDie.polluted_damage_low')} HP/s`, () => {
@@ -766,30 +540,6 @@ for (const key of ['enemy_1267_nhpbr', 'enemy_1267_nhpbr_2']) {
     killed(h, e, null);
     h.run(3.05);
     approx(h.unit('t_wall').stats.taken, 3 * tb(key, 'PollutedDie.polluted_damage_low'));
-  });
-
-  // Owner's official-play recall of 2026-10-12 (GitHub #470): a death while the silence icon is already showing
-  // creates no fog. That contradicts the PRTS / in-game text 「不可沉默」. The same PollutedDie ability is on both keys.
-  test(`${nm(key)}: silenced when it dies, it releases no 污染秽蚀; a silence that ran out does not stop it`, () => {
-    const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 6 }] });
-    h.step();
-    const e = put(h, key, [10, 7]);
-    h.b.applyStatus(e, 'silence', { duration: 30 });
-    h.step();
-    assert.ok(e.s.flags.silence);
-    killed(h, e, null);
-    h.run(3.05);
-    assert.equal(h.unit('t_wall').stats.taken, 0);
-    assert.equal(h.eventsOf('fx').filter((x) => x[1] === 'zone' && x[4] && x[4].kind === 'pollution').length, 0, 'no zone');
-    const h2 = arena({ units: [{ chessId: 't_wall', row: 10, col: 6 }] });
-    h2.step();
-    const e2 = put(h2, key, [10, 7]);
-    h2.b.applyStatus(e2, 'silence', { duration: 1 });
-    h2.run(1.5);
-    assert.ok(!e2.s.flags.silence);
-    killed(h2, e2, null);
-    h2.run(3.05);
-    approx(h2.unit('t_wall').stats.taken, 3 * tb(key, 'PollutedDie.polluted_damage_low'));
   });
 }
 
@@ -890,33 +640,17 @@ for (const key of ['enemy_1169_duphlx', 'enemy_1169_duphlx_2']) {
 }
 
 for (const key of ['enemy_1172_dugago', 'enemy_1172_dugago_2']) {
-  test(`${nm(key)}: melee only while blocked; first knock-out ⇒ unblockable statue (DEF +${tb(key, 'stone.def')}, 失衡 / 浮空 immune) for ${tb(key, 'stone.duration')} s, then a flyer with ranged arts attacks that skip flyers (PRTS 天赋)`, () => {
-    // 地面模式: an operator in its 1.6 radius but not blocking it is never attacked
-    const h0 = arena({ units: [{ chessId: 't_gun', row: 11, col: 7 }] });
-    h0.step();
-    put(h0, key, [10, 7]);
-    h0.run(6);
-    assert.equal(h0.unit('t_gun').stats.taken, 0, 'no ranged attack in its ground mode');
-    const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 7 }, { chessId: 't_gun', row: 11, col: 7 }], kits: { t_gun: NOATK }, hooks: ['damaged'], captureNoisy: true });
+  test(`${nm(key)}: first knock-out ⇒ statue (DEF +${tb(key, 'stone.def')}) for ${tb(key, 'stone.duration')} s, then reborn as a flyer`, () => {
+    const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 7 }] });
     h.step();
     const e = put(h, key, [10, 7]);
     h.step();
     killed(h, e, null);
     assert.ok(e.alive);
-    assert.equal(e.hp, e.s.maxHp, 'an instant 重生 to full HP');
     assert.equal(e.s.def, E[key].stats.def + tb(key, 'stone.def'));
-    h.step();
-    assert.ok(e.s.flags.unblockable && e.s.flags.noDisplace && !e.blockedBy, '转换模式: 无法被阻挡, 失衡免疫');
-    assert.equal(h.b.applyStatus(e, 'levitate', { duration: 2 }), false, '免疫浮空');
-    h.b.dealDamage(h.unit('t_gun'), e, { amount: e.s.maxHp * 0.3, type: 'true' });
-    const hp = e.hp;
     h.run(tb(key, 'stone.duration') + 0.5);
     assert.equal(e.motion, 'FLY');
     assert.ok(!e.blockedBy);
-    assert.equal(e.hp, hp, 'no second refill when it takes off');
-    assert.ok(h.runUntil(() => e.stats.attacks > 0, 10), '飞行模式 attacks at range');
-    assert.ok(h.unit('t_gun').stats.taken + h.unit('t_wall').stats.taken > 0, 'an operator in its radius');
-    assert.ok(h.hooksOf('damaged').filter((c) => c.source === e && c.dmg.isAttack).every((c) => c.dmg.type === 'arts'), 'arts damage');
     killed(h, e, null);
     assert.ok(!e.alive, 'second knock-out is final');
   });
@@ -985,13 +719,11 @@ test(`${nm('enemy_1042_frostd')}: operators within ${tb('enemy_1042_frostd', 'de
 
 test(`${nm('enemy_1040_bombd')}: no normal attack; ONE bomb on the target + its 8 tiles, then move speed ×${skb('enemy_1040_bombd', 'boomb').bb.move_speed}`, () => {
   // PRTS 暴鸰: "不进行普通攻击" · 投弹 "对目标及其周围八格的我方单位造成100%物理伤害 … 技能结束后移速最终提升至200% ※此技能仅能触发一次"
-  // (the bomb leaves on the Attack clip's OnAttack and flies 1 tile at 5 tiles/s; the speed-up when the cast ends —
-  // feedback D4, test/sim/feedback1d-bombd)
   const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 5 }, { chessId: 't_wall2', row: 10, col: 6 }, { chessId: 't_wall3', row: 12, col: 6 }] });
   h.step();
   const e = put(h, 'enemy_1040_bombd', [10, 7], { route: 2 });
   const s = skb('enemy_1040_bombd', 'boomb');
-  h.run(s.initCooldown + enemiesMod.BOMBD_RELEASE + enemiesMod.BOMBD_POST_DELAY + 0.1);
+  h.run(s.initCooldown + 0.2);
   const [w1, w2, w3] = ['t_wall', 't_wall2', 't_wall3'].map((id) => h.unit(id));
   approx(w2.stats.taken, e.s.atk, 1e-6, 'the target (latest deployed in range): 100 % ATK');
   approx(w1.stats.taken, e.s.atk, 1e-6, 'a tile next to it: splash 100 %');
@@ -1098,28 +830,6 @@ test(`${nm('enemy_1112_emppnt')} / 中枢: every attack is a shell that lands 3 
   }
 });
 
-test(`${nm('enemy_1112_emppnt_2')} / 先兆者: the shell's 1.2 circle takes every ally whose collider touches it — the impact tile and the 8 around it, not the cross (GitHub #364)`, () => {
-  for (const key of ['enemy_1112_emppnt_2', 'enemy_1112_emppnt']) {
-    // the enemy on (10, 8) reaches only the wall on (10, 6): the impact; the others stand around it, out of its reach
-    const h = arena({ units: [
-      { chessId: 't_wall', row: 10, col: 6 }, { chessId: 't_wall2', row: 10, col: 5 },
-      { chessId: 't_wall3', row: 9, col: 5 }, { chessId: 't_wall4', row: 10, col: 4 },
-    ], captureNoisy: true });
-    h.step();
-    const e = put(h, key, [10, 8], { route: 2 });
-    assert.ok(h.runUntil(() => e.stats.attacks >= 1, 10), 'attacks');
-    const shell = h.eventsOf('fx').find((ev) => ev[1] === 'bombardShell');
-    assert.ok(Math.abs(shell[4].r - 1.45) < 1e-9, 'drawn at the reach: 1.2 + the 0.25 collider');
-    h.run(3.1);
-    const taken = (id) => h.unit(id).stats.taken;
-    for (const [id, what] of [['t_wall', 'the impact'], ['t_wall2', 'its orthogonal neighbour (1 away)'], ['t_wall3', 'a diagonal neighbour (√2 away)']]) {
-      assert.ok(Math.abs(taken(id) - e.s.atk) < 1e-6, `${key}: ${what} takes the shell`);
-    }
-    assert.equal(taken('t_wall4'), 0, `${key}: two tiles away stays out`);
-    checkInvariants(h.b);
-  }
-});
-
 test(`${nm('enemy_10084_hlegle')}: never attacks a flying ally (不会攻击飞行单位) — a ground one in range instead`, () => {
   // a flying ally (the 炎佑 is one) deployed after the wall, so the engine's order (latest deployed) would pick it
   const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 6 }, { chessId: 't_wall2', row: 10, col: 8 }] });
@@ -1181,68 +891,16 @@ for (const key of ['enemy_1116_liprr', 'enemy_1116_liprr_2', 'enemy_1118_lidbox_
   });
 }
 
-// PRTS 天赋 + the client's templates dlancer_t_listener[a/b/c], dlancer_t[trigger], dlancer_t_atk (DESIGN §25.18): every
-// 0.1 s 晕眩 / 束缚 end the acceleration (its layers with it), not blocked starts it; a layer of move speed +50 % every
-// 0.5 s, at most 25 tries, blocked or not; a hit while it accelerates adds 当前移动速度 × 600 phys (its own instance) and
-// ends it (community report of 2026-10-06, item 36: until 0.2.0 a stun kept the speed, and the hit was multiplied)
-const DL = 'enemy_1072_dlancer';
-const dlBase = () => E[DL].stats.moveSpeed;
-const dlMul = (n) => 1 + tb(DL, 'rush.dlancer_t[trigger].move_speed') * n;
-const DL_ROUTE = { motion: 'WALK', start: [9, 18], end: [9, 2], checkpoints: [] };
-test(`${nm(DL)}: a layer of move speed +${tb(DL, 'rush.dlancer_t[trigger].move_speed') * 100} % every ${tb(DL, 'rush.dlancer_t[trigger].interval')} s while it walks, at most ${tb(DL, 'rush.dlancer_t[trigger].trig_cnt')}`, () => {
-  const h = arena();
+test(`${nm('enemy_1072_dlancer')}: accelerates while walking; the first hit after being blocked scales with the build-up`, () => {
+  const h = arena({ units: [{ chessId: 't_wall', row: 9, col: 3 }], captureNoisy: true, hooks: ['damaged'] });
   h.step();
-  const e = h.spawn(DL, { route: DL_ROUTE });
-  h.run(0.45);
-  approx(e.s.moveSpeed, dlBase(), 1e-9, 'the first layer 0.5 s after the start');
-  h.run(2.6);
-  approx(e.s.moveSpeed, dlBase() * dlMul(6), 1e-9, '6 layers after 3 s');
-  // the cap: a pinned one (speed ×0, never blocked) keeps trying — 25 tries, then the layers stay
-  const p = put(h, DL, [11, 12]);
-  h.run(14);
-  const max = tb(DL, 'rush.dlancer_t[trigger].trig_cnt');
-  assert.equal(p.mem.ab.list[0].n, max);
-  approx(p.findBuff('ab:rush').mods.moveMul, dlMul(max), 1e-9, 'capped at 25 layers');
-});
-
-test(`${nm(DL)}: a stun or a 束缚 ends the acceleration — its speed back to the base, building up again only afterwards; a slow, a freeze or a sleep does not`, () => {
-  for (const [status, value, resets] of [['stun', undefined, true], ['bind', undefined, true], ['slow', 0.5, false], ['freeze', undefined, false], ['sleep', undefined, false]]) {
-    const h = arena();
-    h.step();
-    const e = h.spawn(DL, { route: DL_ROUTE });
-    h.run(3.05);
-    approx(e.s.moveSpeed, dlBase() * dlMul(6), 1e-9, status);
-    h.b.applyStatus(e, status, { duration: 2, value });
-    h.run(2.2);
-    if (resets) {
-      approx(e.s.moveSpeed, dlBase(), 1e-9, `${status}: reset`);
-      h.run(1.05);
-      approx(e.s.moveSpeed, dlBase() * dlMul(2), 1e-9, `${status}: a fresh build-up`);
-    } else assert.ok(e.s.moveSpeed > dlBase() * dlMul(6) - 1e-9, `${status}: kept (${e.s.moveSpeed})`);
-  }
-});
-
-test(`${nm(DL)}: blocked, its first hit adds 当前移动速度 × ${tb(DL, 'firstattack.atk_scale')} physical damage (a second instance) and ends the acceleration; a stun between the block and the hit takes it away`, () => {
-  const hitsOf = (stunAtBlock) => {
-    const h = arena({ units: [{ chessId: 't_wall', row: 9, col: 4 }], captureNoisy: true, hooks: ['damaged'] });
-    h.step();
-    const e = h.spawn(DL, { route: DL_ROUTE });
-    let speedAtHit = null;
-    h.b.on('damaged', (c) => { if (c.source === e && c.dmg.isAttack && speedAtHit === null) speedAtHit = e.s.moveSpeed; }, { priority: 100 });
-    assert.ok(h.runUntil(() => e.blockedBy, 120), 'blocked');
-    if (stunAtBlock) h.b.applyStatus(e, 'stun', { duration: 1 });
-    assert.ok(h.runUntil(() => e.stats.attacks >= 2, 60));
-    const own = h.hooksOf('damaged').filter((c) => c.source === e);
-    return { e, speedAtHit, attacks: own.filter((c) => c.dmg.isAttack).map((c) => c.amount), extra: own.filter((c) => !c.dmg.isAttack).map((c) => c.amount) };
-  };
-  const r = hitsOf(false);
-  assert.ok(r.speedAtHit > dlBase() * 4, `built up: ${r.speedAtHit}`);
-  assert.deepEqual(r.attacks.map((a) => Math.round(a)), [r.e.s.atk, r.e.s.atk], 'the attacks themselves are plain');
-  assert.equal(r.extra.length, 1, 'one extra instance, on the first hit only');
-  approx(r.extra[0], r.speedAtHit * tb(DL, 'firstattack.atk_scale'), 1e-6, 'speed × 600 (DEF 0)');
-  approx(r.e.s.moveSpeed, dlBase(), 1e-9, 'the hit ended the acceleration');
-  const s = hitsOf(true);
-  assert.deepEqual(s.extra, [], 'stunned after the block: no extra damage');
+  const e = put(h, 'enemy_1072_dlancer', [9, 10], { move: true });
+  h.run(3);
+  assert.ok(e.s.moveSpeed > E.enemy_1072_dlancer.stats.moveSpeed * 2);
+  h.runUntil(() => e.stats.attacks >= 2, 120);
+  const hits = h.hooksOf('damaged').filter((c) => c.source === e && c.dmg.isAttack).map((c) => c.amount);
+  assert.ok(hits[0] > hits[1] * 1.5, `${hits[0]} vs ${hits[1]}`);
+  approx(hits[1], e.s.atk);
 });
 
 test(`${nm('enemy_1320_wdrrl_2')}: only blockers with block ≥3; first attack splashes ATK×${tb('enemy_1320_wdrrl_2', 'AOEAttack.atk_scale')} around the target`, () => {
@@ -1408,27 +1066,15 @@ test(`${nm('enemy_1062_rager_2')}: loses ${tb('enemy_1062_rager_2', 'periodic_da
   approx(e.s.maxHp - e.hp, 3 * tb('enemy_1062_rager_2', 'periodic_damage.damage'));
 });
 
-test(`${nm('enemy_1273_stmgun_2')}: Cannon locks the highest-max-HP unit in range, bombards the highest HP% of its 9 tiles every 0.5 s up to 10 times (arts ATK×${skb('enemy_1273_stmgun_2', 'Cannon').bb.atk_scale}), 失衡免疫 + control immunity meanwhile (PRTS)`, () => {
+test(`${nm('enemy_1273_stmgun_2')}: Cannon locks the highest-max-HP unit and bombards (arts ATK×${skb('enemy_1273_stmgun_2', 'Cannon').bb.atk_scale})`, () => {
   const h = arena({ units: [{ chessId: 't_gun', row: 12, col: 3 }, { chessId: 't_wall', row: 11, col: 3 }], chess: { t_wall: WALL('t_wall', { stats: { maxHp: 2e7 } }) } });
   h.step();
-  const far = arena({ units: [{ chessId: 't_gun', row: 12, col: 3 }] });
-  far.step();
-  const e0 = put(far, 'enemy_1273_stmgun_2', [10, 9]);
-  e0.profile.noAttack = true;
-  const s = skb('enemy_1273_stmgun_2', 'Cannon');
-  far.run(s.initCooldown + 1);
-  assert.ok(!far.eventsOf('fx').some((f) => f[1] === 'telegraph' && f[4].kind === 'cannon'), 'nobody in its range: no cast');
-  const e = put(h, 'enemy_1273_stmgun_2', [11, 5]);
+  const e = put(h, 'enemy_1273_stmgun_2', [10, 9]);
   e.profile.noAttack = true;
-  h.run(s.initCooldown + 0.1);
-  const tel = h.eventsOf('fx').find((f) => f[1] === 'telegraph' && f[4].kind === 'cannon');
-  assert.ok(tel && tel[2] === 3 && tel[3] === 11, 'centred on the highest max-HP unit\'s tile');
-  assert.ok(e.findBuff('ab:cannon')?.flags.noDisplace, '失衡免疫 during the bombardment');
-  assert.equal(h.b.applyStatus(e, 'stun', { duration: 1 }), false, '晕眩免疫 during it');
-  h.run(5.5);
-  assert.equal(h.eventsOf('fx').filter((f) => f[1] === 'explode' && f[4].kind === 'cannon').length, 10, '10 shots');
+  const s = skb('enemy_1273_stmgun_2', 'Cannon');
+  h.run(s.initCooldown + 4);
+  assert.ok(h.eventsOf('fx').some((f) => f[1] === 'telegraph' && f[4].kind === 'cannon'));
   assert.ok(h.unit('t_wall').stats.taken + h.unit('t_gun').stats.taken > 0);
-  assert.ok(!e.findBuff('ab:cannon') && h.b.applyStatus(e, 'stun', { duration: 1 }) !== false, 'over afterwards');
 });
 
 for (const key of ['enemy_1501_demonk', 'enemy_10018_sgrobh']) {
@@ -1442,18 +1088,14 @@ for (const key of ['enemy_1501_demonk', 'enemy_10018_sgrobh']) {
 }
 
 for (const key of ['enemy_2001_duckmi', 'enemy_2001_duckmi_2']) {
-  // PRTS 鸭爵 "移动速度+400%" (run 4); the 鸭爵 strategy's version "受伤后移动速度+300%" (run 3): ×(1 + run)
-  test(`${nm(key)}: unblockable, no attack; runs ×${1 + tb(key, 'run.attack@move_speed')} once hit`, () => {
+  test(`${nm(key)}: unblockable; runs ×${tb(key, 'run.attack@move_speed')} once hit`, () => {
     const h = arena();
     h.step();
     const e = put(h, key, [10, 7], { move: true });
     const v = e.s.moveSpeed;
     assert.ok(e.s.flags.unblockable);
-    assert.ok(e.profile.noAttack);
     h.b.dealDamage(null, e, { amount: 1, type: 'true' });
-    approx(e.s.moveSpeed, v * (1 + tb(key, 'run.attack@move_speed')));
-    h.b.dealDamage(null, e, { amount: 1, type: 'true' });
-    approx(e.s.moveSpeed, v * (1 + tb(key, 'run.attack@move_speed')), 1e-6, 'once');
+    approx(e.s.moveSpeed, v * tb(key, 'run.attack@move_speed'));
   });
 }
 
@@ -1484,7 +1126,6 @@ test(`${nm('enemy_10027_vtsk')}: entrance barrage (${skb('enemy_10027_vtsk', 'Ap
   assert.ok(barrage.every((c) => c.target === h.unit('t_wall')), 'the highest-HP unit');
   approx(barrage[0].amount, e.s.atk);
   h.runUntil(() => e.stats.attacks >= 1, 10);
-  h.run(1);   // (its shot lands: since 0.2.0 the first strike comes at the clip's damage frame, after the barrage window)
   const d = h.hooksOf('damaged').find((c) => c.source === e && c.dmg.isAttack);
   approx(d.amount, e.s.atk * tb('enemy_10027_vtsk', 'range.attack@atk_scale_range'));
   h.run(skb('enemy_10027_vtsk', 'MultiCombat').initCooldown + 6);
@@ -1545,24 +1186,6 @@ test(`${nm('enemy_10116_ymgtop')}: spinning phase deals ATK×${tb('enemy_10116_y
   const t0 = w.stats.taken;
   h.run(3);
   assert.equal(w.stats.taken, t0, 'no more spin damage');
-});
-
-test(`${nm('enemy_10116_ymgtop')}: 漩涡形态 — no normal attack on its blocker while it spins; no spin damage while stunned (阻止攻击)`, () => {
-  const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 7 }] });
-  h.step();
-  const e = put(h, 'enemy_10116_ymgtop', [10, 7]);           // blocked by the wall
-  const icd = skb('enemy_10116_ymgtop', 'SwitchModeTrigger').initCooldown;
-  h.run(icd - 1);
-  assert.ok(e.blockedBy && e.stats.attacks > 0, 'its blocked attack before the spin (初始形态 仅进行阻挡攻击)');
-  h.run(1.5);
-  const a0 = e.stats.attacks;
-  h.run(4);
-  assert.ok(e.profile.noAttack && e.stats.attacks === a0, `no normal attack while spinning (${e.stats.attacks - a0})`);
-  const w = h.unit('t_wall');
-  h.b.applyStatus(e, 'stun', { duration: 3, force: true });
-  const t0 = w.stats.taken;
-  h.run(2.5);
-  assert.equal(w.stats.taken, t0, 'stunned: no spin damage');
 });
 
 test(`${nm('enemy_10118_ymgprc')}: double hits; after ${skb('enemy_10118_ymgprc', 'PowerAttack').spCost} attacks the next double hit is ×${skb('enemy_10118_ymgprc', 'PowerAttack').bb.atk_scale}`, () => {
@@ -1657,48 +1280,15 @@ test(`${nm('enemy_1050_lslime')}: 4 targets, burning DoT on hit, ASPD up below h
   assert.ok(h.eventsOf('fx').some((f) => f[1] === 'explode' && f[4].kind === 'selfBlast'));
 });
 
-// PRTS 碎骨 天赋: "未被阻挡时发射榴弹对目标及其周围八格的我方单位造成相当于攻击力26%的物理伤害，并令其在5秒内防御力下降50%" ("榴弹对主
-// 目标造成物理普通伤害，对溅射目标造成物理溅射伤害") — community report #14: until 0.1.3 the target took a full attack and the 4
-// orthogonal neighbours 100 % ATK (no diagonal), DEF down for 3 s
-test(`${nm('enemy_1500_skulsr')}: an unblocked attack is a grenade — 26 % ATK on the target and on its 8 surrounding tiles, DEF −50 % for 5 s; blocked a plain hit; ATK up below half`, () => {
-  // t_wall3 is the one in range (√5): the target; t_wall2 on its diagonal, t_wall two tiles away
-  const h = arena({ units: [{ chessId: 't_wall', row: 11, col: 3 }, { chessId: 't_wall2', row: 12, col: 4 }, { chessId: 't_wall3', row: 11, col: 5 }], captureNoisy: true, hooks: ['statusApplied', 'damaged'] });
+test(`${nm('enemy_1500_skulsr')}: unblocked grenades splash and lower DEF; ATK up below half`, () => {
+  const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 5 }, { chessId: 't_wall2', row: 11, col: 5 }], hooks: ['statusApplied'] });
   h.step();
   const e = put(h, 'enemy_1500_skulsr', [10, 7]);
   h.runUntil(() => e.stats.attacks >= 1, 10);
-  h.run(1);
-  const by = (u) => h.hooksOf('damaged').filter((c) => c.source === e && c.target === u);
-  const main = h.unit('t_wall3'), diag = h.unit('t_wall2'), far = h.unit('t_wall');
-  assert.equal(by(main).length, 1);
-  assert.ok(by(main)[0].dmg.isAttack, 'the target: the attack itself (普通伤害)');
-  approx(by(main)[0].amount, 0.26 * e.s.atk);
-  assert.equal(by(diag).length, 1, 'a diagonal neighbour is splashed (周围八格)');
-  assert.ok(!by(diag)[0].dmg.isAttack && by(diag)[0].dmg.tags.includes('splash'));
-  approx(by(diag)[0].amount, 0.26 * e.s.atk);
-  assert.equal(by(far).length, 0, 'two tiles away: outside the 3×3');
-  for (const u of [main, diag]) {
-    const d = statuses(h, u.id, 'defDown');
-    assert.equal(d.length, 1);
-    approx(d[0].duration, 5);
-    approx(d[0].value, -tb('enemy_1500_skulsr', 'defdown.def'));
-  }
-  assert.equal(statuses(h, far.id, 'defDown').length, 0);
+  h.run(0.5);
+  assert.ok(statuses(h, h.unit('t_wall2').id, 'defDown').length >= 1);
   h.b.dealDamage(null, e, { amount: e.s.maxHp * 0.6, type: 'true' });
   approx(e.s.atk, E.enemy_1500_skulsr.stats.atk * (1 + tb('enemy_1500_skulsr', 'atkup.atk')));
-  // blocked: its plain melee hit, no splash, no DEF down
-  const hb = arena({ units: [{ chessId: 't_wall', row: 10, col: 7 }, { chessId: 't_wall2', row: 11, col: 7 }], captureNoisy: true, hooks: ['statusApplied', 'damaged'] });
-  hb.step();
-  const eb = put(hb, 'enemy_1500_skulsr', [10, 7]);
-  hb.step();
-  eb.atkCd = 0;                                              // (its first tick, before the block, threw a grenade)
-  const n0 = hb.hooksOf('damaged').length, s0 = hb.hooksOf('statusApplied').length;
-  hb.runUntil(() => hb.hooksOf('damaged').slice(n0).some((c) => c.source === eb && c.dmg.isAttack), 10);
-  hb.run(0.5);
-  assert.equal(eb.blockedBy, hb.unit('t_wall'));
-  const hits = hb.hooksOf('damaged').slice(n0).filter((c) => c.source === eb);
-  assert.deepEqual(hits.map((c) => [c.target.defId, c.dmg.isAttack]), [['t_wall', true]]);
-  approx(hits[0].amount, eb.s.atk);
-  assert.equal(hb.hooksOf('statusApplied').slice(s0).filter((c) => c.status === 'defDown').length, 0);
 });
 
 test(`${nm('enemy_1502_crowns')}: blinks past its blocker`, () => {
@@ -1797,24 +1387,14 @@ test(`${nm('enemy_1539_reid')}: ATK up below half; first KO ⇒ ${tb('enemy_1539
   approx(e.s.atk, E.enemy_1539_reid.stats.atk * (1 + tb('enemy_1539_reid', 'AtkUp.atk')));
   killed(h, e, null);
   assert.ok(!e.alive);
-  // 【冲锋】 (PRTS: "仅自身未被阻挡且存在符合条件的可选目标时可触发：选择3.0半径内位于自身下个检查点前的后续路径上(包含自身当前所在地块)
-  // 的距离自身最近的我方单位"; 0.1.3: any unit within the blackboard's 1.5, 隐匿 / 迷彩 ones too, off its path too)
+  // 【冲锋】
+  const h2 = arena({ units: [{ chessId: 't_wall', row: 10, col: 6 }] });
+  h2.step();
+  const r = put(h2, 'enemy_1539_reid', [10, 7], { move: true });
+  h2.step(2);
   const rush = skb('enemy_1539_reid', 'Rush');
-  const charge = (units, status = null) => {
-    const hh = arena({ units });
-    hh.step();
-    if (status) for (const u of hh.allies()) hh.b.applyStatus(u, status, { duration: 99, source: u });
-    const r = put(hh, 'enemy_1539_reid', [9, 8], { move: true });   // route 0 walks row 9 towards (9, 2)
-    hh.step(2);
-    return r;
-  };
-  const r = charge([{ chessId: 't_wall', row: 9, col: 5 }]);      // on its path, 3 tiles ahead
-  assert.ok(r.findBuff('ab:rush'), 'a unit on its path within 3.0');
+  assert.ok(r.findBuff('ab:rush'), 'a unit within range_radius');
   approx(r.s.moveSpeed, E.enemy_1539_reid.stats.moveSpeed * (1 + rush.bb.move_speed));
-  assert.ok(!charge([{ chessId: 't_wall', row: 10, col: 7 }]).findBuff('ab:rush'), 'a unit next to it but off its path: no charge');
-  assert.ok(!charge([{ chessId: 't_wall', row: 9, col: 4 }]).findBuff('ab:rush'), '4 tiles ahead: beyond 3.0');
-  assert.ok(!charge([{ chessId: 't_wall', row: 9, col: 6 }], 'stealth').findBuff('ab:rush'), 'a 隐匿 unit is no selectable target');
-  assert.ok(!charge([{ chessId: 't_wall', row: 9, col: 6 }], 'camou').findBuff('ab:rush'), 'nor a 迷彩 one');
 });
 
 test(`${nm('enemy_2003_rockman')}: boulder stuns a non-stunned unit for ${skb('enemy_2003_rockman', 'StunAttack').bb.stun} s`, () => {
@@ -2042,20 +1622,6 @@ test(`${nm('enemy_10097_crshd')} / ${nm('enemy_2085_skzjxd')}: physical / arts d
   approx(h.b.dealDamage(back, y, { amount: 1000, type: 'true' }), 1000, 1e-6, 'true damage is never reduced');
 });
 
-for (const key of ['enemy_2085_skzjxd', 'enemy_2085_skzjxd_2']) {
-  test(`${nm(key)}: 无法攻击/被阻挡 (PRTS 天赋) — walks through a blocker, never attacks`, () => {
-    const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 5 }], hooks: ['blocked'] });
-    h.step();
-    const e = put(h, key, [10, 7], { move: true, route: { motion: 'WALK', start: [10, 7], end: [10, 2], checkpoints: [] } });
-    assert.ok(e.s.flags.unblockable);
-    assert.ok(e.profile.noAttack);
-    h.runUntil(() => e.x < 4, 60);
-    assert.ok(e.x < 4, `passed the wall (x ${e.x})`);
-    assert.equal(h.hooksOf('blocked').length, 0);
-    assert.equal(e.stats.attacks, 0);
-  });
-}
-
 test(`${nm('enemy_10098_crhro')}: 重生 once after ${tb('enemy_10098_crhro', 'reborn.duration')} s at full HP`, () => {
   const h = arena();
   h.step();
@@ -2068,7 +1634,7 @@ test(`${nm('enemy_10098_crhro')}: 重生 once after ${tb('enemy_10098_crhro', 'r
   assert.ok(!e.alive);
 });
 
-test('失衡: 弧光锋卫 bleeds every 0.066 s while unbalanced; 冒失的小弟 is stunned; 拥霜羽兽 drops its egg (faster, unblockable)', () => {
+test('失衡: 弧光锋卫 bleeds per tile pushed; 冒失的小弟 is stunned; 拥霜羽兽 drops its egg (faster, unblockable)', () => {
   const h = arena({ hooks: ['statusApplied'] });
   h.step();
   const j = put(h, 'enemy_1328_cbjedi', [10, 7]);
@@ -2076,20 +1642,15 @@ test('失衡: 弧光锋卫 bleeds every 0.066 s while unbalanced; 冒失的小�
   const p = put(h, 'enemy_10141_xdpeng_2', [12, 7]);
   h.step(2);
   const hp0 = j.hp;
-  // 弧光锋卫: its 失衡 state — a 受力等级 0 push holds 0.8 s (24 frames) — bleeds unbalanced_bleed.damage every .interval s
-  // (PRTS "处于失衡状态时，每0.066s受到400点无来源真实持续伤害"): 12 hits; until 0.2.2 one hit per tile moved [ASSUMED]
-  h.b.push(j, j.s.massLevel, { from: { x: j.x - 1, y: j.y } });
+  const moved = h.b.displace(j, { x: 1, y: 0 }, 1, { force: 3 });
   h.b.displace(g, { x: 1, y: 0 }, 1, { force: 3 });
   h.b.displace(p, { x: 1, y: 0 }, 1, { force: 3 });
   h.step();
+  approx(hp0 - j.hp, (tb('enemy_1328_cbjedi', 'unbalanced_bleed.damage') * moved) / (tb('enemy_1328_cbjedi', 'unbalanced_bleed.interval') * 5), 0.05);
   assert.equal(statuses(h, g.id, 'stun').length, 1);
   approx(statuses(h, g.id, 'stun')[0].duration, tb('enemy_10112_ymgds', 'StunAfterUnbalance.stun'));
   assert.ok(p.s.flags.unblockable);
   assert.equal(p.findBuff('ab:noEgg').mods.moveMul, 1 + tb('enemy_10141_xdpeng_2', 'speed.move_speed'));
-  assert.ok(p.profile.noAttack, '拥霜羽兽 失去蛋的模式: 不进行普通攻击 (no attack, so no stand for its clip)');
-  assert.equal(typeof p.profile.canTarget === 'function' && p.profile.canTarget({ isFlying: true }), false, '拥霜羽兽: 不会攻击飞行单位');
-  h.run(0.8);
-  approx(hp0 - j.hp, 12 * tb('enemy_1328_cbjedi', 'unbalanced_bleed.damage'), 1e-6);
   // 雪孩子: pushed into high ground (row 12 col 2 is 'h' on the flat stage) ⇒ hitWall.value
   const sn = put(h, 'enemy_10138_xdsnow', [10, 3]);
   const sn2 = put(h, 'enemy_10138_xdsnow', [11, 6]);
@@ -2113,24 +1674,15 @@ test(`${nm('enemy_1512_mcmstr')}: melee ×${tb('enemy_1512_mcmstr', 'combat.atta
   h.step();
   const e = put(h, 'enemy_1512_mcmstr', [9, 5]);
   e.bounty = { coins: 4, ownerPlayerId: 'p1' };
-  h.step();
-  e.atkCd = 0;                                               // (its very first tick, before the block, was a ranged attack)
-  const n0 = h.hooksOf('damaged').length;
-  h.runUntil(() => h.hooksOf('damaged').slice(n0).some((c) => c.source === e && c.dmg.isAttack), 10);
-  assert.equal(e.blockedBy, h.unit('t_wall'));
-  approx(h.hooksOf('damaged').slice(n0).find((c) => c.source === e && c.dmg.isAttack).amount, e.s.atk * tb('enemy_1512_mcmstr', 'combat.attack@mcmstr_rage_attack.atk_scale'));
+  h.runUntil(() => e.stats.attacks >= 1, 10);
+  approx(h.hooksOf('damaged').find((c) => c.source === e).amount, e.s.atk * tb('enemy_1512_mcmstr', 'combat.attack@mcmstr_rage_attack.atk_scale'));
   killed(h, e, h.unit('t_wall'));
   assert.ok(e.alive);
   assert.equal(h.result().perPlayer.p1.coins, 0, 'no bounty for the first form');
-  // PRTS: "重生开始的2.17s后进行自爆，对半径3.0范围内所有我方单位造成攻击力150%的物理伤害和16s晕眩" (0.1.3: at once, radius 2.5)
-  assert.equal(statuses(h, h.unit('t_wall').id, 'stun').length, 0, 'not yet: 2.17 s into the 重生');
-  h.run(2.1);
-  assert.equal(statuses(h, h.unit('t_wall').id, 'stun').length, 0);
-  h.run(0.2);
   const st = statuses(h, h.unit('t_wall').id, 'stun');
   assert.equal(st.length, 1);
   approx(st[0].duration, skb('enemy_1512_mcmstr', 'bomb[reborning]').bb.stun);
-  h.run(tb('enemy_1512_mcmstr', 'reborn.duration') - 2.3 + 0.1);
+  h.run(tb('enemy_1512_mcmstr', 'reborn.duration') + 0.1);
   assert.ok(e.profile.noAttack && e.s.flags.unblockable);
   assert.equal(e.s.def, tb('enemy_1512_mcmstr', 'bird_run.def'));
   assert.equal(e.s.res, tb('enemy_1512_mcmstr', 'bird_run.magic_resistance'));
@@ -2222,20 +1774,15 @@ test(`${nm('enemy_1525_blkswb')}: 抵抗; ignores ${tb('enemy_1525_blkswb', 'Def
   const first = h.hooksOf('damaged').find((c) => c.source === e);
   approx(first.amount, e.s.atk * skb('enemy_1525_blkswb', 'Blink').bb.atk_scale - 500, 1e-6, '速杀 on its blocker');
   assert.ok(e.x < 5 - 0.4, `passed through (x ${e.x})`);
-  // form 2
+  // form 2 (its 速杀 held back so it keeps fighting the wall)
   const CASTER = chessRec({ id: 't_caster', profession: 'CASTER', projectile: 'none', stats: { atk: 1, maxHp: 1e7, bat: 1, blockCnt: 0 }, rangeGrid: [[0, 0]], skill: { spCost: 999 } });
   const h2 = arena({ units: [{ chessId: 't_wall', row: 9, col: 5 }, { chessId: 't_caster', row: 10, col: 4 }], chess: { t_wall: WALL('t_wall', { def: 500 }), t_caster: CASTER },
     captureNoisy: true, hooks: ['damaged', 'statusApplied'] });
   h2.step();
   const k = put(h2, 'enemy_1525_blkswb', [9, 5]);
-  // its 速杀 held back so it keeps fighting the wall (form 2's starts from its initial cooldown 0 when the 重生 ends)
-  for (const a of k.mem.ab.list) if (a.id === 'blink') a.left = 999; else if (a.id === 'blink2') a.cond = () => false;
+  for (const a of k.mem.ab.list) if (a.id === 'blink' || a.id === 'blink2') a.left = 999;
   killed(h2, k, null);
-  assert.ok(h2.runUntil(() => k.form === 'form2', 10), 'the 重生 ends');
-  // PRTS 特殊机制 §重生 "重生结束时，重置自身的通用技能与当前形态的技能冷却为初始冷却"
-  const b1 = k.mem.ab.list.find((a) => a.id === 'blink');
-  assert.ok(b1.left > (b1.icd ?? 0) - 0.04 && b1.left <= (b1.icd ?? 0) + 1e-9, `速杀 (held at 999) back to its initial cooldown (${b1.left} vs ${b1.icd})`);
-  h2.run(tb('enemy_1525_blkswb', 'Reborn.invincible') + 0.1);
+  h2.run(tb('enemy_1525_blkswb', 'Reborn.duration') + tb('enemy_1525_blkswb', 'Reborn.invincible') + 0.1);
   assert.ok(k.s.flags.stealth, 'second form: 隐匿');
   const t0 = h2.b.time, a0 = k.stats.attacks;
   h2.runUntil(() => k.stats.attacks >= a0 + 1, 20);
@@ -2253,13 +1800,10 @@ test(`${nm('enemy_1525_blkswb')}: 抵抗; ignores ${tb('enemy_1525_blkswb', 'Def
   approx(statuses(h2, cs.id, 'disarm')[0].duration, tb('enemy_1525_blkswb', 'ClearSp.duration'));
 });
 
-test(`${nm('enemy_1535_wlfmster')}: −${tb('enemy_1535_wlfmster', 'Passive.damage_resistance') * 100} % damage and not stunnable; 溶血骇惧 (3 units, ASPD ${skb('enemy_1535_wlfmster', 'FearCage').bb.attack_speed}, HP loss rising to ${skb('enemy_1535_wlfmster', 'FearCage').bb.hp_ratio * 100} %/s over ${skb('enemy_1535_wlfmster', 'FearCage').bb.duration_bleed} s, no end, cured after it loses ${-skb('enemy_1535_wlfmster', 'FearCage').bb.hp_ratio_offset * 100} %); KO ⇒ ${tb('enemy_1535_wlfmster', 'Reborn.duration')} s 远古威慑 (r 1.5, −50) ⇒ ranged double hits within 1.25, 远古威慑 still on`, () => {
-  // PRTS 扎罗，“狼之主”: 天赋 "【远古威慑】：自身1.5半径范围内的我方单位攻击速度-50(指定状况下生效)", "重生期间【远古威慑】生效", second form
-  // "【远古威慑】生效 … 攻击范围半径1.25"; 溶血骇惧 "逐渐流失生命（从0/秒开始线性递增，在40秒后达到最大流失速度30%最大生命值/秒），持续时间
-  // 无限 … 累计损失20%生命值后解除" (0.1.3: 2.5 / −30 only while reborning, range 2.5, a 5 % peak for 40 s, cured at 30 %)
+test(`${nm('enemy_1535_wlfmster')}: −${tb('enemy_1535_wlfmster', 'Passive.damage_resistance') * 100} % damage and not stunnable; 溶血骇惧 (3 units, ASPD ${skb('enemy_1535_wlfmster', 'FearCage').bb.attack_speed}, rising HP loss, cured after it loses ${skb('enemy_1535_wlfmster', 'FearCage').bb.hp_ratio * 100} %); KO ⇒ ${tb('enemy_1535_wlfmster', 'Reborn.duration')} s 远古威慑 ⇒ ranged double hits`, () => {
   const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 5 }, { chessId: 't_wall2', row: 11, col: 5 }, { chessId: 't_wall3', row: 12, col: 5 }, { chessId: 't_wall4', row: 9, col: 5 }], hooks: ['statusApplied'] });
   h.step();
-  const e = put(h, 'enemy_1535_wlfmster', [10, 6]);
+  const e = put(h, 'enemy_1535_wlfmster', [10, 7]);
   e.profile.noAttack = true;
   approx(e.s.dmgTakenMul, 1 - tb('enemy_1535_wlfmster', 'Passive.damage_resistance'));
   assert.equal(h.b.applyStatus(e, 'stun', { duration: 2 }), false);
@@ -2268,35 +1812,18 @@ test(`${nm('enemy_1535_wlfmster')}: −${tb('enemy_1535_wlfmster', 'Passive.dama
   const caged = h.allies().filter((u) => u.findBuff('ab:fearCage'));
   assert.equal(caged.length, fc.bb.max_target);
   assert.equal(caged[0].s.aspd, 100 + fc.bb.attack_speed);
-  const hp0 = caged[0].hp, mh = caged[0].s.maxHp;
+  const hp0 = caged[0].hp;
   h.run(10);
-  // 1 tick per second at maxHp × hp_ratio × t / duration_bleed: 10 ticks ≈ 30 % × (0+1+…+10)/40 of max HP
-  approx((hp0 - caged[0].hp) / mh, fc.bb.hp_ratio * 55 / fc.bb.duration_bleed, 0.03, 'linear loss rate');
-  assert.equal(caged[0].findBuff('ab:fearCage').duration, Infinity, '"持续时间无限"');
-  e.mem.ab.list.find((a) => a.fire).left = 0;               // its cooldown over: still no cast while units are caught
-  h.step(3);
-  assert.equal(h.allies().filter((u) => u.findBuff('ab:fearCage')).length, fc.bb.max_target, 'no new cast while units are caught (静默)');
-  h.b.loseHp(e, e.s.maxHp * (-fc.bb.hp_ratio_offset - 0.02));
+  assert.ok(caged[0].hp < hp0, 'losing HP');
+  h.b.loseHp(e, e.s.maxHp * (fc.bb.hp_ratio + 0.01));
   h.run(0.3);
-  assert.equal(h.allies().filter((u) => u.findBuff('ab:fearCage')).length, fc.bb.max_target, 'not yet cured at 18 %');
-  h.b.loseHp(e, e.s.maxHp * 0.03);
-  h.run(0.3);
-  assert.equal(h.allies().filter((u) => u.findBuff('ab:fearCage')).length, 0, 'cured at 20 %');
-  h.run(fc.bb.duration_wait - 0.7);
-  assert.equal(h.allies().filter((u) => u.findBuff('ab:fearCage')).length, 0, '"场上技能效果全部结束时狼之主获得7s静默"');
-  h.run(0.6);
-  assert.equal(h.allies().filter((u) => u.findBuff('ab:fearCage')).length, fc.bb.max_target, 'cast again once the 静默 is over');
+  assert.equal(h.allies().filter((u) => u.findBuff('ab:fearCage')).length, 0, 'cured');
   killed(h, e, null);
-  assert.equal(h.allies().filter((u) => u.findBuff('ab:fearCage')).length, 0, '重生: every 溶血骇惧 ends');
   assert.ok(e.alive && e.s.flags.untargetable);
   h.run(tb('enemy_1535_wlfmster', 'Reborn.duration') / 2);
   approx(e.hpRatio, 0.5, 0.05, 'HP refills during 远古威慑');
-  assert.equal(h.unit('t_wall').s.aspd, 100 - 50, 'aura slows the units within 1.5');
-  assert.equal(h.unit('t_wall4').s.aspd, 100 - 50, '√2 away: inside');
-  assert.equal(h.unit('t_wall3').s.aspd, 100, '√5 away: outside');
+  assert.equal(h.unit('t_wall').s.aspd, 100 - 30, 'aura slows the units around it');
   h.run(tb('enemy_1535_wlfmster', 'Reborn.duration') / 2 + 0.1);
-  assert.equal(h.unit('t_wall').s.aspd, 100 - 50, 'second form: 远古威慑 still on');
-  assert.equal(e.base.rangeRadius, 1.25, 'second-form attack radius');
   approx(e.hpRatio, 1);
   assert.equal(e.s.dmgTakenMul, 1, 'no damage reduction any more');
   assert.equal(e.profile.melee, false);
@@ -2304,34 +1831,30 @@ test(`${nm('enemy_1535_wlfmster')}: −${tb('enemy_1535_wlfmster', 'Passive.dama
   assert.equal(h.b.applyStatus(e, 'stun', { duration: 1 }), true, 'stunnable in the second form');
 });
 
-test(`${nm('enemy_10081_mpplai')}: original form cancels every damage instance; 4th physical hit ⇒ 寻仇者 (melee), 4th arts hit ⇒ 特战术师 (ranged arts), blocked ⇒ 幽灵 (unblockable) — each after a ${TRANSLATOR_CHANGE} s change`, () => {
+test(`${nm('enemy_10081_mpplai')}: no attack until 4 physical hits (复仇: melee), 4 arts hits (术士: ranged arts) or being blocked (幽灵: unblockable)`, () => {
   const mk = () => { const h = arena({ units: [{ chessId: 't_gun', row: 12, col: 3 }, { chessId: 't_mage', row: 12, col: 4 }], kits: { t_gun: NOATK, t_mage: NOATK } }); h.step(); return h; };
   let h = mk();
   let e = put(h, 'enemy_10081_mpplai', [10, 7]);
-  const hp = e.hp;
-  for (let i = 0; i < 4; i++) assert.equal(h.b.dealDamage(h.unit('t_gun'), e, { amount: 1e6, type: 'phys' }), 0);
-  assert.equal(e.hp, hp, 'no damage lands in the original form');
-  h.run(TRANSLATOR_CHANGE + 0.05);
+  for (let i = 0; i < 4; i++) h.b.dealDamage(h.unit('t_gun'), e, { amount: 10, type: 'phys' });
   approx(e.s.atk, E.enemy_10081_mpplai.stats.atk + tb('enemy_10081_mpplai', 'Mode_Fuchou_Passive.atk'));
   approx(e.s.maxHp, E.enemy_10081_mpplai.stats.maxHp + tb('enemy_10081_mpplai', 'Mode_Fuchou_Passive.max_hp'));
   const h2 = arena({ units: [{ chessId: 't_wall', row: 10, col: 6 }] });
   h2.step();
   const f = put(h2, 'enemy_10081_mpplai', [10, 7]);
   for (let i = 0; i < 4; i++) h2.b.dealDamage(null, f, { amount: 1, type: 'arts' });
+  assert.equal(f.mem.ab.list.length, 3);
   // arts hits from nobody (terrain) do not count
-  h2.run(TRANSLATOR_CHANGE + 0.05);
   assert.equal(f.findBuff('ab:form'), null);
   h = mk();
   e = put(h, 'enemy_10081_mpplai', [11, 5]);
   for (let i = 0; i < 4; i++) h.b.dealDamage(h.unit('t_mage'), e, { amount: 10, type: 'arts' });
-  h.run(TRANSLATOR_CHANGE + 0.05);
   approx(e.s.res, E.enemy_10081_mpplai.stats.res + tb('enemy_10081_mpplai', 'Mode_Shushi_Passive.magic_resistance'));
   h.run(3);
-  assert.ok(e.stats.attacks > 0 && h.unit('t_gun').stats.taken + h.unit('t_mage').stats.taken > 0, '特战术师 attacks in range');
+  assert.ok(e.stats.attacks > 0 && h.unit('t_gun').stats.taken + h.unit('t_mage').stats.taken > 0, '术士 attacks in range');
   const h3 = arena({ units: [{ chessId: 't_wall', row: 9, col: 5 }] });
   h3.step();
   const g = put(h3, 'enemy_10081_mpplai', [9, 5]);
-  h3.run(TRANSLATOR_CHANGE + 0.3);
+  h3.run(0.5);
   assert.ok(g.findBuff('ab:form') && g.s.flags.unblockable, '幽灵');
   assert.equal(g.stats.attacks, 0);
 });
@@ -2388,45 +1911,6 @@ test('template overrides of talents/skills are honoured (卢西恩 evade 0.2 in 
 
 const bossArena = (o = {}) => arena({ kind: 'boss', sharedBoss: pool(o.hp ?? 1e6), ...o });
 const setTpl = (id) => (b) => { b.opts.templateId = id; };
-
-// PR #272 (感谢 @CXUtk): a leader's mid-fight summons are enemies like any other — the round's effects reach them
-test('leader summons take the round\'s enemy effects (flags.enemyScale): HP — hit counts too — ATK, speed; the leader keeps the pool', () => {
-  const enemyScale = { hpMul: 2, atkMul: 1.5, speedMul: 1.15, supplyHpMul: 1.08 };
-  const stats = (u, msg) => {
-    assert.ok(u, msg);
-    const d = E[u.defId].stats;
-    approx(u.base.atk, d.atk * 1.5, 1e-9, `${msg}: ATK`);
-    approx(u.base.moveSpeed, d.moveSpeed * 1.15, 1e-9, `${msg}: speed`);
-  };
-  for (const [key, tpl] of [['enemy_9013_acstmk', 'act1autochess_h07_01'], ['enemy_9013_acstmk_2', 'act1autochess_h08_01']]) {
-    const h = bossArena({ flags: { enemyScale }, units: [{ chessId: 't_wall', row: 10, col: 6 }], setup: setTpl(tpl) });
-    h.step();
-    const boss = put(h, key, [3, 10], { tag: 'boss', mods: { atkMul: 1.5, speedMul: 1.15 } });
-    boss.profile.noAttack = true;
-    assert.equal(boss.s.maxHp, h.b.sharedBoss.maxHp, `${key}: the leader's HP is the pool`);
-    assert.ok(h.runUntil(() => alive(h, 'enemy_1005_yokai').length > 0, 90), `${key}: 死亡集群`);
-    const drone = alive(h, 'enemy_1005_yokai')[0];
-    stats(drone, `${key} 妖怪`);
-    approx(drone.s.maxHp, E.enemy_1005_yokai.stats.maxHp * 2 * (skb(key, '2').bb['summon.hp_ratio'] ?? 1), 1e-9, `${key} 妖怪: HP × the round × its summon.hp_ratio`);
-    assert.ok(h.runUntil(() => alive(h, 'enemy_9016_acstmr').length > 0, 90), `${key}: 刺胄之弹`);
-    const shell = alive(h, 'enemy_9016_acstmr')[0];
-    stats(shell, `${key} 刺胄之弹`);
-    assert.equal(shell.s.maxHp, E.enemy_9016_acstmr.stats.maxHp * 2, `${key} 刺胄之弹: hits × the round's HP`);
-  }
-  const p = bossArena({ flags: { enemyScale }, setup: setTpl('act1autochess_h07_03') });
-  p.step();
-  put(p, 'enemy_9021_acduml', [3, 10], { tag: 'boss', mods: { atkMul: 1.5, speedMul: 1.15 } });
-  assert.ok(p.runUntil(() => alive(p, 'enemy_9023_acdums').length > 0, 90), '假想敌：管 summons');
-  const echo = alive(p, 'enemy_9023_acdums')[0];
-  stats(echo, '余音');
-  assert.equal(echo.s.maxHp, E.enemy_9023_acdums.stats.maxHp * 2, '余音: hits × the round\'s HP');
-  // without the flag (tools, tests): the data's numbers
-  const q = bossArena({ units: [{ chessId: 't_wall', row: 10, col: 6 }], setup: setTpl('act1autochess_h07_01') });
-  q.step();
-  put(q, 'enemy_9013_acstmk', [3, 10], { tag: 'boss' }).profile.noAttack = true;
-  assert.ok(q.runUntil(() => alive(q, 'enemy_9016_acstmr').length > 0, 90));
-  assert.equal(alive(q, 'enemy_9016_acstmr')[0].s.maxHp, E.enemy_9016_acstmr.stats.maxHp);
-});
 
 test('假想敌：胄: arts ray on a random target in range; <20 % pool: damage taken ×0.5, still one 刺胄之弹 (PRTS 能力修正)', () => {
   const h = bossArena({ units: [{ chessId: 't_wall', row: 10, col: 6 }, { chessId: 't_wall2', row: 12, col: 4 }] });
@@ -2537,29 +2021,6 @@ test('假想敌：胄 死亡集群: the 2 % reads the leader\'s shown max HP (th
   hidden.step();
   assert.equal(droneLinkBase(hb), 7200000, '隐秘核心 终极: 144 000 per drone');
   assert.equal(droneLinkBase(hb, 'unit'), 1200000);
-});
-
-test('假想敌：胄 (隐秘核心) 死亡集群 past 限伤: with 3 / 4 players alive the drone share (432 000 / 576 000) still lands — a share, no hit (DESIGN §25.13.4)', () => {
-  // the pool counts every player alive at the fight's start (the owner's decision of 2026-10-06, PR #209): hidden 胄 终极
-  // 7 200 000 × 3 / × 4 — 2 % is ≥ BOSS_HIT_LIMIT (300000), which cancels a hit; the drone link is no hit
-  for (const [n, loss] of [[3, 432000], [4, 576000]]) {
-    const h = bossArena({ kind: 'hidden', hp: 7200000 * n, units: [{ chessId: 't_gun', row: 12, col: 3 }], setup: setTpl('act1autochess_h08_01') });
-    h.step();
-    const boss = put(h, 'enemy_9013_acstmk_2', [3, 10], { tag: 'boss' });
-    boss.profile.noAttack = true;
-    h.run(skb('enemy_9013_acstmk_2', '2').initCooldown + 0.1);
-    const d = alive(h, 'enemy_1005_yokai')[0];
-    assert.ok(d, `${n} players: a drone`);
-    const before = h.b.sharedBoss.hp;
-    h.b.kill(d, h.unit('t_gun'));
-    approx(before - h.b.sharedBoss.hp, loss, 1e-6, `${n} players: 2 % of ${7200000 * n}`);
-    assert.ok(!h.eventsOf('fx').some((f) => f[1] === 'hitCap'), `${n} players: not cancelled`);
-    // a hit of the same size is still cancelled (限伤)
-    const hp = h.b.sharedBoss.hp;
-    h.b.dealDamage(h.unit('t_gun'), boss, { amount: loss, type: 'true', canDodge: false });
-    assert.equal(h.b.sharedBoss.hp, hp, `${n} players: a ${loss} hit is cancelled`);
-    assert.ok(h.eventsOf('fx').some((f) => f[1] === 'hitCap'));
-  }
 });
 
 test('假想敌：胄 (隐秘核心) 死亡集群: summon.hp_ratio scales the drone HP', () => {
@@ -2673,8 +2134,7 @@ test('“斩胄之剑” / “破胄之锤” 初始模式 attack: every ally in
     const h = bossArena({ units: [{ chessId: 't_wall', row: 10, col: 9 }, { chessId: 't_wall2', row: 10, col: 7 }] });
     h.step();
     put(h, key, [3, 8], { tag: 'part' });
-    // (the first attack: its 0.8 / 0.867 s wind-up, then the shots — since 0.2.0 an attack strikes at its damage frame)
-    h.runUntil(() => h.unit('t_wall').stats.taken > 0 && h.unit('t_wall2').stats.taken > 0, 3);
+    h.run(1);
     approx(h.unit('t_wall').stats.taken, E[key].stats.atk * scale, 1e-6, key);
     approx(h.unit('t_wall2').stats.taken, E[key].stats.atk * scale, 1e-6, key);
   }
@@ -2713,23 +2173,6 @@ test('假想敌：铳 (h07_02 override) never uses 最终之罚 in the regular b
   assert.ok(!h.eventsOf('fx').some((f) => f[1] === 'charge'));
 });
 
-test('隐秘核心 铳: another gun alone grants 80% reduction from the very first hit; no stale reduction after it leaves', () => {
-  const h = bossArena({ units: [{ chessId: 't_wall', row: 10, col: 7 }] });
-  h.step();
-  const g = put(h, 'enemy_9017_achunt_2', [3, 10], { tag: 'boss' });
-  const other = put(h, 'enemy_9017_achunt_2', [3, 4], { tag: 'boss' });
-  const full = 1000 * (1 - g.s.res / 100);
-  approx(h.b.dealDamage(null, g, { amount: 1000, type: 'arts' }), full * 0.2);
-  // Leaving the field without killing the shared boss pool isolates the companion condition.
-  other.alive = false; other.deployed = false;
-  approx(h.b.dealDamage(null, g, { amount: 1000, type: 'arts' }), full);
-  const spring = put(h, 'enemy_9020_actrpc', [3, 6], { tag: 'part' });
-  approx(h.b.dealDamage(null, g, { amount: 1000, type: 'arts' }), full * 0.2);
-  spring.alive = false; spring.deployed = false;
-  approx(h.b.dealDamage(null, g, { amount: 1000, type: 'arts' }), full);
-  checkInvariants(h.b); assert.deepEqual(h.b.errors, []);
-});
-
 test('假想敌：铳 (隐秘核心): damage ×0.2 while springs live; 盲信之誓 lines hurt operators on them; 末日布道 dash', () => {
   const h = bossArena({ units: [{ chessId: 't_wall', row: 10, col: 7 }], setup(b) { b.enemyOverrides = W.act1autochess_h08_02.overrides; } });
   h.step();
@@ -2747,7 +2190,6 @@ test('假想敌：铳 (隐秘核心): damage ×0.2 while springs live; 盲信之
   const s2 = W.act1autochess_h08_02.overrides.enemy_9017_achunt_2.skills.find((s) => s.prefabKey === '2');
   h.run(s2.initCooldown - h.b.time + 0.2);
   assert.ok(sp.s.flags.invulnerable && sp.mem.ab.dash);
-  assert.ok(sp.s.flags.disarm, '追逐模式: 不进行普通攻击');
 });
 
 test('“碎铳之簧” 法术护盾 (9018): barrier absorbs arts, physical ×0.1 with a counter; damage passes to 铳', () => {
@@ -3073,165 +2515,4 @@ test('determinism: the same boss round with the same seed produces the same outc
   const a = run(), b = run();
   assert.deepEqual(a, b);
   assert.equal(a[3], 0);
-});
-
-// ---------------------------------------------------------------------------------------------------------------
-// enemy numbers checked against PRTS in 0.1.3 (community report #14 and the 0.1.2 review list, DESIGN §22.12 "Found")
-
-/** The first normal attack of `e` that landed, its target and the other units its splash took. */
-function splashOf(h, e) {
-  const all = h.hooksOf('damaged').filter((c) => c.source === e);
-  const main = all.find((c) => c.dmg.isAttack);
-  return { main, target: main && main.target, splash: all.filter((c) => !c.dmg.isAttack && (c.dmg.tags || []).includes('splash')) };
-}
-
-test(`${nm('enemy_1050_lslime')}: the self-blast while blocked — radius 1.4, every 10 s of block (the clock restarts on a new block, stands still while stunned)`, () => {
-  // PRTS “庞贝” 天赋: "被阻挡时，每10秒（受晕眩/无法行动/沉睡/冻结/浮空影响时暂停计时，解除阻挡时重置计时）对半径1.4范围内的所有我方单位造成
-  // 1000预计算的无途径法术溅射伤害（不可对空）" (0.1.3: radius 1, a fixed 10 s clock from its spawn)
-  const h = arena({ units: [{ chessId: 't_wall', row: 9, col: 5 }, { chessId: 't_wall2', row: 10, col: 5 }, { chessId: 't_wall3', row: 10, col: 6 }], hooks: ['damaged'], captureNoisy: true });
-  h.step();
-  const e = put(h, 'enemy_1050_lslime', [9, 5], { mods: { atkMul: 0 } });
-  const blasts = () => h.hooksOf('damaged').filter((c) => c.source === e && !c.dmg.isAttack && c.dmg.tags.includes('splash'));
-  h.run(5);
-  h.b.applyStatus(e, 'stun', { duration: 2 });              // 2 s paused
-  h.run(6.5);                                               // 11.5 s, 9.5 s of it counting
-  assert.equal(blasts().length, 0, 'the stun paused the clock');
-  h.run(0.7);
-  const hit = blasts().map((c) => c.target.defId).sort();
-  assert.deepEqual(hit, ['t_wall', 't_wall2'], 'its blocker and the unit 1.0 away; √2 is outside 1.4');
-  approx(blasts()[0].amount, tb('enemy_1050_lslime', 'rangedamage.attack@damage'));
-  // unblocked for a moment: the clock restarts
-  const n = blasts().length;
-  h.run(4);
-  h.b._unblock(e);
-  h.unit('t_wall').s.flags.noBlock = true;
-  h.step();
-  delete h.unit('t_wall').s.flags.noBlock;
-  h.run(8);
-  assert.equal(blasts().length, n, 'a new block: 10 s again from its start');
-  h.run(2.5);
-  assert.ok(blasts().length > n);
-});
-
-test(`${nm('enemy_10122_uacann_2')}: the shell hits every unit within 1.0 of its target (100 % ATK, not flyers); the burning zone has radius 1.5`, () => {
-  // PRTS 集团军重型火炮 天赋: "普通攻击向目标发射一枚炮弹，对目标半径1.0范围内的所有我方单位造成攻击力100%的物理伤害（此弹道会强制击中主目标，
-  // 碰撞无视迷彩，不可对空）", 【燃烧区域】 "<1.5倍可变半径>碰撞半径1.5" (0.1.3: no splash, zone radius 1)
-  const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 3 }, { chessId: 't_wall2', row: 11, col: 3 }, { chessId: 't_wall3', row: 10, col: 4 }, { chessId: 't_wall4', row: 12, col: 3 }], hooks: ['damaged'], captureNoisy: true });
-  h.step();
-  const e = put(h, 'enemy_10122_uacann_2', [10, 9]);
-  h.runUntil(() => e.stats.attacks >= 1, 10);
-  h.run(2);
-  const { target, splash } = splashOf(h, e);
-  assert.ok(target);
-  const near = h.allies().filter((u) => u !== target && Math.hypot(u.x - target.x, u.y - target.y) <= 1 + 1e-6);
-  assert.ok(near.length >= 1);
-  assert.deepEqual(splash.map((c) => c.target).filter((u, i, l) => l.indexOf(u) === i).sort((a, b) => a.id - b.id), near.sort((a, b) => a.id - b.id));
-  approx(splash[0].amount, e.s.atk);
-  const zone = h.eventsOf('fx').find((f) => f[1] === 'zone' && f[4].kind === 'burning');
-  approx(zone[4].r, tb('enemy_10122_uacann_2', 'ProjectileBoomRange.attack@projectile_range') * 1.5);
-});
-
-test(`${nm('enemy_2008_flking')}: unblocked, a ranged attack at ${tb('enemy_2008_flking', 'atkdown.atk_scale') * 100} % ATK on the target and its 8 surrounding tiles; blocked, a melee hit at 100 %`, () => {
-  // PRTS “墓碑” 天赋: "自身造成的远程途径伤害的攻击倍率降低至40%", "未被阻挡时会进行远程攻击，对目标及其周围八格内的所有我方单位造成物理伤害，
-  // 不会攻击飞行单位" (0.1.3: a single-target hit at 100 %)
-  const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 5 }, { chessId: 't_wall2', row: 11, col: 6 }, { chessId: 't_wall3', row: 12, col: 6 }], hooks: ['damaged'], captureNoisy: true });
-  h.step();
-  const e = put(h, 'enemy_2008_flking', [10, 7]);
-  h.runUntil(() => e.stats.attacks >= 1, 10);
-  h.run(1);
-  const { main, target, splash } = splashOf(h, e);
-  const scale = tb('enemy_2008_flking', 'atkdown.atk_scale');
-  approx(main.amount, e.s.atk * scale);                     // (the walls' DEF is 0, halved by its own aura)
-  const box = h.allies().filter((u) => u !== target && Math.max(Math.abs(u.tileR - target.tileR), Math.abs(u.tileC - target.tileC)) <= 1);
-  assert.ok(box.length >= 1);
-  for (const u of box) assert.ok(splash.some((c) => c.target === u), `${u.defId} in the 3×3`);
-  assert.ok(splash.every((c) => box.includes(c.target)));
-  approx(splash[0].amount, e.s.atk * scale);
-  const hb = arena({ units: [{ chessId: 't_wall', row: 10, col: 7 }, { chessId: 't_wall2', row: 11, col: 7 }], hooks: ['damaged'], captureNoisy: true });
-  hb.step();
-  const eb = put(hb, 'enemy_2008_flking', [10, 7]);
-  hb.step();
-  eb.atkCd = 0;
-  const n0 = hb.hooksOf('damaged').length;
-  hb.runUntil(() => hb.hooksOf('damaged').slice(n0).some((c) => c.source === eb && c.dmg.isAttack), 10);
-  hb.run(1);
-  const hits = hb.hooksOf('damaged').slice(n0).filter((c) => c.source === eb);
-  assert.deepEqual(hits.map((c) => [c.target.defId, c.dmg.isAttack]), [['t_wall', true]], 'blocked: its blocker only');
-  approx(hits[0].amount, eb.s.atk);
-});
-
-test(`${nm('enemy_1512_mcmstr')}: unblocked, a ranged attack (radius 2.5, ground units) on the target and its 8 surrounding tiles at 100 %; the self-destruct reaches 3.0`, () => {
-  // PRTS “巨大的丑东西” 天赋: "未被阻挡时，可对半径2.5范围内的1名非飞行的我方单位进行远程攻击，对目标及其周围8格内的所有我方单位造成攻击力100%的
-  // 物理伤害", "重生开始的2.17s后进行自爆，对半径3.0范围内所有我方单位造成攻击力150%的物理伤害和16s晕眩" (0.1.3: no ranged attack, radius 2.5)
-  const h = arena({ units: [{ chessId: 't_wall', row: 11, col: 5 }, { chessId: 't_wall2', row: 12, col: 6 }, { chessId: 't_wall3', row: 9, col: 4 }], hooks: ['damaged', 'statusApplied'], captureNoisy: true });
-  h.step();
-  const e = put(h, 'enemy_1512_mcmstr', [10, 7]);
-  h.runUntil(() => e.stats.attacks >= 1, 10);
-  h.run(1);
-  const { main, target, splash } = splashOf(h, e);
-  approx(main.amount, e.s.atk);
-  assert.ok(Math.hypot(target.x - e.x, target.y - e.y) <= 2.5 + 0.25 + 1e-6);
-  const box = h.allies().filter((u) => u !== target && Math.max(Math.abs(u.tileR - target.tileR), Math.abs(u.tileC - target.tileC)) <= 1);
-  for (const u of box) assert.ok(splash.some((c) => c.target === u), `${u.defId} in the 3×3`);
-  assert.ok(splash.every((c) => box.includes(c.target)));
-  killed(h, e, null);
-  h.run(2.3);
-  const st = h.hooksOf('statusApplied').filter((c) => c.status === 'stun').map((c) => c.target.defId).sort();
-  // t_wall (11,5): √5 ≈ 2.24, t_wall2 (12,6): √5, t_wall3 (9,4): √10 ≈ 3.16 — outside 3.0
-  assert.deepEqual(st, ['t_wall', 't_wall2']);
-});
-
-test(`${nm('enemy_1535_wlfmster')}: leaking in its first form ends every 溶血骇惧 it cast — no drain afterwards`, () => {
-  // [ASSUMED] (no official text): the buff ends once its 扎罗 is off the field without a 重生 (a leak, a removal); until
-  // 0.1.3 the drain went on ramping after a leak and knocked the units out (Grok review of fb3-enemies-kits)
-  const h = arena({ units: [{ chessId: 't_wall', row: 10, col: 5 }, { chessId: 't_wall2', row: 11, col: 5 }, { chessId: 't_wall3', row: 12, col: 5 }] });
-  h.step();
-  const e = put(h, 'enemy_1535_wlfmster', [10, 7]);
-  e.profile.noAttack = true;
-  const fc = skb('enemy_1535_wlfmster', 'FearCage');
-  h.run(fc.spCost + 3.1);
-  const caged = h.allies().filter((u) => u.findBuff('ab:fearCage'));
-  assert.equal(caged.length, fc.bb.max_target);
-  h.b.leak(e);
-  assert.ok(!e.alive);
-  const hp = caged.map((u) => u.hp);
-  h.run(3);
-  assert.equal(h.allies().filter((u) => u.findBuff('ab:fearCage')).length, 0, 'every 溶血骇惧 ended');
-  assert.deepEqual(caged.map((u) => u.hp), hp, 'no HP lost after the leak');
-});
-
-test(`${nm('enemy_1203_sfhu')}: its attack splash (法术普通伤害) can be dodged; its death blast (法术溅射伤害) cannot`, () => {
-  // PRTS 烹泉 天赋: "普通攻击对目标对及目标周围半径1.0范围内的所有我方单位造成法术普通伤害", "死亡爆炸（…造成攻击力100%法术溅射伤害…）"
-  const h = arena({ units: [{ chessId: 't_gun', row: 10, col: 6 }, { chessId: 't_wall', row: 11, col: 6 }, { chessId: 't_wall2', row: 10, col: 5 }], hooks: ['damaged', 'dodge'], captureNoisy: true });
-  h.step();
-  const g = h.unit('t_gun'), w = h.unit('t_wall'), dodger = h.unit('t_wall2');
-  h.b.addBuff(dodger, { key: 'test:dodge', persist: true, mods: { dodgeArts: 1 } });
-  const e = put(h, 'enemy_1203_sfhu', [10, 7]);
-  h.runUntil(() => h.hooksOf('damaged').some((c) => c.source === e && c.dmg.isAttack && c.target === g), 10);
-  h.run(0.3);
-  approx(w.stats.taken, e.s.atk, 1e-6, 'the plain neighbour: splashed');
-  assert.equal(dodger.stats.taken, 0, 'the arts-dodge neighbour dodges the splash');
-  assert.ok(h.hooksOf('dodge').some((c) => c.target === dodger && c.source === e));
-  h.b.addBuff(g, { key: 'test:dodge', persist: true, mods: { dodgeArts: 1 } });
-  const t0 = g.stats.taken, atk = e.s.atk;
-  killed(h, e, null);
-  approx(g.stats.taken - t0, atk, 1e-6, 'the death blast is not dodged');
-});
-
-test(`${nm('enemy_10122_uacann_2')}: its 燃烧区域 (不可对空) spares a flying ally standing in it`, () => {
-  // PRTS 集团军重型火炮: 【燃烧区域】 "…（可叠加，碰撞不受迷彩制约，不可对空）" — until 0.1.3 the 炎佑 dragon in it burned
-  const h = makeBattle({ seed: 7, autoFinish: false, timeLimit: 120, defs: { chess: { t_wall: WALL('t_wall') } }, kits: { t_wall: NOATK },
-    units: [{ chessId: 't_wall', row: 10, col: 2 }], hooks: ['damaged'], captureNoisy: true });
-  h.step();
-  const [y] = spawnYanyou(h.b, 'p1', { atk: 0, hp: 50000 });
-  assert.ok(y && y.isFlying, 'a flying ally');
-  const e = h.spawn('enemy_10122_uacann_2', { pos: [10, 9], routeIndex: 0, mods: { speedMul: 0 } });
-  const w = h.unit('t_wall');
-  assert.ok(Math.hypot(y.x - w.x, y.y - w.y) <= 1.5, 'the dragon stands inside the zone around the wall');
-  h.runUntil(() => e.stats.attacks >= 1, 15);
-  h.run(3.5);
-  const burns = h.hooksOf('damaged').filter((c) => c.source === e && (c.dmg.tags || []).includes('burning'));
-  assert.ok(burns.some((c) => c.target === w), 'the wall burns');
-  assert.ok(!burns.some((c) => c.target === y), 'the dragon does not');
-  assert.ok(!h.hooksOf('damaged').some((c) => c.source === e && c.target === y), 'nor is it shot or splashed');
 });

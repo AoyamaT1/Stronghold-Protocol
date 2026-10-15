@@ -898,6 +898,10 @@ export class UnitView {
     this.countText = null;
     this.ammoText = null;          // 设置「弹药数量」: the magazine's count under the ammo bar (_updateAmmoCount)
     this.itemPips = [];
+    this.sanity = null;
+    this._sanityBadge = null;
+    this.resonance = null;        // 边狱【金枝共鸣】全队池 [n, cap]（b.snap `resonance`）
+    this._resBadge = null;
   }
 
   /** Show a stack count (token stacks in the hand) — BitmapText-free: a tiny canvas-less chip via Text. */
@@ -965,6 +969,8 @@ export class UnitView {
     this.sp = s.sp; this.spMax = s.spMax;
     this.ammo = s.ammo || null; this.wolves = s.wolves || null; this.neg = s.neg > 0 ? Math.min(1, s.neg) : 0;
     this.coins = s.coins || null;
+    if (s.sanity !== undefined && s.sanity !== null) this.sanity = s.sanity;
+    this.resonance = s.resonance || null;
     const prevFlags = this.flags;
     this.flags = s.flags | 0;
     this.anim = s.anim | 0;
@@ -1615,6 +1621,129 @@ export class UnitView {
       pip.position.set(this.screen.x - s * 0.36 + i * (ps + 1), this.screen.y - s * 0.05);
       pip.visible = this.alive;
     }
+    // Limbus Company Sanity Badge & Dialogue speech bubble
+    const isLimbus = (this.info?.spine || this.info?.defId || '').includes('limbus');
+    this._updateSanityBadge(this.alive && !this.isEnemy && (this.sanity != null || isLimbus), s, x, alpha, t);
+    // 边狱【金枝共鸣】全队进度条（与精神圆圈并列，坐落于其下方）
+    this._updateResonanceBadge(this.alive && !this.isEnemy && this.resonance != null, s, x, alpha, t);
+  }
+
+  /** 台词气泡已移除（需求：干员头顶不显示对话）。保留空方法以免调用点报错。 */
+  speak() { /* no-op */ }
+
+  /**
+   * Limbus Company Sanity (理智值 -45 ~ +45) HUD Badge at the bottom-right of the unit.
+   */
+  _updateSanityBadge(show, s, x, alpha, t) {
+    if (!show) {
+      if (this._sanityBadge) this._sanityBadge.visible = false;
+      return;
+    }
+    const P = this.P;
+    if (!this._sanityBadge) {
+      const root = (this._sanityBadge = new P.Container());
+      this._sanityGfx = new P.Graphics();
+      root.addChild(this._sanityGfx);
+
+      // 理智值 = 一个圆圈里显示当前数值的数字（去掉图标）。正理智蓝、负理智红。
+      this._sanityText = new P.Text('', {
+        fontFamily: 'Bender, Oxanium, "Pretendard", sans-serif',
+        fontSize: 12,
+        fontWeight: '800',
+        fill: '#ffffff',
+        stroke: '#060a0c',
+        strokeThickness: 3,
+      });
+      this._sanityText.anchor.set(0.5, 0.5);
+      root.addChild(this._sanityText);
+
+      this.hud.addChild(root);
+    }
+
+    const root = this._sanityBadge;
+    root.visible = true;
+    root.alpha = alpha;
+
+    const val = Math.max(-45, Math.min(45, Math.round(this.sanity ?? 0)));
+    const valStr = `${val}`;
+
+    // 正理智 = 蓝；负理智 = 红；0 = 中性灰
+    let strokeCol, fillCol, textFill, pulse = 0;
+    if (val > 0) {
+      strokeCol = 0x29b6f6; fillCol = 0x08202c; textFill = '#81d4fa';
+      if (val === 45) { strokeCol = 0x40c4ff; textFill = '#b3e5fc'; }   // 满理智只变亮，不再缩放脉动
+    } else if (val < 0) {
+      strokeCol = 0xff5252; fillCol = 0x2a0810; textFill = '#ff8a80';
+      if (val <= -30) { strokeCol = 0xff1744; textFill = '#ff5252'; pulse = Math.sin(t * 8) * 0.18; }
+    } else {
+      strokeCol = 0x90a4ae; fillCol = 0x141a1c; textFill = '#cfd8dc';
+    }
+
+    // 整体缩小一半
+    const scale = clamp(s / 82, 0.65, 1.25) * 0.5 * (1 + pulse);
+    root.scale.set(scale);
+    root.position.set(x + s * 0.35, this.screen.y - s * 0.12);
+
+    const txt = this._sanityText;
+    if (txt.text !== valStr) txt.text = valStr;
+    txt.style.fill = textFill;
+    txt.position.set(0, 0);
+
+    const gfx = this._sanityGfx;
+    gfx.clear();
+    const r = 16;
+    gfx.lineStyle(2, strokeCol, 0.95);
+    gfx.beginFill(fillCol, 0.9);
+    gfx.drawCircle(0, 0, r);
+    gfx.endFill();
+  }
+
+  /**
+   * 边狱公司【金枝共鸣】全队共享池进度条，坐落于精神圆圈正下方。读取 b.snap `resonance` = [n, cap]（每名在场罪人都带同一份团队值）。
+   */
+  _updateResonanceBadge(show, s, x, alpha, t) {
+    if (!show) { if (this._resBadge) this._resBadge.visible = false; return; }
+    const P = this.P;
+    if (!this._resBadge) {
+      const root = (this._resBadge = new P.Container());
+      this._resGfx = new P.Graphics();
+      root.addChild(this._resGfx);
+      this._resText = new P.Text('', {
+        fontFamily: 'Bender, Oxanium, "Pretendard", sans-serif',
+        fontSize: 11, fontWeight: '800', fill: '#ffe0b2', stroke: '#2a1402', strokeThickness: 3,
+      });
+      this._resText.anchor.set(0, 0.5);
+      root.addChild(this._resText);
+      this.hud.addChild(root);
+    }
+    const [n, cap] = this.resonance;
+    const k = cap > 0 ? clamp(n / cap, 0, 1) : 0;
+    const root = this._resBadge;
+    root.visible = true;
+    root.alpha = alpha;
+    const scale = clamp(s / 82, 0.65, 1.25) * 0.5;
+    root.scale.set(scale);
+    root.position.set(x + s * 0.35, this.screen.y - s * 0.12 + s * 0.14);
+
+    const BW = 46, BH = 11;
+    const full = cap > 0 && n >= cap;
+    const fillCol = full ? 0xff5230 : n > 0 ? 0xffb300 : 0x5a4530;
+    const strokeCol = full ? (Math.sin(t * 7) > 0 ? 0xffd54f : 0xff7043) : 0xffb74d;
+    const gfx = this._resGfx;
+    gfx.clear();
+    gfx.lineStyle(1.5, strokeCol, 0.95);
+    gfx.beginFill(0x180c02, 0.85);
+    gfx.drawRoundedRect(-BW / 2, -BH / 2, BW, BH, 3);
+    gfx.endFill();
+    if (k > 0) {
+      gfx.beginFill(fillCol, 0.95);
+      gfx.drawRoundedRect(-BW / 2, -BH / 2, BW * k, BH, 3);
+      gfx.endFill();
+    }
+    const txt = this._resText;
+    const str = `${n}`;
+    if (txt.text !== str) txt.text = str;
+    txt.position.set(BW / 2 + 3, 0);
   }
 
   /**

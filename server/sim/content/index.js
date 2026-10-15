@@ -42,6 +42,10 @@ async function safeImport(path) {
 }
 
 const KIT_REGISTRY = await safeImport('./kits/index.js');
+const LIMBUS_KITS = await safeImport('./mods/limbusCompany/kits.js');
+const RHODES_KITS = await safeImport('./mods/rhodes/kits.js');
+const SAKIKO_KITS = await safeImport('./mods/sakiko/kit.js');
+const AVEMUJICA_KITS = await safeImport('./mods/aveMujica/kits.js');
 const DOMAIN_NAMES = ['tokens', 'devices', 'enemies', 'bosses', 'bonds', 'garrisons', 'items', 'bands', 'choices'];
 const DOMAINS = await Promise.all(DOMAIN_NAMES.map((n) => safeImport(`./${n}.js`)));
 const tokens = DOMAINS[0];
@@ -50,7 +54,7 @@ const tokens = DOMAINS[0];
  * Merged kit registry: baseChessId → (bb, chess, def) => Kit, then the 补位 stand-in kits: stand-in charId → builder
  * (kits/index.js; each kit file is loaded guarded too)
  */
-export const KITS = KIT_REGISTRY.KITS ?? Object.freeze({});
+export const KITS = Object.freeze(Object.assign({}, KIT_REGISTRY.KITS ?? {}, LIMBUS_KITS.default ?? {}, RHODES_KITS.default ?? {}, AVEMUJICA_KITS.default ?? {}, SAKIKO_KITS.default ?? {}));
 
 /** Domain modules in install order: tokens, devices, enemies, bosses, bonds, garrisons, items, bands, choices. */
 export const MODULES = Object.freeze(DOMAIN_NAMES.map((n, i) => [n, DOMAINS[i]]));
@@ -84,7 +88,7 @@ export function kitOf(def, reg) {
   if (!def || !reg) return undefined;
   if (isOtherBody(def)) return Object.prototype.hasOwnProperty.call(reg, def.charId) ? reg[def.charId] : undefined;
   const bare = String(def.baseId ?? def.id ?? '').replace(/_[ab]$/, '');
-  return reg[def.baseId] ?? reg[def.id] ?? reg[bare];
+  return reg[def.baseId] ?? reg[def.id] ?? reg[bare] ?? (def.charId ? reg[def.charId] : undefined);
 }
 
 /** The generic kit of an operator def; a stand-in's / 自选 piece's also carries the talents generic.js can apply exactly. */

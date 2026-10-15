@@ -2,7 +2,7 @@
 // scripts/launch.mjs — cross-platform "prepare + start + open the browser", used by scripts/start-windows.bat,
 // scripts/start-windows.ps1 and scripts/start.sh (docs/DEPLOY.md).
 //
-//   node scripts/launch.mjs [--port 3000] [--host ::] [--no-open] [--no-setup] [setup options…]
+//   node scripts/launch.mjs [--port 3000] [--host ::] [--no-open] [--no-focus] [--no-setup] [setup options…]
 //
 //   1. If our server already answers on the port, just open the browser (double-clicking twice is harmless).
 //   2. An update package extracted over the folder (UPDATE.json) is finished (server/update.js; the server does it too,
@@ -12,6 +12,8 @@
 //   4. node server/index.js (PORT / HOST from the options or the environment; SP_COMBAT / SP_VERIFY / TRUST_PROXY /
 //      DEBUG are inherited), then — once /healthz answers — prints the addresses to share and opens
 //      http://localhost:<port> (not with --no-open, SP_NO_BROWSER=1, or on a Linux box without a display).
+//      On Windows the launcher window is then raised back to the front (the browser steals it when it opens), so the
+//      server console stays visible — addresses to share, logs, Ctrl+C to stop. Turn off with --no-focus / SP_NO_FOCUS=1.
 // Ctrl+C stops the server (it gets the signal from the terminal itself); the exit code is the server's.
 
 import { spawn, spawnSync } from 'node:child_process';
@@ -20,6 +22,8 @@ import { fileURLToPath } from 'node:url';
 import fs from 'node:fs';
 // 打开浏览器只有一份实现（走 shell 关联 = 默认浏览器，且不会把浏览器拉成提权）
 import { openBrowser as openInBrowser } from './open-browser.mjs';
+// 启动后把启动器窗口重新置前（浏览器打开时会把它盖住），只在 Windows 上有动作。
+import { scheduleRaiseConsole } from './raise-console.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IS_WIN = process.platform === 'win32';
@@ -34,7 +38,7 @@ const { probePort, classifyAddresses, hostUrl, KIND_LABEL } = await import('../t
 const { applyPendingUpdate, UPDATE_FILE } = await import('../server/update.js');
 
 function parseArgs(argv) {
-  const o = { port: Number(process.env.PORT) || 3000, host: process.env.HOST || '::', open: !/^(1|true|yes)$/i.test(process.env.SP_NO_BROWSER || ''), setup: true, setupArgs: [], help: false };
+  const o = { port: Number(process.env.PORT) || 3000, host: process.env.HOST || '::', open: !/^(1|true|yes)$/i.test(process.env.SP_NO_BROWSER || ''), focus: !/^(1|true|yes)$/i.test(process.env.SP_NO_FOCUS || ''), setup: true, setupArgs: [], help: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const [k, v] = a.split('=');
@@ -42,6 +46,7 @@ function parseArgs(argv) {
     if (k === '--port') o.port = Number(val()) || o.port;
     else if (k === '--host') o.host = val() || o.host;
     else if (a === '--no-open') o.open = false;
+    else if (a === '--no-focus') o.focus = false;
     else if (a === '--no-setup') o.setup = false;
     else if (a === '-h' || a === '--help') o.help = true;
     else if (a === '--game') o.setupArgs.push(a, argv[++i] ?? '');
@@ -125,6 +130,9 @@ async function main() {
   if (await waitHealthy(o.port, child)) {
     printShare(o.port);
     if (o.open && !openBrowser(localUrl)) console.log(c.dim(`（未能自动打开浏览器，请手动访问 ${localUrl}）`));
+    // The browser grabs the foreground a beat after it is launched; wait for it to appear, then take the console back
+    // so the server window stays in view (Windows only; off with --no-focus / SP_NO_FOCUS=1).
+    scheduleRaiseConsole({ enabled: o.focus });
   }
   return exited;
 }

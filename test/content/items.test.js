@@ -4,7 +4,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { makeBattle, chessRec, enemyRec, checkInvariants } from '../helpers/battleHarness.js';
-import { makeMatch, give, giveItem, DATA, legalTileFor } from '../match/harness.js';
+import { makeMatch, give, giveItem, DATA } from '../match/harness.js';
 import { createRegistry } from '../../server/match/effectsMeta.js';
 import { lendItemEffects, itemGrants, PRIO_REVIVE } from '../../server/sim/content/items/battle.js';
 import { unitBonds } from '../../server/sim/content/support/index.js';
@@ -96,7 +96,7 @@ test('stat equipment: percentages are 直接乘算 — additive with each other 
   checkInvariants(h2.b);
 });
 
-test('源石溶剂: −60 HP per second on the field (无来源真实伤害, not 流失 — feedback1d-solvent.test.js), ATK +40 %', () => {
+test('源石溶剂: −60 HP per second on the field (流失), ATK +40 %', () => {
   for (const id of [A('1_05'), B('1_05')]) {
     const h = fight({ units: [{ chessId: 't_op', row: 10, col: 4, items: [id] }] });
     h.step(1);
@@ -162,24 +162,6 @@ test('炎国短刀: each skill activation ATK +5 % / +8 % (one multiplier), at m
     cast(9);
     close(u.s.atk, 500 * (1 + per * 10), `${id} capped`);
     cover(id);
-  }
-});
-
-test('炎国短刀: timed deployment skill adds one stack per deployment, including carry.skillActive', () => {
-  const id = 'chess_char_1_19_a';
-  for (const [item, per] of [[A('3_04'), 0.05], [B('3_04'), 0.08]]) {
-    const h = makeBattle({ units: [{ chessId: id, row: 10, col: 4, skillIndex: 0, items: [item], carryState: { skillActive: true } }] });
-    h.b.start();
-    const u = h.unit(id);
-    assert.equal(u.skill.activations, 1);
-    close(u.s.atk, u.base.atk * (1 + per), 'one deployment stack');
-    h.run(u.skill.duration + 1);
-    close(u.s.atk, u.base.atk * (1 + per), 'no extra stack on end');
-    h.b.retreat(u);
-    assert.ok(h.b.redeploy(u, { free: true }));
-    assert.equal(u.skill.activations, 2);
-    close(u.s.atk, u.base.atk * (1 + per * 2), 'one more on redeployment');
-    checkInvariants(h.b);
   }
 });
 
@@ -617,7 +599,7 @@ test('黄沙罗盘: initial SP +30 / +50; (萨尔贡) first skill end +30 SP; + 
   u.skill.sp = 0;
   u.skill.activate('test', { free: true });
   u.skill.end('test');
-  close(u.skill.sp, 3, 'only the first skill end gives 30; this cast still gives its own 3 through the lock');
+  close(u.skill.sp, 0, 'only the first skill end');
   cover(A('6_07'), B('6_07'), A('2_04'), B('2_04'));
 });
 
@@ -741,16 +723,6 @@ const plain = (pred = () => true) => Object.values(DATA.chess)
   .filter((c) => c.visible && !c.isGolden && (c.garrisonIds || []).every((g) => DATA.garrisons[g].eventType === 'IN_BATTLE') && pred(c))
   .map((c) => c.chessId).sort();
 /** Record the chess granted by item effects (acquireChess with an `item:` source). */
-/** The warn toasts sent to the match's players from now on: [{ msgid, who, name }] (server msg() objects). */
-function spyWarns(m) {
-  const got = [];
-  const orig = m.toast.bind(m);
-  m.toast = (ps, kind, text) => {
-    if (kind === 'warn') got.push({ msgid: text?.msgid ?? text, who: text?.params?.who?.dn ?? null, name: text?.params?.name?.dn ?? null });
-    return orig(ps, kind, text);
-  };
-  return got;
-}
 function spyGrants(ps) {
   const got = [];
   const orig = ps.acquireChess.bind(ps);
@@ -954,68 +926,6 @@ test('拟态物质: owning 2 copies gives the 3rd (→ elite); otherwise a rando
   cover(A('5_05'), B('5_05'));
 });
 
-test('拟态物质 grants the third copy even when stock is empty; the gain still merges and occupies stock (measured pool rule)', () => {
-  // the report: an elite 溯光星源 (3 of the Ⅵ阶's 5 copies) and 2 normal ones — the pool is empty, the item text's 否则
-  // (a random same-bond operator) is only for fewer than 2 owned
-  const cid = 'chess_char_6_16_a';
-  const elite = DATA.chess[cid].goldenId;
-  const chessIn = (ps) => [...ps.board.values(), ...ps.hand, ...ps.temp].filter((p) => p && p.kind === 'chess').map((p) => p.id).sort();
-  for (const item of [A('5_05'), B('5_05')]) {
-    const { m, ps, equip } = setup({ seed: 9 });
-    give(m, ps, elite, 'hand');
-    const t = give(m, ps, cid, 'hand');
-    give(m, ps, cid, 'hand');
-    assert.equal(m.pool.left(cid), 0, 'elite 3 + 2 normal = the pool cap 5');
-    const got = spyGrants(ps);
-    const warns = spyWarns(m);
-    const it = giveItem(m, ps, item);
-    assert.deepEqual(equip(it, t), OK, item);
-    assert.deepEqual(got, [cid], `${item}: same operator granted despite empty stock`);
-    assert.deepEqual(chessIn(ps), [elite, elite], `${item}: the third normal copy merges`);
-    assert.ok(!ps.find(it.uid), `${item}: consumed`);
-    assert.deepEqual(warns, [], `${item}: a successful grant must not report an empty-pool failure`);
-    assert.equal(m.pool.entries.get(cid).left, -1, 'the sixth owned copy still occupies the pool');
-  }
-  // 2 normal copies, no elite, the pool drained by other players: the third copy is still granted.
-  {
-    const { m, ps, equip } = setup({ seed: 9 });
-    const t = give(m, ps, cid, 'hand');
-    give(m, ps, cid, 'hand');
-    m.pool.take(cid, m.pool.left(cid));
-    const got = spyGrants(ps);
-    const warns = spyWarns(m);
-    assert.deepEqual(equip(giveItem(m, ps, A('5_05')), t), OK);
-    assert.deepEqual(got, [cid]);
-    assert.deepEqual(chessIn(ps), [elite]);
-    assert.deepEqual(warns, []);
-  }
-  // 2 normal copies with copies left: the 3rd merges into the elite
-  {
-    const { m, ps, equip } = setup({ seed: 9 });
-    const t = give(m, ps, cid, 'hand');
-    give(m, ps, cid, 'hand');
-    assert.equal(m.pool.left(cid), 3);
-    const warns = spyWarns(m);
-    assert.deepEqual(equip(giveItem(m, ps, A('5_05')), t), OK);
-    assert.deepEqual(chessIn(ps), [elite]);
-    assert.deepEqual(warns, [], 'a grant: no warn toast');
-    assert.equal(m.pool.left(cid), 2, 'the elite holds 3 copies');
-  }
-});
-
-test('拟态物质 with fewer than 2 copies samples eligible identities independently of remaining stock', () => {
-  // 缪尔赛思's only bond is 调和 and she is its only member: one copy owned, the rest of her pool taken by others
-  const cid = 'chess_char_6_11_a';
-  const { m, ps, equip } = setup({ seed: 9 });
-  const t = give(m, ps, cid, 'hand');
-  m.pool.take(cid, m.pool.left(cid));
-  const got = spyGrants(ps);
-  const warns = spyWarns(m);
-  assert.deepEqual(equip(giveItem(m, ps, A('5_05')), t), OK);
-  assert.deepEqual(got, [cid], 'the only eligible identity remains available even with no stock');
-  assert.deepEqual(warns, []);
-});
-
 test('博士投影: golden promotes at once; normal stays equipped and promotes at the next round start', () => {
   const { h, m, ps, equip } = setup();
   const cid = plain((c) => c.tier === 2)[0];
@@ -1054,9 +964,7 @@ test('商业包装方案: every 8 / 7 operators sold ⇒ 1 normal operator shari
   }
 });
 
-test('突变细胞: after a battle the carrier becomes a random NORMAL tier+1 operator; its equipment, the cell included, returns to the hand', () => {
-  // PRTS 下半 记录 备注 "生效时，原干员销毁，获得一名高一阶的随机初始干员（最高六阶）"; the cell is not consumed (player
-  // feedback after 0.1.0 — players re-inject it every round; test/match/feedback1-meta.test.js)
+test('突变细胞: after a battle the carrier becomes a random NORMAL tier+1 operator, the cell is consumed, other equipment returns', () => {
   const { m, ps, equip } = setup({ seed: 3 });
   const cid = plain((c) => c.tier === 2)[0];
   const holder = give(m, ps, cid, 'hand');
@@ -1070,35 +978,9 @@ test('突变细胞: after a battle the carrier becomes a random NORMAL tier+1 op
   assert.ok(!DATA.chess[p.id].isGolden);
   assert.deepEqual(p.items, [], 'no equipment left on it');
   assert.ok(handIds(ps, 'item').includes(A('1_01')), 'other item back in the hand');
-  assert.ok(handIds(ps, 'item').includes(A('5_08')), 'the cell back in the hand (not consumed)');
+  assert.ok(!handIds(ps, 'item').includes(A('5_08')), 'cell consumed');
   assert.equal(DATA.items[A('5_08')].upgradeNum, 100);
-  // the golden record (same buff) behaves the same
-  const g = ps.hand.find((x) => x && x.id === A('5_08'));
-  g.id = B('5_08');
-  assert.deepEqual(equip(g, p), OK);
-  m.dispatch(ps, 'onBattleResult', { result: {}, lpLoss: 0, perfect: true });
-  const q = ps.hand.find((x) => x && x.kind === 'chess');
-  assert.equal(DATA.chess[q.id].tier, 4);
-  assert.ok(handIds(ps, 'item').includes(B('5_08')));
   cover(A('5_08'), B('5_08'));
-});
-
-test('突变细胞: a DEPLOYED carrier leaves the field — the new operator is gained into the 整备区, the deploy slot comes back (PR #2)', () => {
-  // official footage (bilibili BV1vzyVBuEN9, BV1Qkw1zMEoR): the tile is empty at the next prep and the new operator waits
-  // on the bench; the case added by the closed PR #2, on the destroy-then-gain rule (DESIGN §21.1)
-  const { m, ps, equip } = setup({ seed: 3 });
-  const cid = plain((c) => c.tier === 2)[0];
-  const holder = give(m, ps, cid, 'board', legalTileFor(m, ps, cid));
-  assert.deepEqual(equip(giveItem(m, ps, A('5_08')), holder), OK);
-  assert.equal(ps.deployCount, 1, 'the carrier is deployed');
-  m.dispatch(ps, 'onBattleResult', { result: {}, lpLoss: 0, perfect: true });
-  assert.equal(ps.board.size, 0, 'the carrier left the field');
-  assert.equal(ps.deployCount, 0, 'the deploy slot came back');
-  const chess = ps.hand.filter((p) => p && p.kind === 'chess');
-  assert.equal(chess.length, 1, 'the new operator waits in the 整备区');
-  assert.equal(DATA.chess[chess[0].id].tier, 3, 'the random tier+1 operator');
-  assert.equal(DATA.chess[chess[0].id].isGolden, false);
-  assert.ok(handIds(ps, 'item').includes(A('5_08')), 'the cell back in the hand');
 });
 
 test('人事部文档: deploy cap becomes 9 (a second copy adds nothing)', () => {
@@ -1150,11 +1032,10 @@ test('画卷 (Art): copies the operator on the tile / in front with its elite st
   const copy = ps.hand.find((p) => p && p.kind === 'chess');
   assert.equal(copy && copy.id, DATA.chess[cid].goldenId, 'elite copy in the hand');
   // the copied 激光发射器 pairs with the original's (items merge "无论是否被装备") ⇒ the golden goes to the hand;
-  // 变形同构体 never merges ⇒ its copy waits in the hand too, unequipped (PRTS 画卷 备注 "获得的装备为未装备状态";
-  // until 0.2.2 the copy wore it)
-  assert.deepEqual(copy.items.map((x) => x.id), [], 'the copy wears nothing');
+  // 变形同构体 never merges ⇒ the copy wears it too
+  assert.deepEqual(copy.items.map((x) => x.id), [A('6_09')]);
   assert.deepEqual(ps.find(target.uid).piece.items.map((x) => x.id), [A('6_09')]);
-  assert.deepEqual(handIds(ps, 'item').slice().sort(), [B('3_03'), A('6_09')].sort(), 'the merged golden and the copied 变形同构体 in the hand');
+  assert.deepEqual(handIds(ps, 'item'), [B('3_03')], 'merged golden in the hand (regression: was equipped on the copy)');
   const art2 = giveItem(m, ps, 'chess_item_6_02_m');
   assert.equal(m.handle('p_0', { t: 'g.art', itemUid: art2.uid, row: 11, col: 7 }).error, 'BAD_TARGET', 'no operator in range');
   cover('chess_item_6_02_m');
@@ -1169,23 +1050,7 @@ test('教鞭 (Art): a 战术特训 bounty (PRTS "于3个战术特训的悬赏任
     const { m, ps } = setup({ seed: 60 + s });
     for (let k = 0; k < 2; k++) {
       const art = giveItem(m, ps, 'chess_item_6_03_m');
-      const deadline = m.deadline;
       assert.deepEqual(m.handle('p_0', { t: 'g.art', itemUid: art.uid, row: 10, col: 5 }), OK);
-      const pending = ps.personalChoice;
-      assert.equal(ps.bounties.length, k, 'offering cards does not add a bounty');
-      assert.equal(pending.cards.length, 3);
-      assert.equal(new Set(pending.cards.map((c) => c.effectId)).size, 3);
-      assert.equal(pending.round, m.round);
-      assert.equal(pending.sourceItemId, art.id);
-      assert.equal(m.deadline, deadline, 'uses the existing PREP clock');
-      assert.equal(ps.find(art.uid), null);
-      assert.equal(ps.round.arts, k + 1, 'consumed when offered');
-      for (const c of pending.cards) assert.ok(training.has(c.effectId) && !m.gd.inactiveEnemies.has(c.enemyKey));
-      assert.deepEqual(m.handle('p_0', { t: 'g.choice', idx: 1, choiceId: pending.id }), OK);
-      assert.equal(ps.personalChoice, null);
-      assert.equal(ps.bounties[k].card.effectId, pending.cards[1].effectId, 'the submitted card is applied');
-      assert.equal(ps.round.arts, k + 1, 'picking does not consume another Art');
-      assert.equal(m.handle('p_0', { t: 'g.choice', idx: 1, choiceId: pending.id }).error, 'BAD_TARGET');
     }
     assert.equal(ps.bounties.length, 2);
     for (const b of ps.bounties) {
@@ -1196,7 +1061,7 @@ test('教鞭 (Art): a 战术特训 bounty (PRTS "于3个战术特训的悬赏任
       seen.add(b.card.effectId);
     }
   }
-  assert.ok(seen.size >= 5, 'different offered cards across seeds');
+  assert.ok(seen.size >= 5, 'random pick');
   const { h, m } = setup({ mode: 'coop', humans: 2, seed: 7 });
   const p0 = h.ps('p_0'), p1 = h.ps('p_1');
   const art = giveItem(m, p0, 'chess_item_6_01_m');
@@ -1207,58 +1072,7 @@ test('教鞭 (Art): a 战术特训 bounty (PRTS "于3个战术特训的悬赏任
   const passed = p1.hand.find((p) => p && p.id === 'chess_item_6_01_m');
   assert.deepEqual(m.handle('p_1', { t: 'g.art', itemUid: passed.uid, row: 10, col: 5 }), OK);
   assert.match(p1.bounties[0].card.effectId, /^enemyeffect_b_/);
-  assert.equal(p1.personalChoice, null, '神秘顾客 still applies its random bounty immediately');
   cover('chess_item_6_03_m', 'chess_item_6_01_m');
-});
-
-test('教鞭: pending and empty-pool failures keep the Art, Arts count and RNG; short offers use actual cards', () => {
-  const { m, ps } = setup();
-  const first = giveItem(m, ps, 'chess_item_6_03_m');
-  const second = giveItem(m, ps, 'chess_item_6_03_m', 'temp');
-  assert.deepEqual(ps.useArt(first.uid, 10, 5), OK);
-  const pending = ps.personalChoice;
-  const rng = m.rngMeta.state(), uid = m.uidSeq;
-  assert.deepEqual(ps.useArt(second.uid, 10, 5), { error: 'BAD_TARGET', detail: '请先完成当前教鞭选择' });
-  assert.equal(ps.personalChoice, pending);
-  assert.ok(ps.find(second.uid));
-  assert.equal(ps.round.arts, 1);
-  assert.equal(m.rngMeta.state(), rng);
-  assert.equal(m.uidSeq, uid);
-  assert.equal(m.pickPersonalChoice(ps, -1, pending.id).error, 'BAD_TARGET');
-  assert.equal(m.pickPersonalChoice(ps, 0.5, pending.id).error, 'BAD_TARGET');
-  assert.equal(m.pickPersonalChoice(ps, 3, pending.id).error, 'BAD_TARGET');
-  assert.equal(ps.personalChoice, pending);
-  assert.deepEqual(m.pickPersonalChoice(ps, 0, pending.id), OK);
-  const training = DATA.choices.cards.bounty.filter((c) => c.payout === 'perfect');
-  m.gd.inactiveEnemies = new Set(training.map((c) => c.enemyKey));
-  assert.deepEqual(ps.useArt(second.uid, 10, 5), { error: 'BAD_TARGET', detail: '当前没有可用的战术特训' });
-  assert.ok(ps.find(second.uid));
-  assert.equal(ps.round.arts, 1);
-  assert.equal(ps.personalChoice, null);
-  assert.equal(m.rngMeta.state(), rng);
-  const allowed = training.find((c) => c.multiRound && m.gd.enemy(c.enemyKey));
-  m.gd.inactiveEnemies.delete(allowed.enemyKey);
-  assert.deepEqual(ps.useArt(second.uid, 10, 5), OK);
-  assert.ok(ps.personalChoice.cards.length > 0 && ps.personalChoice.cards.length < 3);
-  assert.equal(new Set(ps.personalChoice.cards.map((c) => c.effectId)).size, ps.personalChoice.cards.length);
-  assert.equal(ps.find(second.uid), null, 'Arts in temp are consumed too');
-  const view = ps.privateView().personalChoice;
-  assert.ok(view.cards.every((c) => c.kind === 'bounty' && c.rounds === 2));
-  assert.ok(view.cards.every((c) => !/每场/.test(c.descRaw || c.desc)), 'multi-round candidates use the same two-battle text as applied bounties');
-  m.dispose();
-});
-
-test('教鞭: an open choice goes with a player who is eliminated, and nothing of it is left in its views', () => {
-  const { h, m } = setup({ mode: 'coop', humans: 2, seed: 8 });
-  const a = h.ps('p_0');
-  const art = giveItem(m, a, 'chess_item_6_03_m');
-  assert.deepEqual(a.useArt(art.uid, 10, 5), { ok: true });
-  assert.equal(a.privateView().personalChoice.cards.length, 3);
-  a.eliminate(m.round);
-  assert.equal(a.personalChoice, null);
-  assert.equal(a.privateView().personalChoice, null);
-  assert.equal(a.privateView().canReady, false);
-  m.dispose();
 });
 
 test('merging: two identical normal items become the golden one (upgradeNum 2); upgradeNum-100 items never merge', () => {

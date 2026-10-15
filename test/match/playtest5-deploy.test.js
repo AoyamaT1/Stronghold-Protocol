@@ -23,7 +23,6 @@ import {
 import { planLayout } from '../../server/match/bot.js';
 import { collectViolations } from '../../server/match/invariants.js';
 import { DATA, makeMatch, give, chessOfTier, checkInvariants } from './harness.js';
-import { renderMessage } from '../../shared/i18n.js';
 
 const STAGE = 'act2autochess_m01';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -116,8 +115,7 @@ describe('#7 the Final Assault prep deploys on the boss field', () => {
     h.drive(() => m.phase === PHASE.PREP && m.round === m.gd.bossRound);
     const toasts = [];
     const toast = m.toast.bind(m);
-    // a toast is a string or a shared/i18n.js msg(): compare its Chinese rendering
-    m.toast = (ps, kind, text) => { toasts.push(`${ps.playerId}:${renderMessage(text)}`); return toast(ps, kind, text); };
+    m.toast = (ps, kind, text) => { toasts.push(`${ps.playerId}:${text}`); return toast(ps, kind, text); };
     const fields = [];
     m.deployFieldOf = ((orig) => function (ps) { const f = orig.call(this, ps); if (this.round === this.gd.hiddenRound) fields.push(f); return f; })(m.deployFieldOf);
     const placed = {};
@@ -145,14 +143,13 @@ describe('#7 the Final Assault prep deploys on the boss field', () => {
     h.setStage(STAGE);
     h.toPrep(14);
     const m = h.m;
-    const [left, right] = m.bossPairs.find(g => g.length === 2), lone = m.bossPairs.find(g => g.length === 1)[0];
-    assert.equal(m.deployFieldOf(h.ps(right)), 'bossR');
-    assert.equal(m.deployFieldOf(h.ps(lone)), 'bossL', 'the odd player alone on the left half');
-    m.onLeave(left);
-    assert.equal(m.deployFieldOf(h.ps(right)), 'bossL');
-    assert.equal(m.deployFieldOf(h.ps(lone)), 'bossR');
+    assert.equal(m.deployFieldOf(h.ps('p_1')), 'bossR');
+    assert.equal(m.deployFieldOf(h.ps('p_2')), 'bossL', 'the odd player alone on the left half');
+    m.onLeave('p_0');
+    assert.equal(m.deployFieldOf(h.ps('p_1')), 'bossL');
+    assert.equal(m.deployFieldOf(h.ps('p_2')), 'bossR');
     // re-checked at once (Match._quit recomputes the players left), not at their next action
-    for (const [id, field] of [[right, 'bossL'], [lone, 'bossR']]) {
+    for (const [id, field] of [['p_1', 'bossL'], ['p_2', 'bossR']]) {
       assert.equal(h.ps(id)._deployField, field, `${id} board re-checked on ${field}`);
       assert.equal(h.ps(id)._legalityStale, false);
     }
@@ -222,11 +219,8 @@ describe('#7 audit: every stage × deploy field (server = official level data = 
   });
 
   test('independent check against the raw official level files (buildableType / heightType + non-hidden devices)', { skip: !HAS_LEVELS && 'no .cache/gamedata level files (run node tools/build-data.mjs once)' }, () => {
-    // trap_040_canoe 特制水上平台 "在水上建立可以部署任意单位的平台"; tile_deepsea refuses deployment whatever its
-    // buildableType (PRTS 深水区 地形信息 "地形机制：拒绝部署（待补充）" — player report #3 after 0.1.0, 战场#08's pool)
-    const ROLE = { trap_1105_accrate: 'block', trap_032_mound: 'block', trap_1106_achplat: 'platform', trap_040_canoe: 'water' };
+    const ROLE = { trap_1105_accrate: 'block', trap_032_mound: 'block', trap_1106_achplat: 'platform' };
     for (const [id, st] of Object.entries(DATA.stages)) {
-      if (st.kind === 'unite') continue; // the escaped levels' maps: no field is fought on them (no bench, no boss halves)
       const lv = JSON.parse(readFileSync(levelFile(id), 'utf8'));
       const map = lv.mapData.map, tiles = lv.mapData.tiles, H = map.length;
       const dev = new Map();
@@ -237,8 +231,6 @@ describe('#7 audit: every stage × deploy field (server = official level data = 
         if (!t || d === 'block') return null;
         // 射击台: ranged only [ASSUMED, DATA §15.11] (the remake's rule for a raised platform)
         if (d === 'platform') return 'ranged';
-        if (d === 'water') return 'melee';
-        if (t.tileKey === 'tile_deepsea') return null;
         if (t.heightType === 'LOWLAND' && (t.buildableType === 'ALL' || t.buildableType === 'MELEE')) return 'melee';
         if (t.buildableType === 'RANGED' || (t.heightType === 'HIGHLAND' && t.buildableType === 'ALL')) return 'ranged';
         return null;
@@ -263,7 +255,6 @@ describe('#7 audit: every stage × deploy field (server = official level data = 
 
   test('carry-over: a tile legal on the normal board is legal (same class) on both boss halves of every active stage', () => {
     for (const [id, st] of Object.entries(DATA.stages)) {
-      if (st.kind === 'unite') continue; // the escaped levels' maps have no boss field
       const n = buildDeployMap(st);
       for (const field of ['bossL', 'bossR']) {
         const b = buildDeployMap(st, { field });

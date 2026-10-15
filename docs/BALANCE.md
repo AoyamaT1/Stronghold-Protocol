@@ -13,11 +13,9 @@ kinds / counts and routes must follow the official game; research 08 §6–§7, 
   `k` copies, no kept fly placeholders; verified against all 429 official entry × round compositions and the official
   count distribution (同盟 险境 R3 ≤ 10 enemies, R13 ≈ 37 — the old generator averaged 28 / 81);
 * stats = the PRTS per-round `enemyScale` table only (`data/config.json`, 终极 ×1.15 speed from R3);
-* leader pool = `bloodPoint[difficulty]` × the players alive when the fight starts — one pool for every boss field; solo
-  × 1 (the owner's decision of 2026-10-06, adopting PR #209: it replaces the fixed pool of DESIGN §20.10, co-op
-  bloodPoint whatever the count and solo × 0.25 [ASSUMED] — config `bossHpScale.perPlayer: false`, `solo: 0.25` restores
-  it; DESIGN §25.13.4). The bots' solo matches got 4× the leader HP: in the golden corpus 4 of the 6 solo matches that
-  reached and won the Final Assault now lose it (team LP 0 with 93k–176k of the pool left);
+* leader pool = `bloodPoint[difficulty]` in co-op — one pool for every boss field, whatever the number of alive players
+  (config `bossHpScale.aliveScaling` would make it × alive / 4; off — the user chose the fixed pool, DESIGN §20.10); solo keeps ×0.25,
+  flagged [ASSUMED] in data;
 * leader parts and drones (DESIGN §20.10): a 剑 / 锤 / 碎铳之簧 passes every damage it takes to its leader 1:1 (PRTS "等量的
   无来源生命流失"; until 2026-10-01 half, and a 剑 / 锤 only while grounded — the dive hits [ASSUMED], the handbook says
   "被击落时"); a 胄 drone that dies (whoever kills it, DESIGN §20.13) costs 2 % of the leader's shown max HP = the pool (unchanged from v2.5; which "最大生命值" the
@@ -70,7 +68,7 @@ and runs the real
 `Battle` with full content (kits, talents, bonds with layers, IN_BATTLE 特质, equipment, bands, summons). Co-op rounds
 field **4 boards** against the same wave and then run **联防** exactly like the match (`unite.js`: ≤ 2 perfect helpers,
 only the survivors cost their source LP). Boss rounds build the Final Assault fields exactly like `Match.startFinalAssault`
-(pairs / `_s` for a lone player, shared pool `GameData.bossPoolHp` = `bloodPoint` × the players alive (solo × 1, §25.13.4), merged team LP of 15 per player, leaks' `lpr`,
+(pairs / `_s` for a lone player, shared pool `GameData.bossPoolHp` = `bloodPoint` (solo ×0.25), merged team LP of 15 per player, leaks' `lpr`,
 −1 LP/s after 150 s) and record the pool damage by 150 s, the kill time and the win rate.
 
 Metrics: **capped leaks** = min(leaks, 10) per board and round (what that board alone would lose; the targets below
@@ -129,7 +127,6 @@ the preview being read by a human in 90 s, and losing LP early (fewer rounds to 
 | Bounty spawn timing | was: the bounty units appended after the host action's own units | **official: inserted among them at floor((i+1)·len/(n+1)), then the list spread over the window** (client `_InsertSpActionToNormal` + `_CalculateActionPredelay`, decoded; `waves.js withBounties`) |
 | 联防 spawn timing | was: owner k at +min(0.5·k, 5) s, each owner's units over the whole window [ASSUMED] | **official (decoded `_CalculateActionPredelayConsiderUid`): owner k at +0.5·k s, unit step min(max(W/M, 0.05·W), 5 s), M = largest owner group** — a lone leaker's units now come 5 s apart instead of up to 40 s |
 | Leader / leader-part multipliers | was: leaders and their parts never scaled | **official: the round multipliers are the ENEMY effects 攻坚装备 / II / III / 补给线 / 急行军 (`enemy_attribute_mul`; `enemy_exclude` = 炎佑 — plus the TIMES tokens for 补给线 — never a leader) ⇒ parts take HP/ATK/speed, the leader ATK/speed; only the leader's HP (the server pool) is exempt** ("领袖单位于服务器的生命值加成不受上述加成影响"). Co-op 终极 R14: leader ATK ×2.14; solo 标准: ×0.7 |
-| 频次 器物 and leader summons (0.2.1, PR #272 by @CXUtk) | was: a 器物's hit count was the data's whatever the difficulty (the spawn's HP multiplier was overwritten); a leader's mid-fight summons (死亡集群's 妖怪, 刺胄之弹, 余音, 不祥幻影) took no round effect | **official data: 攻坚装备 / II / III leave out only 炎佑, 补给线 / 补给线II also the 14 器物 keys** (activity_table aceffect_enemy_2 / 2_2 `enemy_exclude`) ⇒ a 器物 needs data × hp / supplyHp hits (config `supplyHp`: co-op 终极 R5–R15, the HP-only 1.2 steps and the 1.08), rounded [ASSUMED]; the summons take the round's HP (a hit count too) / ATK / speed through the boss field's `flags.enemyScale`, 死亡集群's `summon.hp_ratio` on top. Solo 标准 青铜镜 30 → 23 hits, co-op 终极 R14 30 → 129; 炎佑 is an ally here, never scaled. The 逐火 / 再生 husk counts (talent `Revive[Trigger].prop_max_hp`) stay as they were [open] |
 | Ground routes | was: 8-dir A*, m02 crates active | **official 4-dir SPFA + smoothing, crates cost 1000, m02 without crates** (research 08 §3) |
 | Income / upgrade curve | R1–R3 VERIFIED, +1/round cap 12 ASSUMED | kept (the model's level curve follows it) |
 | Operator stats per tier | chess status T1 E1 L55 … T6 E2 L1, elites E2 + skill 7 (03) — DATA | faithful: power comes from layers, elites and skills, which is why the model carries them |
@@ -202,8 +199,8 @@ earlier commit (a current run differs for every leader) and were not refreshed h
 
 Reading: the early game is easy everywhere (official R1–R3 bring 3–10 enemies); leaks concentrate on the second-half
 specials (深池逐火 TIMES embers, stealth 隐形弩手组长 / 重弩突袭者, 疯狂的逐腐兽, 掠海漂移体) and 终极 R6–R11, where co-op
-boards still leak 3–6 and 联防 halves the LP cost. Solo leaders (bloodPoint × 0.25 [ASSUMED] when these tables were
-measured; × 1 since the owner's decision of 2026-10-06, §25.13.4) are the hard part of the solo modes.
+boards still leak 3–6 and 联防 halves the LP cost. Solo leaders (bloodPoint × 0.25 [ASSUMED]) are the hard part of the
+solo modes; the solo pool factor is the one open number here (research 08 §8 #2).
 
 Reproduce: `node tools/balance.mjs --mode all --difficulty ALL --tuning off [--bots 5] [--json]`.
 
@@ -336,70 +333,18 @@ Official-waves column: `node tools/balance.mjs --mode all --difficulty ALL --bot
 seed), measured before the review's leader-multiplier / 联防-timing fixes (§2; not re-run); the other columns are the
 previous pass (old generator), kept for history. \* the bot code of this pass (§5) with the old time reading and no tuning; the originally reported bots (old bot code) survived ≈ 6.5 rounds on 险境 and won 1/20 on 标准.
 
-**Player feedback after 0.1.0 (#10 "人机有点太笨了").** Measured first (`tools/botbench.mjs`): the 0.1.0 bots refreshed
-0–2 times a prep and bought side-grade singles they sold again at a loss (every sale returns 1), so they merged ≈ 2
-times a match and fielded ≈ 2 elites at R13; in co-op 绝境 ≈ 1 in 2 of their bounty picks leaked (solo 10 of 80; the
-old score ignored the enemy); 信标 went on the best operator (it destroys its carrier) and a level-up could spend the
-funds a third copy in the shop needed. Changes (server/match/bot.js header, META §1.5): refresh-vs-buy by the shop odds
-of completing held pairs, the freeze for an unaffordable third copy, merges before level-ups, a committed focus /
-second bond (a teammate's main bond read from its bond strip), armour-aware DPS, bounty picks by expected value from
-the exposure model, item carriers by effect, 坎诺特 banking its interest capital, a tactician's 援军 inside its range.
-Same seeds (1–40) old → new, the match's default rehearsal (3):
-
-| config | wins | rounds passed | LP left | leaks / match | bounty enemies leaked | merges / bot | elites at R13 |
-|---|---|---|---|---|---|---|---|
-| 独立 标准 (1 AI) | 35 → 35 / 40 | 8.80 → 8.80 | 29.9 → 28.6 | 2.5 → 3.3 | 1 → 1 | 1.40 → 2.25 | – (R7: 0.7 → 1.0) |
-| 独立 绝境 (1 AI) | 19 → 26 / 40 | 13.05 → 13.35 | 14.3 → 16.6 | 26.5 → 19.7 | 10 → 8 of 80 picks | 2.33 → 4.10 | 1.8 → 2.2 |
-| 同盟 标准 (4 AI) | 40 → 40 / 40 | 14.00 → 14.00 | 110.0 → 112.2 | 39.4 → 33.1 | 6 → 6 | 2.59 → 4.10 | 1.9 → 2.3 |
-| 同盟 绝境 (4 AI) | 5 → 12 / 40 | 11.85 → 12.32 | 5.1 → 12.7 | 224.6 → 212.6 | 155 → 148 of ≈ 310 picks | 2.00 → 2.97 | 2.3 → 2.8 |
-
-绝境 leaks per alive bot in R12 / R13: solo 8.0 / 9.2 → 5.7 / 4.8, co-op 20.5 / 20.7 → 18.5 / 15.8. Co-op bounty leaks
-are bound by the drafts, not the pick: in 223 of the 312 co-op 绝境 bounty picks no card still on offer had a kill
-chance ≥ 0.5 (solo 22 of 80), and only 5 picks (solo 0) took a card below 0.5 while one ≥ 0.5 was on offer — re-measure
-after the bounty-half fix (player report #2). Strategies played alone (solo 绝境, seeds 201–220, forced with `--band`):
-坎诺特 9 → 14 wins of 20, 昆图斯 9 → 11, 杜宾 8 → 9 (keeping an unused 教鞭 vs dropping it: 11 vs 11 wins over 24 杜宾
-matches — kept, as it costs nothing but a hand slot). Decision time per bot prep is unchanged (one thread, back to back
-on a quiet host, seeds 1–6, solo 绝境 / co-op 绝境; the rehearsal included): wall clock p50 / p95 94 / 191 → 89 / 205 ms
-and 86 / 175 → 83 / 162 ms, CPU 131 / 314 → 124 / 329 ms and 97 / 209 → 91 / 188 ms; the heuristics alone (CPU) 31 / 74
-→ 28 / 70 ms and 17 / 39 → 17 / 38 ms (the lineup search tries identical pieces once and reuses the lineup across
-refreshes); a 机变 pick 0.07 → 0.15 ms (p50). Over the 40-seed A/B the summed prep CPU per match moved −6 % … +2 %. The
-tuning sweeps used seeds 101–148 with the rehearsal off; the tables above are separate seed ranges.
-
-**0.1.1 integration (DESIGN §21.6).** With all 18 workstreams merged (the official bounty draft structures, the AoE,
-displacement and enemy fixes) the same bot on the same seeds wins 27 / 40 solo 绝境 and 9 / 40 co-op 绝境 (co-op bounty
-enemies leaked 120 of 380 picks: 232 drafts offered no card at a kill chance ≥ 0.5 — the R9 boss groups). The bot was
-then reconciled with the merged rules: it plans each unit with the range it is deployed with (`rangeRec`:
-`attackRangeGrid`, the server's `summonRange` grid — no outcome changed on these seeds) and values an attack on every
-enemy in range ×2 (阵法术师 / 轰击术师, now `rangeAoe`), a splash ×1.3 and a chain ×1.4 [ASSUMED] (`CROWD`). Seeds 1–40,
-rehearsal 3, before → after: solo 绝境 27 → 27 wins, LP left 17.9 → 18.4, bounty enemies leaked 8 → 5 of 104; co-op 绝境
-9 → 11 wins, LP left 14.8 → 14.1, leaks per match 215 → 220 — within the noise of 40 seeds (the ×2-only variant: 25 /
-11 wins). Decision time stays at the WF numbers (one thread, back to back, seeds 1–6): heuristics CPU p50 / p95 25 / 59
-→ 24 / 57 ms solo and 16 / 36 → 16 / 36 ms co-op; the whole prep with its rehearsal wall clock 80 / 148 → 78 / 153 ms and
-74 / 152 → 73 / 151 ms.
-
-**0.1.1 after the QA (DESIGN §21.6, §21.19).** Seeds 1–40, rehearsal 3 (wins solo 绝境 / co-op 绝境, 4 AI): the merged
-build `dbd45c8` 27 / 11; with WB's 22-match bounty lists (a rule change: R11 is a 悬赏决策 in 14 of 22 and every R11 bounty
-list holds a 特异III giant) the same bot 22 / 9 (LP left 16.3 / 10.9); the residual sim fixes change no outcome (22 / 9);
-the bench-shed fix (the buy loop's shed never sells a piece that came this prep) 24 / 10 (LP left 17.4 / 13.1, co-op
-leaks per match 217 → 210). 0.1.0 on the same seeds: 19 / 5; 0.1.0's bot on the final 0.1.1 rules: 23 / 7 (LP left
-14.6 / 5.2, merges per bot 2.2 / 2.0 — the solo gain over 0.1.0 is mostly the rules, the co-op one the bot). The 29 same-prep buy → sell of co-op 绝境 (2 AI 托管 + 2
-bots, seeds 21–26) drop to 3 (a reward pick's room, `arrange`, `sellJunk`). Decision time unchanged (one thread, seeds
-1–3, both builds side by side): the whole prep p50 / p95 81 / 187 → 81 / 184 ms solo and 71 / 153 → 71 / 129 ms co-op,
-heuristics CPU 36 / 88 → 35 / 86 ms and 16 / 40 → 16 / 40 ms.
-
 ---
 
 ## 6. Match follow-ups shipped with this pass
 
 * Bounties with battles left (multi-round cards — "之后的每场作战" — last two battles since playtest #6, META §1.2)
   also spawn in the Final Assault / Hidden Core, on the owner's half (route to its goal), are shown in the boss-round
-  preview, and the boss battle uses up one of their battles (kill coins, and a perfect-payout 战术特训 card's coins when the player's own field is perfect and the team wins → pending funds for the Hidden Core prep).
+  preview, and the boss battle uses up one of their battles (kill coins → pending funds for the Hidden Core prep).
 * A 驰援 card is never offered when its bond has no chess left in the match's pool (every member banned).
 * docs/META.md §2.6 example guards `ctx.source.kind === 'choice'` (its EffectRef reuses the handler's key).
 * 坚若磐石 = least LP lost (`titles.comment_3 { stat: 'lpLost', rule: 'min' }` in tuning.json; results.js supports
   `rule: 'min'` among the players still alive).
-* 教鞭 offers a personal choice of three 战术特训 cards (a bot picks by the bounty scorer, the prep's deadline at random);
-  “神秘顾客” stays a random bounty — docs/META.md §2.5.
+* 教鞭 / “神秘顾客” stay a random bounty, documented in docs/META.md §2.5.
 
 ---
 
@@ -426,8 +371,6 @@ on a leader is cancelled (`MAX_BATTLE_DAMAGE`: 0 damage, nothing to the pool —
   `--profile` above ≈ 4.9 would have pushed the 170-layer R15 core curve, +20 % jitter, past 999) and
   `matchrun.mjs --layers N` adds at most the room left under 999, so `--check` stays clean on a boosted run.
 - **Pool size and the line**: a drone that dies (whoever kills it, DESIGN §20.13) costs 假想敌：胄 0.02 × the pool
-  max (【死亡集群】, boss_1 / boss_8; `bosses.js DRONE_LINK_BASE 'pool'`). With the pool per player alive (§25.13.4) the
-  hidden 胄 终极 pool is 21.6M / 28.8M at 3 / 4 players, so a drone is 432000 / 576000 — above the line; the link is a
-  share, no hit, and passes it (`Battle.loseHp noHitLimit` [ASSUMED]: research 11 §2.1 checks every damage modifier, but
-  which max HP the official link reads is not documented). Re-check this whenever the pool size changes (research 11 §6).
+  max (【死亡集群】, boss_1 / boss_8; `bosses.js DRONE_LINK_BASE 'pool'`). Today that is at most 144000 (boss_8 ABYSS 7.2M) and lands; a pool above 14999950 would make every
+  drone kill a cancelled hit. Re-check this whenever the pool size changes (research 11 §6).
 

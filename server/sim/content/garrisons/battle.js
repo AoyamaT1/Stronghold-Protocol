@@ -49,6 +49,17 @@ const EMPTY = Object.freeze([]);
 /** Status keys for check_ab_flag values used by the data (16 = 冻结). */
 const AB_FLAG_STATUS = Object.freeze({ 16: 'freeze' });
 
+// "使用技能击杀" (良秀 / 唐吉诃德 garrisons): a kill counts as a skill-kill when the killer activated a skill within
+// this window of game seconds — covers instant nukes and the DoT / follow-up ticks a skill leaves behind.
+const SKILL_KILL_WINDOW = 1.5;
+/** Stamp `unit._garSkillAt` on every skillStart, installed once per battle. */
+function ensureSkillStamp(battle) {
+  if (battle._garSkillStamp) return;
+  battle._garSkillStamp = true;
+  battle.on('skillStart', ({ unit }) => { if (unit) unit._garSkillAt = battle.time; });
+}
+const skillKilled = (battle, killer) => !!killer && (battle.time - (killer._garSkillAt ?? -Infinity)) <= SKILL_KILL_WINDOW;
+
 function garrisonIdsOf(u) {
   const list = u?.def?.raw?.garrisonIds ?? u?.def?.garrisonIds;
   return Array.isArray(list) ? list : EMPTY;
@@ -251,14 +262,49 @@ const INSTALLERS = {
 
   act1autochess_gar_event_selfkillenemy(battle, list) {
     const m = byUnit(list);
-    for (const it of list) it.allies = /我方干员/.test(it.g.desc || '');
+    for (const it of list) { it.allies = /我方干员/.test(it.g.desc || ''); it.skillOnly = /技能/.test(it.g.desc || ''); }
+    if (list.some((it) => it.skillOnly)) ensureSkillStamp(battle);
     battle.on('kill', ({ killer, victim }) => {
       const arr = killer ? m.get(killer) : null;
       if (!arr || !victim) return;
       for (const it of arr) {
         if (!(victim.side === 'enemy' || (it.allies && victim.side === 'ally' && victim.kind === 'op'))) continue;
+        if (it.skillOnly && !skillKilled(battle, killer)) continue;   // 良秀：仅「使用技能击杀」计数
         it.cnt++;
         if (it.cnt % Math.max(1, S.num(it.bb.check_cnt, 1)) === 0) fireGain(battle, it);
+      }
+    });
+  },
+
+  // 奥提斯：身前一格的友方干员每使用一次技能 → 给玩家当前激活且层数最高的盟约加层（bond_actived_maxstack，每场 cap）。
+  act1autochess_gar_event_frontunit_useskill(battle, list) {
+    battle.on('skillStart', ({ unit }) => {
+      if (!unit) return;
+      for (const it of list) if (S.onField(it.unit) && isFrontOf(it.unit, unit)) fireGain(battle, it);
+    });
+  },
+
+  // 唐吉诃德：每有一名 bbStr.bond_id 盟约的友方干员「用技能击杀」一名敌人 → 该盟约加层（经 gainLayers 的 requireActive 把关）。
+  act1autochess_gar_event_bondmate_skillkill(battle, list) {
+    ensureSkillStamp(battle);
+    battle.on('kill', ({ killer, victim }) => {
+      if (!killer || !victim || victim.side !== 'enemy' || !S.isOp(killer) || !skillKilled(battle, killer)) return;
+      for (const it of list) {
+        if (killer.ownerId !== it.unit.ownerId) continue;
+        const bond = ids(it.bbStr.bond_id)[0];
+        if (bond && S.unitBonds(killer).includes(bond)) fireGain(battle, it);
+      }
+    });
+  },
+
+  // 三角初华 (Dolris)：每当 bbStr.bond_id 盟约的友方干员击杀一名敌人 → 该盟约加层（无技能条件，与唐吉诃德区分）。
+  act1autochess_gar_event_allykillenemy(battle, list) {
+    battle.on('kill', ({ killer, victim }) => {
+      if (!killer || !victim || victim.side !== 'enemy' || !S.isOp(killer)) return;
+      for (const it of list) {
+        if (killer.ownerId !== it.unit.ownerId) continue;
+        const bond = ids(it.bbStr.bond_id)[0];
+        if (bond && S.unitBonds(killer).includes(bond)) fireGain(battle, it);
       }
     });
   },

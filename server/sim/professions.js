@@ -19,6 +19,7 @@
 //   chain {count, falloff, radius, sluggish}              heal {mode:'single'|'multi'|'chain', count, falloff, farMul, elementHealRatio}
 //   priority 'fly'|'lowDef'|'ranged'|'lowestHp'|'highestHp'|'nearest'|'farthest'|'notBurst'|null
 //   noAttack bool (never attacks)   noAttackUnlessSkill bool (attacks only while its skill is active)
+//   noAttackVis bool (content owns the visual)   noAttackDamage bool (content owns damage / attack-SP settlement)
 //   noHeal bool (cannot be healed by others)   blockFly bool   onHitStatus {key, duration, value}
 //   dmgMul(battle, unit, target) → number      afterHit(battle, unit, target, {dealt,x,y})
 //   funnelMul(battle, unit, target) → number (drone ramp, separate from the caster's attack multiplier)

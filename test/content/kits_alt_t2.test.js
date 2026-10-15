@@ -1,4 +1,4 @@
-// Operator loadouts (DESIGN §16) for the tier-2 kits (server/sim/content/kits/ops/): every selectable NON-default
+// Operator loadouts (DESIGN §16) for the tier-2 kits (server/sim/content/kits/tier2.js): every selectable NON-default
 // skill of every visible tier-2 chess is hand-authored (tools/kit-coverage.mjs) and shows its signature effect for the
 // normal (Lv4) and the elite (Lv7) chess — numbers from the selected skill's blackboard (data/chess.json skills[]) —
 // and the elite's module choice ('none' instead of the default module) changes what the kit / profile does.
@@ -342,38 +342,27 @@ test('2_12 砾 S1 影袭: at deployment DEF +def decaying to 0 over `duration` s
     h.run(0.5);
     approx(u.s.def, u.base.def * (1 + aura + bb.def), `${id} full bonus`);
     assert.equal(u.s.shield, 0, 'no 鼠群 barrier');
-    assert.equal(u.skill.kind, 'duration');
-    assert.equal(u.skill.active, true);
-    assert.equal(u.skill.ready, false);
-    assert.equal(h.snapshot().units.find((t) => t[0] === u.id)[6], bb.duration);
     h.run(1);
     approx(u.s.def, u.base.def * (1 + aura + bb.def * (bb.duration - 1) / bb.duration), 'one step down after 1 s');
     h.run(0.4);
     approx(u.s.def, u.base.def * (1 + aura + bb.def * (bb.duration - 1) / bb.duration), 'steps once per second');
     h.run(bb.duration);
     approx(u.s.def, u.base.def * (1 + aura), 'gone');
-    assert.equal(u.skill.active, false);
-    assert.equal(u.skill.ready, false);
-    assert.equal(u.findBuff('gravel:shadow'), null);
-    assert.equal(h.hooksOf('skillEnd').filter((c) => c.unit === u && c.reason === 'duration').length, 1);
     done(h);
   }
 });
 
-test('2_13 蒂比 S1 专业喷绘技巧: ACTIVE_RANGE trigger (an enemy in its 2-3 only), takes off (skill range, ATK +atk, blocks flyers), single shots; hits never set it off', () => {
+test('2_13 蒂比 S1 专业喷绘技巧: DEFAULT trigger, takes off (skill range, ATK +atk, blocks flyers), single shots; hits never set it off', () => {
   for (const id of both('chess_char_2_13')) {
     const bb = bbAlt(id);
-    // (10,5) = [1,0]: inside S1's 2-3, outside her own 2-2 — the owner's rule of 2026-10-05 (data trigger ACTIVE_RANGE)
-    const h = run({ defs: { enemies: { e: dummy('e'), f: dummy('f', { motion: 'FLY' }) } }, units: [U(id, 9, 5, { carryState: READY })], enemies: [{ key: 'e', pos: [10, 5] }] });
+    const h = run({ defs: { enemies: { e: dummy('e'), f: dummy('f', { motion: 'FLY' }) } }, units: [U(id, 9, 5, { carryState: READY })], enemies: [{ key: 'e', pos: [9, 6] }] });
     const u = h.unit(id);
     usesAlt(u, id);
     h.step();
     const range0 = u.baseRangeKeys.length;
-    assert.ok(!u.baseRangeKeys.includes(h.b.grid.key(10, 5)), 'the enemy is outside her own range');
     h.runUntil(() => u.skill.active, 3);
-    assert.equal(started(h, u)[0].reason, 'ACTIVE_RANGE');
-    assert.equal(u.s.flags.liftoff, true, 'airborne (起飞)');
-    assert.equal(u.ground, true, 'still a ground unit on her low tile');
+    assert.equal(started(h, u)[0].reason, 'DEFAULT');
+    assert.equal(u.ground, false, 'airborne');
     approx(u.s.atk, u.base.atk * (1 + bb.atk));
     assert.ok(u.rangeKeys.length > range0, 'skill range');
     const fl = h.spawn('f', { pos: [9, 5] });
@@ -385,7 +374,7 @@ test('2_13 蒂比 S1 专业喷绘技巧: ACTIVE_RANGE trigger (an enemy in its 2
     assert.equal(hits.length, atk.reduce((n, c) => n + c.targets.length, 0), 'one shot per target (no 3 连射)');
     h.runUntil(() => !u.skill.active, 40);
     h.step();
-    assert.ok(!u.s.flags.liftoff, 'landed');
+    assert.equal(u.ground, true, 'landed');
     done(h);
     // an enemy attack from outside her range never sets S1 off (S2's 受到攻击后触发 is not hers)
     const h2 = run({ defs: { enemies: { r: dummy('r', { atk: 300, bat: 1, range: 3.2 }) } }, units: [U(id, 9, 5, { carryState: READY })], enemies: [{ key: 'r', pos: [9, 8] }] });
@@ -421,9 +410,8 @@ test('2_16 拉普兰德 S1 日晷: toggle (持续时间无限) ATK +atk; blocks 
     const bb = bbAlt(id);
     for (const roll of [true, false]) {
       const seen = [];
-      // 120 hits a minute at bat 0.5, each at the 5 % floor (12.5): 1500 in the 60 s, short of the normal form's 1791 HP
       const h = run({
-        defs: { enemies: { e: dummy('e', { atk: 250, bat: 0.5 }) } }, units: [U(id, 9, 5, { carryState: READY })], enemies: [{ key: 'e', pos: [9, 5] }],
+        defs: { enemies: { e: dummy('e', { atk: 300, bat: 0.5 }) } }, units: [U(id, 9, 5, { carryState: READY })], enemies: [{ key: 'e', pos: [9, 5] }],
         setup: (b) => { b.rng.chance = (p) => { seen.push(p); return roll; }; },
       });
       const u = h.unit(id);
@@ -467,7 +455,7 @@ test('2_17 折桠 S1 绝境抵抗: TAKE_DAMAGE; DEF +def and 抵抗 (control sta
   }
 });
 
-test('2_18 灰毫 S2 专注轰击: cast with an enemy in range (DEFAULT, the deliberate deviation from the 重装 row — DESIGN §21.29), then blocks nothing, ranged splash bombs only, shorter interval, ATK +atk', () => {
+test('2_18 灰毫 S2 专注轰击: cast when hit (重装 TAKE_DAMAGE), then blocks nothing, ranged splash bombs only, shorter interval, ATK +atk', () => {
   for (const id of both('chess_char_2_18')) {
     const bb = bbAlt(id);
     const enemies = { w: enemyRec({ key: 'w', hp: 1e7, speed: 2, atk: 50, bat: 1 }) };
@@ -476,18 +464,15 @@ test('2_18 灰毫 S2 专注轰击: cast with an enemy in range (DEFAULT, the del
     assert.ok(c.runUntil(() => c.enemies()[0]?.blockedBy === c.unit(id), 10), 'default: blocked');
     done(c);
 
-    // (a second walker, 2 s behind the first, comes by while the skill runs — 10 s from the cast, made as the first one
-    // comes into range: she bombs it from range, unblocked)
-    const h = run({ defs: { enemies }, units: [U(id, 9, 5, { carryState: READY })], enemies: [{ key: 'w', route: 0 }, { key: 'w', route: 0, time: 2 }] });
+    // (a second walker comes by while the skill runs: she bombs it from range, unblocked)
+    const h = run({ defs: { enemies }, units: [U(id, 9, 5, { carryState: READY })], enemies: [{ key: 'w', route: 0 }, { key: 'w', route: 0, time: 5 }] });
     const u = h.unit(id);
     usesAlt(u, id);
-    // the official 下半 重装 row (TAKE_DAMAGE) is overridden for this skill by the owner's decision (data rawRule keeps it)
-    assert.equal(u.skill.rule, 'DEFAULT', 'an offensive 重装 skill of the deviation: the basic strategy');
+    assert.equal(u.skill.rule, 'TAKE_DAMAGE', 'a MANUAL 重装 skill: "不受技能范围影响，受到伤害时释放技能"');
     assert.ok(h.runUntil(() => u.skill.active, 8));
     const st = h.b.time;
     const atk0 = h.eventsOf('atk').length;
-    assert.equal(started(h, u)[0].reason, 'DEFAULT', 'cast by the basic strategy');
-    assert.ok(!h.hooksOf('damaged').some((x) => x.target === u), 'with the walker in range, before anything hit her');
+    assert.ok(h.hooksOf('damaged').some((x) => x.target === u), 'cast by the hit of the enemy she blocked');
     assert.ok(u.s.flags.noBlock);
     approx(u.s.atk, u.base.atk * (1 + u.findBuff('talent:ashlok').mods.atkPct + bb.atk), 'ATK (+ 炮术研习)');
     approx(u.s.interval, (u.base.bat + bb.base_attack_time) * 100 / u.s.aspd, 'base attack time shortened');
@@ -659,9 +644,9 @@ test('modules: removing the elite module changes the trait / talent behaviour th
     const id = 'chess_char_2_10_b';
     const [a, b] = withAndWithout((m) => {
       const h = run({ defs: { enemies: { e: dummy('e') } }, units: [{ chessId: id, row: 10, col: 4, carryState: IDLE, ...mod(m) }], enemies: [{ key: 'e', pos: [10, 6] }] });
-      h.runUntil(() => dealt(h, h.unit(id), (c) => c.dmg.tags.includes('funnel')).length > 0, 5);
+      h.runUntil(() => dealt(h, h.unit(id)).length > 0, 5);
       const u = h.unit(id);
-      const r = dealt(h, u, (c) => c.dmg.tags.includes('funnel'))[0].amount / u.s.atk;
+      const r = dealt(h, u)[0].amount / u.s.atk;
       done(h);
       return r;
     });

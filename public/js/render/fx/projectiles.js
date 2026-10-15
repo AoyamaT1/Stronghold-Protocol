@@ -5,6 +5,7 @@ import { PROJ } from '../style.js';
 import { SHOT_HEIGHT, bodyZ, feetZ } from './camera.js';
 import { clamp } from './limits.js';
 import { projSpeed } from './speeds.js';
+import { pickNoteFrame } from './notes.js';
 
 const MAX_PROJ = 260;
 
@@ -57,7 +58,11 @@ export class FxProjectiles {
     if (kind === 'beam') { if (tgt && tgt !== src) this._beam(src, tgt, src.isEnemy ? 0xff7a5a : 0xffe6a8, 0.18, 0.15); return; }
     const spec = PROJ[kind];
     if (!spec || !tgt) {
-      if (kind === 'none' || !kind) this._slashAt = src.id;
+      // A 'none' from a RANGED attacker (sim ai.js `noAttackVis`: 丰川祥子's note carries her attack) is no melee slash
+      // either — a crescent at the victim would be a blade effect at range. ctx.rangedOf is the renderer's own range-class
+      // lookup; without it (an older harness) every 'none' keeps the slash, exactly as before.
+      const ranged = typeof this.ctx.rangedOf === 'function' && this.ctx.rangedOf(src.info?.defId ?? null, src.info ?? null);
+      if ((kind === 'none' || !kind) && !ranged) this._slashAt = src.id;
       return;
     }
     const pr = this._takeProj();
@@ -112,14 +117,16 @@ export class FxProjectiles {
   _dressProj(pr) {
     const spec = pr.spec, look = spec.look;
     const thin = look === 'tracer' || look === 'dart';
+    const note = look === 'note';                 // 丰川祥子's 音符 (PROJ.note / noteSkill): a glyph + halo, no streak
     const { trail, halo, core, shadow } = pr;
     trail.texture = this.tex[thin ? 'tracer' : 'streak'];
     trail.tint = thin ? spec.tint : pr.trailTint;
-    trail.visible = look !== 'boomerang';
+    trail.visible = look !== 'boomerang' && !note;
     halo.texture = this.tex.glow;
     halo.tint = pr.glow;
     halo.visible = true;
-    core.texture = this.tex[look === 'boomerang' ? 'boomerang' : thin ? 'dot' : 'orb'];
+    if (note) pr.glyph = pickNoteFrame();         // one of 八分 / 十六分 / 高音谱号, fixed for this shot
+    core.texture = this.tex[note ? pr.glyph : look === 'boomerang' ? 'boomerang' : thin ? 'dot' : 'orb'];
     core.tint = spec.tint;
     core.rotation = 0;
     core.visible = true;
@@ -176,21 +183,31 @@ export class FxProjectiles {
     const seg = Math.hypot(px - q.x, py - q.y);
     if (seg > 0.5) pr.ang = Math.atan2(py - q.y, px - q.x);
     const thin = look === 'tracer' || look === 'dart';
+    const note = look === 'note';
     const flown = k > kb ? seg * (k / (k - kb)) : 0;
     const L = Math.min(spec.len * s, flown) * (1 - fk);
     const tr = pr.trail;
-    tr.position.set(px, py);
-    tr.rotation = pr.ang;
-    tr.scale.set(Math.max(0.001, L / 128), (spec.width * s) / (thin ? 16 : 20));
-    tr.alpha = (thin ? 1 : 0.85) * (1 - fk);
+    if (!note) {
+      tr.position.set(px, py);
+      tr.rotation = pr.ang;
+      tr.scale.set(Math.max(0.001, L / 128), (spec.width * s) / (thin ? 16 : 20));
+      tr.alpha = (thin ? 1 : 0.85) * (1 - fk);
+    }
     const hs = spec.head * s;
     const halo = pr.halo;
     halo.position.set(px, py);
-    halo.scale.set((hs / 128) * (1 + 0.12 * Math.sin(pr.t * 40)));
-    halo.alpha = 0.85 * (1 - fk);
+    // a note's halo is its `halo` diameter (not the shot head) and breathes, as the content-owned ones do
+    halo.scale.set((note ? spec.halo * s : hs) / 128 * (1 + 0.12 * Math.sin(pr.t * 40)));
+    halo.alpha = (note ? (spec.haloA ?? 0.75) : 0.85) * (1 - fk);
     const core = pr.core;
     core.position.set(px, py);
-    if (thin) core.scale.set((hs * 0.5) / 32);
+    if (note) {
+      // the glyph's own width / height in tiles (× the camera's px per tile), drifting up a little as it plays
+      const bob = 0.05 * Math.sin(pr.t * 6 + (pr.x0 + pr.y0));
+      core.rotation = 0.16 * Math.sin(pr.t * 3.4 + pr.x0);
+      core.scale.set((spec.width * s) / 128 * (1 - fk * 0.4), (spec.head * s) / 128 * (1 - fk * 0.4));
+      core.position.set(px, py - bob * s);
+    } else if (thin) core.scale.set((hs * 0.5) / 32);
     else if (look === 'shell') { core.rotation = pr.ang; core.scale.set((hs * 0.85) / 64, (hs * 0.55) / 64); }   // a shell along its flight
     else core.scale.set((hs * 0.62) / 64);
     core.alpha = 1 - fk;
@@ -206,7 +223,7 @@ export class FxProjectiles {
       sh.alpha = (0.32 + 0.3 * near) * (1 - fk);
     }
     if (rich && !pr.hit && !thin) {
-      pr.emit += dt * TRAIL_HZ;
+      pr.emit += dt * (note ? TRAIL_HZ * 0.25 : TRAIL_HZ);
       for (let n = 0; pr.emit >= 1 && n < 2; n++) {
         pr.emit -= 1;
         if (!this._room()) { pr.emit = 0; break; }

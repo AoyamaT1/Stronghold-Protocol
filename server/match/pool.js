@@ -97,16 +97,22 @@ export class SharedPool {
 
   /**
    * Remaining copies of eligible chess (tier ≤ maxTier, or exactly `tier`): the pool's entries, then `extra` ([id, entry]
-   * pairs of the same shape — a player's 自选 stock) under the same filters.
+   * pairs of the same shape — a player's 自选 stock) under the same filters. `weight(id, e)` (default 1) scales an entry's
+   * draw weight away from the raw copy count — the only non-copy bias in the roll (an entry whose weight falls to 0 drops
+   * out). Used by the shop-assist mod to over-draw a chosen bond's members (server/match/player/economy.js _shopWeight);
+   * tier shares (tierShares / rollItem, the item slot) stay on raw copies, so weighting never touches item rolls.
    */
-  _eligible({ maxTier = 6, tier = null, filter = null, extra = null, ignoreCounts = false } = {}) {
+  _eligible({ maxTier = 6, tier = null, filter = null, extra = null, ignoreCounts = false, weight = null } = {}) {
     const out = [];
     const scan = (list) => {
       for (const [id, e] of list) {
         if (!ignoreCounts && e.left <= 0) continue;
         if (tier != null ? e.tier !== tier : e.tier > maxTier) continue;
         if (filter && !filter(id, e)) continue;
-        out.push([id, ignoreCounts ? 1 : e.left]);
+        const base = ignoreCounts ? 1 : e.left;
+        const w = weight ? base * weight(id, e) : base;
+        if (!(w > 0)) continue;
+        out.push([id, w]);
       }
     };
     scan(this.entries);
@@ -115,10 +121,12 @@ export class SharedPool {
   }
 
   /**
-   * Copy-weighted roll: one copy uniformly among remaining copies of eligible chess. Returns a base id or null.
+   * Copy-weighted roll: one copy uniformly among remaining copies of eligible chess (each entry's weight optionally
+   * scaled by `weight`). Returns a base id or null.
    * @param {Function} rng
    * @param {{ maxTier?: number, tier?: number|null, filter?: (id: string, e: object) => boolean,
-   *   extra?: Iterable<[string, { left: number, tier: number }]>|null }} [opts]
+   *   extra?: Iterable<[string, { left: number, tier: number }]>|null,
+   *   weight?: (id: string, e: object) => number }} [opts]
    */
   roll(rng, opts = {}) {
     const el = this._eligible(opts);

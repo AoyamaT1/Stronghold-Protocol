@@ -17,8 +17,8 @@
 //   the pair field → its first player's bonds (never its own), taps the second player's operator and its card's bond
 //   chip → the SECOND player's popup (the strip stays on the first), taps each pair player → their half + bonds, taps
 //   the lone field's player → that field and its player's bonds.
-// After the own battle (2 humans + 1 idle AI from round 3, 1× combat, the guest's enemies spawning at twice their times):
-//   the host's battle ends first, the host watches a teammate still fighting → the strip shows that teammate's bonds with the observing pill "👁 name" + 返回战场; a
+// After the own battle (2 humans + 1 idle AI from round 3, 1× combat): the host's battle ends first, the host watches a
+//   teammate still fighting → the strip shows that teammate's bonds with the observing pill "👁 name" + 返回战场; a
 //   reload keeps all three (the resent field is adopted — battle/observe.js resumedWatch); 返回战场 → the own bonds.
 // Unit counterparts: test/ui/watch-bonds.test.js (selection logic incl. 联防), test/match/watch-bonds.test.js (views),
 // test/match/observe.test.js (resumedWatch).
@@ -30,7 +30,7 @@ import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
-import { Client, ROOT, sleep, hasChrome, startRealServer, problemsOf, waitForFunctionLong } from '../e2e/client.mjs';
+import { Client, ROOT, sleep, hasChrome, startRealServer, problemsOf } from '../e2e/client.mjs';
 
 const ENABLED = process.env.SP_E2E === '1' && hasChrome() && existsSync(path.join(ROOT, 'public/assets'));
 const HOST_KIT = ['chess_char_1_10_a', 'chess_char_1_12_a']; // 古米 (坚守), 艾丝黛尔 (萨尔贡)
@@ -39,10 +39,6 @@ const GUEST_KIT = ['chess_char_1_03_a', 'chess_char_1_09_a']; // 惊蛰 (炎), �
 // the AI seats five 拉特兰 ones + 古米 (信仰搅拌机, 莫斯提马, 能天使, 空弦, 送葬人; 坚守) — different bonds on each strip
 const UNITE_HOST_KIT = ['chess_char_4_23_a', 'chess_char_4_24_a', 'chess_char_3_06_a', 'chess_char_3_13_a', 'chess_char_1_12_a', 'chess_char_2_06_a'];
 const BOT_KIT = ['chess_char_4_01_a', 'chess_char_4_02_a', 'chess_char_3_01_a', 'chess_char_3_21_a', 'chess_char_2_01_a', 'chess_char_1_10_a'];
-// "after the own battle": the same host without 菲莱 — the layout planner behind fastServer's autoPlace puts a zero-range
-// guard on a road tile first (PR #339, §27.35), where she holds the enemies and the host's battle could run 109 s of a
-// 110 s round-3 limit (measured; 53–68 s without her)
-const AFTER_HOST_KIT = UNITE_HOST_KIT.filter((id) => id !== 'chess_char_3_06_a');
 
 /** The strip as shown: whose (data-owner), the bonds (data-bond) with their counts, the tag's text. */
 const stripOf = (c) => c.page.evaluate(() => {
@@ -105,10 +101,9 @@ async function chipPopup(c, ownerId) {
     await c.page.mouse.click(pt.x, pt.y);
     const card = await c.page.waitForSelector('.dpanel button.dbond[data-bond]', { timeout: 2500 }).then(() => true).catch(() => false);
     if (!card) continue;
-    // a bond the mode switches off (标准: 本局禁用, since 0.1.1) shows no count on its chip: take a live one when there is one
     const chip = await c.page.evaluate(() => {
-      const el = document.querySelector('.dpanel button.dbond[data-bond]:not(.is-off)') || document.querySelector('.dpanel button.dbond[data-bond]');
-      return { bondId: el.getAttribute('data-bond'), count: el.querySelector('.dbond__count')?.firstChild?.textContent ?? null, off: el.classList.contains('is-off') };
+      const el = document.querySelector('.dpanel button.dbond[data-bond]');
+      return { bondId: el.getAttribute('data-bond'), count: el.querySelector('.dbond__count')?.firstChild?.textContent ?? null };
     });
     await c.page.click(`.dpanel button.dbond[data-bond="${chip.bondId}"]`);
     await c.page.waitForSelector('.bpop', { timeout: 3000 });
@@ -117,7 +112,7 @@ async function chipPopup(c, ownerId) {
       return { owner: el.getAttribute('data-owner'), label: el.getAttribute('aria-label'), tag: el.querySelector('.bpop__owner')?.textContent || '',
         count: el.querySelector('.bpop__facts b.num')?.textContent ?? null, on: el.querySelectorAll('.bpop__member.is-on').length };
     });
-    return { ...pop, bondId: chip.bondId, chipCount: chip.count, off: chip.off, defId: pt.defId };
+    return { ...pop, bondId: chip.bondId, chipCount: chip.count, defId: pt.defId };
   }
   return null;
 }
@@ -339,7 +334,7 @@ describe('DESIGN §20.15 — the bond strip shows the watched teammate\'s bonds 
       assert.equal(chip.owner, '阿米娅', `全景: the guest's unit chip opens the guest's popup (${JSON.stringify(chip)})`);
       assert.match(chip.tag, /阿米娅.*的盟约/);
       assert.equal(chip.count, guestNow.counts[chip.bondId] ?? '0', `the guest's member count (${JSON.stringify({ chip, guestNow })})`);
-      if (!chip.off) assert.equal(chip.chipCount, chip.count, 'the chip and its popup agree');
+      assert.equal(chip.chipCount, chip.count, 'the chip and its popup agree');
       if (Number(chip.count) > 0) assert.ok(chip.on >= 1, `the guest's operators in play are listed as members (${JSON.stringify(chip)})`);
       st = await stripOf(host);
       assert.equal(st.owner, null, 'the strip stays the host\'s on 全景');
@@ -366,7 +361,7 @@ describe('DESIGN §20.15 — the bond strip shows the watched teammate\'s bonds 
       assert.equal(chip.owner, null, `the partner's half: an own unit's chip opens the host's own popup (${JSON.stringify(chip)})`);
       assert.equal(chip.tag, '');
       assert.equal(chip.count, hostNow.counts[chip.bondId] ?? '0', `the host's member count (${JSON.stringify({ chip, hostNow })})`);
-      if (!chip.off) assert.equal(chip.chipCount, chip.count, 'the chip and its popup agree');
+      assert.equal(chip.chipCount, chip.count, 'the chip and its popup agree');
       st = await stripOf(host);
       assert.equal(st.owner, '阿米娅', 'the strip stays the guest\'s on that half');
       await closeCard(host);
@@ -474,12 +469,10 @@ describe('DESIGN §20.15 — the bond strip shows the watched teammate\'s bonds 
   });
 
   test('after the own battle: the watched teammate\'s bonds, kept through a reload with the observing pill + 返回战场 (desktop)', { timeout: 12 * 60 * 1000 }, async () => {
-    // the host's five 萨尔贡 operators end their battle first; the guest (no board) leaks, and its enemies spawn at twice
-    // their times (fastServer SP_SLOW_SPAWNS), so its battle runs to the round's time limit — a window of 40 s and more
-    // for watching it and a reload (at the scheduled times a leaker's walk outlasted the host's battle by 5–11 s in 0.2.1
-    // and 0.2.2 alike, and the 0.2.2 full pass lost 返回战场 to 联防); the host watches the guest, reloads, then goes back
+    // the host's six 萨尔贡 operators end their battle early; the guest (no board) and the idle AI leak for the enemies'
+    // whole walk (combat at 1×: a window for the reload) — the host watches one of them, reloads, then goes back
     const srv = await startRealServer({ fast: { timerScale: 1, combatSpeed: 1, startRound: 3, idleBots: true, autoPlace: true,
-      kits: [AFTER_HOST_KIT, []], slowSpawns: '1:2' } });
+      kits: [UNITE_HOST_KIT, []] } });
     const P = (await import('puppeteer-core')).default;
     let host = null;
     let guest = null;
@@ -491,9 +484,8 @@ describe('DESIGN §20.15 — the bond strip shows the watched teammate\'s bonds 
         await sleep(1500);
         for (const c of [host, guest]) if (!(await c.st()).ready) await c.click('.readybtn');
         await host.waitFor((s) => s.phase === 'COMBAT', 'combat', 60000);
-        // the own battle over while a teammate's still runs (at 1× it may last longer than the browser's 90 s protocol
-        // timeout, which cut a plain page.waitForFunction off with a bare "Waiting failed")
-        const target = await waitForFunctionLong(host.page, () => {
+        // the own battle over while a teammate's still runs
+        const target = await host.page.waitForFunction(() => {
           const s = globalThis.__SP__.store.get();
           const pub = s.match.public;
           if (pub?.phase !== 'COMBAT') return { gone: true };
@@ -545,13 +537,8 @@ describe('DESIGN §20.15 — the bond strip shows the watched teammate\'s bonds 
         for (const id of await pubBonds()) assert.ok(st.bonds.includes(id), `after the reload: ${name}'s ${id} on the strip (${JSON.stringify(st.bonds)})`);
         await sleep(1500); // the phase banner of the fresh screen
         await host.shot('reloaded');
-        // 返回战场 → the own bonds, untagged. The watched battle may end meanwhile — 联防 or the settlement takes the
-        // screen and the pill with it (the 0.2.2 full pass) — then the next round tries again
-        if (!(await host.click('.chud__observe .chud__back', '返回战场', { optional: true, timeout: 8000 }))) {
-          const phase = (await host.st()).phase;
-          if (phase !== 'COMBAT') { console.log(`round ${round}: the battles ended before 返回战场 (${phase}), next round`); continue; }
-          throw new Error('host: nothing clickable for .chud__observe .chud__back "返回战场" while the battle runs');
-        }
+        // 返回战场 → the own bonds, untagged
+        await host.click('.chud__observe .chud__back', '返回战场');
         await host.page.waitForFunction(() => !document.querySelector('.gm__bonds .bstrip')?.getAttribute('data-owner'), { timeout: 8000 });
         st = await stripOf(host);
         assert.deepEqual([st.owner, st.observe], [null, null], 'back: own bonds, no observing pill');
@@ -603,7 +590,7 @@ describe('DESIGN §20.15 — the bond strip shows the watched teammate\'s bonds 
       const secondNow = await bondsOf(guest, second);
       assert.equal(chip.owner, second, `全景: ${second}'s unit chip opens ${second}'s popup (${JSON.stringify(chip)})`);
       assert.equal(chip.count, secondNow.counts[chip.bondId] ?? '0', `${second}'s member count (${JSON.stringify({ chip, secondNow })})`);
-      if (!chip.off) assert.equal(chip.chipCount, chip.count, 'the chip and its popup agree');
+      assert.equal(chip.chipCount, chip.count, 'the chip and its popup agree');
       if (Number(chip.count) > 0) assert.ok(chip.on >= 1, `${second}'s operators in play are listed as members (${JSON.stringify(chip)})`);
       assert.equal((await stripOf(guest)).owner, first, 'the strip stays on the first player');
       await guest.shot('chip-second');

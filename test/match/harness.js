@@ -3,12 +3,11 @@
 //   const h = makeMatch({ mode: 'coop', difficulty: 'NORMAL', humans: 1, bots: 1, seed: 7, fake: true });
 //   h.start(); h.runToPhase('PREP'); const ps = h.ps('p_0'); …; h.invariants();
 //
-// Options: mode, difficulty, humans (count) | seats (explicit), bots, spectators (spectator seat ids, opts.spectators),
-// seed, matchNo (the room's match number: part of the battleId prefix), data (default: real data/*.json),
+// Options: mode, difficulty, humans (count) | seats (explicit), bots, seed, matchNo (the room's match number: part of
+// the battleId prefix), data (default: real data/*.json),
 // fake (true → test/match/fakeBattle.js as BattleClass), script (FakeBattle.script), registry, instant (virtual
 // scheduler runs battles synchronously; default true), timerScale, battleContent, botRehearsal (default 0),
-// botSliceMs (bot rehearsal slice budget; default: unbounded in virtual time), aiPicksLast (the room option
-// AI 队友最后选择: the drafts order every human seat before every AI seat).
+// botSliceMs (bot rehearsal slice budget; default: unbounded in virtual time).
 // Combat mode: clientCombat (default false here: the legacy server-run mode most suites were written for; production
 // defaults to client-side combat, DESIGN §14). With clientCombat: true every human gets a scripted browser
 // (test/match/simClient.js SimClient: h.clients) unless clients: false; pace 'instant' | 'paced', perPlayer
@@ -21,7 +20,7 @@ import assert from 'node:assert/strict';
 import { Match } from '../../server/match/Match.js';
 import { VirtualScheduler } from '../../server/match/scheduler.js';
 import { getData } from '../../server/data.js';
-import { FIELD, canPlace, placeClass, positionClass, tileKey } from '../../server/match/board.js';
+import { FIELD, canPlace, positionClass, tileKey } from '../../server/match/board.js';
 import { FakeBattle } from './fakeBattle.js';
 import { GEO } from '../../shared/constants.js';
 import { collectViolations } from '../../server/match/invariants.js';
@@ -56,7 +55,7 @@ export function makeMatch(o = {}) {
     if (o.script) FakeBattle.script = o.script;
   }
   h.m = new Match({
-    roomCode: 'TEST', mode, difficulty, seats, spectators: o.spectators, seed: o.seed ?? 1, matchNo: o.matchNo, data: o.data ?? DATA, log,
+    roomCode: 'TEST', mode, difficulty, seats, seed: o.seed ?? 1, matchNo: o.matchNo, data: o.data ?? DATA, log,
     send: (id, msg) => {
       for (const fn of h.onSend) fn(id, msg);
       if (msg.t === 'b.snap' || msg.t === 'b.ev') { h.frames++; if (!captureFrames) return true; }
@@ -78,7 +77,6 @@ export function makeMatch(o = {}) {
     clientCombat: o.clientCombat ?? false,
     verify: o.verify ?? 'off',
     headlessSliceMs: o.headlessSliceMs,
-    aiPicksLast: o.aiPicksLast,
   });
   const m = h.m;
   if (m.clientCombat && o.clients !== false) {
@@ -124,7 +122,6 @@ export function makeMatch(o = {}) {
           if (idx != null) m.handle(ps.playerId, { t: 'g.choice', idx });
         }
         if (ready && m.phase === 'PREP' && ps.alive && !ps.ready) {
-          if (ps.personalChoice) m.handle(ps.playerId, { t: 'g.choice', idx: 0, choiceId: ps.personalChoice.id });
           if (!ps.tempEmpty) ps.resolveTemp();
           m.handle(ps.playerId, { t: 'g.ready', ready: true });
         }
@@ -173,7 +170,6 @@ function legacyInvariants(m) {
       assert.ok(ps.hand.every((x) => x == null) && ps.temp.every((x) => x == null), 'eliminated player keeps nothing');
     }
     const chessUids = new Set();
-    const diyHeld = new Map();
     const all = [...ps.board.values(), ...ps.hand.filter(Boolean), ...ps.temp.filter(Boolean)];
     for (const p of all) if (p.kind === 'chess') chessUids.add(p.uid);
     let deployed = 0;
@@ -181,11 +177,9 @@ function legacyInvariants(m) {
     for (const [k, p] of ps.board) {
       const [r, c] = k.split(',').map(Number);
       assert.ok(r >= FIELD.r0 && r <= FIELD.r1 && c >= FIELD.c0 && c <= FIELD.c1, `piece outside the board ${k}`);
-      const pgd = ps.gd || m.gd; // the player's data view (0.2.0 自选: its summons are data/backups.json tokens)
-      const rec = p.kind === 'token' ? pgd.token(p.id) : pgd.chess(p.id);
+      const rec = p.kind === 'token' ? m.gd.token(p.id) : m.gd.chess(p.id);
       assert.ok(rec, `unknown board piece ${p.id}`);
-      const cls = p.kind === 'chess' ? placeClass(ps, rec) : positionClass(rec);
-      assert.ok(canPlace(dmap, cls, r, c), `illegal tile ${p.id} @ ${k}`);
+      assert.ok(canPlace(dmap, positionClass(rec), r, c), `illegal tile ${p.id} @ ${k}`);
       assert.notEqual(p.kind, 'item', 'items never stand on the board');
       if (p.kind === 'chess') deployed++;
       if (p.kind === 'token') assert.ok(chessUids.has(p.ownerUid), `orphan token ${p.uid}`);
@@ -200,9 +194,7 @@ function legacyInvariants(m) {
         for (const it of p.items) { note(it); assert.equal(it.kind, 'item'); assert.ok(m.gd.item(it.id), `unknown item ${it.id}`); }
         assert.ok(Number.isInteger(p.poolCopies) && p.poolCopies >= 0);
         const base = m.gd.baseIdOf(p.id);
-        // a 自选 piece's copies are its player's own stock (0.2.0, server/match/player/diy.js)
-        const tally = ps.diyStock && ps.diyStock.has(base) ? diyHeld : held;
-        tally.set(base, (tally.get(base) || 0) + p.poolCopies);
+        held.set(base, (held.get(base) || 0) + p.poolCopies);
       } else if (p.kind === 'item') {
         assert.ok(m.gd.item(p.id), `unknown item ${p.id}`);
       } else if (p.kind === 'token') {
@@ -217,13 +209,9 @@ function legacyInvariants(m) {
       const need = m.gd.mergeCount(b);
       if (need > 1 && m.gd.goldenIdOf(b)) assert.ok(n < need, `${ps.playerId} owns ${n} copies of ${b} (merge ${need})`);
     }
-    for (const [base, e] of ps.diyStock ? ps.diyStock.entries : []) {
-      assert.equal(e.left + (diyHeld.get(base) || 0), e.cap, `${ps.playerId} 自选 stock ${base}: left ${e.left} + held ${diyHeld.get(base) || 0} != cap ${e.cap}`);
-    }
   }
   for (const [base, e] of pool.entries) {
-    assert.ok(Number.isInteger(e.left) && e.left <= e.cap, `pool ${base} balance ${e.left} cap ${e.cap}`);
-    assert.equal(pool.left(base), Math.max(0, e.left), 'overdrawn ownership never becomes a negative shop supply');
+    assert.ok(e.left >= 0 && e.left <= e.cap, `pool ${base} left ${e.left} cap ${e.cap}`);
     assert.equal(e.left + (held.get(base) || 0), e.cap, `pool accounting ${base}: left ${e.left} + held ${held.get(base) || 0} != cap ${e.cap}`);
   }
   for (const [base, n] of held) if (!pool.has(base)) assert.equal(n, 0, `non-pool chess ${base} holds copies`);
@@ -267,7 +255,7 @@ export function chessOfTier(tier, filter = () => true) {
 
 /** First legal board tile for a chess (reading order). */
 export function legalTileFor(m, ps, chessId, skip = new Set()) {
-  const pos = placeClass(ps, m.gd.chess(chessId));
+  const pos = positionClass(m.gd.chess(chessId));
   const map = ps.deployMap();
   for (let r = FIELD.r1; r >= FIELD.r0; r--) for (let c = FIELD.c0; c <= FIELD.c1; c++) {
     if (skip.has(tileKey(r, c)) || ps.board.has(tileKey(r, c))) continue;

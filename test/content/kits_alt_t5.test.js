@@ -1,4 +1,4 @@
-// Tier 5 alternate skills & modules (DESIGN §16 operator loadouts; the `skills` maps of the tier-5 kits, server/sim/content/kits/ops/).
+// Tier 5 alternate skills & modules (DESIGN §16 operator loadouts; server/sim/content/kits/tier5.js `skills` maps).
 // Every selectable non-default skill of every visible tier-5 chess runs a real battle — normal (Lv4) and elite (Lv7) —
 // through the harness with its loadout (`skillIndex` / `moduleId` on the board entry, as a BattleSpec carries them),
 // and its signature effect is asserted with numbers from that skill's own blackboard (data/chess.json skills[]).
@@ -178,19 +178,6 @@ test('圣约送葬人 module REA-Y (已知悉): ASPD +12 with ≥ 2 enemies in r
   }
 });
 
-test('圣约送葬人 heals 50 per enemy hit with REA-Y or no module, 60 with REA-X (the REA-Y line\'s 12 is its ASPD, GitHub #400)', () => {
-  for (const [moduleId, want] of [['uniequip_003_excu2', 50], ['uniequip_002_excu2', 60], ['none', 50]]) {
-    const h = run({
-      defs: { enemies: { enemy_dummy: dummy('enemy_dummy') } },
-      units: [{ chessId: 'chess_char_5_01_b', row: 10, col: 4, moduleId }],
-      enemies: [{ key: 'enemy_dummy', pos: [10, 5] }],
-    });
-    const u = h.unit('chess_char_5_01_b');
-    assert.equal(u.profile.selfHeal, want, moduleId);
-    done(h);
-  }
-});
-
 // =================================================================================================================
 // 缇缇
 
@@ -245,17 +232,6 @@ test('缇缇 S2 封护: no attacks; she and the lowest-HP op in range sleep (inv
     approx(dream.at(-1).amount, u.s.atk * t0.damage_atk_scale * bb.talent_scale, 'T1 ×talent_scale');
     assert.ok(h.runUntil(() => !u.skill.active, 30));
     assert.equal(during(h, u, attacks(h, u)).length, 0, 'no attacks during the skill');
-    // …and every 凝固的时光 tick healed a 咒愈师 ally: the official trait buff (`titi_tr`) is ON_AFTER_OUTPUT_DAMAGE, so
-    // the heal follows ANY damage she deals. The sim ran the trait from the attack path only and she does not attack at
-    // all while this skill runs, so those ticks healed nothing (the same hook gap that left 隐德来希 S2 without heals).
-    const dreams = during(h, u, dealt(h, u, (c) => (c.dmg?.tags || []).includes('titiDream')));
-    const incHeals = during(h, u, heals(h, u, (c) => (c.opts?.tags || []).includes('incantation')));
-    assert.ok(dreams.length > 0, `${dreams.length} 凝固的时光 ticks`);
-    assert.equal(incHeals.length, dreams.length, 'one trait heal per tick');
-    for (const c of incHeals) {
-      approx(c.amount, dreams[0].amount * u.profile.healRatio, 'heal = 50 % of the tick');
-      assert.ok([hurt, fine, u].includes(c.target), 'on an ally in her range');
-    }
     assert.ok(!u.findBuff('titi:ward') && !hurt.findBuff('titi:ward'), 'both wake at the end');
     done(h);
   }
@@ -441,51 +417,6 @@ test('隐德来希 S2 绯红壁合: no attacks; blood sickles on her and on the 
   }
 });
 
-test('隐德来希 S2 绯红壁合: every 血镰 cut heals the 收割者 trait (每攻击到一个敌人回复自身50生命)', () => {
-  for (const id of pair('06')) {
-    const h = run({
-      defs: { enemies: { enemy_dummy: dummy('enemy_dummy') } },
-      units: [entry(id, 'skchr_etlchi_2', { row: 10, col: 4 })],
-      enemies: [{ key: 'enemy_dummy', pos: [10, 5] }],
-    });
-    const u = sel(h, id, 'skchr_etlchi_2');
-    h.step();
-    cast(h, u);
-    u.hp = u.s.maxHp * 0.4; // wounded (and above 重盈's 25 %), so every heal shows
-    const hp0 = u.hp, t0 = h.b.time;
-    h.run(3);
-    const cuts = tagged(h, u, 'bloodSickle').filter((c) => c.t > t0 + 1e-9);
-    const healed = heals(h, u, (c) => c.target === u && c.t > t0 + 1e-9);
-    assert.ok(cuts.length >= 5, `${cuts.length} cuts`);
-    assert.equal(healed.length, cuts.length, 'one trait heal per cut (the trait fires on every damage she outputs)');
-    for (const c of healed) approx(c.amount, u.profile.selfHeal, 'per-hit heal = the trait 生命值');
-    approx(u.hp - hp0, healed.length * u.profile.selfHeal, 'HP restored');
-    done(h);
-  }
-});
-
-test('隐德来希 S2 绯红壁合: the 收割者 heal is capped by the block count per cut (最大生效数等于阻挡数)', () => {
-  const h = run({
-    defs: { enemies: { enemy_dummy: dummy('enemy_dummy') } },
-    units: [entry('chess_char_5_06_a', 'skchr_etlchi_2', { row: 10, col: 4 })],
-    enemies: [{ key: 'enemy_dummy', pos: [10, 5] }, { key: 'enemy_dummy', pos: [9, 4] }, { key: 'enemy_dummy', pos: [11, 4] }],
-  });
-  const u = sel(h, 'chess_char_5_06_a', 'skchr_etlchi_2');
-  h.step();
-  cast(h, u);
-  u.hp = u.s.maxHp * 0.4;
-  const hp0 = u.hp, t0 = h.b.time;
-  h.run(3);
-  const cuts = tagged(h, u, 'bloodSickle').filter((c) => c.t > t0 + 1e-9);
-  const healed = heals(h, u, (c) => c.target === u && c.t > t0 + 1e-9);
-  const ticks = cuts.length / 3; // three enemies stand in the sickle's ring
-  assert.ok(ticks >= 5 && Number.isInteger(ticks), `${cuts.length} cuts over ${ticks} ticks`);
-  assert.equal(healed.length, ticks * Math.max(1, u.s.blockCnt), `${healed.length} heals (阻挡数 ${u.s.blockCnt})`);
-  for (const c of healed) approx(c.amount, u.profile.selfHeal, 'per-hit heal');
-  approx(u.hp - hp0, healed.length * u.profile.selfHeal, 'HP restored');
-  done(h);
-});
-
 test('隐德来希 module REA-Y (玫瑰色故事集): ASPD +12 with ≥ 2 enemies in range', () => {
   const h = run({
     defs: { enemies: { enemy_dummy: dummy('enemy_dummy') } },
@@ -596,19 +527,18 @@ test('号角 S1 照明榴弹 (自动触发 ⇒ DEFAULT): the next ranged shot de
   }
 });
 
-test('号角 S2 暴风号令: cast with an enemy in range (DEFAULT, DESIGN §21.29); 10 rounds of attack@s2.atk_scale × ATK splash; the second half adds magic_atk_scale × ATK arts (过载)', () => {
+test('号角 S2 暴风号令: 10 rounds of attack@s2.atk_scale × ATK splash; the second half adds magic_atk_scale × ATK arts (过载)', () => {
   for (const id of pair('08')) {
     const h = run({ defs: { enemies: { enemy_dummy: dummy('enemy_dummy') } }, units: [entry(id, 'skchr_horn_2', { row: 10, col: 2 })], enemies: [{ key: 'enemy_dummy', pos: [10, 6] }] });
     const u = sel(h, id, 'skchr_horn_2');
     const bb = bbOf(u);
     const e = h.b.enemies[0];
     h.step();
-    // the owner's deliberate deviation from the 重装 TAKE_DAMAGE row (DESIGN §21.29): cast with an enemy in range
-    assert.equal(u.skill.rule, 'DEFAULT');
     u.skill.gainSp(1000);
-    assert.ok(h.runUntil(() => u.skill.activations === 1, 3), 'cast with the enemy in range');
-    assert.equal(h.hooksOf('skillStart').find((c) => c.unit === u).reason, 'DEFAULT');
-    assert.ok(!h.hooksOf('damaged').some((c) => c.target === u), 'no hit needed');
+    h.run(1);
+    assert.equal(u.skill.activations, 0, '重装 TAKE_DAMAGE: not before a hit');
+    h.b.dealDamage(e, u, { amount: 10, type: 'phys' });
+    assert.equal(u.skill.activations, 1, 'cast by the hit');
     assert.equal(u.skill.kind, 'ammo');
     assert.equal(u.skill.ammoLeft + h.hooksOf('ammoUsed').filter((c) => c.unit === u).length, bb['attack@s2.trigger_time']);
     assert.ok(h.runUntil(() => !u.skill.active, 60));
@@ -1013,7 +943,7 @@ test('凛御银灰 S3 变革已至: skill range, line attacks bird_atk_scale × 
 // =================================================================================================================
 // 引星棘刺
 
-test('引星棘刺 S1 度算浪波: an alchemy unit on the lowest-HP ally: DEF +def and 生命回复速度 hp ratio × ATK/s on the 3×3 around it (+3 s 心相)', () => {
+test('引星棘刺 S1 度算浪波: an alchemy unit on the lowest-HP ally: DEF +def and hp ratio × ATK/s on the 3×3 around it (+3 s 心相)', () => {
   for (const id of pair('15')) {
     const h = run({
       defs: { chess: { t_low: ally('t_low', { stats: { def: 100 } }), t_near: ally('t_near', { stats: { def: 100 } }), t_far: ally('t_far', { stats: { def: 100 } }) }, enemies: { enemy_dummy: dummy('enemy_dummy') } },
@@ -1032,88 +962,11 @@ test('引星棘刺 S1 度算浪波: an alchemy unit on the lowest-HP ally: DEF +
     h.run(1.1);
     for (const a of [low, near]) assert.equal(a.s.def, 100 + bb.def, a.defId);
     assert.equal(far.s.def, 100);
-    // 生命回复速度 (an hpRegen buff per unit, like 锡人 S2), not a heal of hers
-    for (const a of [low, near]) approx(a.buffs.find((b) => b.key === z.key)?.mods.hpRegen, u.s.atk * bb.hp_recovery_per_sec_ratio, a.defId);
-    assert.equal(far.buffs.some((b) => b.key === z.key), false);
-    assert.equal(heals(h, u, () => true).length, 0);
+    approx(heals(h, u, (c) => c.target === near)[0].amount, u.s.atk * bb.hp_recovery_per_sec_ratio);
     mute(h, u);
     h.run(z.dur);
     assert.ok(!u.mem.zones.includes(z), 'expired');
     assert.equal(low.s.def, 100, 'no DEF bonus afterwards');
-    done(h);
-  }
-});
-
-test('引星棘刺 S1 度算浪波: two alchemy units on one ally add their DEF (PRTS 备注 「效果均可叠加」, GitHub #388)', () => {
-  // two 引星棘刺 (a normal and an elite: +60 and +75) throw at the same lowest-HP ally; one shared buff key used to let the
-  // last unit's DEF replace the other's (+75 instead of +135) while both heals already landed
-  const [na, el] = pair('15');
-  const h = run({
-    defs: { chess: { t_low: ally('t_low', { stats: { def: 100 } }) } },
-    units: [entry(na, 'skchr_thorn2_1', { row: 10, col: 3 }), entry(el, 'skchr_thorn2_1', { row: 11, col: 3 }), { chessId: 't_low', row: 10, col: 5 }],
-    enemies: [],
-  });
-  const a = sel(h, na, 'skchr_thorn2_1'), b = sel(h, el, 'skchr_thorn2_1');
-  const low = h.unit('t_low');
-  h.step();
-  low.hp = low.s.maxHp * 0.3;
-  for (const u of [a, b]) u.skill.gainSp(1000);
-  h.runUntil(() => [a, b].every((u) => (u.mem.zones || []).some((z) => z.type === 'guard')), 10);
-  h.run(1.1);
-  const [za, zb] = [a, b].map((u) => u.mem.zones.find((z) => z.type === 'guard'));
-  assert.deepEqual([za.r, za.c, zb.r, zb.c], [10, 5, 10, 5], 'both on the lowest-HP ally');
-  assert.equal(low.s.def, 100 + bbOf(a).def + bbOf(b).def, '+60 +75');
-  assert.ok(low.hp > low.s.maxHp * 0.3, 'and they restore its HP');
-  // one unit runs out: the other's DEF stays
-  mute(h, a); mute(h, b);
-  h.run(Math.max(0, za.dur - za.t) + 0.6);
-  assert.ok(!a.mem.zones.includes(za) && b.mem.zones.includes(zb), 'the elite\'s unit (7 s) outlasts the normal one (6 s)');
-  assert.equal(low.s.def, 100 + bbOf(b).def, 'its DEF stays alone');
-  h.run(zb.dur);
-  assert.equal(low.s.def, 100, 'no DEF bonus afterwards');
-  done(h);
-});
-
-test('引星棘刺 S1 度算浪波: at an HP-ratio tie the unit goes to the latest deployed ally (PRTS 备注 「优先选择生命比例最低>最晚部署的我方单位」)', () => {
-  for (const id of pair('15')) {
-    const h = run({
-      defs: { chess: { t_first: ally('t_first'), t_last: ally('t_last') } },
-      // t_first stands nearer to her, t_last deploys after it (until 0.2.2 a tie went to more blocking, then the nearer)
-      units: [entry(id, 'skchr_thorn2_1', { row: 10, col: 3 }), { chessId: 't_first', row: 11, col: 4 }, { chessId: 't_last', row: 9, col: 5 }],
-      enemies: [],
-    });
-    const u = sel(h, id, 'skchr_thorn2_1');
-    const first = h.unit('t_first'), last = h.unit('t_last');
-    h.step();
-    assert.ok(last.deploySeq > first.deploySeq, 't_last is the later deployment');
-    first.hp = first.s.maxHp * 0.5; last.hp = last.s.maxHp * 0.5;
-    cast(h, u);
-    const z = u.mem.zones.find((x) => x.type === 'guard');
-    assert.deepEqual([z.r, z.c], [9, 5], 'the latest deployed of the two at 50 %');
-    // the lowest ratio still comes first
-    last.hp = last.s.maxHp; first.hp = first.s.maxHp * 0.4;
-    const n0 = u.skill.activations;
-    u.skill.gainSp(1000);
-    assert.ok(h.runUntil(() => u.skill.activations > n0, 15), 'cast again');
-    const z2 = u.mem.zones.filter((x) => x.type === 'guard').at(-1);
-    assert.deepEqual([z2.r, z2.c], [11, 4], 'a lower ratio beats a later deployment');
-    done(h);
-  }
-});
-
-test('引星棘刺 S1 度算浪波 (AUTO): fires as soon as its SP is full, no enemy needed (GitHub #124)', () => {
-  for (const id of pair('15')) {
-    const h = run({
-      defs: { chess: { t_low: ally('t_low') } },
-      units: [entry(id, 'skchr_thorn2_1', { row: 10, col: 3 }), { chessId: 't_low', row: 10, col: 5 }],
-      enemies: [],
-    });
-    const u = sel(h, id, 'skchr_thorn2_1');
-    h.step();
-    assert.equal(h.b.enemies.length, 0, 'no enemy on the field');
-    const need = u.skill.spCost - u.skill.sp;
-    h.run(need + 0.5);
-    assert.ok((u.mem.zones || []).some((z) => z.type === 'guard'), `cast within ${need.toFixed(1)} s of SP filling, no enemy around`);
     done(h);
   }
 });

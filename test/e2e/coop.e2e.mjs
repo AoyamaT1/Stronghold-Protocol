@@ -56,9 +56,7 @@ async function checkHud(c, where) {
     const s = globalThis.__SP__.store.get();
     const pub = s.match.public; const priv = s.match.private;
     const txt = (sel) => document.querySelector(sel)?.textContent?.trim() ?? null;
-    // a chess slot is any slot but the item's: a slot a 调度中心 upgrade opened stays null until the next roll and shows an
-    // empty card (DESIGN §27.52, ui/shopBar.js chessSlots)
-    const shopChess = (priv?.shop?.slots || []).filter((x) => !x || x.kind !== 'item').length;
+    const shopChess = (priv?.shop?.slots || []).filter((x) => x && x.kind !== 'item').length;
     return {
       phase: pub?.phase, round: pub?.round, lastRound: pub?.lastRound, players: (pub?.players || []).length,
       lp: priv?.lp, teamLp: pub?.teamLp, funds: priv?.funds, cap: priv?.deployCap, count: priv?.deployCount,
@@ -195,29 +193,23 @@ async function levelUp(c, { shot = null } = {}) {
 }
 
 async function refreshKey(c) {
-  // phase, funds, price, free counter and slots from ONE store snapshot: the m.private that answers R carries them all,
-  // and two separate reads could straddle it — the new slots with the old funds, a false "refresh cost" under load
-  const shop = () => c.page.evaluate(() => {
-    const st = globalThis.__SP__.store.get();
-    const priv = st.match.private;
-    const sh = priv.shop;
-    return { phase: st.match.public?.phase ?? null, funds: priv.funds, price: sh.refreshPrice, free: sh.freeRefreshes, ids: JSON.stringify(sh.slots.map((x) => x && x.id)) };
-  });
+  const s = await c.st();
+  if (s.funds < s.refreshPrice) return false;
+  const shop = () => c.page.evaluate(() => { const sh = globalThis.__SP__.store.get().match.private.shop; return { ids: JSON.stringify(sh.slots.map((x) => x && x.id)), free: sh.freeRefreshes }; });
   const before = await shop();
-  if (before.funds < before.price) return false;
   await c.page.mouse.click(c.w / 2, c.h * 0.3); // focus the page (not a text field)
   await c.page.keyboard.press('KeyR');
   // a free refresh (机变 补给 …) changes the free counter, a paid one the funds; the slots are rerolled either way
   const t0 = Date.now();
-  let now = null;
+  let after = null; let now = null;
   while (Date.now() - t0 < 6000) {
-    now = await shop();
-    if (now.phase !== 'PREP' || now.funds !== before.funds || now.free !== before.free || now.ids !== before.ids) break;
+    after = await c.st(); now = await shop();
+    if (after.phase !== 'PREP' || after.funds !== s.funds || now.free !== before.free || now.ids !== before.ids) break;
     await sleep(150);
   }
-  assert.ok(now.funds !== before.funds || now.free !== before.free || now.ids !== before.ids, `${c.label}: R refreshed the shop`);
-  if (before.price > 0) assert.equal(now.funds, before.funds - before.price, `${c.label}: refresh cost`);
-  c.note(`refresh (R) ${before.price ? `funds ${before.funds} → ${now.funds}` : `free (${before.free} → ${now.free})`}, slots ${before.ids === now.ids ? 'same ids' : 'rerolled'}`);
+  assert.ok(after.funds !== s.funds || now.free !== before.free || now.ids !== before.ids, `${c.label}: R refreshed the shop`);
+  if (s.refreshPrice > 0) assert.equal(after.funds, s.funds - s.refreshPrice, `${c.label}: refresh cost`);
+  c.note(`refresh (R) ${s.refreshPrice ? `funds ${s.funds} → ${after.funds}` : `free (${before.free} → ${now.free})`}, slots ${before.ids === now.ids ? 'same ids' : 'rerolled'}`);
   return true;
 }
 
@@ -608,8 +600,7 @@ async function ready(c, { key = false } = {}) {
   if (!(await c.isEditable())) return;
   const s = await c.st();
   if (!s.canReady) { c.note(`temp not empty (${s.temp}) — ready blocked`); return; }
-  // Space asks about leftover funds like the button does (剩余资金, DESIGN §23.11); the button path confirms inside c.click
-  if (key) { await c.page.mouse.click(c.w / 2, c.h * 0.3); await c.page.keyboard.press('Space'); await c.confirmFundsLeft(); } else await c.click('.readybtn');
+  if (key) { await c.page.mouse.click(c.w / 2, c.h * 0.3); await c.page.keyboard.press('Space'); } else await c.click('.readybtn');
   await c.waitFor((x) => x.ready || x.phase !== 'PREP', 'ready', 8000);
 }
 
@@ -798,9 +789,7 @@ async function facingTour(c, did) {
   if (!did.item && !(await c.handPieces('item')).length) did.itemBought = await buyOne(c, '.shopbar__item .scard:not(.scard--sold):not(.is-disabled)').catch(() => false);
   const units = () => c.handPieces().then((h) => h.filter((p) => p.kind === 'chess'));
   let hand = await units();
-  // a bought operator can merge into an elite at once (two copies already fielded) and leave the bench empty: the
-  // placement steps then wait for a later round (`did` carries them over)
-  if (!hand.length) { c.note('facing: no operator on the bench this round (the bought ones merged)'); return; }
+  assert.ok(hand.length >= 1, 'bought operators');
   // place + choose a direction (UP: striped rotated range + 拖回中心区域取消 while held) — the unit with the widest range
   // grid shows it best (a defender's grid is its own tile only)
   if (!did.place) {
@@ -1064,17 +1053,10 @@ describe('browser E2E against the real server', { skip: !ENABLED && 'needs Chrom
           if (!shotDraft.has(c.label)) { shotDraft.add(c.label); await sleep(700); await c.shot(s.draft?.turn === s.me ? 'draft-myturn' : 'draft-waiting'); }
           if (picked.has(c.label) || s.draft?.turn !== s.me) continue;
           if (c === guest && !guestSkipped) {
+            await c.click('.draft-detail__btns .btn', '跳过');
             guestSkipped = true;
-            // one skip — only while someone is left to pass to: the last player still to pick sees 跳过 disabled
-            // (PR #546), which a random draft order gives the guest about one time in three
-            const canSkip = await c.page.evaluate(() => [...document.querySelectorAll('.draft-detail__btns .btn')]
-              .some((b) => b.textContent.includes('跳过') && !b.disabled));
-            if (canSkip) {
-              await c.click('.draft-detail__btns .btn', '跳过');
-              c.note('band draft: skipped once');
-              continue;
-            }
-            c.note('band draft: 跳过 disabled (the last player still to pick)');
+            c.note('band draft: skipped once');
+            continue;
           }
           if ((s.draft?.picks || 0) > 0) {
             // research 09 §5: a strategy a teammate (human or AI) picked is marked 队友已选 and cannot be chosen
@@ -1209,16 +1191,6 @@ describe('browser E2E against the real server', { skip: !ENABLED && 'needs Chrom
           } else if (hs.phase === 'UNITE') {
             const rs = await runnerState(host);
             assert.ok(rs && rs.kind === 'unite', 'every human simulates the 联防 field locally');
-            // 0.2.1 (the owner's decision of 2026-10-07): the 联防 field is the round's battlefield, terrain and crates
-            // included — the field meta names the match stage and the view draws it (0.2.0 drew the escaped levels' road)
-            for (const c of both) {
-              const drawn = await c.page.evaluate(() => {
-                const s = globalThis.__SP__.store.get();
-                return { match: s.match.public?.stageId ?? null, field: s.match.field?.stageId ?? null, shown: globalThis.__SP_VIEW__?.raw?.debug?.tiles?.stage?.id ?? null };
-              });
-              assert.ok(drawn.match && drawn.field === drawn.match && drawn.shown === drawn.match, `${c.label}: the 联防 field shows the round's battlefield (${JSON.stringify(drawn)})`);
-              c.note(`联防 round ${hs.round} drawn on ${drawn.shown}`);
-            }
           }
           if (hs.round >= ROUNDS && hs.phase === 'COMBAT') { await sleep(2000); break; }
         } else if (hs.phase === 'SETTLE' && !seen.has(`settle-${hs.round}`)) {

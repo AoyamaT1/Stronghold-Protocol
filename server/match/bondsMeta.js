@@ -180,6 +180,33 @@ export function tierFor(bond, count) {
   return t;
 }
 
+/**
+ * The currently active core (主盟约, isCore) bond with the most layers, or null when no core bond is active. Ties break
+ * by data order (lowest `identifier`), mirroring the game's "当前已激活且层数最多的盟约" convention. Used by the shop-assist
+ * mod to over-draw its members (server/match/player/economy.js _shopWeight; config.assist.topCoreBondShopBoost).
+ * @param {import('./gamedata.js').GameData} gd
+ * @param {ReturnType<typeof computeBonds>} bonds
+ * @returns {string|null}
+ */
+export function topCoreBondByLayers(gd, bonds) {
+  let best = null;
+  let bestLayers = -1;
+  let bestOrder = Infinity;
+  for (const [id, b] of Object.entries(bonds || {})) {
+    if (!b || !b.active) continue;
+    const bond = gd.bond(id);
+    if (!bond || !bond.isCore) continue;
+    const layers = Number.isFinite(b.layers) ? b.layers : 0;
+    const order = Number.isFinite(bond.identifier) ? bond.identifier : 99;
+    if (layers > bestLayers || (layers === bestLayers && order < bestOrder)) {
+      best = id;
+      bestLayers = layers;
+      bestOrder = order;
+    }
+  }
+  return best;
+}
+
 /** Σ layers over active bonds (hidden-core check, 不朽盟约 title). */
 export function activatedLayers(bonds) {
   let n = 0;

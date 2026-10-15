@@ -198,7 +198,7 @@ export function checkAssets() {
   const missing = [];
   for (const u of urls) {
     let st = null;
-    try { st = fs.statSync(path.join(pub, ...u.split('/').filter(Boolean).map(decodeURIComponent))); } catch { /* missing */ }
+    try { st = fs.statSync(path.join(pub, ...u.split('?')[0].split('/').filter(Boolean).map(decodeURIComponent))); } catch { /* missing */ }
     if (!st || !st.size) missing.push(u);
   }
   return { ok: present && missing.length === 0 && urls.length > 0, present, manifest: true, total: urls.length, missing: missing.length, sample: missing.slice(0, 5), bytes: Number(m.stats?.bytes) || 0 };

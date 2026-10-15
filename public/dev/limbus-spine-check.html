@@ -1,0 +1,55 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>PENDING</title></head>
+<body><pre id="out">running…</pre>
+<script src="/vendor/pixi.min.js"></script>
+<script src="/vendor/pixi-spine.js"></script>
+<script>
+const out = [];
+const log = (s) => out.push(s);
+async function check(tag, url) {
+  log('=== ' + tag + ' ===\n  url: ' + url);
+  try {
+    const res = await PIXI.Assets.load(url);
+    const data = res && (res.spineData || res);
+    log('  animations=' + (data.animations || []).length + ' array=' + Array.isArray(data.animations));
+    log('  bones=' + (data.bones ? data.bones.length : '-') + ' slots=' + (data.slots ? data.slots.length : '-'));
+    const ds = data.defaultSkin;
+    log('  defaultSkin=' + !!ds + ' 类型=' + (ds && ds.constructor && ds.constructor.name));
+    if (ds) log('  skin 键: ' + Object.keys(ds).join(','));
+    // 从 skin 里直接找附件
+    let found = null, n = 0;
+    const atts = ds && (ds.attachments || ds._attachments);
+    if (atts) {
+      for (const k in atts) {
+        const inner = atts[k];
+        for (const nm2 in inner) { n++; if (!found) found = { slot: k, name: nm2, att: inner[nm2] }; }
+      }
+    }
+    log('  skin 内附件总数=' + n + (found ? ('  例: ' + found.slot + '/' + found.name) : ''));
+    if (found) {
+      const a = found.att;
+      const reg = a.region || (a.regions && a.regions[0]);
+      log('  该附件 region=' + !!reg + '  texture=' + !!(reg && reg.texture) +
+          (reg ? ('  ' + reg.width + 'x' + reg.height) : ''));
+      const tex = reg && reg.texture;
+      if (tex && tex.baseTexture) {
+        const bt = tex.baseTexture;
+        log('  贴图 ' + bt.width + 'x' + bt.height + ' valid=' + bt.valid + ' url=' +
+            (bt.resource && bt.resource.url ? bt.resource.url.split('/').slice(-1)[0] : '?'));
+      } else {
+        log('  ✗ 该附件没有贴图 → 模型会隐形');
+      }
+    }
+  } catch (e) { log('  ERROR: ' + (e && e.message)); }
+}
+async function main() {
+  log('PIXI ' + PIXI.VERSION);
+  await check('Limbus 李箱', '/assets/spine/op/char_limbus_yisang/front/yisang.json');
+  await check('控制组 kalts', '/assets/spine/op/char_003_kalts/front/char_003_kalts.skel');
+  await check('控制组 敌人', '/assets/spine/enemy/enemy_10001_trslim/enemy_10001_trslim.skel');
+  document.getElementById('out').textContent = out.join('\n');
+  document.title = 'DONE';
+}
+main();
+</script>
+</body></html>

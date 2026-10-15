@@ -57,7 +57,7 @@ export class MatchMessaging {
    * round's prep also its pair partner's m.private, which shows this board on its other half (bossMate, item 51).
    */
   markPrivate(ps) {
-    if (!ps) return;
+    if (!ps || !this._privDirty) return;
     this._privDirty.add(ps);
     this._pubDirty = true;
     const m = this._bossMateOf(ps);

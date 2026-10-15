@@ -171,16 +171,6 @@ export function acquireTargets(b, u, prof) {
   if (u.blocking.length) for (const e of b.blockedTargets(u, prof)) if (!cands.includes(e)) cands.push(e);
   // an ally target (Battle.setAllyTarget: 白铁's 铁钳号·原型机, an enemy-camp summon with 嘲讽等级 −2) after every enemy
   const extra = b._allyTargets && b._allyTargets.size ? b.allyTargetsInKeys(u.rangeKeys, u) : null;
-  // Fortress has an extra melee tile even against enemies it cannot block (PRTS branch / 号角). Its ordinary
-  // ranged targets still take priority; this does not fill the other tiles in its ranged blind spot.
-  if (prof.fortress && !cands.length && !extra?.length) {
-    const here = [u.tileR * COLS + u.tileC];
-    const near = b.enemiesInKeys(here, u, prof);
-    if (!near.length && b._allyTargets?.size) near.push(...b.allyTargetsInKeys(here, u));
-    prof._fortressMelee = near.length > 0;
-    sortEnemyTargets(b, u, near, prof.priority);
-    return near.slice(0, 1);
-  }
   if (extra && extra.length) {
     if (prof.allInRange) return cands.concat(extra);
     sortEnemyTargets(b, u, cands, prof.priority);
@@ -228,29 +218,30 @@ export function performAttack(b, u, prof, targets, opts = null) {
     b._ev(['engage', u.id]);
   }
   const ranged = !prof._fortressMelee && prof.attack === 'ranged' && prof.projectile && prof.projectile !== 'none' && prof.projectile !== 'beam';
-  const vis = prof._fortressMelee ? 'none' : (prof.projectile || 'none');
+  // Content-owned attack carriers (丰川祥子's notes) suppress the ordinary visual and settle attack SP on contact.
+  const vis = prof._fortressMelee || prof.noAttackVis ? 'none' : (prof.projectile || 'none');
+  const carried = prof.noAttackDamage === true;
   // 秘术师: the stored energies leave with this attack, at its main target (professions.js installMystic)
   const energy = !isHeal && prof.releaseEnergy ? prof.releaseEnergy(b, u) : 0;
   for (let i = 0; i < targets.length; i++) {
     const t = targets[i];
     b._ev(['atk', u.id, t.id, vis]);
     if (isHeal) { doHeal(b, u, prof, t); continue; }
-    // Target acquisition mutates the fortress profile. Keep this shot's mode while its shell is in flight.
-    const info = { isSkill, index: i, attackId, fortressMelee: !!prof._fortressMelee, energy: i === 0 ? energy : 0 };
+    const info = { isSkill, index: i, attackId, energy: i === 0 ? energy : 0 };
     const foe = t.side === 'enemy' || b.isAllyTarget(t);
     if (ranged && foe && prof.projectile === 'boomerang') {
       throwBoomerang(b, u, prof, t, info);
     } else if (ranged && foe) {
       const speed = PROJECTILE_SPEEDS[prof.projectile] ?? PROJECTILE_SPEED;
       // projectiles land even if the shooter died meanwhile (damage is credited to it)
-      b.addProjectile({ from: u, target: t, speed, visual: prof.projectile, source: u, hitDead: prof.splashRadius > 0,
+      b.addProjectile({ from: u, target: t, speed, visual: vis, source: u, hitDead: prof.splashRadius > 0,
         onHit: (c) => resolveHit(b, u, prof, c.target, info, c.x, c.y) });
     } else {
       resolveHit(b, u, prof, t, info, t.x, t.y);
     }
   }
   if (b._hooks.attack) b.emit('attack', { attacker: u, targets, isSkill });
-  if (u.skill) u.skill.onAttackPerformed(targets, isSkill, !!(opts && opts.noAmmo));
+  if (u.skill && !carried) u.skill.onAttackPerformed(targets, isSkill, !!(opts && opts.noAmmo));
   if (prof.afterAttack) b._safe(() => prof.afterAttack(b, u, targets), 'profile.afterAttack', u);
 }
 
@@ -305,6 +296,8 @@ export function resolveHit(b, u, prof, target, info, x, y) {
   const baseType = prof.dmgType === 'heal' || prof.dmgType === 'none' ? 'phys' : prof.dmgType;
   const skillMul = prof.skillDmgMul ?? 1;
   const attackId = info.attackId ?? 0;
+  // A content projectile owns the damage, but ordinary impact callbacks still launch the skill's own effects.
+  const noDmg = prof.noAttackDamage === true;
   // per-victim callbacks (main target, every splash / chain victim): profile `onEachHit(b, u, victim, hctx)` and
   // SkillSpec `attack.onEachHit(ctx)` — `attack.onHit` stays once per attack with the main target
   const each = prof.onEachHit || prof.skillOnEachHit ? (victim, dealt, kind) => {
@@ -334,7 +327,7 @@ export function resolveHit(b, u, prof, target, info, x, y) {
     if (attachedFunnel && info.index === 0) {
       const bodyHits = Math.max(1, prof.funnelBodyHits > 0 ? prof.funnelBodyHits : 1);
       for (let h = 0; h < bodyHits && target.alive; h++) {
-        dealtMain += b.dealDamage(u, target, { amount: atk * scale * mulT, type: baseType,
+        dealtMain += noDmg ? 0 : b.dealDamage(u, target, { amount: atk * scale * mulT, type: baseType,
           isAttack: true, isSkill: info.isSkill, tags: prof.tags || [], attackId });
       }
     }
@@ -342,7 +335,7 @@ export function resolveHit(b, u, prof, target, info, x, y) {
       const d = { amount: atk * scale * mulT * (attachedFunnel ? funnelMul : 1), type: baseType,
         isAttack: !attachedFunnel, isSkill: info.isSkill, tags: attachedFunnel ? [...(prof.tags || []), 'addition', 'funnel'] : (prof.tags || []), attackId };
       if (split != null) { d.mul = split; if (h > 0) d.noSp = true; }
-      dealtMain += b.dealDamage(u, target, d);
+      dealtMain += noDmg ? 0 : b.dealDamage(u, target, d);
     }
     dealtTotal += dealtMain;
     if (prof.onHitStatus && target.alive) b.applyStatus(target, prof.onHitStatus.key, { duration: prof.onHitStatus.duration, source: u, value: prof.onHitStatus.value });
@@ -358,7 +351,7 @@ export function resolveHit(b, u, prof, target, info, x, y) {
       if (prof.groundOnly && e.isFlying) continue;
       if (!prof.canHitFly && e.isFlying && !prof.splashHitsFly) continue;
       if (e.s.flags.untargetable) continue;
-      const d = b.dealDamage(u, e, { amount: atk * scale * sc * skillMul, type: baseType, isAttack: true, isSplash: true, isSkill: info.isSkill, attackId });
+      const d = noDmg ? 0 : b.dealDamage(u, e, { amount: atk * scale * sc * skillMul, type: baseType, isAttack: true, isSplash: true, isSkill: info.isSkill, attackId });
       dealtTotal += d;
       if (each) each(e, d, 'splash');
     }
@@ -378,7 +371,7 @@ export function resolveHit(b, u, prof, target, info, x, y) {
       if (!best) break;
       hit.add(best.id);
       b._ev(['atk', prev.id, best.id, 'chain']);
-      const d = b.dealDamage(u, best, { amount: atk * scale * skillMul * powi(1 - (prof.chain.falloff ?? 0.15), k), type: baseType, isAttack: true, isSkill: info.isSkill, tags: ['chain'], attackId });
+      const d = noDmg ? 0 : b.dealDamage(u, best, { amount: atk * scale * skillMul * powi(1 - (prof.chain.falloff ?? 0.15), k), type: baseType, isAttack: true, isSkill: info.isSkill, tags: ['chain'], attackId });
       dealtTotal += d;
       if (prof.chain.sluggish && best.alive) b.applyStatus(best, 'sluggish', { duration: prof.chain.sluggish, source: u });
       if (each) each(best, d, 'chain');

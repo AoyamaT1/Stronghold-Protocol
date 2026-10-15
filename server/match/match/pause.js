@@ -3,39 +3,47 @@
 // Installed on Match.prototype by server/match/Match.js (a method container: never instantiated; `this` is the match).
 
 import { PHASE, ERR } from '../../../shared/constants.js';
-import { BOSS_CLOCK_MS, OK, fail } from './common.js';
+import { msg } from '../../../shared/i18n.js';
+import { BOSS_CLOCK_MS, FLOW_TICKER_PRIORITY, OK, fail } from './common.js';
 
 export class MatchPause {
   /**
-   * Solo pause (official PauseUp / ResumeUp; DESIGN §14 "Solo pause"): g.pause { on } freezes the running battle — the
+   * Pause (official PauseUp / ResumeUp; DESIGN §14 "Solo pause"): g.pause { on } freezes the running battle — the
    * field clock (b.start `elapsed`, the boss budgets and overtime), the result deadline / server release timers, the
    * boss clock, the HUD `deadline` / `overtimeAt` (shifted by the pause on resume) and the server-run pacers
    * (FieldRunner / HeadlessPacer skip their intervals) — and the browser's runner stops its local clock while
-   * `m.public.paused` is true. Solo matches only (co-op battles never pause: WRONG_PHASE) and only while a battle runs;
-   * `{ on: false }` is always accepted. A disconnect / leave, or the battle phase ending, resumes.
+   * `m.public.paused` is true.
+   * Solo matches by default; co-op battles also supported when config.coopPause is enabled.
    */
   setPause(ps, on) {
-    void ps;
-    if (!this.isSolo) return fail(ERR.WRONG_PHASE, 'co-op battles never pause');
-    if (!on) { this._resume(); return OK; }
+    const allowCoop = !this.isSolo && Boolean(this.gd && this.gd.config && this.gd.config.coopPause);
+    if (!this.isSolo && !allowCoop) return fail(ERR.WRONG_PHASE, 'co-op battles never pause');
+    if (ps && ps.alive === false) return fail(ERR.WRONG_PHASE, 'eliminated players cannot pause');
+    if (!on) { this._resume(ps); return OK; }
     if (this.paused) return OK;
-    const battlePhase = this.phase === PHASE.COMBAT || this.phase === PHASE.FINAL_ASSAULT || this.phase === PHASE.HIDDEN_CORE;
+    const battlePhase = this.phase === PHASE.COMBAT || (allowCoop && this.phase === PHASE.UNITE) || this.phase === PHASE.FINAL_ASSAULT || this.phase === PHASE.HIDDEN_CORE;
     if (!battlePhase || this._finalEnding || !this.fields.some((f) => f.live && !f.done)) return fail(ERR.WRONG_PHASE, 'no battle running');
     this.paused = true;
     this._pausedAt = this.sched.now();
+    this._pausedByName = ps?.name || null;
+    this._pausedById = ps?.playerId || null;
     for (const f of this.fields) {
       if (!f.cc) continue;
       if (f.deadlineTimer) { this.cancel(f.deadlineTimer); f.deadlineTimer = null; f.rearmDeadline = true; }
       if (f.doneTimer) { this.cancel(f.doneTimer); f.doneTimer = null; f.rearmRelease = true; }
     }
     if (this._bossClock) { this.cancel(this._bossClock); this._bossClock = null; }
+    if (allowCoop) {
+      this.tickerText(msg('{name} 暂停了游戏', { name: ps?.name || '玩家' }), FLOW_TICKER_PRIORITY);
+    }
     this.markPublic();
     return OK;
   }
 
-  /** End a solo pause: every clock and deadline moves on by the paused time (no-op when not paused). */
-  _resume() {
+  /** End a pause: every clock and deadline moves on by the paused time (no-op when not paused). */
+  _resume(ps = null) {
     if (!this.paused) return;
+    const allowCoop = !this.isSolo && Boolean(this.gd && this.gd.config && this.gd.config.coopPause);
     const d = Math.max(0, this.sched.now() - this._pausedAt);
     this.paused = false;
     this._pausedAt = 0;
@@ -55,6 +63,12 @@ export class MatchPause {
     if (this._bossClockOn && !this._bossClock && (this.phase === PHASE.FINAL_ASSAULT || this.phase === PHASE.HIDDEN_CORE)) {
       this._bossClock = this.later(BOSS_CLOCK_MS, () => this._bossClockTick());
     }
+    if (allowCoop && (ps || this._pausedByName)) {
+      const name = ps?.name || this._pausedByName || '玩家';
+      this.tickerText(msg('{name} 继续了游戏', { name }), FLOW_TICKER_PRIORITY);
+    }
+    this._pausedByName = null;
+    this._pausedById = null;
     this.markPublic();
   }
 
@@ -64,6 +78,8 @@ export class MatchPause {
     this.pausedMs += Math.max(0, this.sched.now() - this._pausedAt);
     this.paused = false;
     this._pausedAt = 0;
+    this._pausedByName = null;
+    this._pausedById = null;
     this.markPublic();
   }
 

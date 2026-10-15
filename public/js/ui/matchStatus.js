@@ -15,6 +15,8 @@ const isObj = (v) => !!v && typeof v === 'object';
 const BOSS_PHASES = new Set([PHASE.FINAL_ASSAULT, PHASE.HIDDEN_CORE]);
 /** Battle phases a solo player may pause (a solo run has no 联防). */
 const PAUSE_PHASES = new Set([PHASE.COMBAT, PHASE.FINAL_ASSAULT, PHASE.HIDDEN_CORE]);
+/** Battle phases a co-op team may pause (includes 联防). */
+const COOP_PAUSE_PHASES = new Set([PHASE.COMBAT, PHASE.UNITE, PHASE.FINAL_ASSAULT, PHASE.HIDDEN_CORE]);
 
 /** Level time of a boss round when the config does not say (research 01 §3: maxPlayTime 120 s). */
 export const BOSS_LEVEL_SECONDS = 120;
@@ -66,15 +68,17 @@ export function overtimeState(pub, now, { perSec = 1, warnBefore = OVERTIME_WARN
 }
 
 /**
- * Whether the solo pause control is offered: solo runs only (hidden in co-op), while the player's own battle runs
- * (server Match.setPause: WRONG_PHASE once no battle is live). While paused the control stays (to resume).
+ * Whether the pause control is offered: solo runs, or co-op when allowCoopPause is enabled,
+ * while the battle runs. While paused the control stays (to resume).
  * @param {any} pub m.public
- * @param {{ solo?: boolean, alive?: boolean, done?: boolean }} [o] done: the own battle is over
+ * @param {{ solo?: boolean, alive?: boolean, done?: boolean, allowCoopPause?: boolean }} [o]
  */
-export function pauseAvailable(pub, { solo = false, alive = true, done = false } = {}) {
-  if (!solo || !isObj(pub) || alive === false) return false;
-  if (done && !pub.paused) return false;
-  return PAUSE_PHASES.has(pub.phase);
+export function pauseAvailable(pub, { solo = false, alive = true, done = false, allowCoopPause = false } = {}) {
+  const allowed = solo || allowCoopPause;
+  if (!allowed || !isObj(pub) || alive === false) return false;
+  if (solo && done && !pub.paused) return false;
+  const phases = allowCoopPause ? COOP_PAUSE_PHASES : PAUSE_PHASES;
+  return phases.has(pub.phase);
 }
 
 /** Whether m.public says the (solo) match is paused. */

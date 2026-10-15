@@ -4,7 +4,7 @@
 
 import { EVENT_BUFFER_CAP } from '../constants.js';
 import { elementView } from '../damage.js';
-import { unitInfo, snapshotUnits, ammoView, wolfView, negView, coinView } from '../snapshot.js';
+import { unitInfo, snapshotUnits, ammoView, wolfView, negView, coinView, sanityView, resonanceView } from '../snapshot.js';
 
 export class BattleEvents {
   fx(kind, params = {}) {
@@ -82,7 +82,7 @@ export class BattleEvents {
       (down || (down = [])).push([u.id, r2(u.respawnAt), r2(Math.max(0, u.respawnAt - u.deathAt)), this._downState(u), ...this.restTile(u)]);
     }
     if (down) snap.down = down;
-    let elem = null, ammo = null, wolves = null, neg = null, stand = null, standCut = null;
+    let elem = null, ammo = null, wolves = null, neg = null, stand = null, standCut = null, sanity = null, resonance = null, fever = null;
     let listed = null;   // the ids in snap.units, built for the first enemy with a cut to report
     for (const u of this.units) {
       if (u.side === 'enemy' && u.atkStandCutAt >= 0) {
@@ -104,13 +104,31 @@ export class BattleEvents {
       if (ng) (neg || (neg = [])).push([u.id, ng]);
       const purse = coinView(u);
       if (purse) (snap.coins || (snap.coins = [])).push([u.id, ...purse]);
+      const san = sanityView(u);
+      if (san !== null) (sanity || (sanity = [])).push([u.id, san]);
+      const res = resonanceView(u);
+      if (res) (resonance || (resonance = [])).push([u.id, res[0], res[1]]);
+      // Fever gauge a kit keeps on unit.mem.gauges.fever (0..100): 丰川祥子 (mods/sakiko). Forwarded for the client badge.
+      const fv = u.mem?.gauges?.fever;
+      if (Number.isFinite(fv)) (fever || (fever = [])).push([u.id, Math.max(0, Math.min(100, Math.round(fv)))]);
     }
+    // Content-owned cosmetic projectiles (`visual: 'note'`): 丰川祥子's 音符 fly on their own (projectiles.js `steer`), so
+    // the client draws them from this list — [[id, x, y, kind]] — instead of from an 'atk' event (fx/notes.js syncNotes).
+    let proj = null;
+    for (const p of this.projectiles.list) {
+      if (p.visual !== 'note') continue;
+      (proj || (proj = [])).push([p.id, r2(p.x), r2(p.y), p.data && p.data.hitTag === 'skill' ? 'noteSkill' : 'note']);
+    }
+    if (proj) snap.proj = proj;
+    if (fever) snap.fever = fever;
     if (elem) snap.elem = elem;
     if (ammo) snap.ammo = ammo;
     if (wolves) snap.wolves = wolves;
     if (neg) snap.neg = neg;
     if (stand) snap.stand = stand;
     if (standCut) snap.standCut = standCut;
+    if (sanity) snap.sanity = sanity;
+    if (resonance) snap.resonance = resonance;
     return snap;
   }
 

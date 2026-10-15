@@ -1,0 +1,622 @@
+/* ==========================================================================================
+   screens/game-invader.css — Invader Tactical Command Terminal (js/ui/invaderBar.js)
+   Asymmetric PvP Dungeon Master mode UI styles
+   ========================================================================================== */
+
+.invaderbar {
+  position: absolute;
+  left: .3rem;
+  right: .3rem;
+  bottom: .2rem;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, rgba(24, 12, 14, .96), rgba(12, 8, 9, .98));
+  border: 1px solid rgba(255, 77, 79, .45);
+  border-top: 2px solid #ff4d4f;
+  box-shadow: 0 -.04rem .3rem rgba(0, 0, 0, .75), 0 0 .2rem rgba(255, 77, 79, .15);
+  z-index: 10;
+  pointer-events: auto;
+  animation: invader-up var(--t-slow) var(--ease-out);
+}
+
+@keyframes invader-up {
+  from { opacity: 0; transform: translateY(.3rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.invaderbar--collapsed {
+  left: auto;
+  right: .3rem;
+  bottom: .2rem;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.invaderbar__collapsed-box {
+  display: flex;
+  align-items: center;
+  gap: .15rem;
+  padding: .08rem .16rem;
+  background: rgba(24, 12, 14, .95);
+  border: 1px solid #ff4d4f;
+  box-shadow: 0 0 .15rem rgba(255, 77, 79, .3);
+}
+
+.invaderbar__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .08rem .18rem;
+  background: rgba(36, 14, 16, .7);
+  border-bottom: 1px solid rgba(255, 77, 79, .25);
+}
+
+.invaderbar__header-left {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+
+.invaderbar__title {
+  font-size: .18rem;
+  font-weight: 900;
+  color: #ff7875;
+  letter-spacing: .06em;
+  display: flex;
+  align-items: center;
+  gap: .1rem;
+}
+
+.invaderbar__cp-gauge {
+  display: flex;
+  align-items: center;
+  gap: .08rem;
+  padding: .03rem .12rem;
+  background: rgba(0, 0, 0, .5);
+  border: 1px solid rgba(255, 215, 0, .4);
+  border-radius: 2px;
+}
+
+.invaderbar__cp-gauge.is-over {
+  border-color: #ff4d4f;
+  background: rgba(255, 77, 79, .2);
+}
+
+.invaderbar__cp-label {
+  font-size: .13rem;
+  color: var(--text-lo);
+}
+
+.invaderbar__cp-val {
+  font-size: .18rem;
+  font-weight: 700;
+  color: #ffd666;
+}
+
+.invaderbar__cp-val b {
+  font-size: .22rem;
+  color: #fff;
+}
+
+.invaderbar__body {
+  display: grid;
+  grid-template-columns: 1.3fr 1.2fr 1.4fr 1fr;
+  gap: .12rem;
+  padding: .12rem .16rem;
+}
+
+/* Panel Containers */
+.invader-panel {
+  display: flex;
+  flex-direction: column;
+  padding: .1rem;
+  background: rgba(16, 9, 11, .85);
+  border: 1px solid rgba(255, 77, 79, .2);
+  min-height: 1.9rem;
+}
+
+.invader-panel__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .08rem;
+  padding-bottom: .04rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  font-size: .14rem;
+  font-weight: 700;
+  color: #ffccc7;
+}
+
+/* Section 1: Vanguard Slots */
+.invader-slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .08rem;
+  flex: 1;
+}
+
+.invader-slot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #190f11;
+  border: 1px solid rgba(255, 77, 79, .3);
+  padding: .06rem;
+  transition: border-color var(--t-fast);
+}
+
+.invader-slot:hover {
+  border-color: #ff7875;
+}
+
+.invader-slot__badge {
+  font-size: .11rem;
+  font-weight: 700;
+  color: #ff7875;
+  background: rgba(255, 77, 79, .15);
+  padding: .01rem .06rem;
+  align-self: flex-start;
+  margin-bottom: .04rem;
+}
+
+.invader-slot__badge--elite {
+  color: #ffec3d;
+  background: rgba(255, 235, 59, .15);
+}
+
+.invader-slot__card {
+  display: flex;
+  align-items: center;
+  gap: .08rem;
+  cursor: pointer;
+  flex: 1;
+}
+
+.invader-slot__art {
+  width: .56rem;
+  height: .56rem;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, .15);
+  background: #000;
+}
+
+.invader-slot__meta {
+  display: flex;
+  flex-direction: column;
+  gap: .03rem;
+  flex: 1;
+  overflow: hidden;
+}
+
+.invader-slot__name {
+  font-size: .14rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.invader-slot__stats {
+  font-size: .11rem;
+  color: var(--text-dim);
+}
+
+.invader-slot__stats b {
+  color: #ffccc7;
+}
+
+.invader-slot__btn {
+  font-size: .11rem;
+  padding: .02rem .06rem;
+  background: #2a1013;
+  color: #ff7875;
+  border: 1px solid #ff4d4f;
+  cursor: pointer;
+}
+
+.invader-slot__info {
+  position: absolute;
+  right: .04rem;
+  bottom: .04rem;
+  background: transparent;
+  border: none;
+  font-size: .12rem;
+  cursor: pointer;
+  opacity: .7;
+}
+
+.invader-slot__info:hover {
+  opacity: 1;
+}
+
+/* Section 2: Strategy & Tactics */
+.invader-strategy-row {
+  margin-bottom: .08rem;
+}
+
+.invader-sublabel {
+  font-size: .11rem;
+  color: var(--text-lo);
+  margin-bottom: .04rem;
+}
+
+.invader-pills {
+  display: flex;
+  gap: .06rem;
+}
+
+.invader-pill {
+  flex: 1;
+  padding: .04rem .06rem;
+  font-size: .12rem;
+  font-weight: 700;
+  background: #1a0f12;
+  border: 1px solid rgba(255, 77, 79, .3);
+  color: var(--text-md);
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+
+.invader-pill:hover:not(:disabled) {
+  border-color: #ff7875;
+  color: #fff;
+}
+
+.invader-pill.is-active {
+  background: rgba(255, 77, 79, .25);
+  border-color: #ff4d4f;
+  color: #ff7875;
+  box-shadow: 0 0 .08rem rgba(255, 77, 79, .3);
+}
+
+.invader-tactics {
+  display: flex;
+  flex-direction: column;
+  gap: .05rem;
+}
+
+.invader-tactic-btn {
+  display: flex;
+  flex-direction: column;
+  padding: .04rem .08rem;
+  background: #1a0f12;
+  border: 1px solid rgba(255, 77, 79, .25);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+
+.invader-tactic-btn:hover:not(:disabled) {
+  border-color: #ff7875;
+}
+
+.invader-tactic-btn.is-active {
+  background: rgba(255, 77, 79, .22);
+  border-color: #ff4d4f;
+  box-shadow: 0 0 .08rem rgba(255, 77, 79, .25);
+}
+
+.invader-tactic-btn__top {
+  display: flex;
+  justify-content: space-between;
+  font-size: .13rem;
+  font-weight: 700;
+  color: #ffccc7;
+}
+
+.invader-tactic-btn__cost {
+  color: #ffd666;
+  font-size: .12rem;
+}
+
+.invader-tactic-btn__desc {
+  font-size: .11rem;
+  color: var(--text-dim);
+}
+
+/* Section 3: Reinforcements */
+.invader-reinfs {
+  display: flex;
+  flex-direction: column;
+  gap: .06rem;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 1.55rem;
+}
+
+.invader-reinf-item {
+  display: flex;
+  align-items: center;
+  gap: .08rem;
+  padding: .04rem .06rem;
+  background: #190f12;
+  border: 1px solid rgba(255, 77, 79, .25);
+}
+
+.invader-reinf-item__icon {
+  position: relative;
+  width: .44rem;
+  height: .44rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.invader-reinf-item__art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 77, 79, .3);
+  background: #000;
+}
+
+.invader-reinf-item__cost {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .85);
+  color: #ffd666;
+  font-size: .1rem;
+  padding: 0 .02rem;
+}
+
+.invader-reinf-item__controls {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .03rem;
+}
+
+.invader-reinf-item__title {
+  display: flex;
+  justify-content: space-between;
+  font-size: .12rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.invader-reinf-item__del {
+  background: transparent;
+  border: none;
+  color: #ff4d4f;
+  cursor: pointer;
+  font-size: .12rem;
+  line-height: 1;
+}
+
+.invader-reinf-item__row {
+  display: flex;
+  align-items: center;
+  gap: .06rem;
+}
+
+.invader-select {
+  background: #0e0708;
+  border: 1px solid rgba(255, 77, 79, .3);
+  color: #ffccc7;
+  font-size: .11rem;
+  padding: .02rem .04rem;
+  cursor: pointer;
+}
+
+.invader-counter {
+  display: flex;
+  align-items: center;
+  background: #0e0708;
+  border: 1px solid rgba(255, 77, 79, .3);
+}
+
+.invader-counter button {
+  background: transparent;
+  border: none;
+  color: #ff7875;
+  width: .18rem;
+  height: .2rem;
+  cursor: pointer;
+}
+
+.invader-counter span {
+  font-size: .12rem;
+  padding: 0 .04rem;
+  color: #fff;
+}
+
+.invader-add-reinf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .06rem;
+  padding: .06rem;
+  background: rgba(255, 77, 79, .08);
+  border: 1px dashed rgba(255, 77, 79, .4);
+  color: #ff7875;
+  font-size: .12rem;
+  cursor: pointer;
+  transition: background var(--t-fast);
+}
+
+.invader-add-reinf:hover {
+  background: rgba(255, 77, 79, .18);
+}
+
+/* Section 4: Action Panel */
+.invader-action-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.invader-action-summary {
+  display: flex;
+  flex-direction: column;
+  gap: .04rem;
+  font-size: .12rem;
+  color: var(--text-lo);
+  padding: .08rem;
+  background: rgba(0, 0, 0, .4);
+  border: 1px solid rgba(255, 255, 255, .06);
+}
+
+.invader-action-summary b {
+  color: #fff;
+}
+
+.invader-ready-status {
+  display: flex;
+  flex-direction: column;
+  gap: .06rem;
+}
+
+.invader-ready-badge {
+  text-align: center;
+  font-size: .13rem;
+  font-weight: 700;
+  color: var(--mint-400);
+  padding: .06rem;
+  background: rgba(78, 216, 175, .15);
+  border: 1px solid var(--mint-500);
+}
+
+/* Enemy Picker Modal */
+.invader-picker-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fade-in var(--t-fast);
+}
+
+.invader-picker-modal__dialog {
+  width: 7.2rem;
+  max-width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  background: #160c0e;
+  border: 2px solid #ff4d4f;
+  box-shadow: 0 0 .4rem rgba(255, 77, 79, .3);
+  padding: .16rem;
+}
+
+.invader-picker-modal__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .12rem;
+  padding-bottom: .08rem;
+  border-bottom: 1px solid rgba(255, 77, 79, .3);
+}
+
+.invader-picker-modal__head h3 {
+  font-size: .18rem;
+  color: #ff7875;
+  margin: 0;
+}
+
+.invader-picker-modal__close {
+  background: transparent;
+  border: none;
+  font-size: .18rem;
+  color: #ff7875;
+  cursor: pointer;
+}
+
+.invader-picker-modal__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .1rem;
+  overflow-y: auto;
+  max-height: 60vh;
+  padding-right: .06rem;
+}
+
+.invader-picker-card {
+  display: flex;
+  gap: .1rem;
+  padding: .08rem;
+  background: #200f12;
+  border: 1px solid rgba(255, 77, 79, .25);
+  transition: border-color var(--t-fast);
+}
+
+.invader-picker-card:hover {
+  border-color: #ff7875;
+}
+
+.invader-picker-card__art-wrap {
+  position: relative;
+  width: .7rem;
+  height: .7rem;
+  flex-shrink: 0;
+}
+
+.invader-picker-card__art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 77, 79, .3);
+  background: #000;
+}
+
+.invader-picker-card__cost {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .85);
+  color: #ffd666;
+  font-size: .11rem;
+  font-weight: 700;
+  padding: 0 .04rem;
+}
+
+.invader-picker-card__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.invader-picker-card__name-row {
+  display: flex;
+  align-items: center;
+  gap: .06rem;
+}
+
+.invader-picker-card__name {
+  font-size: .14rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.badge--elite {
+  background: #faad14;
+  color: #000;
+}
+
+.badge--fly {
+  background: #13c2c2;
+  color: #000;
+}
+
+.invader-picker-card__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .02rem .06rem;
+  font-size: .11rem;
+  color: var(--text-dim);
+}
+
+.invader-picker-card__stats b {
+  color: #ffccc7;
+}
+
+.invader-picker-card__btns {
+  display: flex;
+  gap: .06rem;
+  margin-top: .04rem;
+}

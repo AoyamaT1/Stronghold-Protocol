@@ -1,0 +1,44 @@
+<!doctype html><html><head><meta charset="utf-8"><title>PENDING</title></head>
+<body><pre id="out">running…</pre><div id="host"></div>
+<script src="/vendor/pixi.min.js"></script><script src="/vendor/pixi-spine.js"></script>
+<script>
+const out=[]; const log=s=>out.push(s);
+const S_TILE = 300;           // 假设相机每格 300px（只为看比例）
+const SC = S_TILE / 320;      // 渲染器的 UNIT.modelScale
+async function shot(tag, url, name){
+  try{
+    const res = await PIXI.Assets.load(url);
+    const d = res && (res.spineData || res);
+    const app = new PIXI.Application({ width: 1400, height: 900, backgroundAlpha: 0, antialias: true, preserveDrawingBuffer: true });
+    document.getElementById('host').appendChild(app.view);
+    // 参考格：1 格 = 300px 的地面线
+    const g = new PIXI.Graphics();
+    g.lineStyle(3, 0xff3355, 1).moveTo(0, 700).lineTo(1400, 700);
+    for (let x = 0; x <= 1400; x += S_TILE) { g.lineStyle(1, 0x556677, 0.6).moveTo(x, 0).lineTo(x, 900); }
+    app.stage.addChild(g);
+    const sp = new PIXI.spine.Spine(d);
+    sp.scale.set(SC);
+    sp.position.set(700, 700);
+    app.stage.addChild(sp);
+    const anims = (d.animations || []).map(a => a.name);
+    log(`${tag}\n  动画: ${anims.slice(0,6).join(', ')}\n  缩放后高度≈ ${(sp.height*SC).toFixed(0)}px（= ${(sp.height*SC/S_TILE).toFixed(2)} 格）`);
+    // 播 idle 并截两张图（看是否在动 / 是否两个）
+    for (const [i, an] of ['idle', anims.find(a=>/^attack/.test(a)) || 'idle'].entries()) {
+      if (sp.state.hasAnimation?.(an) || (d.animations||[]).some(a=>a.name===an)) sp.state.setAnimation(0, an, true);
+      for (let k=0;k<30;k++) sp.update(1/60);
+      app.renderer.render(app.stage);
+      const url2 = app.view.toDataURL('image/png');
+      window['__shot_'+name+'_'+i] = url2;
+    }
+    window['__anims_'+name] = anims;
+    app.destroy(true);
+  }catch(e){ log(tag+' ERROR '+e.message); }
+}
+async function main(){
+  await shot('边狱 默尔索','/assets/spine/op/char_limbus_meursault/front/meursault.json','meur');
+  await shot('方舟 char_003_kalts','/assets/spine/op/char_003_kalts/front/char_003_kalts.skel','kalts');
+  document.getElementById('out').textContent = out.join('\n\n');
+  document.title = 'DONE';
+}
+main();
+</script></body></html>

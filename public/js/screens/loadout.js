@@ -49,6 +49,7 @@ import { diyCount, sanitizeDiyPicks, setPick, serializeDiy, parseDiyImport, DIY_
 import { t, tParts, N_ } from '../../../shared/i18n.js';
 import { copyText } from '../ui/clipboard.js';
 import { toast } from '../ui/toasts.js';
+import { SkinSection } from '../ui/skinPicker.js';
 
 export { openLoadout, closeLoadout };
 
@@ -373,6 +374,7 @@ function Detail({ m, chess, golden, entries, ops = {}, onChange, onOps, onReset,
         </div>
         ${modOpt ? html`<${ModuleInfo} m=${m} golden=${golden} opt=${modOpt} potential=${opsOf(ops, chess.charId).potential} />` : null}
       </section>` : null}
+      <${SkinSection} chess=${chess} />
       ${notOwned ? html`<p class="lo-locknote lo-locknote--standin" data-testid="loadout-standin-note"><${Icon} name="info" />${standInName(chess) ? t('干员持有中标记为未持有：此棋子由替补干员 {name} 上场，技能与模组固定（补位干员技能不可更改）；这里的调配在改回「持有」后生效', { name: standInName(chess) })
         : t('干员持有中标记为未持有：此棋子由替补干员上场，技能与模组固定（补位干员技能不可更改）；这里的调配在改回「持有」后生效')}</p>` : null}
       ${locked ? html`<p class="lo-locknote"><${Icon} name="info" />${t('本局的调配已锁定，修改将在下一局生效')}</p>` : null}
@@ -452,12 +454,10 @@ export function importRefusal(kind, ready, status = data.status) {
 }
 
 /**
- * A loadout payload that carries `ops` (including empty `ops`) replaces 潜能 / 练度. 自选 operators are in that list
- * and only backups.json names them, so the refusal is the 自选编队 one: chess.json and backups.json both loaded.
- * Null when the payload has no `ops` (an older file leaves the current 练度 alone) or that data is ready (GitHub #538).
- * @param {Record<string, any> | null | undefined} ops
+ * Whether importing a loadout with `ops` must be refused because the required data files are not ready.
+ * @param {Record<string, any>|null} ops
  * @param {boolean} ready
- * @param {(name: string) => string} [status]
+ * @param {() => Record<string, 'loading'|'ok'|'error'>} [status]
  * @returns {{ text: string, tone: 'warn'|'error' } | null}
  */
 export function loadoutOpsImportRefusal(ops, ready, status = data.status) {
