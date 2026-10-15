@@ -1,0 +1,145 @@
+{
+  "rhodesShip": {
+    "bondId": "rhodesShip",
+    "name": "罗德岛",
+    "isMod": true,
+    "identifier": 24,
+    "isCore": true,
+    "bondType": "SEASON",
+    "bondOrder": 3,
+    "powerIdList": [
+      "rhodes"
+    ],
+    "iconId": "icon_rhodesShip",
+    "activeCount": 3,
+    "thresholds": [
+      3,
+      6
+    ],
+    "maxCount": null,
+    "thresholdTemplate": "count_threshold_upward",
+    "countMode": "BOARD",
+    "countsHand": false,
+    "countsGoldenOnly": false,
+    "activeType": "BATTLE",
+    "isActiveInDeck": false,
+    "noStack": false,
+    "weight": 10,
+    "maxInactiveBondCount": -1,
+    "layerMilestones": [],
+    "desc": "【罗德岛】受到的治疗和生命回复效果+{0:0%}（受层数影响）\n<在场6名不同【罗德岛】干员>治疗溢出量转为屏障；有屏障的【罗德岛】干员因敌人攻击减少屏障时，对周围8格内敌人造成{1:0}点真实伤害",
+    "descRaw": "【罗德岛】受到的<@ba.vup>治疗和生命回复效果</>+<@ba.vup>{0:0%}</><@ba.acrem>（受层数影响）</>\n<在场<@ba.vup>6</>名不同【罗德岛】干员>治疗溢出量<@ba.vup>转为屏障</>；有屏障的【罗德岛】干员因敌人攻击减少屏障时，对周围8格内敌人造成<@ba.vup>{1:0}点真实伤害</>",
+    "effectId": "bondeffect_rhodes",
+    "effectName": "罗德岛",
+    "effectDesc": "【罗德岛】受到的治疗和生命回复效果+{0:0%}（受层数影响）\n<在场6名不同【罗德岛】干员>治疗溢出量转为屏障；有屏障的【罗德岛】干员因敌人攻击减少屏障时，对周围8格内敌人造成{1:0}点真实伤害",
+    "effectDescRaw": "【罗德岛】受到的<@ba.vup>治疗和生命回复效果</>+<@ba.vup>{0:0%}</><@ba.acrem>（受层数影响）</>\n<在场<@ba.vup>6</>名不同【罗德岛】干员>治疗溢出量<@ba.vup>转为屏障</>；有屏障的【罗德岛】干员因敌人攻击减少屏障时，对周围8格内敌人造成<@ba.vup>{1:0}点真实伤害</>",
+    "effectDescParams": [
+      {
+        "index": 0,
+        "format": "0%",
+        "base": "heal_taken_base",
+        "perStack": "heal_taken_per_stack"
+      },
+      {
+        "index": 1,
+        "format": "0",
+        "base": "shield_break_damage",
+        "perStack": "shield_break_damage_per_stack"
+      }
+    ],
+    "bb": {
+      "power_bond_char_cnt": 6,
+      "heal_taken_base": 0.3,
+      "heal_taken_per_stack": 0.008,
+      "shield_break_damage": 1000,
+      "shield_break_damage_per_stack": 10,
+      "shield_break_radius": 1.5,
+      "shield_break_cd": 1
+    },
+    "bbStr": {
+      "key": "act1autochess_bond_eff_rhodes"
+    },
+    "buffs": [
+      {
+        "key": "env_gbuff_new",
+        "bb": {
+          "power_bond_char_cnt": 6,
+          "heal_taken_base": 0.3,
+          "heal_taken_per_stack": 0.008,
+          "shield_break_damage": 1000,
+          "shield_break_damage_per_stack": 10,
+          "shield_break_radius": 1.5,
+          "shield_break_cd": 1
+        },
+        "bbStr": {
+          "key": "act1autochess_bond_eff_rhodes"
+        }
+      }
+    ],
+    "baseParams": [
+      "heal_taken_base",
+      "shield_break_damage"
+    ],
+    "perStackParams": [
+      "heal_taken_per_stack",
+      "shield_break_damage_per_stack"
+    ],
+    "members": [
+      "chess_char_2_14_a",
+      "chess_char_4_18_a",
+      "chess_char_5_06_a",
+      "chess_char_6_12_a",
+      "chess_rhodes_closur_a",
+      "chess_rhodes_monstr_a",
+      "chess_rhodes_ascln_a",
+      "chess_rhodes_amiya3_a",
+      "chess_rhodes_kalts2_a",
+      "chess_rhodes_logos_a",
+      "chess_rhodes_savage_a"
+    ],
+    "visibleMembers": [
+      "chess_char_2_14_a",
+      "chess_char_4_18_a",
+      "chess_char_5_06_a",
+      "chess_char_6_12_a",
+      "chess_rhodes_closur_a",
+      "chess_rhodes_monstr_a",
+      "chess_rhodes_ascln_a",
+      "chess_rhodes_amiya3_a",
+      "chess_rhodes_kalts2_a",
+      "chess_rhodes_logos_a",
+      "chess_rhodes_savage_a"
+    ],
+    "spec": {
+      "tiers": [
+        {
+          "need": "3 distinct",
+          "effect": "Heals & HP-regen a member RECEIVES are +(0.30 + 0.008*L) (the engine heal-hook reads the layers live)."
+        },
+        {
+          "need": "6 distinct",
+          "effect": "The overflow of a heal landing on a member becomes the member's own barrier (capped at the member's max HP, never decays); every enemy-sourced hit that chews that barrier deals (1000 + 10*L) TRUE damage to enemies within 1.5 tiles (周围8格, <= once per 1 s per member)."
+        }
+      ],
+      "formulas": {
+        "healTakenMultiplier": "+(0.30 + 0.008*L) on every heal / HP-regen a member receives",
+        "barrierFromOverheal": "100% of the overflow (capped at the member's max HP, never decays)",
+        "barrierDetonation": "(1000 + 10*L) TRUE damage on every enemy-sourced barrier chip, 周围8格 (radius 1.5), 1 s internal CD per member"
+      },
+      "caps": "barrier value capped at the member's max HP (engine overheal rule) and it NEVER decays — a 屏障 shaped like 砾's `gravel:rats` with the per-second decay removed; no lethal-hit save (user decision 2026-10-05)",
+      "layerGain": "None from this bond (2026-10-06): the healing-driven accumulator (1 layer per 200 HP a member healed, <= 40/battle) was removed. 罗德岛 layers come from the prep side and from the layer 特质 of its operators — 阿米娅·医疗 (heals), 阿斯卡纶 (knock-outs), 凯尔希·思衡托 / Mon3tr (skill casts), 暴行 (on acquisition).",
+      "howToPlay": "Field 3 distinct 罗德岛 operators to switch the bond on: the medic-heavy roster keeps them topped up and every point of healing past full is worth +30 %+0.8 %·L more. At 6 distinct, heals that overflow past a member's missing HP, Mon3tr the 链愈师's full-HP chain jumps, and 生命回复 regeneration on a full-HP member all bank into barriers — and every enemy hit against a barriered member detonates (1000+10·L) true damage around them.",
+      "notes": [
+        "2026-10-06 (user): the bond no longer funds its own layers from healing. The old `layer_heal_step` accumulator (1 layer per 200 HP a member landed, `layer_battle_cap` 40) stacked up to +40 a round on a medic-heavy board, on top of the operators' own layer 特质 — which read as 「异常叠层」 and was removed. Both bb keys are gone from the record.",
+        "2026-10-05 redesign (user): the 3-tier boost moved from healing DEALT to healing RECEIVED (治疗和生命回复), the overflow barrier moved from tier 3 to tier 6 and now sits on the member, the detonation retimed from on-break arts (300+15·L, 1 s) to on-chip true damage (1000+10·L, 1 s per member), and the once-per-battle shield save was removed.",
+        "Medics keep the engine's \"injured ally first\" target rule (no global full-HP fallback — user decision 2026-10-05). The only full-HP heal vector is Mon3tr the 链愈师 (chain jumps to a random full-HP ally when nobody in range is injured, the official 链愈师 rule), plus 生命回复 regeneration and heals that overflow past a member's missing HP. 禁疗 / 孤立 / devices stay excluded."
+      ],
+      "assumed": [
+        "overheal is measured per heal instance (engine `opts.overheal`), never banked between instances beyond the shield cap",
+        "the barrier behaves like 砾's 屏障 (absorbs damage before HP, capped) but does not decay: no duration, no per-second rescale (user decision)",
+        "a barrier chip is detected via the `hit`/`damaged` hook pair (shield snapshot before absorb vs live value after); the damage must be enemy-sourced (因敌人攻击)",
+        "HP-regen (生命回复) rides the same heal pipeline, so the received boost covers it and a full-HP member's regen overflows into the barrier too"
+      ]
+    }
+  }
+}

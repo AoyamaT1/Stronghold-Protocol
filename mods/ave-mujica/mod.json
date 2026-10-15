@@ -1,0 +1,29 @@
+{
+  "id": "ave-mujica",
+  "name": "Ave Mujica 势力与干员",
+  "version": "1.0.0",
+  "description": "新增【Ave Mujica】势力核心盟约及5名干员（丰川祥子、若叶睦、八幡海铃、三角初华、祐天寺若麦）与专属演出皮肤",
+  "author": "ruka",
+  "bonds": ["aveMujicaShip"],
+  "chess": [
+    "chess_char_2_20_a", "chess_char_2_20_b",
+    "chess_char_3_22_a", "chess_char_3_22_b",
+    "chess_char_4_27_a", "chess_char_4_27_b",
+    "chess_char_5_24_a", "chess_char_5_24_b",
+    "chess_char_6_21_a", "chess_char_6_21_b"
+  ],
+  "garrisons": [
+    "garrison_amoris_a", "garrison_amoris_b",
+    "garrison_tmoris_a", "garrison_tmoris_b",
+    "garrison_mortis_a", "garrison_mortis_b",
+    "garrison_dolris_a", "garrison_dolris_b",
+    "garrison_oblvns_a", "garrison_oblvns_b"
+  ],
+  "skins": [
+    "char_4182_oblvns@avemujica#1",
+    "char_4183_mortis@avemujica#1",
+    "char_4184_dolris@avemujica#1",
+    "char_4185_amoris@avemujica#1",
+    "char_4186_tmoris@avemujica#1"
+  ]
+}

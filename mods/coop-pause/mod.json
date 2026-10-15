@@ -1,0 +1,12 @@
+{
+  "id": "coop-pause",
+  "name": "功能：多人联机暂停",
+  "version": "1.0.0",
+  "description": "允许在多人游戏（同盟联机）作战期间暂停游戏。任何未淘汰玩家均可在战斗中暂停或继续，所有队友战场与计时同步静止。",
+  "author": "Antigravity",
+  "bonds": [],
+  "chess": [],
+  "config": {
+    "coopPause": true
+  }
+}

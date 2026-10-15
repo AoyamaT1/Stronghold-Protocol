@@ -1,0 +1,41 @@
+{
+  "bondeffect_rhodes": {
+    "effectId": "bondeffect_rhodes",
+    "effectType": "BOND",
+    "name": "罗德岛",
+    "desc": "【罗德岛】受到的治疗和生命回复效果+{0:0%}（受层数影响）\n<在场6名不同【罗德岛】干员>治疗溢出量转为屏障；有屏障的【罗德岛】干员因敌人攻击减少屏障时，对周围8格内敌人造成{1:0}点真实伤害",
+    "descRaw": "【罗德岛】受到的<@ba.vup>治疗和生命回复效果</>+<@ba.vup>{0:0%}</><@ba.acrem>（受层数影响）</>\n<在场<@ba.vup>6</>名不同【罗德岛】干员>治疗溢出量<@ba.vup>转为屏障</>；有屏障的【罗德岛】干员因敌人攻击减少屏障时，对周围8格内敌人造成<@ba.vup>{1:0}点真实伤害</>",
+    "counterType": "NONE",
+    "continuedRound": -1,
+    "decoIconId": null,
+    "enemyPrice": 0,
+    "buffs": [
+      {
+        "key": "env_gbuff_new",
+        "countType": "NONE",
+        "bb": {
+          "power_bond_char_cnt": 6,
+          "heal_taken_base": 0.3,
+          "heal_taken_per_stack": 0.008,
+          "shield_break_damage": 1000,
+          "shield_break_damage_per_stack": 10,
+          "shield_break_radius": 1.5,
+          "shield_break_cd": 1
+        },
+        "bbStr": {
+          "key": "act1autochess_bond_eff_rhodes"
+        }
+      }
+    ],
+    "params": {
+      "power_bond_char_cnt": 6,
+      "heal_taken_base": 0.3,
+      "heal_taken_per_stack": 0.008,
+      "shield_break_damage": 1000,
+      "shield_break_damage_per_stack": 10,
+      "shield_break_radius": 1.5,
+      "shield_break_cd": 1,
+      "key": "act1autochess_bond_eff_rhodes"
+    }
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "garrison_amoris_a": {
+    "garrisonId": "garrison_amoris_a",
+    "desc": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 1 名不高于当前调度中心等级的【Ave Mujica】干员",
+    "descRaw": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 1 名不高于当前调度中心等级的【Ave Mujica】干员",
+    "eventType": "SERVER_PREP_START",
+    "eventTypeDesc": "整备能力",
+    "eventTypeIcon": "icon_gold",
+    "effectType": "modautochess_gar_prep_gain_chess_by_bond",
+    "effectKey": "modautochess_gar_prep_gain_chess_by_bond",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 1
+    },
+    "bbStr": {
+      "bond": "aveMujicaShip",
+      "tier": "shoplv",
+      "conditionkey": "character_target_inboard"
+    },
+    "owners": [
+      "chess_char_2_20_a"
+    ]
+  },
+  "garrison_amoris_b": {
+    "garrisonId": "garrison_amoris_b",
+    "desc": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 2 名不高于当前调度中心等级的【Ave Mujica】干员",
+    "descRaw": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 2 名不高于当前调度中心等级的【Ave Mujica】干员",
+    "eventType": "SERVER_PREP_START",
+    "eventTypeDesc": "整备能力",
+    "eventTypeIcon": "icon_gold",
+    "effectType": "modautochess_gar_prep_gain_chess_by_bond",
+    "effectKey": "modautochess_gar_prep_gain_chess_by_bond",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "aveMujicaShip",
+      "tier": "shoplv",
+      "conditionkey": "character_target_inboard"
+    },
+    "owners": [
+      "chess_char_2_20_b"
+    ]
+  },
+  "garrison_tmoris_a": {
+    "garrisonId": "garrison_tmoris_a",
+    "desc": "<进入休整期时>若上场作战，额外获得1资金，并使已激活的【Ave Mujica】层数+2",
+    "descRaw": "<进入休整期时>若上场作战，额外获得<@ba.vup>1</>资金，并使已激活的【Ave Mujica】层数<@ba.vup>+2</>",
+    "eventType": "SERVER_PREP_START",
+    "eventTypeDesc": "整备能力",
+    "eventTypeIcon": "icon_gold",
+    "effectType": "SERVER_ONCE_GOLD_AND_BOND",
+    "effectKey": "SERVER_ONCE_GOLD_AND_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "gold": 1,
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "aveMujicaShip",
+      "conditionkey": "character_target_inboard"
+    },
+    "owners": [
+      "chess_char_3_22_a"
+    ]
+  },
+  "garrison_tmoris_b": {
+    "garrisonId": "garrison_tmoris_b",
+    "desc": "<进入休整期时>若上场作战，额外获得2资金，并使已激活的【Ave Mujica】层数+4",
+    "descRaw": "<进入休整期时>若上场作战，额外获得<@ba.vup>2</>资金，并使已激活的【Ave Mujica】层数<@ba.vup>+4</>",
+    "eventType": "SERVER_PREP_START",
+    "eventTypeDesc": "整备能力",
+    "eventTypeIcon": "icon_gold",
+    "effectType": "SERVER_ONCE_GOLD_AND_BOND",
+    "effectKey": "SERVER_ONCE_GOLD_AND_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "gold": 2,
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "aveMujicaShip",
+      "conditionkey": "character_target_inboard"
+    },
+    "owners": [
+      "chess_char_3_22_b"
+    ]
+  },
+  "garrison_mortis_a": {
+    "garrisonId": "garrison_mortis_a",
+    "desc": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数+5、【不屈】层数+5",
+    "descRaw": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数<@ba.vup>+5</>、【不屈】层数<@ba.vup>+5</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_selfdead",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 5
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_selfdead",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip,indomShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_4_27_a"
+    ]
+  },
+  "garrison_mortis_b": {
+    "garrisonId": "garrison_mortis_b",
+    "desc": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数+10、【不屈】层数+10",
+    "descRaw": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数<@ba.vup>+10</>、【不屈】层数<@ba.vup>+10</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_selfdead",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 10
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_selfdead",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip,indomShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_4_27_b"
+    ]
+  },
+  "garrison_dolris_a": {
+    "garrisonId": "garrison_dolris_a",
+    "desc": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数+1",
+    "descRaw": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数<@ba.vup>+1</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_allykillenemy",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 1
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_allykillenemy",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_5_24_a"
+    ]
+  },
+  "garrison_dolris_b": {
+    "garrisonId": "garrison_dolris_b",
+    "desc": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数+2",
+    "descRaw": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数<@ba.vup>+2</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_allykillenemy",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 2
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_allykillenemy",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_5_24_b"
+    ]
+  },
+  "garrison_oblvns_a": {
+    "garrisonId": "garrison_oblvns_a",
+    "desc": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数+6",
+    "descRaw": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数<@ba.vup>+6</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_useskill",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 6
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_useskill",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_6_21_a"
+    ]
+  },
+  "garrison_oblvns_b": {
+    "garrisonId": "garrison_oblvns_b",
+    "desc": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数+12",
+    "descRaw": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数<@ba.vup>+12</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_useskill",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 12
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_useskill",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_6_21_b"
+    ]
+  }
+}

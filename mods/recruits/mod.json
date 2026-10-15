@@ -1,0 +1,23 @@
+{
+  "id": "recruits",
+  "name": "社区额外招募干员包 (含【望】)",
+  "version": "1.0.0",
+  "description": "来自 Lunac1a / 社区扩展：将 6★ 特种陷阱师【望】（大炎盟约，全套棋子落子与连星/天下劫）、【赤刃明霄陈】、【凯尔希·思衡托】与【维什戴尔】正式加入招募池",
+  "author": "Lunac1a / llleeeqi",
+  "bonds": [],
+  "chess": [
+    "chess_custom_6_wang_a",
+    "chess_custom_6_wang_b",
+    "chess_custom_5_chen3_a",
+    "chess_custom_5_chen3_b",
+    "chess_custom_5_kalts2_a",
+    "chess_custom_5_kalts2_b",
+    "chess_custom_5_wisdel_a",
+    "chess_custom_5_wisdel_b"
+  ],
+  "tokens": [
+    "token_10064_wang_stone1",
+    "token_10035_wisdel_wward",
+    "token_10068_kalts2_mtship"
+  ]
+}

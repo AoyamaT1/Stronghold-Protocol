@@ -1,0 +1,1625 @@
+{
+  "chars": {
+    "char_4182_oblvns": {
+      "avatar": "/assets/char/avatar/char_4182_oblvns.png",
+      "avatarE2": "/assets/char/avatar/char_4182_oblvns_2.png",
+      "portrait": "/assets/char/portrait/char_4182_oblvns_1.png",
+      "portraitE2": "/assets/char/portrait/char_4182_oblvns_2.png",
+      "skins": {
+        "char_4182_oblvns@avemujica#1": {
+          "avatar": "/assets/char/avatar/skin/char_4182_oblvns_avemujica_1.png",
+          "portrait": "/assets/char/portrait/skin/char_4182_oblvns_avemujica_1.png",
+          "name": "旋律的主人",
+          "group": "Ave Mujica",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_4182_oblvns/char_4182_oblvns_avemujica_1/front/char_4182_oblvns_avemujica_1.skel",
+              "atlas": "/assets/spine/op/char_4182_oblvns/char_4182_oblvns_avemujica_1/front/char_4182_oblvns_avemujica_1.atlas",
+              "textures": [
+                "/assets/spine/op/char_4182_oblvns/char_4182_oblvns_avemujica_1/front/char_4182_oblvns_avemujica_1.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "Idle",
+                "deploy": "Start",
+                "attack": {
+                  "begin": null,
+                  "loop": "Attack",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "Skill_1",
+                  "end": null,
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "Die",
+                "move": null,
+                "stun": null,
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "Skill_1",
+                    "end": null,
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": "Skill_2_Start",
+                    "loop": "Skill_2_Idle_A",
+                    "end": null,
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": "Skill_3_Begin",
+                    "loop": "Skill_3_Loop",
+                    "end": "Skill_3_End",
+                    "index": 2,
+                    "idle": "Skill_3_Idle"
+                  }
+                }
+              },
+              "animations": {
+                "Attack": 1.3,
+                "Combat": 1.3,
+                "Default": 0,
+                "Die": 1,
+                "Idle": 4,
+                "Skill_1": 1.3,
+                "Skill_2_Idle_A": 4,
+                "Skill_2_Idle_B": 4,
+                "Skill_2_Loop_A": 1.3,
+                "Skill_2_Loop_B": 1.3,
+                "Skill_2_Start": 1,
+                "Skill_2_Trans_A": 0.333,
+                "Skill_2_Trans_B": 0.333,
+                "Skill_3_Begin": 0.333,
+                "Skill_3_End": 0.333,
+                "Skill_3_Idle": 4,
+                "Skill_3_Loop": 1.167,
+                "Start": 1
+              },
+              "events": [
+                "OnAttack",
+                "OnStart"
+              ],
+              "hits": {
+                "Attack": [
+                  0.267
+                ],
+                "Combat": [
+                  0.267
+                ],
+                "Skill_1": [
+                  0.267
+                ],
+                "Skill_2_Loop_A": [
+                  0.267
+                ],
+                "Skill_2_Loop_B": [
+                  0.267
+                ],
+                "Skill_3_Loop": [
+                  0.2,
+                  0.3
+                ]
+              },
+              "bounds": {
+                "x": -241.81,
+                "y": -55.888,
+                "width": 718.844,
+                "height": 516.837
+              }
+            },
+            "back": {
+              "skel": "/assets/spine/op/char_4182_oblvns/char_4182_oblvns_avemujica_1/back/char_4182_oblvns_avemujica_1.skel",
+              "atlas": "/assets/spine/op/char_4182_oblvns/char_4182_oblvns_avemujica_1/back/char_4182_oblvns_avemujica_1.atlas",
+              "textures": [
+                "/assets/spine/op/char_4182_oblvns/char_4182_oblvns_avemujica_1/back/char_4182_oblvns_avemujica_1.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "Idle",
+                "deploy": "Start",
+                "attack": {
+                  "begin": null,
+                  "loop": "Attack",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "Skill_1",
+                  "end": null,
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "Die",
+                "move": null,
+                "stun": null,
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "Skill_1",
+                    "end": null,
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": "Skill_2_Start",
+                    "loop": "Skill_2_Idle_A",
+                    "end": null,
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": "Skill_3_Begin",
+                    "loop": "Skill_3_Loop",
+                    "end": "Skill_3_End",
+                    "index": 2,
+                    "idle": "Skill_3_Idle"
+                  }
+                }
+              },
+              "animations": {
+                "Attack": 1.3,
+                "Combat": 1.3,
+                "Default": 0,
+                "Die": 1,
+                "Idle": 4,
+                "Skill_1": 1.3,
+                "Skill_2_Idle_A": 4,
+                "Skill_2_Idle_B": 4,
+                "Skill_2_Loop_A": 1.3,
+                "Skill_2_Loop_B": 1.3,
+                "Skill_2_Start": 1,
+                "Skill_2_Trans_A": 0.333,
+                "Skill_2_Trans_B": 0.333,
+                "Skill_3_Begin": 0.333,
+                "Skill_3_End": 0.333,
+                "Skill_3_Idle": 4,
+                "Skill_3_Loop": 1.167,
+                "Start": 1
+              },
+              "events": [
+                "OnAttack",
+                "OnStart"
+              ],
+              "hits": {
+                "Attack": [
+                  0.267
+                ],
+                "Combat": [
+                  0.267
+                ],
+                "Skill_1": [
+                  0.267
+                ],
+                "Skill_2_Loop_A": [
+                  0.267
+                ],
+                "Skill_2_Loop_B": [
+                  0.267
+                ],
+                "Skill_3_Loop": [
+                  0.2,
+                  0.3
+                ]
+              },
+              "bounds": {
+                "x": -204.44,
+                "y": -55.888,
+                "width": 681.474,
+                "height": 458.274
+              }
+            }
+          }
+        }
+      },
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_4182_oblvns/front/char_4182_oblvns.skel",
+          "atlas": "/assets/spine/op/char_4182_oblvns/front/char_4182_oblvns.atlas",
+          "textures": [
+            "/assets/spine/op/char_4182_oblvns/front/char_4182_oblvns.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "Idle",
+            "deploy": "Start",
+            "attack": {
+              "begin": null,
+              "loop": "Attack",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "Skill_1",
+              "end": null,
+              "index": 0,
+              "idle": null
+            },
+            "die": "Die",
+            "move": null,
+            "stun": null,
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "Skill_1",
+                "end": null,
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": "Skill_2_Start",
+                "loop": "Skill_2_Idle_A",
+                "end": null,
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": "Skill_3_Begin",
+                "loop": "Skill_3_Loop",
+                "end": "Skill_3_End",
+                "index": 2,
+                "idle": "Skill_3_Idle"
+              }
+            }
+          },
+          "animations": {
+            "Attack": 1.3,
+            "Combat": 1.3,
+            "Default": 0,
+            "Die": 1,
+            "Idle": 4,
+            "Skill_1": 1.3,
+            "Skill_2_Idle_A": 4,
+            "Skill_2_Idle_B": 4,
+            "Skill_2_Loop_A": 1.3,
+            "Skill_2_Loop_B": 1.3,
+            "Skill_2_Start": 1,
+            "Skill_2_Trans_A": 0.333,
+            "Skill_2_Trans_B": 0.333,
+            "Skill_3_Begin": 0.333,
+            "Skill_3_End": 0.333,
+            "Skill_3_Idle": 3.667,
+            "Skill_3_Loop": 1.167,
+            "Start": 1
+          },
+          "events": [
+            "OnAttack",
+            "OnStart"
+          ],
+          "hits": {
+            "Attack": [
+              0.267
+            ],
+            "Combat": [
+              0.267
+            ],
+            "Skill_1": [
+              0.267
+            ],
+            "Skill_2_Loop_A": [
+              0.267
+            ],
+            "Skill_2_Loop_B": [
+              0.267
+            ],
+            "Skill_3_Loop": [
+              0.2,
+              0.3
+            ]
+          },
+          "bounds": {
+            "x": -1363.64,
+            "y": -1.919,
+            "width": 2765.07,
+            "height": 692.659
+          }
+        },
+        "back": {
+          "skel": "/assets/spine/op/char_4182_oblvns/back/char_4182_oblvns.skel",
+          "atlas": "/assets/spine/op/char_4182_oblvns/back/char_4182_oblvns.atlas",
+          "textures": [
+            "/assets/spine/op/char_4182_oblvns/back/char_4182_oblvns.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "Idle",
+            "deploy": "Start",
+            "attack": {
+              "begin": null,
+              "loop": "Attack",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "Skill_1",
+              "end": null,
+              "index": 0,
+              "idle": null
+            },
+            "die": "Die",
+            "move": null,
+            "stun": null,
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "Skill_1",
+                "end": null,
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": "Skill_2_Start",
+                "loop": "Skill_2_Idle_A",
+                "end": null,
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": "Skill_3_Begin",
+                "loop": "Skill_3_Loop",
+                "end": "Skill_3_End",
+                "index": 2,
+                "idle": "Skill_3_Idle"
+              }
+            }
+          },
+          "animations": {
+            "Attack": 1.3,
+            "Combat": 1.3,
+            "Default": 0,
+            "Die": 1,
+            "Idle": 4,
+            "Skill_1": 1.3,
+            "Skill_2_Idle_A": 4,
+            "Skill_2_Idle_B": 4,
+            "Skill_2_Loop_A": 1.3,
+            "Skill_2_Loop_B": 1.3,
+            "Skill_2_Start": 1,
+            "Skill_2_Trans_A": 0.333,
+            "Skill_2_Trans_B": 0.333,
+            "Skill_3_Begin": 0.333,
+            "Skill_3_End": 0.333,
+            "Skill_3_Idle": 3.667,
+            "Skill_3_Loop": 1.167,
+            "Start": 1
+          },
+          "events": [
+            "OnAttack",
+            "OnStart"
+          ],
+          "hits": {
+            "Attack": [
+              0.267
+            ],
+            "Combat": [
+              0.267
+            ],
+            "Skill_1": [
+              0.267
+            ],
+            "Skill_2_Loop_A": [
+              0.267
+            ],
+            "Skill_2_Loop_B": [
+              0.267
+            ],
+            "Skill_3_Loop": [
+              0.2,
+              0.3
+            ]
+          },
+          "bounds": {
+            "x": -1363.64,
+            "y": -1.919,
+            "width": 2765.07,
+            "height": 692.659
+          }
+        }
+      }
+    },
+    "char_4183_mortis": {
+      "avatar": "/assets/char/avatar/char_4183_mortis.png",
+      "avatarE2": "/assets/char/avatar/char_4183_mortis_2.png",
+      "portrait": "/assets/char/portrait/char_4183_mortis_1.png",
+      "portraitE2": "/assets/char/portrait/char_4183_mortis_2.png",
+      "skins": {
+        "char_4183_mortis@avemujica#1": {
+          "avatar": "/assets/char/avatar/skin/char_4183_mortis_avemujica_1.png",
+          "portrait": "/assets/char/portrait/skin/char_4183_mortis_avemujica_1.png",
+          "name": "提线的本我",
+          "group": "Ave Mujica",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_4183_mortis/char_4183_mortis_avemujica_1/front/char_4183_mortis_avemujica_1.skel",
+              "atlas": "/assets/spine/op/char_4183_mortis/char_4183_mortis_avemujica_1/front/char_4183_mortis_avemujica_1.atlas",
+              "textures": [
+                "/assets/spine/op/char_4183_mortis/char_4183_mortis_avemujica_1/front/char_4183_mortis_avemujica_1.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "Idle",
+                "deploy": "Start",
+                "attack": {
+                  "begin": null,
+                  "loop": "Attack",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "Skill_1",
+                  "end": null,
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "Doll_Die",
+                "move": null,
+                "stun": {
+                  "begin": null,
+                  "loop": "Stun",
+                  "end": null
+                },
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "Skill_1",
+                    "end": null,
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "Skill_2",
+                    "end": null,
+                    "index": 1,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "Attack": 1.2,
+                "Default": 0,
+                "Doll_Default": 0,
+                "Doll_Die": 1,
+                "Doll_Idle": 10,
+                "Doll_SwitchOut": 1,
+                "Doll_Switchin": 1,
+                "Idle": 6.667,
+                "Skill_1": 1.2,
+                "Skill_2": 0.9,
+                "Start": 1,
+                "Stun": 1,
+                "SwitchOut": 1
+              },
+              "events": [
+                "OnAttack",
+                "OnStart"
+              ],
+              "hits": {
+                "Attack": [
+                  0.433
+                ],
+                "Skill_1": [
+                  0.433
+                ],
+                "Skill_2": [
+                  0.333
+                ]
+              },
+              "bounds": {
+                "x": -177.828,
+                "y": -1.109,
+                "width": 764.067,
+                "height": 425.933
+              }
+            },
+            "back": {
+              "skel": "/assets/spine/op/char_4183_mortis/char_4183_mortis_avemujica_1/back/char_4183_mortis_avemujica_1.skel",
+              "atlas": "/assets/spine/op/char_4183_mortis/char_4183_mortis_avemujica_1/back/char_4183_mortis_avemujica_1.atlas",
+              "textures": [
+                "/assets/spine/op/char_4183_mortis/char_4183_mortis_avemujica_1/back/char_4183_mortis_avemujica_1.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "Idle",
+                "deploy": "Start",
+                "attack": {
+                  "begin": null,
+                  "loop": "Attack",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "Skill_1",
+                  "end": null,
+                  "index": 0,
+                  "idle": null
+                },
+                "die": null,
+                "move": null,
+                "stun": null,
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "Skill_1",
+                    "end": null,
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "Skill_2",
+                    "end": null,
+                    "index": 1,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "Attack": 1.2,
+                "Default": 0,
+                "Doll_Default": 0,
+                "Doll_Idle": 10,
+                "Doll_SwitchOut": 1,
+                "Doll_Switchin": 1,
+                "Idle": 6.667,
+                "Skill_1": 1.2,
+                "Skill_2": 0.9,
+                "Start": 1
+              },
+              "events": [
+                "OnAttack",
+                "OnStart"
+              ],
+              "hits": {
+                "Attack": [
+                  0.433
+                ],
+                "Skill_1": [
+                  0.433
+                ],
+                "Skill_2": [
+                  0.333
+                ]
+              },
+              "bounds": {
+                "x": -177.828,
+                "y": -1.109,
+                "width": 764.067,
+                "height": 425.933
+              }
+            }
+          }
+        }
+      },
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_4183_mortis/front/char_4183_mortis.skel",
+          "atlas": "/assets/spine/op/char_4183_mortis/front/char_4183_mortis.atlas",
+          "textures": [
+            "/assets/spine/op/char_4183_mortis/front/char_4183_mortis.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "Idle",
+            "deploy": "Start",
+            "attack": {
+              "begin": null,
+              "loop": "Attack",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "Skill_1",
+              "end": null,
+              "index": 0,
+              "idle": null
+            },
+            "die": "Doll_Die",
+            "move": null,
+            "stun": {
+              "begin": null,
+              "loop": "Stun",
+              "end": null
+            },
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "Skill_1",
+                "end": null,
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "Skill_2",
+                "end": null,
+                "index": 1,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "Attack": 1.2,
+            "Default": 0,
+            "Doll_Default": 0,
+            "Doll_Die": 1,
+            "Doll_Idle": 18.133,
+            "Doll_SwitchOut": 1,
+            "Doll_Switchin": 1,
+            "Idle": 6.667,
+            "Skill_1": 1.2,
+            "Skill_2": 0.9,
+            "Start": 1,
+            "Stun": 1,
+            "SwitchOut": 1
+          },
+          "events": [
+            "OnAttack",
+            "OnStart"
+          ],
+          "hits": {
+            "Attack": [
+              0.433
+            ],
+            "Skill_1": [
+              0.433
+            ],
+            "Skill_2": [
+              0.333
+            ]
+          },
+          "bounds": {
+            "x": -103.376,
+            "y": -1.014,
+            "width": 582.708,
+            "height": 387.679
+          }
+        },
+        "back": {
+          "skel": "/assets/spine/op/char_4183_mortis/back/char_4183_mortis.skel",
+          "atlas": "/assets/spine/op/char_4183_mortis/back/char_4183_mortis.atlas",
+          "textures": [
+            "/assets/spine/op/char_4183_mortis/back/char_4183_mortis.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "Idle",
+            "deploy": "Start",
+            "attack": {
+              "begin": null,
+              "loop": "Attack",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "Skill_1",
+              "end": null,
+              "index": 0,
+              "idle": null
+            },
+            "die": null,
+            "move": null,
+            "stun": null,
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "Skill_1",
+                "end": null,
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "Skill_2",
+                "end": null,
+                "index": 1,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "Attack": 1.2,
+            "Default": 0,
+            "Doll_Default": 0,
+            "Doll_Idle": 18.133,
+            "Doll_SwitchOut": 1,
+            "Doll_Switchin": 1,
+            "Idle": 6.667,
+            "Skill_1": 1.2,
+            "Skill_2": 0.9,
+            "Start": 1
+          },
+          "events": [
+            "OnAttack",
+            "OnStart"
+          ],
+          "hits": {
+            "Attack": [
+              0.433
+            ],
+            "Skill_1": [
+              0.433
+            ],
+            "Skill_2": [
+              0.333
+            ]
+          },
+          "bounds": {
+            "x": -103.376,
+            "y": -1.014,
+            "width": 582.708,
+            "height": 387.679
+          }
+        }
+      }
+    },
+    "char_4184_dolris": {
+      "avatar": "/assets/char/avatar/char_4184_dolris.png",
+      "avatarE2": "/assets/char/avatar/char_4184_dolris_2.png",
+      "portrait": "/assets/char/portrait/char_4184_dolris_1.png",
+      "portraitE2": "/assets/char/portrait/char_4184_dolris_2.png",
+      "skins": {
+        "char_4184_dolris@avemujica#1": {
+          "avatar": "/assets/char/avatar/skin/char_4184_dolris_avemujica_1.png",
+          "portrait": "/assets/char/portrait/skin/char_4184_dolris_avemujica_1.png",
+          "name": "笼中歌者",
+          "group": "Ave Mujica",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_4184_dolris/char_4184_dolris_avemujica_1/front/char_4184_dolris_avemujica_1.skel",
+              "atlas": "/assets/spine/op/char_4184_dolris/char_4184_dolris_avemujica_1/front/char_4184_dolris_avemujica_1.atlas",
+              "textures": [
+                "/assets/spine/op/char_4184_dolris/char_4184_dolris_avemujica_1/front/char_4184_dolris_avemujica_1.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "Idle",
+                "deploy": "Start",
+                "attack": {
+                  "begin": null,
+                  "loop": "Skill_1_Loop",
+                  "end": null,
+                  "via": "skill"
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": "Skill_1_Begin",
+                  "loop": "Skill_1_Loop",
+                  "end": "Skill_1_End",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "Die",
+                "move": null,
+                "stun": null,
+                "skills": {
+                  "0": {
+                    "begin": "Skill_1_Begin",
+                    "loop": "Skill_1_Loop",
+                    "end": "Skill_1_End",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": "Skill_2_Begin",
+                    "loop": "Skill_2_Loop",
+                    "end": "Skill_2_End",
+                    "index": 1,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "Default": 0,
+                "Die": 1,
+                "Idle": 2.667,
+                "Skill_1_Begin": 1.333,
+                "Skill_1_End": 0.667,
+                "Skill_1_Loop": 2.667,
+                "Skill_2_Begin": 0.333,
+                "Skill_2_End": 1.167,
+                "Skill_2_Loop": 3.333,
+                "Start": 1
+              },
+              "events": [
+                "OnStart"
+              ],
+              "hits": {},
+              "bounds": {
+                "x": -217.758,
+                "y": -1.432,
+                "width": 326.038,
+                "height": 404.209
+              }
+            }
+          }
+        }
+      },
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_4184_dolris/front/char_4184_dolris.skel",
+          "atlas": "/assets/spine/op/char_4184_dolris/front/char_4184_dolris.atlas",
+          "textures": [
+            "/assets/spine/op/char_4184_dolris/front/char_4184_dolris.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "Idle",
+            "deploy": "Start",
+            "attack": {
+              "begin": null,
+              "loop": "Skill_1_Loop",
+              "end": null,
+              "via": "skill"
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": "Skill_1_Begin",
+              "loop": "Skill_1_Loop",
+              "end": "Skill_1_End",
+              "index": 0,
+              "idle": null
+            },
+            "die": "Die",
+            "move": null,
+            "stun": null,
+            "skills": {
+              "0": {
+                "begin": "Skill_1_Begin",
+                "loop": "Skill_1_Loop",
+                "end": "Skill_1_End",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": "Skill_2_Begin",
+                "loop": "Skill_2_Loop",
+                "end": "Skill_2_End",
+                "index": 1,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "Default": 0,
+            "Die": 1,
+            "Idle": 4,
+            "Skill_1_Begin": 1.333,
+            "Skill_1_End": 0.667,
+            "Skill_1_Loop": 3.333,
+            "Skill_2_Begin": 0.333,
+            "Skill_2_End": 1.167,
+            "Skill_2_Loop": 1.333,
+            "Start": 1
+          },
+          "events": [
+            "OnStart"
+          ],
+          "hits": {},
+          "bounds": {
+            "x": -106.383,
+            "y": -1.32,
+            "width": 265.655,
+            "height": 362.132
+          }
+        }
+      }
+    },
+    "char_4185_amoris": {
+      "avatar": "/assets/char/avatar/char_4185_amoris.png",
+      "avatarE2": "/assets/char/avatar/char_4185_amoris_2.png",
+      "portrait": "/assets/char/portrait/char_4185_amoris_1.png",
+      "portraitE2": "/assets/char/portrait/char_4185_amoris_2.png",
+      "skins": {
+        "char_4185_amoris@avemujica#1": {
+          "avatar": "/assets/char/avatar/skin/char_4185_amoris_avemujica_1.png",
+          "portrait": "/assets/char/portrait/skin/char_4185_amoris_avemujica_1.png",
+          "name": "情热魔术师",
+          "group": "Ave Mujica",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_4185_amoris/char_4185_amoris_avemujica_1/front/char_4185_amoris_avemujica_1.skel",
+              "atlas": "/assets/spine/op/char_4185_amoris/char_4185_amoris_avemujica_1/front/char_4185_amoris_avemujica_1.atlas",
+              "textures": [
+                "/assets/spine/op/char_4185_amoris/char_4185_amoris_avemujica_1/front/char_4185_amoris_avemujica_1.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "Idle",
+                "deploy": "Start",
+                "attack": {
+                  "begin": null,
+                  "loop": "Attack",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "Skill_1",
+                  "end": null,
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "Die",
+                "move": null,
+                "stun": null,
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "Skill_1",
+                    "end": null,
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "Skill_2",
+                    "end": null,
+                    "index": 1,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "Attack": 1.8,
+                "Default": 0,
+                "Die": 1,
+                "Idle": 1.333,
+                "Skill_1": 1.8,
+                "Skill_2": 1.8,
+                "Start": 1
+              },
+              "events": [
+                "OnAttack",
+                "OnStart"
+              ],
+              "hits": {
+                "Attack": [
+                  0.667
+                ],
+                "Skill_1": [
+                  0.267,
+                  0.867,
+                  1.467
+                ],
+                "Skill_2": [
+                  0.1,
+                  0.333,
+                  0.567,
+                  0.8,
+                  1,
+                  1.233,
+                  1.467,
+                  1.7
+                ]
+              },
+              "bounds": {
+                "x": -1107.96,
+                "y": -1.332,
+                "width": 1383.547,
+                "height": 387.504
+              }
+            },
+            "back": {
+              "skel": "/assets/spine/op/char_4185_amoris/char_4185_amoris_avemujica_1/back/char_4185_amoris_avemujica_1.skel",
+              "atlas": "/assets/spine/op/char_4185_amoris/char_4185_amoris_avemujica_1/back/char_4185_amoris_avemujica_1.atlas",
+              "textures": [
+                "/assets/spine/op/char_4185_amoris/char_4185_amoris_avemujica_1/back/char_4185_amoris_avemujica_1.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "Idle",
+                "deploy": "Start",
+                "attack": {
+                  "begin": null,
+                  "loop": "Attack",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "Skill_1",
+                  "end": null,
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "Die",
+                "move": null,
+                "stun": null,
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "Skill_1",
+                    "end": null,
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "Skill_2",
+                    "end": null,
+                    "index": 1,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "Attack": 1.8,
+                "Default": 0,
+                "Die": 1,
+                "Idle": 1.333,
+                "Skill_1": 1.8,
+                "Skill_2": 1.8,
+                "Start": 1
+              },
+              "events": [
+                "OnAttack",
+                "OnStart"
+              ],
+              "hits": {
+                "Attack": [
+                  0.667
+                ],
+                "Skill_1": [
+                  0.267,
+                  0.867,
+                  1.467
+                ],
+                "Skill_2": [
+                  0.1,
+                  0.333,
+                  0.567,
+                  0.8,
+                  1,
+                  1.233,
+                  1.467,
+                  1.7
+                ]
+              },
+              "bounds": {
+                "x": -1107.96,
+                "y": -1.333,
+                "width": 1439.482,
+                "height": 387.509
+              }
+            }
+          }
+        }
+      },
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_4185_amoris/front/char_4185_amoris.skel",
+          "atlas": "/assets/spine/op/char_4185_amoris/front/char_4185_amoris.atlas",
+          "textures": [
+            "/assets/spine/op/char_4185_amoris/front/char_4185_amoris.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "Idle",
+            "deploy": "Start",
+            "attack": {
+              "begin": null,
+              "loop": "Attack",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "Skill_1",
+              "end": null,
+              "index": 0,
+              "idle": null
+            },
+            "die": "Die",
+            "move": null,
+            "stun": null,
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "Skill_1",
+                "end": null,
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "Skill_2",
+                "end": null,
+                "index": 1,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "Attack": 1.8,
+            "Default": 0,
+            "Die": 1,
+            "Idle": 1,
+            "Skill_1": 1.8,
+            "Skill_2": 1.8,
+            "Start": 1
+          },
+          "events": [
+            "OnAttack",
+            "OnStart"
+          ],
+          "hits": {
+            "Attack": [
+              0.667
+            ],
+            "Skill_1": [
+              0.267,
+              0.867,
+              1.467
+            ],
+            "Skill_2": [
+              0.1,
+              0.333,
+              0.567,
+              0.8,
+              1,
+              1.233,
+              1.467,
+              1.7
+            ]
+          },
+          "bounds": {
+            "x": -1413.23,
+            "y": -11.3,
+            "width": 1550.098,
+            "height": 371.42
+          }
+        },
+        "back": {
+          "skel": "/assets/spine/op/char_4185_amoris/back/char_4185_amoris.skel",
+          "atlas": "/assets/spine/op/char_4185_amoris/back/char_4185_amoris.atlas",
+          "textures": [
+            "/assets/spine/op/char_4185_amoris/back/char_4185_amoris.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "Idle",
+            "deploy": "Start",
+            "attack": {
+              "begin": null,
+              "loop": "Attack",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "Skill_1",
+              "end": null,
+              "index": 0,
+              "idle": null
+            },
+            "die": "Die",
+            "move": null,
+            "stun": null,
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "Skill_1",
+                "end": null,
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "Skill_2",
+                "end": null,
+                "index": 1,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "Attack": 1.8,
+            "Default": 0,
+            "Die": 1,
+            "Idle": 1,
+            "Skill_1": 1.8,
+            "Skill_2": 1.8,
+            "Start": 1
+          },
+          "events": [
+            "OnAttack",
+            "OnStart"
+          ],
+          "hits": {
+            "Attack": [
+              0.667
+            ],
+            "Skill_1": [
+              0.267,
+              0.867,
+              1.467
+            ],
+            "Skill_2": [
+              0.1,
+              0.333,
+              0.567,
+              0.8,
+              1,
+              1.233,
+              1.467,
+              1.7
+            ]
+          },
+          "bounds": {
+            "x": -1413.23,
+            "y": -11.3,
+            "width": 1550.098,
+            "height": 371.09
+          }
+        }
+      }
+    },
+    "char_4186_tmoris": {
+      "avatar": "/assets/char/avatar/char_4186_tmoris.png",
+      "avatarE2": "/assets/char/avatar/char_4186_tmoris_2.png",
+      "portrait": "/assets/char/portrait/char_4186_tmoris_1.png",
+      "portraitE2": "/assets/char/portrait/char_4186_tmoris_2.png",
+      "skins": {
+        "char_4186_tmoris@avemujica#1": {
+          "avatar": "/assets/char/avatar/skin/char_4186_tmoris_avemujica_1.png",
+          "portrait": "/assets/char/portrait/skin/char_4186_tmoris_avemujica_1.png",
+          "name": "月下执行者",
+          "group": "Ave Mujica",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_4186_tmoris/char_4186_tmoris_avemujica_1/front/char_4186_tmoris_avemujica_1.skel",
+              "atlas": "/assets/spine/op/char_4186_tmoris/char_4186_tmoris_avemujica_1/front/char_4186_tmoris_avemujica_1.atlas",
+              "textures": [
+                "/assets/spine/op/char_4186_tmoris/char_4186_tmoris_avemujica_1/front/char_4186_tmoris_avemujica_1.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "Idle",
+                "deploy": "Start",
+                "attack": {
+                  "begin": null,
+                  "loop": "Attack",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "Skill_1",
+                  "end": null,
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "Die",
+                "move": null,
+                "stun": null,
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "Skill_1",
+                    "end": null,
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": "Skill_2_Begin",
+                    "loop": "Skill_2_Loop",
+                    "end": "Skill_2_End",
+                    "index": 1,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "Attack": 1,
+                "Default": 0,
+                "Die": 1,
+                "Idle": 2.667,
+                "Skill_1": 1.5,
+                "Skill_2_Begin": 0.333,
+                "Skill_2_End": 0.667,
+                "Skill_2_Loop": 2,
+                "Start": 1
+              },
+              "events": [
+                "OnAttack",
+                "OnStart"
+              ],
+              "hits": {
+                "Attack": [
+                  0.467
+                ],
+                "Skill_1": [
+                  0.367,
+                  0.5,
+                  0.633,
+                  0.767,
+                  0.9
+                ]
+              },
+              "bounds": {
+                "x": -245.304,
+                "y": -4.824,
+                "width": 411.741,
+                "height": 1414.259
+              }
+            },
+            "back": {
+              "skel": "/assets/spine/op/char_4186_tmoris/char_4186_tmoris_avemujica_1/back/char_4186_tmoris_avemujica_1.skel",
+              "atlas": "/assets/spine/op/char_4186_tmoris/char_4186_tmoris_avemujica_1/back/char_4186_tmoris_avemujica_1.atlas",
+              "textures": [
+                "/assets/spine/op/char_4186_tmoris/char_4186_tmoris_avemujica_1/back/char_4186_tmoris_avemujica_1.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "Idle",
+                "deploy": "Start",
+                "attack": {
+                  "begin": null,
+                  "loop": "Attack",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "Skill_1",
+                  "end": null,
+                  "index": 0,
+                  "idle": null
+                },
+                "die": null,
+                "move": null,
+                "stun": null,
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "Skill_1",
+                    "end": null,
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": "Skill_2_Begin",
+                    "loop": "Skill_2_Loop",
+                    "end": "Skill_2_End",
+                    "index": 1,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "Attack": 1,
+                "Default": 0,
+                "Idle": 2.667,
+                "Skill_1": 1.5,
+                "Skill_2_Begin": 0.333,
+                "Skill_2_End": 0.667,
+                "Skill_2_Loop": 2,
+                "Start": 1
+              },
+              "events": [
+                "OnAttack",
+                "OnStart"
+              ],
+              "hits": {
+                "Attack": [
+                  0.467
+                ],
+                "Skill_1": [
+                  0.367,
+                  0.5,
+                  0.633,
+                  0.767,
+                  0.9
+                ]
+              },
+              "bounds": {
+                "x": -245.304,
+                "y": -4.824,
+                "width": 411.741,
+                "height": 1414.259
+              }
+            }
+          }
+        }
+      },
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_4186_tmoris/front/char_4186_tmoris.skel",
+          "atlas": "/assets/spine/op/char_4186_tmoris/front/char_4186_tmoris.atlas",
+          "textures": [
+            "/assets/spine/op/char_4186_tmoris/front/char_4186_tmoris.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "Idle",
+            "deploy": "Start",
+            "attack": {
+              "begin": null,
+              "loop": "Attack",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "Skill_1",
+              "end": null,
+              "index": 0,
+              "idle": null
+            },
+            "die": "Die",
+            "move": null,
+            "stun": null,
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "Skill_1",
+                "end": null,
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": "Skill_2_Begin",
+                "loop": "Skill_2_Loop",
+                "end": "Skill_2_End",
+                "index": 1,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "Attack": 1,
+            "Default": 0,
+            "Die": 1,
+            "Idle": 4,
+            "Skill_1": 1.5,
+            "Skill_2_Begin": 0.333,
+            "Skill_2_End": 0.667,
+            "Skill_2_Loop": 2,
+            "Start": 1
+          },
+          "events": [
+            "OnAttack",
+            "OnStart"
+          ],
+          "hits": {
+            "Attack": [
+              0.467
+            ],
+            "Skill_1": [
+              0.367,
+              0.5,
+              0.633,
+              0.767,
+              0.9
+            ]
+          },
+          "bounds": {
+            "x": -201.437,
+            "y": -1.159,
+            "width": 388.26,
+            "height": 361.572
+          }
+        },
+        "back": {
+          "skel": "/assets/spine/op/char_4186_tmoris/back/char_4186_tmoris.skel",
+          "atlas": "/assets/spine/op/char_4186_tmoris/back/char_4186_tmoris.atlas",
+          "textures": [
+            "/assets/spine/op/char_4186_tmoris/back/char_4186_tmoris.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "Idle",
+            "deploy": "Start",
+            "attack": {
+              "begin": null,
+              "loop": "Attack",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "Skill_1",
+              "end": null,
+              "index": 0,
+              "idle": null
+            },
+            "die": null,
+            "move": null,
+            "stun": null,
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "Skill_1",
+                "end": null,
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": "Skill_2_Begin",
+                "loop": "Skill_2_Loop",
+                "end": "Skill_2_End",
+                "index": 1,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "Attack": 1,
+            "Default": 0,
+            "Idle": 4,
+            "Skill_1": 1.5,
+            "Skill_2_Begin": 0.333,
+            "Skill_2_End": 0.667,
+            "Skill_2_Loop": 2,
+            "Start": 1
+          },
+          "events": [
+            "OnAttack",
+            "OnStart"
+          ],
+          "hits": {
+            "Attack": [
+              0.467
+            ],
+            "Skill_1": [
+              0.367,
+              0.5,
+              0.633,
+              0.767,
+              0.9
+            ]
+          },
+          "bounds": {
+            "x": -201.437,
+            "y": -1.144,
+            "width": 298.711,
+            "height": 360.55
+          }
+        }
+      }
+    }
+  },
+  "bonds": {
+    "aveMujicaShip": "/assets/bond/aveMujicaShip.png"
+  },
+  "skills": {
+    "skchr_amoris_1": "/assets/skill/skchr_amoris_1.png",
+    "skchr_amoris_2": "/assets/skill/skchr_amoris_2.png",
+    "skchr_tmoris_1": "/assets/skill/skchr_tmoris_1.png",
+    "skchr_tmoris_2": "/assets/skill/skchr_tmoris_2.png",
+    "skchr_mortis_1": "/assets/skill/skchr_mortis_1.png",
+    "skchr_mortis_2": "/assets/skill/skchr_mortis_2.png",
+    "skchr_dolris_1": "/assets/skill/skchr_dolris_1.png",
+    "skchr_dolris_2": "/assets/skill/skchr_dolris_2.png",
+    "skchr_oblvns_1": "/assets/skill/skchr_oblvns_1.png",
+    "skchr_oblvns_2": "/assets/skill/skchr_oblvns_2.png",
+    "skchr_oblvns_3": "/assets/skill/skchr_oblvns_3.png"
+  },
+  "skillsById": {
+    "skchr_amoris_1": "skchr_amoris_1",
+    "skchr_amoris_2": "skchr_amoris_2",
+    "skchr_tmoris_1": "skchr_tmoris_1",
+    "skchr_tmoris_2": "skchr_tmoris_2",
+    "skchr_mortis_1": "skchr_mortis_1",
+    "skchr_mortis_2": "skchr_mortis_2",
+    "skchr_dolris_1": "skchr_dolris_1",
+    "skchr_dolris_2": "skchr_dolris_2",
+    "skchr_oblvns_1": "skchr_oblvns_1",
+    "skchr_oblvns_2": "skchr_oblvns_2",
+    "skchr_oblvns_3": "skchr_oblvns_3"
+  }
+}

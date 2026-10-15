@@ -1,0 +1,82 @@
+{
+  "aveMujicaShip": {
+    "bondId": "aveMujicaShip",
+    "name": "Ave Mujica",
+    "identifier": 24,
+    "isCore": true,
+    "bondType": "SEASON",
+    "bondOrder": 2,
+    "powerIdList": ["mujica"],
+    "iconId": "icon_aveMujicaShip",
+    "activeCount": 3,
+    "thresholds": [3, 5],
+    "maxCount": null,
+    "thresholdTemplate": "count_threshold_upward",
+    "countMode": "BOARD",
+    "countsHand": false,
+    "countsGoldenOnly": false,
+    "activeType": "BATTLE",
+    "isActiveInDeck": false,
+    "noStack": false,
+    "weight": 10,
+    "maxInactiveBondCount": -1,
+    "layerMilestones": [],
+    "desc": "【Ave Mujica】干员造成的伤害提升（受层数影响）\n<在场5名不同【Ave Mujica】干员>战斗开始时，全体【Ave Mujica】干员技能所需技力-50%；且成员技能持续期间，造成的伤害额外提升30%，受到的物理和法术伤害降低30%",
+    "descRaw": "【Ave Mujica】干员造成的<@ba.vup>伤害提升</><@autochess.gray>（受层数影响）</>\n<在场<@autochess.dgreen>5</>名不同【Ave Mujica】干员>战斗开始时，全体【Ave Mujica】干员技能所需技力<@ba.vup>-50%</>；且成员技能持续期间，造成的伤害额外提升<@ba.vup>30%</>，受到的物理和法术伤害降低<@ba.vup>30%</>",
+    "effectId": "bondeffect_ave_mujica",
+    "effectName": "Ave Mujica",
+    "effectDesc": "【Ave Mujica】干员造成的伤害提升至{0:0%}（受层数影响）\n<在场5名不同【Ave Mujica】干员>战斗开始时全体【Ave Mujica】干员技能所需技力-50%；且成员技能持续期间造成的伤害额外提升30%，受到的物理和法术伤害降低30%",
+    "effectDescRaw": "【Ave Mujica】干员造成的伤害提升至<@ba.vup>{0:0%}</><@ba.acrem>（受层数影响）</>\n<在场<@ba.vup>5</>名不同【Ave Mujica】干员>战斗开始时全体【Ave Mujica】干员技能所需技力<@ba.vup>-50%</>；且成员技能持续期间造成的伤害额外提升<@ba.vup>30%</>，受到的物理和法术伤害降低<@ba.vup>30%</>",
+    "effectDescParams": [
+      {
+        "index": 0,
+        "format": "0%",
+        "base": "base_damage_scale",
+        "perStack": "damage_scale_per_stack"
+      }
+    ],
+    "bb": {
+      "base_damage_scale": 1.2,
+      "damage_scale_per_stack": 0.01,
+      "sp_cost_ratio": 0.5,
+      "skill_damage_scale": 1.3,
+      "damage_resistance": 0.3,
+      "power_bond_char_cnt": 5
+    },
+    "bbStr": {
+      "key": "act1autochess_bond_eff_ave_mujica"
+    },
+    "buffs": [
+      {
+        "key": "env_gbuff_new",
+        "bb": {
+          "base_damage_scale": 1.2,
+          "damage_scale_per_stack": 0.01,
+          "sp_cost_ratio": 0.5,
+          "skill_damage_scale": 1.3,
+          "damage_resistance": 0.3,
+          "power_bond_char_cnt": 5
+        },
+        "bbStr": {
+          "key": "act1autochess_bond_eff_ave_mujica"
+        }
+      }
+    ],
+    "baseParams": ["base_damage_scale"],
+    "perStackParams": ["damage_scale_per_stack"],
+    "members": [
+      "chess_char_2_20_a",
+      "chess_char_3_22_a",
+      "chess_char_4_27_a",
+      "chess_char_5_24_a",
+      "chess_char_6_21_a"
+    ],
+    "visibleMembers": [
+      "chess_char_2_20_a",
+      "chess_char_3_22_a",
+      "chess_char_4_27_a",
+      "chess_char_5_24_a",
+      "chess_char_6_21_a"
+    ]
+  }
+}

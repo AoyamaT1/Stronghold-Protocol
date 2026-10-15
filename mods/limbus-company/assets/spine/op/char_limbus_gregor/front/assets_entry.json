@@ -1,0 +1,61 @@
+{
+  "char_limbus_gregor": {
+    "spine": {
+      "front": {
+        "skel": "/assets/spine/op/char_limbus_gregor/front/gregor.json",
+        "atlas": "/assets/spine/op/char_limbus_gregor/front/gregor.atlas",
+        "textures": [
+          "/assets/spine/op/char_limbus_gregor/front/gregor_0.png"
+        ],
+        "pma": false,
+        "anims": {
+          "idle": "idle",
+          "deploy": null,
+          "attack": {
+            "begin": null,
+            "loop": "attack1",
+            "end": null
+          },
+          "attackDown": null,
+          "skill": {
+            "begin": null,
+            "loop": "attack1",
+            "end": null,
+            "via": "attack",
+            "index": 0,
+            "idle": null
+          },
+          "die": "die",
+          "move": "move",
+          "stun": "hit",
+          "skills": {
+            "0": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "1": {
+              "begin": null,
+              "loop": "attack2",
+              "end": null,
+              "via": "attack",
+              "index": 1,
+              "idle": null
+            },
+            "2": {
+              "begin": null,
+              "loop": "attack3",
+              "end": null,
+              "via": "attack",
+              "index": 2,
+              "idle": null
+            }
+          }
+        }
+      }
+    }
+  }
+}

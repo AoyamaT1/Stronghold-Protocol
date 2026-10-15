@@ -1,0 +1,26 @@
+{
+  "id": "rhodes",
+  "name": "罗德岛 MOD",
+  "version": "1.4.0",
+  "description": "罗德岛势力：rhodesShip 盟约 + 6 名干员（阿米娅·医疗 / 临光·煌 closur / Mon3tr / 阿斯卡纶 ascln / 逻各斯 logos / 暴行 savage）。移植自 Rhodes-Mod v1.4.0，按本仓库 mods/ 约定重整。凯尔希(kalts2) 因与 recruits 的 char_1052_kalts2 冲突暂未纳入。",
+  "author": "muchiyun",
+  "upstream": "https://github.com/Stronghold-Protocol-Mod/Rhodes-Mod/releases/tag/v1.4.0",
+  "bonds": ["rhodesShip"],
+  "chess": [
+    "chess_rhodes_amiya3_a", "chess_rhodes_amiya3_b",
+    "chess_rhodes_closur_a", "chess_rhodes_closur_b",
+    "chess_rhodes_monstr_a", "chess_rhodes_monstr_b",
+    "chess_rhodes_ascln_a", "chess_rhodes_ascln_b",
+    "chess_rhodes_logos_a", "chess_rhodes_logos_b",
+    "chess_rhodes_savage_a", "chess_rhodes_savage_b"
+  ],
+  "garrisons": [
+    "garrison_rhodes_amiya_a", "garrison_rhodes_amiya_b",
+    "garrison_rhodes_closur_a", "garrison_rhodes_closur_b",
+    "garrison_rhodes_monstr_a", "garrison_rhodes_monstr_b",
+    "garrison_rhodes_ascln_a", "garrison_rhodes_ascln_b",
+    "garrison_rhodes_logos_a", "garrison_rhodes_logos_b",
+    "garrison_rhodes_savage_a", "garrison_rhodes_savage_b"
+  ],
+  "skins": []
+}

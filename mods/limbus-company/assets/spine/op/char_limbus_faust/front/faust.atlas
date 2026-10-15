@@ -1,0 +1,265 @@
+faust_0.png
+size: 4096,3101
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pma: false
+skill3_12
+  rotate: false
+  xy: 0, 0
+  size: 317, 691
+  orig: 317, 691
+  offset: 0, 0
+  index: -1
+skill3_11
+  rotate: false
+  xy: 319, 0
+  size: 292, 679
+  orig: 292, 679
+  offset: 0, 0
+  index: -1
+skill3_7
+  rotate: false
+  xy: 613, 0
+  size: 379, 673
+  orig: 379, 673
+  offset: 0, 0
+  index: -1
+skill3_9
+  rotate: false
+  xy: 994, 0
+  size: 242, 673
+  orig: 242, 673
+  offset: 0, 0
+  index: -1
+skill3_8
+  rotate: false
+  xy: 1238, 0
+  size: 255, 669
+  orig: 255, 669
+  offset: 0, 0
+  index: -1
+skill3_14
+  rotate: false
+  xy: 1495, 0
+  size: 362, 662
+  orig: 362, 662
+  offset: 0, 0
+  index: -1
+skill3_13
+  rotate: false
+  xy: 1859, 0
+  size: 366, 655
+  orig: 366, 655
+  offset: 0, 0
+  index: -1
+skill3_15
+  rotate: false
+  xy: 2227, 0
+  size: 291, 651
+  orig: 291, 651
+  offset: 0, 0
+  index: -1
+skill3_10
+  rotate: false
+  xy: 2520, 0
+  size: 257, 628
+  orig: 257, 628
+  offset: 0, 0
+  index: -1
+gud
+  rotate: false
+  xy: 2779, 0
+  size: 464, 541
+  orig: 464, 541
+  offset: 0, 0
+  index: -1
+miss
+  rotate: false
+  xy: 3245, 0
+  size: 431, 473
+  orig: 431, 473
+  offset: 0, 0
+  index: -1
+idle
+  rotate: false
+  xy: 3678, 0
+  size: 241, 466
+  orig: 241, 466
+  offset: 0, 0
+  index: -1
+skill3_5
+  rotate: false
+  xy: 0, 693
+  size: 1026, 460
+  orig: 1026, 460
+  offset: 0, 0
+  index: -1
+skill1_4
+  rotate: false
+  xy: 1028, 693
+  size: 1024, 460
+  orig: 1024, 460
+  offset: 0, 0
+  index: -1
+skill1_2
+  rotate: false
+  xy: 2054, 693
+  size: 1024, 457
+  orig: 1024, 457
+  offset: 0, 0
+  index: -1
+skill1_3
+  rotate: false
+  xy: 0, 1155
+  size: 1026, 457
+  orig: 1026, 457
+  offset: 0, 0
+  index: -1
+skill3_4
+  rotate: false
+  xy: 1028, 1155
+  size: 1031, 456
+  orig: 1031, 456
+  offset: 0, 0
+  index: -1
+dmg
+  rotate: false
+  xy: 2061, 1155
+  size: 449, 443
+  orig: 449, 443
+  offset: 0, 0
+  index: -1
+skill3_6
+  rotate: false
+  xy: 2512, 1155
+  size: 611, 396
+  orig: 611, 396
+  offset: 0, 0
+  index: -1
+skill2_6
+  rotate: false
+  xy: 3125, 1155
+  size: 749, 389
+  orig: 749, 389
+  offset: 0, 0
+  index: -1
+skill2_11
+  rotate: false
+  xy: 0, 1614
+  size: 813, 389
+  orig: 813, 389
+  offset: 0, 0
+  index: -1
+skill2_5
+  rotate: false
+  xy: 815, 1614
+  size: 758, 388
+  orig: 758, 388
+  offset: 0, 0
+  index: -1
+skill2_3
+  rotate: false
+  xy: 1575, 1614
+  size: 916, 387
+  orig: 916, 387
+  offset: 0, 0
+  index: -1
+skill2_10
+  rotate: false
+  xy: 2493, 1614
+  size: 832, 386
+  orig: 832, 386
+  offset: 0, 0
+  index: -1
+skill2_9
+  rotate: false
+  xy: 0, 2005
+  size: 887, 385
+  orig: 887, 385
+  offset: 0, 0
+  index: -1
+skill2_8
+  rotate: false
+  xy: 889, 2005
+  size: 896, 383
+  orig: 896, 383
+  offset: 0, 0
+  index: -1
+dead
+  rotate: false
+  xy: 1787, 2005
+  size: 375, 376
+  orig: 375, 376
+  offset: 0, 0
+  index: -1
+skill2_4
+  rotate: false
+  xy: 2164, 2005
+  size: 677, 370
+  orig: 677, 370
+  offset: 0, 0
+  index: -1
+skill1_5
+  rotate: false
+  xy: 2843, 2005
+  size: 611, 367
+  orig: 611, 367
+  offset: 0, 0
+  index: -1
+skill3_1
+  rotate: false
+  xy: 3456, 2005
+  size: 484, 360
+  orig: 484, 360
+  offset: 0, 0
+  index: -1
+move
+  rotate: false
+  xy: 0, 2392
+  size: 522, 360
+  orig: 522, 360
+  offset: 0, 0
+  index: -1
+skill3_3
+  rotate: false
+  xy: 524, 2392
+  size: 630, 353
+  orig: 630, 353
+  offset: 0, 0
+  index: -1
+skill2_1
+  rotate: false
+  xy: 1156, 2392
+  size: 630, 353
+  orig: 630, 353
+  offset: 0, 0
+  index: -1
+skill1
+  rotate: false
+  xy: 1788, 2392
+  size: 630, 352
+  orig: 630, 352
+  offset: 0, 0
+  index: -1
+skill2_12
+  rotate: false
+  xy: 2420, 2392
+  size: 799, 352
+  orig: 799, 352
+  offset: 0, 0
+  index: -1
+skill2_2
+  rotate: false
+  xy: 3221, 2392
+  size: 631, 347
+  orig: 631, 347
+  offset: 0, 0
+  index: -1
+skill3_2
+  rotate: false
+  xy: 0, 2754
+  size: 906, 345
+  orig: 906, 345
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,86 @@
+{
+  "char_limbus_yisang": [
+    {
+      "id": "char_limbus_yisang@limbus#1",
+      "name": "绽放E.G.O::山茶花",
+      "group": "边狱公司"
+    }
+  ],
+  "char_limbus_sinclair": [
+    {
+      "id": "char_limbus_sinclair@limbus#1",
+      "name": "握紧之钉",
+      "group": "边狱公司"
+    }
+  ],
+  "char_limbus_faust": [
+    {
+      "id": "char_limbus_faust@limbus#1",
+      "name": "黑兽组·卯分支",
+      "group": "边狱公司"
+    }
+  ],
+  "char_limbus_rodion": [
+    {
+      "id": "char_limbus_rodion@limbus#1",
+      "name": "脑叶E.G.O::泪水磨砺之剑",
+      "group": "边狱公司"
+    }
+  ],
+  "char_limbus_donquixote": [
+    {
+      "id": "char_limbus_donquixote@limbus#1",
+      "name": "拉曼恰管理者",
+      "group": "边狱公司"
+    }
+  ],
+  "char_limbus_meursault": [
+    {
+      "id": "char_limbus_meursault@limbus#1",
+      "name": "剑契头领",
+      "group": "边狱公司"
+    }
+  ],
+  "char_limbus_ishmael": [
+    {
+      "id": "char_limbus_ishmael@limbus#1",
+      "name": "裴廓德号船长",
+      "group": "边狱公司"
+    }
+  ],
+  "char_limbus_ryoshu": [
+    {
+      "id": "char_limbus_ryoshu@limbus#1",
+      "name": "小指子辈·蜘蛛巢之刃",
+      "group": "边狱公司"
+    }
+  ],
+  "char_limbus_outis": [
+    {
+      "id": "char_limbus_outis@limbus#1",
+      "name": "魔弹射手",
+      "group": "边狱公司"
+    }
+  ],
+  "char_limbus_heathcliff": [
+    {
+      "id": "char_limbus_heathcliff@limbus#1",
+      "name": "狂猎魔王",
+      "group": "边狱公司"
+    }
+  ],
+  "char_limbus_honglu": [
+    {
+      "id": "char_limbus_honglu@limbus#1",
+      "name": "鸿园的君主-红露",
+      "group": "边狱公司"
+    }
+  ],
+  "char_limbus_gregor": [
+    {
+      "id": "char_limbus_gregor@limbus#1",
+      "name": "黎明事务所代表",
+      "group": "边狱公司"
+    }
+  ]
+}

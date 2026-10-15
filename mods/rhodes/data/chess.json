@@ -1,0 +1,5717 @@
+{
+  "chess_rhodes_amiya3_a": {
+    "chessId": "chess_rhodes_amiya3_a",
+    "baseId": "chess_rhodes_amiya3_a",
+    "goldenId": "chess_rhodes_amiya3_b",
+    "isGolden": false,
+    "tier": 3,
+    "identifier": 272,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 33,
+    "charId": "char_1037_amiya3",
+    "name": "阿米娅",
+    "appellation": "Amiya",
+    "rarity": 5,
+    "profession": "MEDIC",
+    "subProfessionId": "incantationmedic",
+    "subProfessionName": "咒愈师",
+    "position": "RANGED",
+    "nationId": "rhodes",
+    "bonds": [
+      "rhodesShip",
+      "deputShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_amiya_a"
+    ],
+    "price": 3,
+    "sellPrice": 1,
+    "upgradeNum": 3,
+    "upgradeChessId": "chess_rhodes_amiya3_b",
+    "status": {
+      "phase": 2,
+      "level": 1,
+      "skillLevel": 4,
+      "equipLevel": 0
+    },
+    "stats": {
+      "maxHp": 1217,
+      "atk": 425,
+      "def": 84,
+      "res": 20,
+      "cost": 17,
+      "blockCnt": 1,
+      "bat": 1.6,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "3-3",
+    "rangeGrid": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        -1,
+        2
+      ],
+      [
+        -1,
+        3
+      ]
+    ],
+    "dmgType": "arts",
+    "attackKind": "ranged",
+    "projectile": "bolt",
+    "canHitFly": true,
+    "targetPriority": null,
+    "trait": {
+      "desc": "攻击造成法术伤害，攻击敌人时为攻击范围内一名友方干员治疗相当于50%伤害的生命值",
+      "descRaw": "攻击造成<@ba.kw>法术伤害</>，攻击敌人时为攻击范围内一名友方干员治疗相当于<@ba.kw>50%</>伤害的生命值",
+      "bb": {
+        "scale": 0.5
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "skill": {
+      "skillId": "skchr_amiya3_2",
+      "iconId": "skchr_amiya3_2",
+      "name": "慈悲愿景",
+      "level": 4,
+      "desc": "立刻对攻击范围内所有敌人造成进行一次攻击力为155%的攻击并使目标在6秒内攻击速度-60，移动速度-60%，该次攻击每击中一个敌人获得攻击力+20%（最多叠加5次），接下来的伤害类型变为真实且可以同时攻击2名敌人；整场战斗中该技能只能释放一次",
+      "descRaw": "立刻对攻击范围内所有敌人造成进行一次攻击力为<@ba.vup>155%</>的攻击并使目标在<@ba.vup>6</>秒内攻击速度<@ba.vup>-60</>，移动速度<@ba.vup>-60%</>，该次攻击每击中一个敌人获得攻击力<@ba.vup>+20%</>（最多叠加<@ba.vup>5</>次），接下来的伤害类型变为<@ba.vup>真实</>且可以同时攻击<@ba.vup>2</>名敌人；<@ba.rem>整场战斗中该技能只能释放一次</>",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 32,
+      "spType": "INCREASE_WITH_TIME",
+      "spCost": 28,
+      "initSp": 5,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "atk_scale": 1.55,
+        "atk": 0.2,
+        "max_stack_cnt": 5,
+        "skill_max_trigger_time": 1,
+        "amiya3_s_2[debuff].duration": 6,
+        "amiya3_s_2[debuff].attack_speed": -60,
+        "amiya3_s_2[debuff].move_speed": -0.6
+      },
+      "bbStr": {},
+      "rangeId": null,
+      "rangeGrid": null,
+      "prefabId": "skchr_amiya3_2",
+      "trigger": {
+        "rule": "DEFAULT",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": null
+      },
+      "index": 1,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "诚挚期许",
+        "desc": "在场时所有友方单位最大生命+8%，技能期间所有友方单位每秒恢复2.5%最大生命",
+        "descRaw": "在场时所有友方单位最大生命+8%，技能期间所有友方单位每秒恢复2.5%最大生命",
+        "bb": {
+          "max_hp": 0.08,
+          "hp_recovery_per_sec_by_max_hp_ratio": 0.025
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "tokens": [],
+    "module": null,
+    "assets": {
+      "avatar": "char_1037_amiya3",
+      "portrait": "char_1037_amiya3_1",
+      "spine": "char_1037_amiya3",
+      "skillIcon": "skchr_amiya3_2",
+      "subProfIcon": "sub_incantationmedic_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_amiya3_1",
+        "iconId": "skchr_amiya3_1",
+        "name": "哀恸共情",
+        "level": 4,
+        "desc": "攻击速度+45，每次攻击时额外治疗自身周围一定范围内所有我方相当于攻击力15%的生命",
+        "descRaw": "攻击速度<@ba.vup>+45</>，每次攻击时额外治疗自身周围一定范围内所有我方相当于攻击力<@ba.vup>15%</>的生命",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 50,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 70,
+        "initSp": 25,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "attack_speed": 45,
+          "heal_scale": 0.15
+        },
+        "bbStr": {},
+        "rangeId": "x-1",
+        "rangeGrid": [
+          [
+            2,
+            0
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -2,
+            0
+          ]
+        ],
+        "prefabId": "skchr_amiya3_1",
+        "trigger": {
+          "rule": "SKILL_RANGE",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": [
+            [
+              2,
+              0
+            ],
+            [
+              1,
+              -1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              -2
+            ],
+            [
+              0,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              -1,
+              -1
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              1
+            ],
+            [
+              -2,
+              0
+            ]
+          ]
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_amiya3_2",
+        "iconId": "skchr_amiya3_2",
+        "name": "慈悲愿景",
+        "level": 4,
+        "desc": "立刻对攻击范围内所有敌人造成进行一次攻击力为155%的攻击并使目标在6秒内攻击速度-60，移动速度-60%，该次攻击每击中一个敌人获得攻击力+20%（最多叠加5次），接下来的伤害类型变为真实且可以同时攻击2名敌人；整场战斗中该技能只能释放一次",
+        "descRaw": "立刻对攻击范围内所有敌人造成进行一次攻击力为<@ba.vup>155%</>的攻击并使目标在<@ba.vup>6</>秒内攻击速度<@ba.vup>-60</>，移动速度<@ba.vup>-60%</>，该次攻击每击中一个敌人获得攻击力<@ba.vup>+20%</>（最多叠加<@ba.vup>5</>次），接下来的伤害类型变为<@ba.vup>真实</>且可以同时攻击<@ba.vup>2</>名敌人；<@ba.rem>整场战斗中该技能只能释放一次</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 32,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 28,
+        "initSp": 5,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk_scale": 1.55,
+          "atk": 0.2,
+          "max_stack_cnt": 5,
+          "skill_max_trigger_time": 1,
+          "amiya3_s_2[debuff].duration": 6,
+          "amiya3_s_2[debuff].attack_speed": -60,
+          "amiya3_s_2[debuff].move_speed": -0.6
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_amiya3_2",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_1037_amiya3",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": null,
+      "potRank": 0
+    },
+    "isMod": true
+  },
+  "chess_rhodes_amiya3_b": {
+    "chessId": "chess_rhodes_amiya3_b",
+    "baseId": "chess_rhodes_amiya3_a",
+    "goldenId": "chess_rhodes_amiya3_b",
+    "isGolden": true,
+    "tier": 3,
+    "identifier": 273,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 34,
+    "charId": "char_1037_amiya3",
+    "name": "阿米娅",
+    "appellation": "Amiya",
+    "rarity": 5,
+    "profession": "MEDIC",
+    "subProfessionId": "incantationmedic",
+    "subProfessionName": "咒愈师",
+    "position": "RANGED",
+    "nationId": "rhodes",
+    "bonds": [
+      "rhodesShip",
+      "deputShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_amiya_b"
+    ],
+    "price": 3,
+    "sellPrice": 1,
+    "upgradeNum": 0,
+    "upgradeChessId": null,
+    "status": {
+      "phase": 2,
+      "level": 60,
+      "skillLevel": 7,
+      "equipLevel": 1
+    },
+    "stats": {
+      "maxHp": 1466,
+      "atk": 530,
+      "def": 100,
+      "res": 20,
+      "cost": 17,
+      "blockCnt": 1,
+      "bat": 1.6,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "3-3",
+    "rangeGrid": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        -1,
+        2
+      ],
+      [
+        -1,
+        3
+      ]
+    ],
+    "dmgType": "arts",
+    "attackKind": "ranged",
+    "projectile": "bolt",
+    "canHitFly": true,
+    "targetPriority": null,
+    "trait": {
+      "desc": "攻击造成法术伤害，攻击敌人时为攻击范围内一名友方干员治疗相当于60%伤害的生命值",
+      "descRaw": "攻击造成<@ba.kw>法术伤害</>，攻击敌人时为攻击范围内一名友方干员治疗相当于<@ba.kw>60%</>伤害的生命值",
+      "bb": {
+        "scale": 0.6
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "skill": {
+      "skillId": "skchr_amiya3_2",
+      "iconId": "skchr_amiya3_2",
+      "name": "慈悲愿景",
+      "level": 7,
+      "desc": "立刻对攻击范围内所有敌人造成进行一次攻击力为170%的攻击并使目标在7秒内攻击速度-60，移动速度-60%，该次攻击每击中一个敌人获得攻击力+25%（最多叠加5次），接下来的伤害类型变为真实且可以同时攻击2名敌人；整场战斗中该技能只能释放一次",
+      "descRaw": "立刻对攻击范围内所有敌人造成进行一次攻击力为<@ba.vup>170%</>的攻击并使目标在<@ba.vup>7</>秒内攻击速度<@ba.vup>-60</>，移动速度<@ba.vup>-60%</>，该次攻击每击中一个敌人获得攻击力<@ba.vup>+25%</>（最多叠加<@ba.vup>5</>次），接下来的伤害类型变为<@ba.vup>真实</>且可以同时攻击<@ba.vup>2</>名敌人；<@ba.rem>整场战斗中该技能只能释放一次</>",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 32,
+      "spType": "INCREASE_WITH_TIME",
+      "spCost": 25,
+      "initSp": 10,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "atk_scale": 1.7,
+        "atk": 0.25,
+        "max_stack_cnt": 5,
+        "skill_max_trigger_time": 1,
+        "amiya3_s_2[debuff].duration": 7,
+        "amiya3_s_2[debuff].attack_speed": -60,
+        "amiya3_s_2[debuff].move_speed": -0.6
+      },
+      "bbStr": {},
+      "rangeId": null,
+      "rangeGrid": null,
+      "prefabId": "skchr_amiya3_2",
+      "trigger": {
+        "rule": "DEFAULT",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": null
+      },
+      "index": 1,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "诚挚期许",
+        "desc": "在场时所有友方单位最大生命+8%，技能期间所有友方单位每秒恢复2.5%最大生命",
+        "descRaw": "在场时所有友方单位最大生命+8%，技能期间所有友方单位每秒恢复2.5%最大生命",
+        "bb": {
+          "max_hp": 0.08,
+          "hp_recovery_per_sec_by_max_hp_ratio": 0.025
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "tokens": [],
+    "module": {
+      "id": "uniequip_002_amiya3",
+      "name": "带有灼痕的裙子",
+      "type": "INC-X",
+      "level": 1,
+      "active": true
+    },
+    "assets": {
+      "avatar": "char_1037_amiya3_2",
+      "portrait": "char_1037_amiya3_2",
+      "spine": "char_1037_amiya3",
+      "skillIcon": "skchr_amiya3_2",
+      "subProfIcon": "sub_incantationmedic_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_amiya3_1",
+        "iconId": "skchr_amiya3_1",
+        "name": "哀恸共情",
+        "level": 7,
+        "desc": "攻击速度+60，每次攻击时额外治疗自身周围一定范围内所有我方相当于攻击力20%的生命",
+        "descRaw": "攻击速度<@ba.vup>+60</>，每次攻击时额外治疗自身周围一定范围内所有我方相当于攻击力<@ba.vup>20%</>的生命",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 50,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 70,
+        "initSp": 30,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "attack_speed": 60,
+          "heal_scale": 0.2
+        },
+        "bbStr": {},
+        "rangeId": "x-1",
+        "rangeGrid": [
+          [
+            2,
+            0
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -2,
+            0
+          ]
+        ],
+        "prefabId": "skchr_amiya3_1",
+        "trigger": {
+          "rule": "SKILL_RANGE",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": [
+            [
+              2,
+              0
+            ],
+            [
+              1,
+              -1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              -2
+            ],
+            [
+              0,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              -1,
+              -1
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              1
+            ],
+            [
+              -2,
+              0
+            ]
+          ]
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_amiya3_2",
+        "iconId": "skchr_amiya3_2",
+        "name": "慈悲愿景",
+        "level": 7,
+        "desc": "立刻对攻击范围内所有敌人造成进行一次攻击力为170%的攻击并使目标在7秒内攻击速度-60，移动速度-60%，该次攻击每击中一个敌人获得攻击力+25%（最多叠加5次），接下来的伤害类型变为真实且可以同时攻击2名敌人；整场战斗中该技能只能释放一次",
+        "descRaw": "立刻对攻击范围内所有敌人造成进行一次攻击力为<@ba.vup>170%</>的攻击并使目标在<@ba.vup>7</>秒内攻击速度<@ba.vup>-60</>，移动速度<@ba.vup>-60%</>，该次攻击每击中一个敌人获得攻击力<@ba.vup>+25%</>（最多叠加<@ba.vup>5</>次），接下来的伤害类型变为<@ba.vup>真实</>且可以同时攻击<@ba.vup>2</>名敌人；<@ba.rem>整场战斗中该技能只能释放一次</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 32,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 25,
+        "initSp": 10,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk_scale": 1.7,
+          "atk": 0.25,
+          "max_stack_cnt": 5,
+          "skill_max_trigger_time": 1,
+          "amiya3_s_2[debuff].duration": 7,
+          "amiya3_s_2[debuff].attack_speed": -60,
+          "amiya3_s_2[debuff].move_speed": -0.6
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_amiya3_2",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_1037_amiya3",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": "uniequip_002_amiya3",
+      "potRank": 0
+    },
+    "isMod": true,
+    "statsBase": {
+      "maxHp": 1366,
+      "atk": 505,
+      "def": 100,
+      "res": 20,
+      "cost": 17,
+      "blockCnt": 1,
+      "bat": 1.6,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "traitBase": {
+      "desc": "攻击造成法术伤害，攻击敌人时为攻击范围内一名友方干员治疗相当于50%伤害的生命值",
+      "descRaw": "攻击造成<@ba.kw>法术伤害</>，攻击敌人时为攻击范围内一名友方干员治疗相当于<@ba.kw>50%</>伤害的生命值",
+      "bb": {
+        "scale": 0.5
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "talentsBase": [
+      {
+        "index": 0,
+        "name": "诚挚期许",
+        "desc": "在场时所有友方单位最大生命+8%，技能期间所有友方单位每秒恢复2.5%最大生命",
+        "descRaw": "在场时所有友方单位最大生命+8%，技能期间所有友方单位每秒恢复2.5%最大生命",
+        "bb": {
+          "max_hp": 0.08,
+          "hp_recovery_per_sec_by_max_hp_ratio": 0.025
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "modules": [
+      {
+        "uniEquipId": "uniequip_002_amiya3",
+        "name": "带有灼痕的裙子",
+        "typeName": "INC-X",
+        "typeIcon": "inc-x",
+        "icon": "uniequip_002_amiya3",
+        "isDefault": true,
+        "level": 1,
+        "attr": {
+          "maxHp": 100,
+          "atk": 25
+        },
+        "traitOverride": {
+          "desc": "攻击造成法术伤害，攻击敌人时为攻击范围内一名友方干员治疗相当于60%伤害的生命值",
+          "descRaw": "攻击造成<@ba.kw>法术伤害</>，攻击敌人时为攻击范围内一名友方干员治疗相当于<@ba.kw>60%</>伤害的生命值",
+          "bb": {
+            "scale": 0.6
+          },
+          "bbStr": {},
+          "rangeGrid": null
+        },
+        "talentChanges": []
+      }
+    ]
+  },
+  "chess_rhodes_closur_a": {
+    "chessId": "chess_rhodes_closur_a",
+    "baseId": "chess_rhodes_closur_a",
+    "goldenId": "chess_rhodes_closur_b",
+    "isGolden": false,
+    "tier": 3,
+    "identifier": 266,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 27,
+    "charId": "char_4228_closur",
+    "name": "可露希尔",
+    "appellation": "Closure",
+    "rarity": 6,
+    "profession": "PIONEER",
+    "subProfessionId": "tactician",
+    "subProfessionName": "战术家",
+    "position": "RANGED",
+    "nationId": "rhodes",
+    "bonds": [
+      "rhodesShip",
+      "preciShip",
+      "investShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_closur_a"
+    ],
+    "price": 3,
+    "sellPrice": 1,
+    "upgradeNum": 3,
+    "upgradeChessId": "chess_rhodes_closur_b",
+    "status": {
+      "phase": 2,
+      "level": 1,
+      "skillLevel": 4,
+      "equipLevel": 0
+    },
+    "stats": {
+      "maxHp": 1444,
+      "atk": 393,
+      "def": 110,
+      "res": 0,
+      "cost": 15,
+      "blockCnt": 1,
+      "bat": 1,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "3-3",
+    "rangeGrid": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        -1,
+        2
+      ],
+      [
+        -1,
+        3
+      ]
+    ],
+    "dmgType": "phys",
+    "attackKind": "ranged",
+    "projectile": "arrow",
+    "canHitFly": true,
+    "targetPriority": null,
+    "trait": {
+      "desc": "可以在攻击范围内选择一次战术点来召唤援军，自身攻击援军阻挡的敌人时攻击力提升至150%",
+      "descRaw": "可以在攻击范围内选择一次<@ba.kw>战术点</>来召唤援军，自身攻击援军阻挡的敌人时攻击力提升至150%",
+      "bb": {
+        "atk_scale": 1.5
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "skill": {
+      "skillId": "skchr_closur_3",
+      "iconId": "skchr_closur_3",
+      "name": "Q.E.D.",
+      "level": 4,
+      "desc": "技能持续时间内逐渐获得18点部署费用，攻击间隔缩短，锁定自身和援军原本攻击范围内的敌人进行攻击，造成可露希尔150%攻击力的物理伤害并施加持续3秒的4%迟钝效果（可叠加，最高40%），每攻击9次后攻击目标数+1（最多触发6次）",
+      "descRaw": "技能持续时间内逐渐获得<@ba.vup>18</>点部署费用，攻击间隔缩短，锁定自身和援军原本攻击范围内的敌人进行攻击，造成可露希尔<@ba.vup>150%</>攻击力的物理伤害并施加持续<@ba.vup>3</>秒的<@ba.vup>4%</><$ba.slowdown>迟钝</>效果（可叠加，最高<@ba.vup>40%</>），每攻击<@ba.vup>9</>次后攻击目标数+1（最多触发<@ba.vup>6</>次）",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 30,
+      "spType": "INCREASE_WITH_TIME",
+      "spCost": 39,
+      "initSp": 15,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "cost": 0,
+        "cost_attack_add": 0,
+        "attack_trigger_cnt": 9,
+        "max_trigger_cnt": 6,
+        "attack@atk_scale": 1.5,
+        "base_attack_time": -0.5,
+        "attack@slow_down": 0.04,
+        "attack@slow_down_time": 3,
+        "attack@max_stack_cnt": 10,
+        "attack@slow_down_max": 0.4,
+        "cost_period": 18,
+        "closur_s_3[add_cost_period].cost": 1,
+        "closur_s_3[add_cost_period].interval": 1.66
+      },
+      "bbStr": {},
+      "rangeId": null,
+      "rangeGrid": null,
+      "prefabId": "skchr_closur_3",
+      "trigger": {
+        "rule": "SP_FULL",
+        "rawRule": "ALWAYS",
+        "customRangeGrid": null
+      },
+      "index": 2,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "精准投放",
+        "desc": "可以在战术点召唤指挥中心协助作战，其被击败后会在15秒后自动刷新；战术点效果范围随携带技能变化，效果范围内的友方单位视为自身的援军",
+        "descRaw": "可以在战术点召唤指挥中心协助作战，其被击败后会在15秒后自动刷新；战术点效果范围随携带技能变化，效果范围内的友方单位视为自身的援军",
+        "bb": {
+          "cnt": 1
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": "token_10066_closur_ourbase",
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "极限调度",
+        "desc": "携带可露希尔时，部署费用下限降低3，【罗德岛】干员攻击力+4%",
+        "descRaw": "携带可露希尔时，<$ba.costlowerbound>部署费用下限</>降低3，【罗德岛】干员攻击力+4%",
+        "bb": {
+          "cost": -3,
+          "atk": 0.04
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "tokens": [
+      "token_10066_closur_ourbase"
+    ],
+    "module": null,
+    "assets": {
+      "avatar": "char_4228_closur",
+      "portrait": "char_4228_closur_1",
+      "spine": "char_4228_closur",
+      "skillIcon": "skchr_closur_3",
+      "subProfIcon": "sub_tactician_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_closur_1",
+        "iconId": "skchr_closur_1",
+        "name": "递归策略",
+        "level": 4,
+        "desc": "立即使自身的援军获得1层护盾（不叠加），技能持续时间内逐渐获得3点部署费用；部署后每使用过一次技能，获得的部署费用+1（最多提升至6点）",
+        "descRaw": "立即使自身的援军获得<@ba.vup>1</>层<$ba.shield>护盾</>（不叠加），技能持续时间内逐渐获得<@ba.vup>3</>点部署费用；部署后每使用过一次技能，获得的部署费用<@ba.vup>+1</>（最多提升至<@ba.vup>6</>点）",
+        "skillType": "AUTO",
+        "durationType": "NONE",
+        "duration": 8,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 14,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "cost": 3,
+          "cost_per_add": 1,
+          "cost_add_max": 6,
+          "shield_cnt": 1
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_closur_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_closur_2",
+        "iconId": "skchr_closur_2",
+        "name": "模型扩展",
+        "level": 4,
+        "desc": "立即获得6点部署费用，持续时间内逐渐获得15点部署费用，自身的援军防御力+30%，阻挡数+1，自身攻击力+40%，同时攻击2个目标且能攻击到自身援军阻挡的敌人；在战术点效果范围内部署干员时，立即返还部署费用的40%",
+        "descRaw": "立即获得<@ba.vup>6</>点部署费用，持续时间内逐渐获得<@ba.vup>15</>点部署费用，自身的援军防御力<@ba.vup>+30%</>，阻挡数<@ba.vup>+1</>，自身攻击力<@ba.vup>+40%</>，同时攻击<@ba.vup>2</>个目标且能攻击到自身援军阻挡的敌人；在战术点效果范围内部署干员时，立即返还部署费用的<@ba.vup>40%</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 30,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 47,
+        "initSp": 28,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "cost": 6,
+          "cost_return": 0.4,
+          "block_cnt": 1,
+          "def": 0.3,
+          "atk": 0.4,
+          "attack@max_target": 2,
+          "cost_period": 15,
+          "closur_s_2[add_cost_period].cost": 1,
+          "closur_s_2[add_cost_period].interval": 2
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_closur_2",
+        "trigger": {
+          "rule": "SP_FULL",
+          "rawRule": "ALWAYS",
+          "customRangeGrid": null
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_closur_3",
+        "iconId": "skchr_closur_3",
+        "name": "Q.E.D.",
+        "level": 4,
+        "desc": "技能持续时间内逐渐获得18点部署费用，攻击间隔缩短，锁定自身和援军原本攻击范围内的敌人进行攻击，造成可露希尔150%攻击力的物理伤害并施加持续3秒的4%迟钝效果（可叠加，最高40%），每攻击9次后攻击目标数+1（最多触发6次）",
+        "descRaw": "技能持续时间内逐渐获得<@ba.vup>18</>点部署费用，攻击间隔缩短，锁定自身和援军原本攻击范围内的敌人进行攻击，造成可露希尔<@ba.vup>150%</>攻击力的物理伤害并施加持续<@ba.vup>3</>秒的<@ba.vup>4%</><$ba.slowdown>迟钝</>效果（可叠加，最高<@ba.vup>40%</>），每攻击<@ba.vup>9</>次后攻击目标数+1（最多触发<@ba.vup>6</>次）",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 30,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 39,
+        "initSp": 15,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "cost": 0,
+          "cost_attack_add": 0,
+          "attack_trigger_cnt": 9,
+          "max_trigger_cnt": 6,
+          "attack@atk_scale": 1.5,
+          "base_attack_time": -0.5,
+          "attack@slow_down": 0.04,
+          "attack@slow_down_time": 3,
+          "attack@max_stack_cnt": 10,
+          "attack@slow_down_max": 0.4,
+          "cost_period": 18,
+          "closur_s_3[add_cost_period].cost": 1,
+          "closur_s_3[add_cost_period].interval": 1.66
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_closur_3",
+        "trigger": {
+          "rule": "SP_FULL",
+          "rawRule": "ALWAYS",
+          "customRangeGrid": null
+        },
+        "index": 2,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_4228_closur",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": null,
+      "potRank": 0
+    },
+    "isMod": true
+  },
+  "chess_rhodes_closur_b": {
+    "chessId": "chess_rhodes_closur_b",
+    "baseId": "chess_rhodes_closur_a",
+    "goldenId": "chess_rhodes_closur_b",
+    "isGolden": true,
+    "tier": 3,
+    "identifier": 267,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 28,
+    "charId": "char_4228_closur",
+    "name": "可露希尔",
+    "appellation": "Closure",
+    "rarity": 6,
+    "profession": "PIONEER",
+    "subProfessionId": "tactician",
+    "subProfessionName": "战术家",
+    "position": "RANGED",
+    "nationId": "rhodes",
+    "bonds": [
+      "rhodesShip",
+      "preciShip",
+      "investShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_closur_b"
+    ],
+    "price": 3,
+    "sellPrice": 1,
+    "upgradeNum": 0,
+    "upgradeChessId": null,
+    "status": {
+      "phase": 2,
+      "level": 60,
+      "skillLevel": 7,
+      "equipLevel": 1
+    },
+    "stats": {
+      "maxHp": 1805,
+      "atk": 471,
+      "def": 139,
+      "res": 0,
+      "cost": 15,
+      "blockCnt": 1,
+      "bat": 1,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "3-3",
+    "rangeGrid": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        -1,
+        2
+      ],
+      [
+        -1,
+        3
+      ]
+    ],
+    "dmgType": "phys",
+    "attackKind": "ranged",
+    "projectile": "arrow",
+    "canHitFly": true,
+    "targetPriority": null,
+    "trait": {
+      "desc": "可以在攻击范围内选择一次战术点来召唤援军，援军受到来自自身阻挡单位的伤害降低15%，自身攻击援军阻挡的敌人时攻击力提升至150%",
+      "descRaw": "可以在攻击范围内选择一次<@ba.kw>战术点</>来召唤援军，援军受到来自自身阻挡单位的伤害降低<@ba.kw>15%</>，自身攻击援军阻挡的敌人时攻击力提升至150%",
+      "bb": {
+        "atk_scale": 1.5
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "skill": {
+      "skillId": "skchr_closur_3",
+      "iconId": "skchr_closur_3",
+      "name": "Q.E.D.",
+      "level": 7,
+      "desc": "技能持续时间内逐渐获得18点部署费用，攻击间隔缩短，锁定自身和援军原本攻击范围内的敌人进行攻击，造成可露希尔190%攻击力的物理伤害并施加持续3秒的5%迟钝效果（可叠加，最高50%），每攻击9次后攻击目标数+1（最多触发6次）",
+      "descRaw": "技能持续时间内逐渐获得<@ba.vup>18</>点部署费用，攻击间隔缩短，锁定自身和援军原本攻击范围内的敌人进行攻击，造成可露希尔<@ba.vup>190%</>攻击力的物理伤害并施加持续<@ba.vup>3</>秒的<@ba.vup>5%</><$ba.slowdown>迟钝</>效果（可叠加，最高<@ba.vup>50%</>），每攻击<@ba.vup>9</>次后攻击目标数+1（最多触发<@ba.vup>6</>次）",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 30,
+      "spType": "INCREASE_WITH_TIME",
+      "spCost": 36,
+      "initSp": 18,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "cost": 0,
+        "cost_attack_add": 0,
+        "attack_trigger_cnt": 9,
+        "max_trigger_cnt": 6,
+        "attack@atk_scale": 1.9,
+        "base_attack_time": -0.5,
+        "attack@slow_down": 0.05,
+        "attack@slow_down_time": 3,
+        "attack@max_stack_cnt": 10,
+        "attack@slow_down_max": 0.5,
+        "cost_period": 18,
+        "closur_s_3[add_cost_period].cost": 1,
+        "closur_s_3[add_cost_period].interval": 1.66
+      },
+      "bbStr": {},
+      "rangeId": null,
+      "rangeGrid": null,
+      "prefabId": "skchr_closur_3",
+      "trigger": {
+        "rule": "SP_FULL",
+        "rawRule": "ALWAYS",
+        "customRangeGrid": null
+      },
+      "index": 2,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "精准投放",
+        "desc": "可以在战术点召唤指挥中心协助作战，其被击败后会在15秒后自动刷新；战术点效果范围随携带技能变化，效果范围内的友方单位视为自身的援军",
+        "descRaw": "可以在战术点召唤指挥中心协助作战，其被击败后会在15秒后自动刷新；战术点效果范围随携带技能变化，效果范围内的友方单位视为自身的援军",
+        "bb": {
+          "cnt": 1
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": "token_10066_closur_ourbase",
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "极限调度",
+        "desc": "携带可露希尔时，部署费用下限降低3，【罗德岛】干员攻击力+4%",
+        "descRaw": "携带可露希尔时，<$ba.costlowerbound>部署费用下限</>降低3，【罗德岛】干员攻击力+4%",
+        "bb": {
+          "cost": -3,
+          "atk": 0.04
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": -1,
+        "name": null,
+        "desc": null,
+        "descRaw": null,
+        "bb": {
+          "damage_scale": 0.85
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": true,
+        "fromModule": true
+      }
+    ],
+    "tokens": [
+      "token_10066_closur_ourbase"
+    ],
+    "module": {
+      "id": "uniequip_002_closur",
+      "name": "给自己的小奖杯",
+      "type": "TAC-X",
+      "level": 1,
+      "active": true
+    },
+    "assets": {
+      "avatar": "char_4228_closur_2",
+      "portrait": "char_4228_closur_2",
+      "spine": "char_4228_closur",
+      "skillIcon": "skchr_closur_3",
+      "subProfIcon": "sub_tactician_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_closur_1",
+        "iconId": "skchr_closur_1",
+        "name": "递归策略",
+        "level": 7,
+        "desc": "立即使自身的援军获得1层护盾（不叠加），技能持续时间内逐渐获得3点部署费用；部署后每使用过一次技能，获得的部署费用+1（最多提升至7点）",
+        "descRaw": "立即使自身的援军获得<@ba.vup>1</>层<$ba.shield>护盾</>（不叠加），技能持续时间内逐渐获得<@ba.vup>3</>点部署费用；部署后每使用过一次技能，获得的部署费用<@ba.vup>+1</>（最多提升至<@ba.vup>7</>点）",
+        "skillType": "AUTO",
+        "durationType": "NONE",
+        "duration": 8,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 11,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "cost": 3,
+          "cost_per_add": 1,
+          "cost_add_max": 7,
+          "shield_cnt": 1
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_closur_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_closur_2",
+        "iconId": "skchr_closur_2",
+        "name": "模型扩展",
+        "level": 7,
+        "desc": "立即获得7点部署费用，持续时间内逐渐获得15点部署费用，自身的援军防御力+45%，阻挡数+1，自身攻击力+55%，同时攻击2个目标且能攻击到自身援军阻挡的敌人；在战术点效果范围内部署干员时，立即返还部署费用的40%",
+        "descRaw": "立即获得<@ba.vup>7</>点部署费用，持续时间内逐渐获得<@ba.vup>15</>点部署费用，自身的援军防御力<@ba.vup>+45%</>，阻挡数<@ba.vup>+1</>，自身攻击力<@ba.vup>+55%</>，同时攻击<@ba.vup>2</>个目标且能攻击到自身援军阻挡的敌人；在战术点效果范围内部署干员时，立即返还部署费用的<@ba.vup>40%</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 30,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 44,
+        "initSp": 31,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "cost": 7,
+          "cost_return": 0.4,
+          "block_cnt": 1,
+          "def": 0.45,
+          "atk": 0.55,
+          "attack@max_target": 2,
+          "cost_period": 15,
+          "closur_s_2[add_cost_period].cost": 1,
+          "closur_s_2[add_cost_period].interval": 2
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_closur_2",
+        "trigger": {
+          "rule": "SP_FULL",
+          "rawRule": "ALWAYS",
+          "customRangeGrid": null
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_closur_3",
+        "iconId": "skchr_closur_3",
+        "name": "Q.E.D.",
+        "level": 7,
+        "desc": "技能持续时间内逐渐获得18点部署费用，攻击间隔缩短，锁定自身和援军原本攻击范围内的敌人进行攻击，造成可露希尔190%攻击力的物理伤害并施加持续3秒的5%迟钝效果（可叠加，最高50%），每攻击9次后攻击目标数+1（最多触发6次）",
+        "descRaw": "技能持续时间内逐渐获得<@ba.vup>18</>点部署费用，攻击间隔缩短，锁定自身和援军原本攻击范围内的敌人进行攻击，造成可露希尔<@ba.vup>190%</>攻击力的物理伤害并施加持续<@ba.vup>3</>秒的<@ba.vup>5%</><$ba.slowdown>迟钝</>效果（可叠加，最高<@ba.vup>50%</>），每攻击<@ba.vup>9</>次后攻击目标数+1（最多触发<@ba.vup>6</>次）",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 30,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 36,
+        "initSp": 18,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "cost": 0,
+          "cost_attack_add": 0,
+          "attack_trigger_cnt": 9,
+          "max_trigger_cnt": 6,
+          "attack@atk_scale": 1.9,
+          "base_attack_time": -0.5,
+          "attack@slow_down": 0.05,
+          "attack@slow_down_time": 3,
+          "attack@max_stack_cnt": 10,
+          "attack@slow_down_max": 0.5,
+          "cost_period": 18,
+          "closur_s_3[add_cost_period].cost": 1,
+          "closur_s_3[add_cost_period].interval": 1.66
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_closur_3",
+        "trigger": {
+          "rule": "SP_FULL",
+          "rawRule": "ALWAYS",
+          "customRangeGrid": null
+        },
+        "index": 2,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_4228_closur",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": "uniequip_002_closur",
+      "potRank": 0
+    },
+    "isMod": true,
+    "statsBase": {
+      "maxHp": 1655,
+      "atk": 451,
+      "def": 124,
+      "res": 0,
+      "cost": 15,
+      "blockCnt": 1,
+      "bat": 1,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "traitBase": {
+      "desc": "可以在攻击范围内选择一次战术点来召唤援军，自身攻击援军阻挡的敌人时攻击力提升至150%",
+      "descRaw": "可以在攻击范围内选择一次<@ba.kw>战术点</>来召唤援军，自身攻击援军阻挡的敌人时攻击力提升至150%",
+      "bb": {
+        "atk_scale": 1.5
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "talentsBase": [
+      {
+        "index": 0,
+        "name": "精准投放",
+        "desc": "可以在战术点召唤指挥中心协助作战，其被击败后会在15秒后自动刷新；战术点效果范围随携带技能变化，效果范围内的友方单位视为自身的援军",
+        "descRaw": "可以在战术点召唤指挥中心协助作战，其被击败后会在15秒后自动刷新；战术点效果范围随携带技能变化，效果范围内的友方单位视为自身的援军",
+        "bb": {
+          "cnt": 1
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": "token_10066_closur_ourbase",
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "极限调度",
+        "desc": "携带可露希尔时，部署费用下限降低3，【罗德岛】干员攻击力+4%",
+        "descRaw": "携带可露希尔时，<$ba.costlowerbound>部署费用下限</>降低3，【罗德岛】干员攻击力+4%",
+        "bb": {
+          "cost": -3,
+          "atk": 0.04
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "modules": [
+      {
+        "uniEquipId": "uniequip_002_closur",
+        "name": "给自己的小奖杯",
+        "typeName": "TAC-X",
+        "typeIcon": "tac-x",
+        "icon": "uniequip_002_closur",
+        "isDefault": true,
+        "level": 1,
+        "attr": {
+          "maxHp": 150,
+          "atk": 20,
+          "def": 15
+        },
+        "traitOverride": {
+          "desc": "可以在攻击范围内选择一次战术点来召唤援军，援军受到来自自身阻挡单位的伤害降低15%，自身攻击援军阻挡的敌人时攻击力提升至150%",
+          "descRaw": "可以在攻击范围内选择一次<@ba.kw>战术点</>来召唤援军，援军受到来自自身阻挡单位的伤害降低<@ba.kw>15%</>，自身攻击援军阻挡的敌人时攻击力提升至150%",
+          "bb": {
+            "atk_scale": 1.5
+          },
+          "bbStr": {},
+          "rangeGrid": null
+        },
+        "talentChanges": [
+          {
+            "talentIndex": -1,
+            "name": null,
+            "desc": null,
+            "descRaw": null,
+            "bb": {
+              "damage_scale": 0.85
+            },
+            "bbStr": {},
+            "rangeGrid": null,
+            "tokenKey": null,
+            "hidden": true
+          }
+        ]
+      }
+    ]
+  },
+  "chess_rhodes_monstr_a": {
+    "chessId": "chess_rhodes_monstr_a",
+    "baseId": "chess_rhodes_monstr_a",
+    "goldenId": "chess_rhodes_monstr_b",
+    "isGolden": false,
+    "tier": 4,
+    "identifier": 268,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 29,
+    "charId": "char_4179_monstr",
+    "name": "Mon3tr",
+    "appellation": "Mon3tr",
+    "rarity": 6,
+    "profession": "MEDIC",
+    "subProfessionId": "chainhealer",
+    "subProfessionName": "链愈师",
+    "position": "RANGED",
+    "nationId": "rhodes",
+    "bonds": [
+      "rhodesShip",
+      "swiftShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_monstr_a"
+    ],
+    "price": 3,
+    "sellPrice": 1,
+    "upgradeNum": 3,
+    "upgradeChessId": "chess_rhodes_monstr_b",
+    "status": {
+      "phase": 2,
+      "level": 1,
+      "skillLevel": 4,
+      "equipLevel": 0
+    },
+    "stats": {
+      "maxHp": 1492,
+      "atk": 422,
+      "def": 176,
+      "res": 0,
+      "cost": 18,
+      "blockCnt": 1,
+      "bat": 2.85,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "y-2",
+    "rangeGrid": [
+      [
+        1,
+        -1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        -1,
+        2
+      ]
+    ],
+    "dmgType": "heal",
+    "attackKind": "heal",
+    "projectile": "orb",
+    "canHitFly": false,
+    "targetPriority": null,
+    "trait": {
+      "desc": "恢复友方单位生命，且会在3个友方单位间跳跃，每次跳跃治疗量降低25%",
+      "descRaw": "恢复友方单位生命，且会在<@ba.kw>3</>个友方单位间跳跃，每次跳跃治疗量降低25%",
+      "bb": {
+        "attack@chain.max_target": 3,
+        "attack@chain.atk_scale": 0.75
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "skill": {
+      "skillId": "skchr_monstr_3",
+      "iconId": "skchr_monstr_3",
+      "name": "策略：熔毁",
+      "level": 4,
+      "desc": "攻击范围改变，移动至重构体位置，攻击力+250%，攻击间隔降低，阻挡数+2，生命上限+5000，每秒流失80点生命值，同时攻击阻挡的所有敌人，伤害类型变为真实，攻击治疗自身相当于攻击力50%的生命值\n技能结束或受到致命伤害时，返回初始位置",
+      "descRaw": "攻击范围改变，<$ba.addash>移动</>至重构体位置，攻击力<@ba.vup>+250%</>，攻击间隔降低，阻挡数<@ba.vup>+2</>，生命上限<@ba.vup>+5000</>，每秒流失<@ba.vdown>80</>点生命值，同时攻击阻挡的所有敌人，伤害类型变为<@ba.vup>真实</>，攻击治疗自身相当于攻击力<@ba.vup>50%</>的生命值\n<@ba.rem>技能结束或受到致命伤害时，返回初始位置</>",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 25,
+      "spType": "INCREASE_WHEN_ATTACK",
+      "spCost": 15,
+      "initSp": 5,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "atk": 2.5,
+        "damage_per_second": 80,
+        "max_hp": 5000,
+        "block_cnt": 2,
+        "base_attack_time": -1.5,
+        "attack@heal_scale": 0.5
+      },
+      "bbStr": {},
+      "rangeId": "x-4",
+      "rangeGrid": [
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      "prefabId": "skchr_monstr_3",
+      "trigger": {
+        "rule": "DEFAULT",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": null
+      },
+      "index": 2,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "自我修复",
+        "desc": "可以在攻击范围内的地面使用一个仅可被自身治疗的重构体，重构体周围友方单位的攻击力+15%，重构体受到自身和Mon3tr治疗时，可额外进行一次不会衰减的治疗跳跃",
+        "descRaw": "可以在攻击范围内的地面使用一个仅可被自身治疗的重构体，重构体周围友方单位的攻击力+15%，重构体受到自身和Mon3tr治疗时，可额外进行一次不会衰减的治疗跳跃",
+        "bb": {
+          "cnt": 1,
+          "atk": 0.15
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": "token_10050_monstr_prosts",
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "战术协同",
+        "desc": "自身或重构体造成治疗时，使目标及自身的攻击速度+20，持续10秒（无法叠加）",
+        "descRaw": "自身或重构体造成治疗时，使目标及自身的攻击速度+20，持续10秒（无法叠加）",
+        "bb": {
+          "buff_duration": 10,
+          "attack_speed": 20
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "tokens": [
+      "token_10050_monstr_prosts"
+    ],
+    "module": null,
+    "assets": {
+      "avatar": "char_4179_monstr",
+      "portrait": "char_4179_monstr_1",
+      "spine": "char_4179_monstr",
+      "skillIcon": "skchr_monstr_3",
+      "subProfIcon": "sub_chainhealer_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_monstr_1",
+        "iconId": "skchr_monstr_1",
+        "name": "策略：超压链接",
+        "level": 4,
+        "desc": "下次治疗可以恢复相当于攻击力135%的生命，治疗的跳跃次数+1",
+        "descRaw": "下次治疗可以恢复相当于攻击力<@ba.vup>135%</>的生命，治疗的跳跃次数<@ba.vup>+1</>",
+        "skillType": "AUTO",
+        "durationType": "NONE",
+        "duration": -1,
+        "spType": "INCREASE_WHEN_ATTACK",
+        "spCost": 5,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "heal_scale": 1.35,
+          "chain.max_target": 4
+        },
+        "bbStr": {},
+        "rangeId": "y-2",
+        "rangeGrid": [
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ]
+        ],
+        "prefabId": "skchr_monstr_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_monstr_2",
+        "iconId": "skchr_monstr_2",
+        "name": "策略：超负荷",
+        "level": 4,
+        "desc": "技能期间优先治疗重构体，重构体每受到一次Mon3tr的治疗，就会进行一次跳跃治疗，第二天赋的效果提升至1.8倍",
+        "descRaw": "技能期间优先治疗重构体，重构体每受到一次Mon3tr的治疗，就会进行一次跳跃治疗，第二天赋的效果提升至<@ba.vup>1.8</>倍",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 30,
+        "spType": "INCREASE_WHEN_ATTACK",
+        "spCost": 15,
+        "initSp": 7,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "talent_scale": 1.8
+        },
+        "bbStr": {},
+        "rangeId": "y-2",
+        "rangeGrid": [
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ]
+        ],
+        "prefabId": "skchr_monstr_2",
+        "trigger": {
+          "rule": "SKILL_RANGE",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": [
+            [
+              1,
+              -1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              0,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              -1,
+              -1
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              1
+            ],
+            [
+              -1,
+              2
+            ]
+          ]
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_monstr_3",
+        "iconId": "skchr_monstr_3",
+        "name": "策略：熔毁",
+        "level": 4,
+        "desc": "攻击范围改变，移动至重构体位置，攻击力+250%，攻击间隔降低，阻挡数+2，生命上限+5000，每秒流失80点生命值，同时攻击阻挡的所有敌人，伤害类型变为真实，攻击治疗自身相当于攻击力50%的生命值\n技能结束或受到致命伤害时，返回初始位置",
+        "descRaw": "攻击范围改变，<$ba.addash>移动</>至重构体位置，攻击力<@ba.vup>+250%</>，攻击间隔降低，阻挡数<@ba.vup>+2</>，生命上限<@ba.vup>+5000</>，每秒流失<@ba.vdown>80</>点生命值，同时攻击阻挡的所有敌人，伤害类型变为<@ba.vup>真实</>，攻击治疗自身相当于攻击力<@ba.vup>50%</>的生命值\n<@ba.rem>技能结束或受到致命伤害时，返回初始位置</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 25,
+        "spType": "INCREASE_WHEN_ATTACK",
+        "spCost": 15,
+        "initSp": 5,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 2.5,
+          "damage_per_second": 80,
+          "max_hp": 5000,
+          "block_cnt": 2,
+          "base_attack_time": -1.5,
+          "attack@heal_scale": 0.5
+        },
+        "bbStr": {},
+        "rangeId": "x-4",
+        "rangeGrid": [
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ]
+        ],
+        "prefabId": "skchr_monstr_3",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 2,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_4179_monstr",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": null,
+      "potRank": 0
+    },
+    "isMod": true
+  },
+  "chess_rhodes_monstr_b": {
+    "chessId": "chess_rhodes_monstr_b",
+    "baseId": "chess_rhodes_monstr_a",
+    "goldenId": "chess_rhodes_monstr_b",
+    "isGolden": true,
+    "tier": 4,
+    "identifier": 269,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 30,
+    "charId": "char_4179_monstr",
+    "name": "Mon3tr",
+    "appellation": "Mon3tr",
+    "rarity": 6,
+    "profession": "MEDIC",
+    "subProfessionId": "chainhealer",
+    "subProfessionName": "链愈师",
+    "position": "RANGED",
+    "nationId": "rhodes",
+    "bonds": [
+      "rhodesShip",
+      "swiftShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_monstr_b"
+    ],
+    "price": 3,
+    "sellPrice": 1,
+    "upgradeNum": 0,
+    "upgradeChessId": null,
+    "status": {
+      "phase": 2,
+      "level": 60,
+      "skillLevel": 7,
+      "equipLevel": 1
+    },
+    "stats": {
+      "maxHp": 1653,
+      "atk": 532,
+      "def": 236,
+      "res": 0,
+      "cost": 18,
+      "blockCnt": 1,
+      "bat": 2.85,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "y-2",
+    "rangeGrid": [
+      [
+        1,
+        -1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        -1,
+        2
+      ]
+    ],
+    "dmgType": "heal",
+    "attackKind": "heal",
+    "projectile": "orb",
+    "canHitFly": false,
+    "targetPriority": null,
+    "trait": {
+      "desc": "恢复友方单位生命，且会在3个友方单位间跳跃，每次跳跃治疗量降低15%",
+      "descRaw": "恢复友方单位生命，且会在<@ba.kw>3</>个友方单位间跳跃，每次跳跃治疗量降低15%",
+      "bb": {
+        "attack@chain.max_target": 3,
+        "attack@chain.atk_scale": 0.85
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "skill": {
+      "skillId": "skchr_monstr_3",
+      "iconId": "skchr_monstr_3",
+      "name": "策略：熔毁",
+      "level": 7,
+      "desc": "攻击范围改变，移动至重构体位置，攻击力+280%，攻击间隔降低，阻挡数+2，生命上限+5000，每秒流失80点生命值，同时攻击阻挡的所有敌人，伤害类型变为真实，攻击治疗自身相当于攻击力50%的生命值\n技能结束或受到致命伤害时，返回初始位置",
+      "descRaw": "攻击范围改变，<$ba.addash>移动</>至重构体位置，攻击力<@ba.vup>+280%</>，攻击间隔降低，阻挡数<@ba.vup>+2</>，生命上限<@ba.vup>+5000</>，每秒流失<@ba.vdown>80</>点生命值，同时攻击阻挡的所有敌人，伤害类型变为<@ba.vup>真实</>，攻击治疗自身相当于攻击力<@ba.vup>50%</>的生命值\n<@ba.rem>技能结束或受到致命伤害时，返回初始位置</>",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 25,
+      "spType": "INCREASE_WHEN_ATTACK",
+      "spCost": 15,
+      "initSp": 7,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "atk": 2.8,
+        "damage_per_second": 80,
+        "max_hp": 5000,
+        "block_cnt": 2,
+        "base_attack_time": -1.5,
+        "attack@heal_scale": 0.5
+      },
+      "bbStr": {},
+      "rangeId": "x-4",
+      "rangeGrid": [
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      "prefabId": "skchr_monstr_3",
+      "trigger": {
+        "rule": "DEFAULT",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": null
+      },
+      "index": 2,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "自我修复",
+        "desc": "可以在攻击范围内的地面使用一个仅可被自身治疗的重构体，重构体周围友方单位的攻击力+15%，重构体受到自身和Mon3tr治疗时，可额外进行一次不会衰减的治疗跳跃",
+        "descRaw": "可以在攻击范围内的地面使用一个仅可被自身治疗的重构体，重构体周围友方单位的攻击力+15%，重构体受到自身和Mon3tr治疗时，可额外进行一次不会衰减的治疗跳跃",
+        "bb": {
+          "cnt": 1,
+          "atk": 0.15
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": "token_10050_monstr_prosts",
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "战术协同",
+        "desc": "自身或重构体造成治疗时，使目标及自身的攻击速度+20，持续10秒（无法叠加）",
+        "descRaw": "自身或重构体造成治疗时，使目标及自身的攻击速度+20，持续10秒（无法叠加）",
+        "bb": {
+          "buff_duration": 10,
+          "attack_speed": 20
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": -1,
+        "name": null,
+        "desc": null,
+        "descRaw": null,
+        "bb": {
+          "attack@chain.max_target": 3,
+          "attack@chain.atk_scale": 0.85
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": true
+      }
+    ],
+    "tokens": [
+      "token_10050_monstr_prosts"
+    ],
+    "module": {
+      "id": "uniequip_002_monstr",
+      "name": "记忆存档",
+      "type": "XAH-X",
+      "level": 1,
+      "active": true
+    },
+    "assets": {
+      "avatar": "char_4179_monstr_2",
+      "portrait": "char_4179_monstr_2",
+      "spine": "char_4179_monstr",
+      "skillIcon": "skchr_monstr_3",
+      "subProfIcon": "sub_chainhealer_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_monstr_1",
+        "iconId": "skchr_monstr_1",
+        "name": "策略：超压链接",
+        "level": 7,
+        "desc": "下次治疗可以恢复相当于攻击力170%的生命，治疗的跳跃次数+1",
+        "descRaw": "下次治疗可以恢复相当于攻击力<@ba.vup>170%</>的生命，治疗的跳跃次数<@ba.vup>+1</>",
+        "skillType": "AUTO",
+        "durationType": "NONE",
+        "duration": -1,
+        "spType": "INCREASE_WHEN_ATTACK",
+        "spCost": 3,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "heal_scale": 1.7,
+          "chain.max_target": 4
+        },
+        "bbStr": {},
+        "rangeId": "y-2",
+        "rangeGrid": [
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ]
+        ],
+        "prefabId": "skchr_monstr_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_monstr_2",
+        "iconId": "skchr_monstr_2",
+        "name": "策略：超负荷",
+        "level": 7,
+        "desc": "技能期间优先治疗重构体，重构体每受到一次Mon3tr的治疗，就会进行一次跳跃治疗，第二天赋的效果提升至2.3倍",
+        "descRaw": "技能期间优先治疗重构体，重构体每受到一次Mon3tr的治疗，就会进行一次跳跃治疗，第二天赋的效果提升至<@ba.vup>2.3</>倍",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 30,
+        "spType": "INCREASE_WHEN_ATTACK",
+        "spCost": 15,
+        "initSp": 8,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "talent_scale": 2.3
+        },
+        "bbStr": {},
+        "rangeId": "y-2",
+        "rangeGrid": [
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ]
+        ],
+        "prefabId": "skchr_monstr_2",
+        "trigger": {
+          "rule": "SKILL_RANGE",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": [
+            [
+              1,
+              -1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              0,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              -1,
+              -1
+            ],
+            [
+              -1,
+              0
+            ],
+            [
+              -1,
+              1
+            ],
+            [
+              -1,
+              2
+            ]
+          ]
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_monstr_3",
+        "iconId": "skchr_monstr_3",
+        "name": "策略：熔毁",
+        "level": 7,
+        "desc": "攻击范围改变，移动至重构体位置，攻击力+280%，攻击间隔降低，阻挡数+2，生命上限+5000，每秒流失80点生命值，同时攻击阻挡的所有敌人，伤害类型变为真实，攻击治疗自身相当于攻击力50%的生命值\n技能结束或受到致命伤害时，返回初始位置",
+        "descRaw": "攻击范围改变，<$ba.addash>移动</>至重构体位置，攻击力<@ba.vup>+280%</>，攻击间隔降低，阻挡数<@ba.vup>+2</>，生命上限<@ba.vup>+5000</>，每秒流失<@ba.vdown>80</>点生命值，同时攻击阻挡的所有敌人，伤害类型变为<@ba.vup>真实</>，攻击治疗自身相当于攻击力<@ba.vup>50%</>的生命值\n<@ba.rem>技能结束或受到致命伤害时，返回初始位置</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 25,
+        "spType": "INCREASE_WHEN_ATTACK",
+        "spCost": 15,
+        "initSp": 7,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 2.8,
+          "damage_per_second": 80,
+          "max_hp": 5000,
+          "block_cnt": 2,
+          "base_attack_time": -1.5,
+          "attack@heal_scale": 0.5
+        },
+        "bbStr": {},
+        "rangeId": "x-4",
+        "rangeGrid": [
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ]
+        ],
+        "prefabId": "skchr_monstr_3",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 2,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_4179_monstr",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": "uniequip_002_monstr",
+      "potRank": 0
+    },
+    "isMod": true,
+    "statsBase": {
+      "maxHp": 1653,
+      "atk": 492,
+      "def": 206,
+      "res": 0,
+      "cost": 18,
+      "blockCnt": 1,
+      "bat": 2.85,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "traitBase": {
+      "desc": "恢复友方单位生命，且会在3个友方单位间跳跃，每次跳跃治疗量降低25%",
+      "descRaw": "恢复友方单位生命，且会在<@ba.kw>3</>个友方单位间跳跃，每次跳跃治疗量降低25%",
+      "bb": {
+        "attack@chain.max_target": 3,
+        "attack@chain.atk_scale": 0.75
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "talentsBase": [
+      {
+        "index": 0,
+        "name": "自我修复",
+        "desc": "可以在攻击范围内的地面使用一个仅可被自身治疗的重构体，重构体周围友方单位的攻击力+15%，重构体受到自身和Mon3tr治疗时，可额外进行一次不会衰减的治疗跳跃",
+        "descRaw": "可以在攻击范围内的地面使用一个仅可被自身治疗的重构体，重构体周围友方单位的攻击力+15%，重构体受到自身和Mon3tr治疗时，可额外进行一次不会衰减的治疗跳跃",
+        "bb": {
+          "cnt": 1,
+          "atk": 0.15
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": "token_10050_monstr_prosts",
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "战术协同",
+        "desc": "自身或重构体造成治疗时，使目标及自身的攻击速度+20，持续10秒（无法叠加）",
+        "descRaw": "自身或重构体造成治疗时，使目标及自身的攻击速度+20，持续10秒（无法叠加）",
+        "bb": {
+          "buff_duration": 10,
+          "attack_speed": 20
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "modules": [
+      {
+        "uniEquipId": "uniequip_002_monstr",
+        "name": "记忆存档",
+        "typeName": "XAH-X",
+        "typeIcon": "xah-x",
+        "icon": "uniequip_002_monstr",
+        "isDefault": true,
+        "level": 1,
+        "attr": {
+          "atk": 40,
+          "def": 30
+        },
+        "traitOverride": {
+          "desc": "恢复友方单位生命，且会在3个友方单位间跳跃，每次跳跃治疗量降低15%",
+          "descRaw": "恢复友方单位生命，且会在<@ba.kw>3</>个友方单位间跳跃，每次跳跃治疗量降低15%",
+          "bb": {
+            "attack@chain.max_target": 3,
+            "attack@chain.atk_scale": 0.85
+          },
+          "bbStr": {},
+          "rangeGrid": null
+        },
+        "talentChanges": [
+          {
+            "talentIndex": -1,
+            "name": null,
+            "desc": null,
+            "descRaw": null,
+            "bb": {
+              "attack@chain.max_target": 3,
+              "attack@chain.atk_scale": 0.85
+            },
+            "bbStr": {},
+            "rangeGrid": null,
+            "tokenKey": null,
+            "hidden": false
+          }
+        ]
+      }
+    ]
+  },
+  "chess_rhodes_ascln_a": {
+    "chessId": "chess_rhodes_ascln_a",
+    "baseId": "chess_rhodes_ascln_a",
+    "goldenId": "chess_rhodes_ascln_b",
+    "isGolden": false,
+    "tier": 5,
+    "identifier": 270,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 31,
+    "charId": "char_4132_ascln",
+    "name": "阿斯卡纶",
+    "appellation": "Ascalon",
+    "rarity": 6,
+    "profession": "SPECIAL",
+    "subProfessionId": "stalker",
+    "subProfessionName": "伏击客",
+    "position": "MELEE",
+    "nationId": "rhodes",
+    "bonds": [
+      "rhodesShip",
+      "soloShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_ascln_a"
+    ],
+    "price": 4,
+    "sellPrice": 1,
+    "upgradeNum": 3,
+    "upgradeChessId": "chess_rhodes_ascln_b",
+    "status": {
+      "phase": 2,
+      "level": 1,
+      "skillLevel": 4,
+      "equipLevel": 0
+    },
+    "stats": {
+      "maxHp": 1233,
+      "atk": 763,
+      "def": 283,
+      "res": 30,
+      "cost": 21,
+      "blockCnt": 0,
+      "bat": 3.5,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": -1,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "y-1",
+    "rangeGrid": [
+      [
+        1,
+        -1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        -1,
+        1
+      ]
+    ],
+    "dmgType": "phys",
+    "attackKind": "melee",
+    "projectile": "none",
+    "canHitFly": false,
+    "targetPriority": null,
+    "trait": {
+      "desc": "对攻击范围内所有敌人造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的攻击目标",
+      "descRaw": "对攻击范围内<@ba.kw>所有敌人</>造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的<@ba.kw>攻击目标</>",
+      "bb": {
+        "prob": 0.5
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "skill": {
+      "skillId": "skchr_ascln_3",
+      "iconId": "skchr_ascln_3",
+      "name": "降临",
+      "level": 4,
+      "desc": "攻击范围扩大，攻击力+20%，攻击间隔缩短，使攻击范围内的地面敌人物理与法术命中率-15%。自身更易受到敌人攻击，敌人未命中自身或自身闪避时回复4%最大生命值",
+      "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+20%</>，攻击间隔<@ba.vup>缩短</>，使攻击范围内的地面敌人物理与法术命中率<@ba.vup>-15%</>。自身更易受到敌人攻击，敌人未命中自身或自身闪避时回复<@ba.vup>4%</>最大生命值",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 45,
+      "spType": "INCREASE_WITH_TIME",
+      "spCost": 53,
+      "initSp": 25,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "base_attack_time": -1.2,
+        "atk": 0.2,
+        "taunt_level": 2,
+        "attack@hp_ratio": 0.04,
+        "attack@damage_hitrate_physical": -0.15,
+        "attack@damage_hitrate_magical": -0.15
+      },
+      "bbStr": {},
+      "rangeId": "y-10",
+      "rangeGrid": [
+        [
+          2,
+          -1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -2,
+          -1
+        ],
+        [
+          -2,
+          0
+        ],
+        [
+          -2,
+          1
+        ]
+      ],
+      "prefabId": "skchr_ascln_3",
+      "trigger": {
+        "rule": "DEFAULT",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": null
+      },
+      "index": 2,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "死亡拘审",
+        "desc": "攻击对敌人施加效果：移动速度降低18％，每秒受到10％阿斯卡纶当前攻击力的法术伤害，持续25秒，效果最多叠加三层",
+        "descRaw": "攻击对敌人施加效果：移动速度降低18％，每秒受到10％阿斯卡纶当前攻击力的法术伤害，持续25秒，效果最多叠加三层",
+        "bb": {
+          "move_speed": -0.18,
+          "atk_ratio": 0.1,
+          "max_stack_cnt": 3,
+          "debuff_duration": 25,
+          "interval": 1
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "噬光残影",
+        "desc": "攻击速度+8，自身周围四格有高台时，攻击速度额外+6",
+        "descRaw": "攻击速度+8，自身周围四格有高台时，攻击速度额外+6",
+        "bb": {
+          "attack_speed": 8,
+          "attack_speed_add": 6,
+          "cnt": 1
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "tokens": [],
+    "module": null,
+    "assets": {
+      "avatar": "char_4132_ascln",
+      "portrait": "char_4132_ascln_1",
+      "spine": "char_4132_ascln",
+      "skillIcon": "skchr_ascln_3",
+      "subProfIcon": "sub_stalker_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_ascln_1",
+        "iconId": "skchr_ascln_1",
+        "name": "追袭",
+        "level": 4,
+        "desc": "下次攻击的攻击力提升至130%，并连续攻击两次\n可充能2次",
+        "descRaw": "下次攻击的攻击力提升至<@ba.vup>130%</>，并连续攻击两次\n<@ba.rem>可充能2次</>",
+        "skillType": "AUTO",
+        "durationType": "NONE",
+        "duration": -1,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 10,
+        "initSp": 2,
+        "maxChargeTime": 2,
+        "increment": 1,
+        "bb": {
+          "atk_scale": 1.3,
+          "cnt": 2
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_ascln_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_ascln_2",
+        "iconId": "skchr_ascln_2",
+        "name": "恩赐",
+        "level": 4,
+        "desc": "攻击力+50%，使攻击范围内地面敌人移动速度-30%，并在其被击倒时对周围敌人施加一层第一天赋效果",
+        "descRaw": "攻击力<@ba.vup>+50%</>，使攻击范围内地面敌人移动速度<@ba.vup>-30%</>，并在其被击倒时对周围敌人施加一层第一天赋效果",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 35,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 27,
+        "initSp": 5,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 0.5,
+          "move_speed": -0.3,
+          "range_radius": 1.3
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_ascln_2",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_ascln_3",
+        "iconId": "skchr_ascln_3",
+        "name": "降临",
+        "level": 4,
+        "desc": "攻击范围扩大，攻击力+20%，攻击间隔缩短，使攻击范围内的地面敌人物理与法术命中率-15%。自身更易受到敌人攻击，敌人未命中自身或自身闪避时回复4%最大生命值",
+        "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+20%</>，攻击间隔<@ba.vup>缩短</>，使攻击范围内的地面敌人物理与法术命中率<@ba.vup>-15%</>。自身更易受到敌人攻击，敌人未命中自身或自身闪避时回复<@ba.vup>4%</>最大生命值",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 45,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 53,
+        "initSp": 25,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "base_attack_time": -1.2,
+          "atk": 0.2,
+          "taunt_level": 2,
+          "attack@hp_ratio": 0.04,
+          "attack@damage_hitrate_physical": -0.15,
+          "attack@damage_hitrate_magical": -0.15
+        },
+        "bbStr": {},
+        "rangeId": "y-10",
+        "rangeGrid": [
+          [
+            2,
+            -1
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -2,
+            -1
+          ],
+          [
+            -2,
+            0
+          ],
+          [
+            -2,
+            1
+          ]
+        ],
+        "prefabId": "skchr_ascln_3",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 2,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_4132_ascln",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": null,
+      "potRank": 0
+    },
+    "isMod": true
+  },
+  "chess_rhodes_ascln_b": {
+    "chessId": "chess_rhodes_ascln_b",
+    "baseId": "chess_rhodes_ascln_a",
+    "goldenId": "chess_rhodes_ascln_b",
+    "isGolden": true,
+    "tier": 5,
+    "identifier": 271,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 32,
+    "charId": "char_4132_ascln",
+    "name": "阿斯卡纶",
+    "appellation": "Ascalon",
+    "rarity": 6,
+    "profession": "SPECIAL",
+    "subProfessionId": "stalker",
+    "subProfessionName": "伏击客",
+    "position": "MELEE",
+    "nationId": "rhodes",
+    "bonds": [
+      "rhodesShip",
+      "soloShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_ascln_b"
+    ],
+    "price": 4,
+    "sellPrice": 1,
+    "upgradeNum": 0,
+    "upgradeChessId": null,
+    "status": {
+      "phase": 2,
+      "level": 60,
+      "skillLevel": 7,
+      "equipLevel": 1
+    },
+    "stats": {
+      "maxHp": 1672,
+      "atk": 905,
+      "def": 316,
+      "res": 30,
+      "cost": 21,
+      "blockCnt": 0,
+      "bat": 3.5,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": -1,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "y-1",
+    "rangeGrid": [
+      [
+        1,
+        -1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        -1,
+        1
+      ]
+    ],
+    "dmgType": "phys",
+    "attackKind": "melee",
+    "projectile": "none",
+    "canHitFly": false,
+    "targetPriority": null,
+    "trait": {
+      "desc": "对攻击范围内所有敌人造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的攻击目标",
+      "descRaw": "对攻击范围内<@ba.kw>所有敌人</>造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的<@ba.kw>攻击目标</>",
+      "bb": {
+        "prob": 0.5
+      },
+      "bbStr": {},
+      "rangeGrid": null,
+      "moduleDesc": "攻击范围内所有敌人移动速度-20%",
+      "moduleDescRaw": "攻击范围内所有敌人移动速度<@ba.kw>-20%</>"
+    },
+    "skill": {
+      "skillId": "skchr_ascln_3",
+      "iconId": "skchr_ascln_3",
+      "name": "降临",
+      "level": 7,
+      "desc": "攻击范围扩大，攻击力+20%，攻击间隔较大幅度缩短，使攻击范围内的地面敌人物理与法术命中率-30%。自身更易受到敌人攻击，敌人未命中自身或自身闪避时回复5%最大生命值",
+      "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+20%</>，攻击间隔<@ba.vup>较大幅度缩短</>，使攻击范围内的地面敌人物理与法术命中率<@ba.vup>-30%</>。自身更易受到敌人攻击，敌人未命中自身或自身闪避时回复<@ba.vup>5%</>最大生命值",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 45,
+      "spType": "INCREASE_WITH_TIME",
+      "spCost": 49,
+      "initSp": 30,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "base_attack_time": -1.5,
+        "atk": 0.2,
+        "taunt_level": 2,
+        "attack@hp_ratio": 0.05,
+        "attack@damage_hitrate_physical": -0.3,
+        "attack@damage_hitrate_magical": -0.3
+      },
+      "bbStr": {},
+      "rangeId": "y-10",
+      "rangeGrid": [
+        [
+          2,
+          -1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -2,
+          -1
+        ],
+        [
+          -2,
+          0
+        ],
+        [
+          -2,
+          1
+        ]
+      ],
+      "prefabId": "skchr_ascln_3",
+      "trigger": {
+        "rule": "DEFAULT",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": null
+      },
+      "index": 2,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "死亡拘审",
+        "desc": "攻击对敌人施加效果：移动速度降低18％，每秒受到10％阿斯卡纶当前攻击力的法术伤害，持续25秒，效果最多叠加三层",
+        "descRaw": "攻击对敌人施加效果：移动速度降低18％，每秒受到10％阿斯卡纶当前攻击力的法术伤害，持续25秒，效果最多叠加三层",
+        "bb": {
+          "move_speed": -0.18,
+          "atk_ratio": 0.1,
+          "max_stack_cnt": 3,
+          "debuff_duration": 25,
+          "interval": 1
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "噬光残影",
+        "desc": "攻击速度+8，自身周围四格有高台时，攻击速度额外+6",
+        "descRaw": "攻击速度+8，自身周围四格有高台时，攻击速度额外+6",
+        "bb": {
+          "attack_speed": 8,
+          "attack_speed_add": 6,
+          "cnt": 1
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": -1,
+        "name": null,
+        "desc": null,
+        "descRaw": null,
+        "bb": {
+          "move_speed": -0.2
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": true,
+        "fromModule": true
+      }
+    ],
+    "tokens": [],
+    "module": {
+      "id": "uniequip_002_ascln",
+      "name": "“无形，无情”",
+      "type": "AMB-X",
+      "level": 1,
+      "active": true
+    },
+    "assets": {
+      "avatar": "char_4132_ascln_2",
+      "portrait": "char_4132_ascln_2",
+      "spine": "char_4132_ascln",
+      "skillIcon": "skchr_ascln_3",
+      "subProfIcon": "sub_stalker_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_ascln_1",
+        "iconId": "skchr_ascln_1",
+        "name": "追袭",
+        "level": 7,
+        "desc": "下次攻击的攻击力提升至170%，并连续攻击两次\n可充能3次",
+        "descRaw": "下次攻击的攻击力提升至<@ba.vup>170%</>，并连续攻击两次\n<@ba.rem>可充能3次</>",
+        "skillType": "AUTO",
+        "durationType": "NONE",
+        "duration": -1,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 8,
+        "initSp": 4,
+        "maxChargeTime": 3,
+        "increment": 1,
+        "bb": {
+          "atk_scale": 1.7,
+          "cnt": 3
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_ascln_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_ascln_2",
+        "iconId": "skchr_ascln_2",
+        "name": "恩赐",
+        "level": 7,
+        "desc": "攻击力+90%，使攻击范围内地面敌人移动速度-40%，并在其被击倒时对周围敌人施加一层第一天赋效果",
+        "descRaw": "攻击力<@ba.vup>+90%</>，使攻击范围内地面敌人移动速度<@ba.vup>-40%</>，并在其被击倒时对周围敌人施加一层第一天赋效果",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 35,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 24,
+        "initSp": 10,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 0.9,
+          "move_speed": -0.4,
+          "range_radius": 1.3
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_ascln_2",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_ascln_3",
+        "iconId": "skchr_ascln_3",
+        "name": "降临",
+        "level": 7,
+        "desc": "攻击范围扩大，攻击力+20%，攻击间隔较大幅度缩短，使攻击范围内的地面敌人物理与法术命中率-30%。自身更易受到敌人攻击，敌人未命中自身或自身闪避时回复5%最大生命值",
+        "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+20%</>，攻击间隔<@ba.vup>较大幅度缩短</>，使攻击范围内的地面敌人物理与法术命中率<@ba.vup>-30%</>。自身更易受到敌人攻击，敌人未命中自身或自身闪避时回复<@ba.vup>5%</>最大生命值",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 45,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 49,
+        "initSp": 30,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "base_attack_time": -1.5,
+          "atk": 0.2,
+          "taunt_level": 2,
+          "attack@hp_ratio": 0.05,
+          "attack@damage_hitrate_physical": -0.3,
+          "attack@damage_hitrate_magical": -0.3
+        },
+        "bbStr": {},
+        "rangeId": "y-10",
+        "rangeGrid": [
+          [
+            2,
+            -1
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -2,
+            -1
+          ],
+          [
+            -2,
+            0
+          ],
+          [
+            -2,
+            1
+          ]
+        ],
+        "prefabId": "skchr_ascln_3",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 2,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_4132_ascln",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": "uniequip_002_ascln",
+      "potRank": 0
+    },
+    "isMod": true,
+    "statsBase": {
+      "maxHp": 1492,
+      "atk": 890,
+      "def": 316,
+      "res": 30,
+      "cost": 21,
+      "blockCnt": 0,
+      "bat": 3.5,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": -1,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "traitBase": {
+      "desc": "对攻击范围内所有敌人造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的攻击目标",
+      "descRaw": "对攻击范围内<@ba.kw>所有敌人</>造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的<@ba.kw>攻击目标</>",
+      "bb": {
+        "prob": 0.5
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "talentsBase": [
+      {
+        "index": 0,
+        "name": "死亡拘审",
+        "desc": "攻击对敌人施加效果：移动速度降低18％，每秒受到10％阿斯卡纶当前攻击力的法术伤害，持续25秒，效果最多叠加三层",
+        "descRaw": "攻击对敌人施加效果：移动速度降低18％，每秒受到10％阿斯卡纶当前攻击力的法术伤害，持续25秒，效果最多叠加三层",
+        "bb": {
+          "move_speed": -0.18,
+          "atk_ratio": 0.1,
+          "max_stack_cnt": 3,
+          "debuff_duration": 25,
+          "interval": 1
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "噬光残影",
+        "desc": "攻击速度+8，自身周围四格有高台时，攻击速度额外+6",
+        "descRaw": "攻击速度+8，自身周围四格有高台时，攻击速度额外+6",
+        "bb": {
+          "attack_speed": 8,
+          "attack_speed_add": 6,
+          "cnt": 1
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "modules": [
+      {
+        "uniEquipId": "uniequip_002_ascln",
+        "name": "“无形，无情”",
+        "typeName": "AMB-X",
+        "typeIcon": "amb-x",
+        "icon": "uniequip_002_ascln",
+        "isDefault": true,
+        "level": 1,
+        "attr": {
+          "maxHp": 180,
+          "atk": 15
+        },
+        "traitOverride": {
+          "desc": "对攻击范围内所有敌人造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的攻击目标",
+          "descRaw": "对攻击范围内<@ba.kw>所有敌人</>造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的<@ba.kw>攻击目标</>",
+          "bb": {
+            "prob": 0.5
+          },
+          "bbStr": {},
+          "rangeGrid": null,
+          "moduleDesc": "攻击范围内所有敌人移动速度-20%",
+          "moduleDescRaw": "攻击范围内所有敌人移动速度<@ba.kw>-20%</>"
+        },
+        "talentChanges": [
+          {
+            "talentIndex": -1,
+            "name": null,
+            "desc": null,
+            "descRaw": null,
+            "bb": {
+              "move_speed": -0.2
+            },
+            "bbStr": {},
+            "rangeGrid": null,
+            "tokenKey": null,
+            "hidden": true
+          }
+        ]
+      },
+      {
+        "uniEquipId": "uniequip_003_ascln",
+        "name": "“阿斯卡纶的眼睛”",
+        "typeName": "AMB-Y",
+        "typeIcon": "amb-y",
+        "icon": "uniequip_003_ascln",
+        "isDefault": false,
+        "level": 1,
+        "attr": {
+          "atk": 55,
+          "def": 25
+        },
+        "traitOverride": {
+          "desc": "对攻击范围内所有敌人造成伤害\n拥有65%的物理和法术闪避且不容易成为敌人的攻击目标",
+          "descRaw": "对攻击范围内<@ba.kw>所有敌人</>造成伤害\n拥有65%的物理和法术闪避且不容易成为敌人的<@ba.kw>攻击目标</>",
+          "bb": {
+            "prob": 0.65
+          },
+          "bbStr": {},
+          "rangeGrid": null
+        },
+        "talentChanges": []
+      }
+    ]
+  },
+  "chess_rhodes_logos_a": {
+    "chessId": "chess_rhodes_logos_a",
+    "baseId": "chess_rhodes_logos_a",
+    "goldenId": "chess_rhodes_logos_b",
+    "isGolden": false,
+    "tier": 6,
+    "identifier": 276,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 37,
+    "charId": "char_4133_logos",
+    "name": "逻各斯",
+    "appellation": "Logos",
+    "rarity": 6,
+    "profession": "CASTER",
+    "subProfessionId": "corecaster",
+    "subProfessionName": "中坚术师",
+    "position": "RANGED",
+    "nationId": "rhodes",
+    "bonds": [
+      "rhodesShip",
+      "arcaneShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_logos_a"
+    ],
+    "price": 4,
+    "sellPrice": 1,
+    "upgradeNum": 3,
+    "upgradeChessId": "chess_rhodes_logos_b",
+    "status": {
+      "phase": 2,
+      "level": 1,
+      "skillLevel": 4,
+      "equipLevel": 0
+    },
+    "stats": {
+      "maxHp": 1297,
+      "atk": 556,
+      "def": 106,
+      "res": 20,
+      "cost": 21,
+      "blockCnt": 1,
+      "bat": 1.6,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "3-1",
+    "rangeGrid": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        -1,
+        2
+      ]
+    ],
+    "dmgType": "arts",
+    "attackKind": "ranged",
+    "projectile": "bolt",
+    "canHitFly": true,
+    "targetPriority": null,
+    "trait": {
+      "desc": "攻击造成法术伤害",
+      "descRaw": "攻击造成<@ba.kw>法术伤害</>",
+      "bb": {},
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "skill": {
+      "skillId": "skchr_logos_3",
+      "iconId": "skchr_logos_3",
+      "name": "延异视阈",
+      "level": 4,
+      "desc": "攻击范围扩大，攻击力+160%，同时攻击3个目标，使攻击范围内敌方子弹的飞行速度大幅降低、并在技能结束时将其全部清除",
+      "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+160%</>，同时攻击<@ba.vup>3</>个目标，使攻击范围内敌方子弹的飞行速度<@ba.vup>大幅降低</>、并在技能结束时将其全部<@ba.vup>清除</>",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 30,
+      "spType": "INCREASE_WITH_TIME",
+      "spCost": 45,
+      "initSp": 9,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "atk": 1.6,
+        "attack@max_target": 3,
+        "projectile_move_scale": 0.05
+      },
+      "bbStr": {},
+      "rangeId": "3-4",
+      "rangeGrid": [
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -1,
+          3
+        ],
+        [
+          -2,
+          0
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -2,
+          2
+        ]
+      ],
+      "prefabId": "skchr_logos_3",
+      "trigger": {
+        "rule": "DEFAULT",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": null
+      },
+      "index": 2,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "语汇演化",
+        "desc": "对一个目标发起攻击时，有40%几率额外对攻击范围内一个随机目标造成相当于攻击力60%的法术伤害并使其停顿0.8秒",
+        "descRaw": "对一个目标发起攻击时，有40%几率额外对攻击范围内一个随机目标造成相当于攻击力60%的法术伤害并使其<$ba.sluggish>停顿</>0.8秒",
+        "bb": {
+          "prob": 0.4,
+          "atk_scale": 0.6,
+          "sluggish": 0.8
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "剜魂具辞",
+        "desc": "攻击使目标在5秒内法术抗性-10且受到的法术伤害提高150点",
+        "descRaw": "攻击使目标在5秒内法术抗性-10且受到的法术伤害提高150点",
+        "bb": {
+          "duration": 5,
+          "magic_resistance": -10,
+          "atk_addition": 150
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "tokens": [],
+    "module": null,
+    "assets": {
+      "avatar": "char_4133_logos",
+      "portrait": "char_4133_logos_1",
+      "spine": "char_4133_logos",
+      "skillIcon": "skchr_logos_3",
+      "subProfIcon": "sub_corecaster_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_logos_1",
+        "iconId": "skchr_logos_1",
+        "name": "殁亡",
+        "level": 4,
+        "desc": "攻击范围扩大，攻击力+40%，使攻击范围内生命值低于逻各斯攻击力90%的敌人立刻倒下、并对另一个随机目标造成与倒下单位生命值相等的法术伤害\n持续时间无限",
+        "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+40%</>，使攻击范围内生命值低于逻各斯攻击力<@ba.vup>90%</>的敌人立刻倒下、并对另一个随机目标造成与倒下单位生命值相等的法术伤害\n<@ba.rem>持续时间无限</>",
+        "skillType": "AUTO",
+        "durationType": "NONE",
+        "duration": -1,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 74,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 0.4,
+          "attack@kill_atk_scale": 0.9,
+          "attack@kill_damage": 9999999
+        },
+        "bbStr": {},
+        "rangeId": "3-3",
+        "rangeGrid": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ]
+        ],
+        "prefabId": "skchr_logos_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_logos_2",
+        "iconId": "skchr_logos_2",
+        "name": "提喻",
+        "level": 4,
+        "desc": "法术抗性+40，攻击改为锁定一个目标对其每0.5秒造成一次相当于攻击力35%的法术伤害，对相同目标的伤害逐渐提高至3倍并使其移动速度逐渐降低至40%(锁定5秒后达到上限)，被打断或目标倒下时重新索敌且效果重置",
+        "descRaw": "法术抗性<@ba.vup>+40</>，攻击改为锁定一个目标对其每<@ba.vup>0.5</>秒造成一次相当于攻击力<@ba.vup>35%</>的法术伤害，对相同目标的伤害逐渐提高至<@ba.vup>3</>倍并使其移动速度逐渐降低至<@ba.vup>40%</>(锁定5秒后达到上限)，被打断或目标倒下时重新索敌且效果重置",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 20,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 39,
+        "initSp": 20,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "magic_resistance": 40,
+          "attack@cooldown": 0.5,
+          "attack@atk_scale_base": 0.35,
+          "attack@atk_scale_delta": 0.07,
+          "attack@move_speed": -0.06,
+          "attack@max_stack_cnt": 10
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_logos_2",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_logos_3",
+        "iconId": "skchr_logos_3",
+        "name": "延异视阈",
+        "level": 4,
+        "desc": "攻击范围扩大，攻击力+160%，同时攻击3个目标，使攻击范围内敌方子弹的飞行速度大幅降低、并在技能结束时将其全部清除",
+        "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+160%</>，同时攻击<@ba.vup>3</>个目标，使攻击范围内敌方子弹的飞行速度<@ba.vup>大幅降低</>、并在技能结束时将其全部<@ba.vup>清除</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 30,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 45,
+        "initSp": 9,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 1.6,
+          "attack@max_target": 3,
+          "projectile_move_scale": 0.05
+        },
+        "bbStr": {},
+        "rangeId": "3-4",
+        "rangeGrid": [
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            -2,
+            0
+          ],
+          [
+            -2,
+            1
+          ],
+          [
+            -2,
+            2
+          ]
+        ],
+        "prefabId": "skchr_logos_3",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 2,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_4133_logos",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": null,
+      "potRank": 0
+    },
+    "isMod": true
+  },
+  "chess_rhodes_logos_b": {
+    "chessId": "chess_rhodes_logos_b",
+    "baseId": "chess_rhodes_logos_a",
+    "goldenId": "chess_rhodes_logos_b",
+    "isGolden": true,
+    "tier": 6,
+    "identifier": 277,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 38,
+    "charId": "char_4133_logos",
+    "name": "逻各斯",
+    "appellation": "Logos",
+    "rarity": 6,
+    "profession": "CASTER",
+    "subProfessionId": "corecaster",
+    "subProfessionName": "中坚术师",
+    "position": "RANGED",
+    "nationId": "rhodes",
+    "bonds": [
+      "rhodesShip",
+      "arcaneShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_logos_b"
+    ],
+    "price": 4,
+    "sellPrice": 1,
+    "upgradeNum": 0,
+    "upgradeChessId": null,
+    "status": {
+      "phase": 2,
+      "level": 60,
+      "skillLevel": 7,
+      "equipLevel": 3
+    },
+    "stats": {
+      "maxHp": 1710,
+      "atk": 699,
+      "def": 115,
+      "res": 20,
+      "cost": 21,
+      "blockCnt": 1,
+      "bat": 1.6,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "3-1",
+    "rangeGrid": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        -1,
+        2
+      ]
+    ],
+    "dmgType": "arts",
+    "attackKind": "ranged",
+    "projectile": "bolt",
+    "canHitFly": true,
+    "targetPriority": null,
+    "trait": {
+      "desc": "攻击造成法术伤害",
+      "descRaw": "攻击造成<@ba.kw>法术伤害</>",
+      "bb": {},
+      "bbStr": {},
+      "rangeGrid": null,
+      "moduleDesc": "造成法术伤害时附带相当于8%伤害的凋亡损伤",
+      "moduleDescRaw": "造成法术伤害时附带相当于<@ba.vup>8%</>伤害的<$ba.dt.apoptosis2>凋亡损伤</>"
+    },
+    "skill": {
+      "skillId": "skchr_logos_3",
+      "iconId": "skchr_logos_3",
+      "name": "延异视阈",
+      "level": 7,
+      "desc": "攻击范围扩大，攻击力+220%，同时攻击3个目标，使攻击范围内敌方子弹的飞行速度大幅降低、并在技能结束时将其全部清除",
+      "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+220%</>，同时攻击<@ba.vup>3</>个目标，使攻击范围内敌方子弹的飞行速度<@ba.vup>大幅降低</>、并在技能结束时将其全部<@ba.vup>清除</>",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 30,
+      "spType": "INCREASE_WITH_TIME",
+      "spCost": 45,
+      "initSp": 18,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "atk": 2.2,
+        "attack@max_target": 3,
+        "projectile_move_scale": 0.05
+      },
+      "bbStr": {},
+      "rangeId": "3-4",
+      "rangeGrid": [
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -1,
+          3
+        ],
+        [
+          -2,
+          0
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -2,
+          2
+        ]
+      ],
+      "prefabId": "skchr_logos_3",
+      "trigger": {
+        "rule": "DEFAULT",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": null
+      },
+      "index": 2,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "语汇演化",
+        "desc": "对一个目标发起攻击时，有60%几率额外对攻击范围内一个随机目标造成相当于攻击力60%的法术伤害并使其停顿0.8秒，若该随机目标处于凋亡损伤爆发期间则同时造成相当于攻击力60%的元素伤害",
+        "descRaw": "对一个目标发起攻击时，有60%几率额外对攻击范围内一个随机目标造成相当于攻击力60%的法术伤害并使其<$ba.sluggish>停顿</>0.8秒，若该随机目标处于<$ba.dt.apoptosis2>凋亡损伤</>爆发期间则同时造成相当于攻击力60%的元素伤害",
+        "bb": {
+          "prob": 0.6,
+          "atk_scale": 0.6,
+          "sluggish": 0.8,
+          "element_atk_scale": 0.6
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": true
+      },
+      {
+        "index": 1,
+        "name": "剜魂具辞",
+        "desc": "攻击使目标在5秒内法术抗性-10且受到的法术伤害提高150点",
+        "descRaw": "攻击使目标在5秒内法术抗性-10且受到的法术伤害提高150点",
+        "bb": {
+          "duration": 5,
+          "magic_resistance": -10,
+          "atk_addition": 150
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": -1,
+        "name": null,
+        "desc": null,
+        "descRaw": null,
+        "bb": {
+          "ep_damage_ratio": 0.08
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": true,
+        "fromModule": true
+      }
+    ],
+    "tokens": [],
+    "module": {
+      "id": "uniequip_002_logos",
+      "name": "来自河谷的笔盒",
+      "type": "CCR-D",
+      "level": 3,
+      "active": true
+    },
+    "assets": {
+      "avatar": "char_4133_logos_2",
+      "portrait": "char_4133_logos_2",
+      "spine": "char_4133_logos",
+      "skillIcon": "skchr_logos_3",
+      "subProfIcon": "sub_corecaster_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_logos_1",
+        "iconId": "skchr_logos_1",
+        "name": "殁亡",
+        "level": 7,
+        "desc": "攻击范围扩大，攻击力+70%，使攻击范围内生命值低于逻各斯攻击力120%的敌人立刻倒下、并对另一个随机目标造成与倒下单位生命值相等的法术伤害\n持续时间无限",
+        "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+70%</>，使攻击范围内生命值低于逻各斯攻击力<@ba.vup>120%</>的敌人立刻倒下、并对另一个随机目标造成与倒下单位生命值相等的法术伤害\n<@ba.rem>持续时间无限</>",
+        "skillType": "AUTO",
+        "durationType": "NONE",
+        "duration": -1,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 68,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 0.7,
+          "attack@kill_atk_scale": 1.2,
+          "attack@kill_damage": 9999999
+        },
+        "bbStr": {},
+        "rangeId": "3-3",
+        "rangeGrid": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ]
+        ],
+        "prefabId": "skchr_logos_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_logos_2",
+        "iconId": "skchr_logos_2",
+        "name": "提喻",
+        "level": 7,
+        "desc": "法术抗性+50，攻击改为锁定一个目标对其每0.5秒造成一次相当于攻击力50%的法术伤害，对相同目标的伤害逐渐提高至3倍并使其移动速度逐渐降低至40%(锁定5秒后达到上限)，被打断或目标倒下时重新索敌且效果重置",
+        "descRaw": "法术抗性<@ba.vup>+50</>，攻击改为锁定一个目标对其每<@ba.vup>0.5</>秒造成一次相当于攻击力<@ba.vup>50%</>的法术伤害，对相同目标的伤害逐渐提高至<@ba.vup>3</>倍并使其移动速度逐渐降低至<@ba.vup>40%</>(锁定5秒后达到上限)，被打断或目标倒下时重新索敌且效果重置",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 20,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 36,
+        "initSp": 20,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "magic_resistance": 50,
+          "attack@cooldown": 0.5,
+          "attack@atk_scale_base": 0.5,
+          "attack@atk_scale_delta": 0.1,
+          "attack@move_speed": -0.06,
+          "attack@max_stack_cnt": 10
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_logos_2",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_logos_3",
+        "iconId": "skchr_logos_3",
+        "name": "延异视阈",
+        "level": 7,
+        "desc": "攻击范围扩大，攻击力+220%，同时攻击3个目标，使攻击范围内敌方子弹的飞行速度大幅降低、并在技能结束时将其全部清除",
+        "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+220%</>，同时攻击<@ba.vup>3</>个目标，使攻击范围内敌方子弹的飞行速度<@ba.vup>大幅降低</>、并在技能结束时将其全部<@ba.vup>清除</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 30,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 45,
+        "initSp": 18,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 2.2,
+          "attack@max_target": 3,
+          "projectile_move_scale": 0.05
+        },
+        "bbStr": {},
+        "rangeId": "3-4",
+        "rangeGrid": [
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            -1,
+            2
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            -2,
+            0
+          ],
+          [
+            -2,
+            1
+          ],
+          [
+            -2,
+            2
+          ]
+        ],
+        "prefabId": "skchr_logos_3",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 2,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_4133_logos",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": "uniequip_002_logos",
+      "potRank": 0
+    },
+    "isMod": true,
+    "statsBase": {
+      "maxHp": 1540,
+      "atk": 632,
+      "def": 115,
+      "res": 20,
+      "cost": 21,
+      "blockCnt": 1,
+      "bat": 1.6,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "traitBase": {
+      "desc": "攻击造成法术伤害",
+      "descRaw": "攻击造成<@ba.kw>法术伤害</>",
+      "bb": {},
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "talentsBase": [
+      {
+        "index": 0,
+        "name": "语汇演化",
+        "desc": "对一个目标发起攻击时，有40%几率额外对攻击范围内一个随机目标造成相当于攻击力60%的法术伤害并使其停顿0.8秒",
+        "descRaw": "对一个目标发起攻击时，有40%几率额外对攻击范围内一个随机目标造成相当于攻击力60%的法术伤害并使其<$ba.sluggish>停顿</>0.8秒",
+        "bb": {
+          "prob": 0.4,
+          "atk_scale": 0.6,
+          "sluggish": 0.8
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "剜魂具辞",
+        "desc": "攻击使目标在5秒内法术抗性-10且受到的法术伤害提高150点",
+        "descRaw": "攻击使目标在5秒内法术抗性-10且受到的法术伤害提高150点",
+        "bb": {
+          "duration": 5,
+          "magic_resistance": -10,
+          "atk_addition": 150
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "modules": [
+      {
+        "uniEquipId": "uniequip_002_logos",
+        "name": "来自河谷的笔盒",
+        "typeName": "CCR-D",
+        "typeIcon": "ccr-d",
+        "icon": "uniequip_002_logos",
+        "isDefault": true,
+        "level": 3,
+        "attr": {
+          "maxHp": 170,
+          "atk": 67
+        },
+        "traitOverride": {
+          "desc": "攻击造成法术伤害",
+          "descRaw": "攻击造成<@ba.kw>法术伤害</>",
+          "bb": {},
+          "bbStr": {},
+          "rangeGrid": null,
+          "moduleDesc": "造成法术伤害时附带相当于8%伤害的凋亡损伤",
+          "moduleDescRaw": "造成法术伤害时附带相当于<@ba.vup>8%</>伤害的<$ba.dt.apoptosis2>凋亡损伤</>"
+        },
+        "talentChanges": [
+          {
+            "talentIndex": -1,
+            "name": null,
+            "desc": null,
+            "descRaw": null,
+            "bb": {
+              "ep_damage_ratio": 0.08
+            },
+            "bbStr": {},
+            "rangeGrid": null,
+            "tokenKey": null,
+            "hidden": true
+          },
+          {
+            "talentIndex": 0,
+            "name": "语汇演化",
+            "desc": "对一个目标发起攻击时，有60%几率额外对攻击范围内一个随机目标造成相当于攻击力60%的法术伤害并使其停顿0.8秒，若该随机目标处于凋亡损伤爆发期间则同时造成相当于攻击力60%的元素伤害",
+            "descRaw": "对一个目标发起攻击时，有60%几率额外对攻击范围内一个随机目标造成相当于攻击力60%的法术伤害并使其<$ba.sluggish>停顿</>0.8秒，若该随机目标处于<$ba.dt.apoptosis2>凋亡损伤</>爆发期间则同时造成相当于攻击力60%的元素伤害",
+            "bb": {
+              "prob": 0.6,
+              "atk_scale": 0.6,
+              "sluggish": 0.8,
+              "element_atk_scale": 0.6
+            },
+            "bbStr": {},
+            "rangeGrid": null,
+            "tokenKey": null,
+            "hidden": false
+          }
+        ]
+      },
+      {
+        "uniEquipId": "uniequip_003_logos",
+        "name": "《语义范式百科》",
+        "typeName": "CCR-Y",
+        "typeIcon": "ccr-y",
+        "icon": "uniequip_003_logos",
+        "isDefault": false,
+        "level": 3,
+        "attr": {
+          "atk": 60,
+          "res": 5
+        },
+        "traitOverride": {
+          "desc": "攻击造成法术伤害",
+          "descRaw": "攻击造成<@ba.kw>法术伤害</>",
+          "bb": {
+            "sp": 1
+          },
+          "bbStr": {},
+          "rangeGrid": null,
+          "moduleDesc": "普通攻击命中精英或领袖敌人时获得1点技力",
+          "moduleDescRaw": "普通攻击命中精英或领袖敌人时获得<@ba.kw>1</>点技力"
+        },
+        "talentChanges": [
+          {
+            "talentIndex": 0,
+            "name": "语汇演化",
+            "desc": "对一个目标发起攻击时，有40%几率额外对攻击范围内两个随机目标造成相当于攻击力65%的法术伤害并使其停顿0.8秒",
+            "descRaw": "对一个目标发起攻击时，有40%几率额外对攻击范围内两个随机目标造成相当于攻击力65%的法术伤害并使其<$ba.sluggish>停顿</>0.8秒",
+            "bb": {
+              "prob": 0.4,
+              "atk_scale": 0.65,
+              "sluggish": 0.8,
+              "emit_count": 2
+            },
+            "bbStr": {},
+            "rangeGrid": null,
+            "tokenKey": null,
+            "hidden": false
+          }
+        ]
+      }
+    ]
+  },
+  "chess_rhodes_savage_a": {
+    "chessId": "chess_rhodes_savage_a",
+    "baseId": "chess_rhodes_savage_a",
+    "goldenId": "chess_rhodes_savage_b",
+    "isGolden": false,
+    "tier": 1,
+    "identifier": 278,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 39,
+    "charId": "char_230_savage",
+    "name": "暴行",
+    "appellation": "Savage",
+    "rarity": 5,
+    "profession": "WARRIOR",
+    "subProfessionId": "centurion",
+    "subProfessionName": "强攻手",
+    "position": "MELEE",
+    "nationId": "rim",
+    "bonds": [
+      "rhodesShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_savage_a"
+    ],
+    "price": 2,
+    "sellPrice": 1,
+    "upgradeNum": 3,
+    "upgradeChessId": "chess_rhodes_savage_b",
+    "status": {
+      "phase": 1,
+      "level": 55,
+      "skillLevel": 4,
+      "equipLevel": 0
+    },
+    "stats": {
+      "maxHp": 1735,
+      "atk": 505,
+      "def": 247,
+      "res": 0,
+      "cost": 20,
+      "blockCnt": 2,
+      "bat": 1.2,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "1-1",
+    "rangeGrid": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "dmgType": "phys",
+    "attackKind": "melee",
+    "projectile": "none",
+    "canHitFly": false,
+    "targetPriority": null,
+    "trait": {
+      "desc": "同时攻击阻挡的所有敌人",
+      "descRaw": "同时攻击阻挡的<@ba.kw>所有敌人</>",
+      "bb": {},
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "skill": {
+      "skillId": "skchr_savage_2",
+      "iconId": "skchr_savage_2",
+      "name": "微差爆破",
+      "level": 4,
+      "desc": "对前方三格范围内至多4个敌人造成相当于攻击力330%的物理伤害",
+      "descRaw": "对前方三格范围内至多<@ba.vup>4</>个敌人造成相当于攻击力<@ba.vup>330%</>的物理伤害",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 0,
+      "spType": "INCREASE_WHEN_ATTACK",
+      "spCost": 20,
+      "initSp": 0,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "max_target": 4,
+        "atk_scale": 3.3
+      },
+      "bbStr": {},
+      "rangeId": "3-2",
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "prefabId": "skchr_savage_2",
+      "trigger": {
+        "rule": "SKILL_RANGE",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "index": 1,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "山谷",
+        "desc": "周围四格中有两格以上的高地地形时攻击力和防御力+5%",
+        "descRaw": "周围四格中有两格以上的高地地形时攻击力和防御力+5%",
+        "bb": {
+          "cnt": 2,
+          "atk": 0.05,
+          "def": 0.05
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "tokens": [],
+    "module": null,
+    "assets": {
+      "avatar": "char_230_savage",
+      "portrait": "char_230_savage_1",
+      "spine": "char_230_savage",
+      "skillIcon": "skchr_savage_2",
+      "subProfIcon": "sub_centurion_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_savage_1",
+        "iconId": "skcom_powerstrike[2]",
+        "name": "强力击·β型",
+        "level": 4,
+        "desc": "下次攻击的攻击力提高至185%",
+        "descRaw": "下次攻击的攻击力提高至<@ba.vup>185%</>",
+        "skillType": "AUTO",
+        "durationType": "NONE",
+        "duration": 0,
+        "spType": "INCREASE_WHEN_ATTACK",
+        "spCost": 4,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk_scale": 1.85
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_savage_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_savage_2",
+        "iconId": "skchr_savage_2",
+        "name": "微差爆破",
+        "level": 4,
+        "desc": "对前方三格范围内至多4个敌人造成相当于攻击力330%的物理伤害",
+        "descRaw": "对前方三格范围内至多<@ba.vup>4</>个敌人造成相当于攻击力<@ba.vup>330%</>的物理伤害",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 0,
+        "spType": "INCREASE_WHEN_ATTACK",
+        "spCost": 20,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "max_target": 4,
+          "atk_scale": 3.3
+        },
+        "bbStr": {},
+        "rangeId": "3-2",
+        "rangeGrid": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "prefabId": "skchr_savage_2",
+        "trigger": {
+          "rule": "SKILL_RANGE",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ]
+          ]
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_230_savage",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": null,
+      "potRank": 0
+    },
+    "isMod": true
+  },
+  "chess_rhodes_savage_b": {
+    "chessId": "chess_rhodes_savage_b",
+    "baseId": "chess_rhodes_savage_a",
+    "goldenId": "chess_rhodes_savage_b",
+    "isGolden": true,
+    "tier": 1,
+    "identifier": 279,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "NORMAL",
+    "shopSortId": 40,
+    "charId": "char_230_savage",
+    "name": "暴行",
+    "appellation": "Savage",
+    "rarity": 5,
+    "profession": "WARRIOR",
+    "subProfessionId": "centurion",
+    "subProfessionName": "强攻手",
+    "position": "MELEE",
+    "nationId": "rim",
+    "bonds": [
+      "rhodesShip"
+    ],
+    "garrisonIds": [
+      "garrison_rhodes_savage_b"
+    ],
+    "price": 2,
+    "sellPrice": 1,
+    "upgradeNum": 0,
+    "upgradeChessId": null,
+    "status": {
+      "phase": 2,
+      "level": 50,
+      "skillLevel": 7,
+      "equipLevel": 1
+    },
+    "stats": {
+      "maxHp": 2199,
+      "atk": 670,
+      "def": 320,
+      "res": 0,
+      "cost": 22,
+      "blockCnt": 3,
+      "bat": 1.2,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "1-1",
+    "rangeGrid": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "dmgType": "phys",
+    "attackKind": "melee",
+    "projectile": "none",
+    "canHitFly": false,
+    "targetPriority": null,
+    "trait": {
+      "desc": "同时攻击阻挡的所有敌人，攻击被阻挡的敌人攻击力提升至110%",
+      "descRaw": "同时攻击阻挡的<@ba.kw>所有敌人</>，攻击被阻挡的敌人攻击力提升至<@ba.kw>110%</>",
+      "bb": {
+        "atk_scale": 1.1
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "skill": {
+      "skillId": "skchr_savage_2",
+      "iconId": "skchr_savage_2",
+      "name": "微差爆破",
+      "level": 7,
+      "desc": "对前方三格范围内至多4个敌人造成相当于攻击力360%的物理伤害",
+      "descRaw": "对前方三格范围内至多<@ba.vup>4</>个敌人造成相当于攻击力<@ba.vup>360%</>的物理伤害",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 0,
+      "spType": "INCREASE_WHEN_ATTACK",
+      "spCost": 19,
+      "initSp": 0,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "max_target": 4,
+        "atk_scale": 3.6
+      },
+      "bbStr": {},
+      "rangeId": "3-2",
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "prefabId": "skchr_savage_2",
+      "trigger": {
+        "rule": "SKILL_RANGE",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "index": 1,
+      "overrideTokenKey": null
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "山谷",
+        "desc": "周围四格中有两格以上的高地地形时攻击力和防御力+10%",
+        "descRaw": "周围四格中有两格以上的高地地形时攻击力和防御力+10%",
+        "bb": {
+          "cnt": 2,
+          "atk": 0.1,
+          "def": 0.1
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "tokens": [],
+    "module": {
+      "id": "uniequip_002_savage",
+      "name": "未竟的旅程",
+      "type": "CEN-X",
+      "level": 1,
+      "active": true
+    },
+    "assets": {
+      "avatar": "char_230_savage_2",
+      "portrait": "char_230_savage_2",
+      "spine": "char_230_savage",
+      "skillIcon": "skchr_savage_2",
+      "subProfIcon": "sub_centurion_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_savage_1",
+        "iconId": "skcom_powerstrike[2]",
+        "name": "强力击·β型",
+        "level": 7,
+        "desc": "下次攻击的攻击力提高至200%",
+        "descRaw": "下次攻击的攻击力提高至<@ba.vup>200%</>",
+        "skillType": "AUTO",
+        "durationType": "NONE",
+        "duration": 0,
+        "spType": "INCREASE_WHEN_ATTACK",
+        "spCost": 4,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk_scale": 2
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_savage_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": false
+      },
+      {
+        "skillId": "skchr_savage_2",
+        "iconId": "skchr_savage_2",
+        "name": "微差爆破",
+        "level": 7,
+        "desc": "对前方三格范围内至多4个敌人造成相当于攻击力360%的物理伤害",
+        "descRaw": "对前方三格范围内至多<@ba.vup>4</>个敌人造成相当于攻击力<@ba.vup>360%</>的物理伤害",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 0,
+        "spType": "INCREASE_WHEN_ATTACK",
+        "spCost": 19,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "max_target": 4,
+          "atk_scale": 3.6
+        },
+        "bbStr": {},
+        "rangeId": "3-2",
+        "rangeGrid": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "prefabId": "skchr_savage_2",
+        "trigger": {
+          "rule": "SKILL_RANGE",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ]
+          ]
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": true
+      }
+    ],
+    "backup": {
+      "charId": "char_230_savage",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": "uniequip_002_savage",
+      "potRank": 0
+    },
+    "isMod": true,
+    "statsBase": {
+      "maxHp": 2199,
+      "atk": 640,
+      "def": 298,
+      "res": 0,
+      "cost": 22,
+      "blockCnt": 3,
+      "bat": 1.2,
+      "aspd": 100,
+      "respawnTime": 70,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0
+    },
+    "traitBase": {
+      "desc": "同时攻击阻挡的所有敌人",
+      "descRaw": "同时攻击阻挡的<@ba.kw>所有敌人</>",
+      "bb": {},
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "talentsBase": [
+      {
+        "index": 0,
+        "name": "山谷",
+        "desc": "周围四格中有两格以上的高地地形时攻击力和防御力+10%",
+        "descRaw": "周围四格中有两格以上的高地地形时攻击力和防御力+10%",
+        "bb": {
+          "cnt": 2,
+          "atk": 0.1,
+          "def": 0.1
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "modules": [
+      {
+        "uniEquipId": "uniequip_002_savage",
+        "name": "未竟的旅程",
+        "typeName": "CEN-X",
+        "typeIcon": "cen-x",
+        "icon": "uniequip_002_savage",
+        "isDefault": true,
+        "level": 1,
+        "attr": {
+          "atk": 30,
+          "def": 22
+        },
+        "traitOverride": {
+          "desc": "同时攻击阻挡的所有敌人，攻击被阻挡的敌人攻击力提升至110%",
+          "descRaw": "同时攻击阻挡的<@ba.kw>所有敌人</>，攻击被阻挡的敌人攻击力提升至<@ba.kw>110%</>",
+          "bb": {
+            "atk_scale": 1.1
+          },
+          "bbStr": {},
+          "rangeGrid": null
+        },
+        "talentChanges": []
+      }
+    ]
+  }
+}

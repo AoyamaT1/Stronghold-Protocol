@@ -1,0 +1,15 @@
+{
+  "_comment": "边狱巴士罪人模型微调（渲染端 units.js 实时读取 assets.json 的 spine.front/back.modelScale / modelOffsetX / modelOffsetY）。改完跑: node tools/limbus/apply-model-tweaks.mjs。key=charId 作用于基础+该干员全部皮肤(含以后新增的人格皮肤)；key=\"charId@skinId\" 只覆盖该皮肤。modelScale 默认1(0.8=缩到80%)；modelOffsetX 单位格,正=右移;modelOffsetY 单位格,正=下移(模型缩放锚定在脚底,一般不用,除非某皮肤脚没踩地)。",
+  "char_limbus_yisang":     { "modelScale": 0.8 },
+  "char_limbus_sinclair":   { "modelScale": 0.8 },
+  "char_limbus_faust":      { "modelScale": 0.8, "modelOffsetX": 0.21 },
+  "char_limbus_donquixote": { "modelScale": 0.8, "modelOffsetX": 1.0 },
+  "char_limbus_ryoshu":     { "modelScale": 0.8 },
+  "char_limbus_meursault":  { "modelScale": 0.8 },
+  "char_limbus_honglu":     { "modelScale": 0.8, "modelOffsetX": 0.38 },
+  "char_limbus_heathcliff": { "modelScale": 0.8 },
+  "char_limbus_ishmael":    { "modelScale": 0.8 },
+  "char_limbus_rodion":     { "modelScale": 0.8, "modelOffsetX": 0.18 },
+  "char_limbus_outis":      { "modelScale": 0.8 },
+  "char_limbus_gregor":     { "modelScale": 0.8 }
+}

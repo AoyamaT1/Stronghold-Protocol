@@ -1,0 +1,274 @@
+{
+  "chess_item_2_limbus_lcb_a": {
+    "id": "chess_item_2_limbus_lcb_a",
+    "baseId": "chess_item_2_limbus_lcb_a",
+    "goldenId": "chess_item_2_limbus_lcb_b",
+    "isGolden": false,
+    "trapId": "trap_1132_acarm132",
+    "iconId": "trap_1132_acarm132",
+    "identifier": 385,
+    "name": "LCB员工证",
+    "itemType": "EQUIP",
+    "tier": 2,
+    "shopSortId": 1,
+    "price": 2,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "shopExcludedBy": null,
+    "mergeable": true,
+    "upgradeNum": 2,
+    "upgradeChessId": "chess_item_2_limbus_lcb_b",
+    "duration": -1,
+    "giveBondId": "limbusShip",
+    "givePowerId": null,
+    "canGiveBond": false,
+    "requiresBondId": null,
+    "effectId": "eff_limbus_lcb_a",
+    "effectName": "LCB员工证",
+    "desc": "攻击力+15%，生命值+15%",
+    "descRaw": "攻击力<@ba.vup>+15%</>，生命值<@ba.vup>+15%</>",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "atk": 0.15,
+          "max_hp": 0.15
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "atk": 0.15,
+      "max_hp": 0.15,
+      "key": "attr_common_global_buff"
+    },
+    "category": "STAT",
+    "kind": "passive",
+    "family": null,
+    "implFormula": "ATK% += 15%, maxHP% += 15%. Pair with 变形同构体 grants limbusShip.",
+    "note": null,
+    "rangeGrid": [
+      [
+        0,
+        0
+      ]
+    ],
+    "flavor": "边狱公司为所属员工配发的身份凭证。\n“请妥善保管，它记录着你在巴士上的一切。”"
+  },
+  "chess_item_2_limbus_lcb_b": {
+    "id": "chess_item_2_limbus_lcb_b",
+    "baseId": "chess_item_2_limbus_lcb_a",
+    "goldenId": "chess_item_2_limbus_lcb_b",
+    "isGolden": true,
+    "trapId": "trap_1132_acarm132",
+    "iconId": "trap_1132_acarm132",
+    "identifier": 386,
+    "name": "LCB员工证",
+    "itemType": "EQUIP",
+    "tier": 2,
+    "shopSortId": 1,
+    "price": 5,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "shopExcludedBy": null,
+    "mergeable": false,
+    "upgradeNum": 0,
+    "upgradeChessId": null,
+    "duration": 0,
+    "giveBondId": "limbusShip",
+    "givePowerId": null,
+    "canGiveBond": false,
+    "requiresBondId": null,
+    "effectId": "eff_limbus_lcb_b",
+    "effectName": "LCB员工证",
+    "desc": "攻击力+25%，生命值+25%",
+    "descRaw": "攻击力<@ba.vup>+25%</>，生命值<@ba.vup>+25%</>",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "atk": 0.25,
+          "max_hp": 0.25
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "atk": 0.25,
+      "max_hp": 0.25,
+      "key": "attr_common_global_buff"
+    },
+    "category": "STAT",
+    "kind": "passive",
+    "family": null,
+    "implFormula": "ATK% += 25%, maxHP% += 25%. Pair with 变形同构体 grants limbusShip.",
+    "note": null,
+    "rangeGrid": [
+      [
+        0,
+        0
+      ]
+    ],
+    "flavor": "边狱公司为所属员工配发的身份凭证。\n“请妥善保管，它记录着你在巴士上的一切。”"
+  },
+  "chess_item_6_limbus_bough_a": {
+    "id": "chess_item_6_limbus_bough_a",
+    "baseId": "chess_item_6_limbus_bough_a",
+    "goldenId": "chess_item_6_limbus_bough_b",
+    "isGolden": false,
+    "trapId": "trap_1133_acarm133",
+    "iconId": "trap_1133_acarm133",
+    "identifier": 387,
+    "name": "金枝",
+    "itemType": "EQUIP",
+    "tier": 6,
+    "shopSortId": 2,
+    "price": 4,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "shopExcludedBy": null,
+    "mergeable": true,
+    "upgradeNum": 2,
+    "upgradeChessId": "chess_item_6_limbus_bough_b",
+    "duration": -1,
+    "giveBondId": null,
+    "givePowerId": null,
+    "canGiveBond": false,
+    "requiresBondId": "limbusShip",
+    "effectId": "eff_limbus_bough_a",
+    "effectName": "金枝",
+    "desc": "攻击力+35%；若携带者为【边狱公司】盟约干员，战斗开始时获得20点精神值，造成伤害时额外积攒1点金枝共鸣\n若该【边狱公司】盟约干员同时装备“LCB员工证”，全队金枝共鸣上限提升5点，战斗开始时全队获得3点金枝共鸣",
+    "descRaw": "攻击力<@ba.vup>+35%</>；若携带者为【边狱公司】盟约干员，战斗开始时获得<@ba.vup>20</>点精神值，造成伤害时额外积攒<@ba.vup>1</>点金枝共鸣\n<@ba.acrem>若该【边狱公司】盟约干员同时装备“LCB员工证”，全队金枝共鸣上限提升<@ba.vup>5</>点，战斗开始时全队获得<@ba.vup>3</>点金枝共鸣</>",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "atk": 0.35,
+          "init_sanity": 20,
+          "res_on_damage": 1,
+          "combo_cap_bonus": 5,
+          "combo_init_res": 3
+        },
+        "bbStr": {
+          "key": "act1autochess_equip_limbus_bough_buff",
+          "equip_chess_id": "chess_item_2_limbus_lcb_a"
+        }
+      },
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "atk": 0.35
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "atk": 0.35,
+      "init_sanity": 20,
+      "res_on_damage": 1,
+      "combo_cap_bonus": 5,
+      "combo_init_res": 3,
+      "key": "act1autochess_equip_limbus_bough_buff",
+      "equip_chess_id": "chess_item_2_limbus_lcb_a"
+    },
+    "category": "BOND_SIGNATURE",
+    "kind": "passive",
+    "family": null,
+    "implFormula": "ATK% += 35%. If carrier has bond limbusShip: initSanity +20, extra +1 resonance on damage. Combo with LCB员工证: resonance cap +5, start with 3 resonance.",
+    "note": null,
+    "rangeGrid": [
+      [
+        0,
+        0
+      ]
+    ],
+    "flavor": "脑叶公司支部深处所埋藏的心脏，蕴含着无可估量的可能性。\n“它正向我们发出共鸣与呼唤。”"
+  },
+  "chess_item_6_limbus_bough_b": {
+    "id": "chess_item_6_limbus_bough_b",
+    "baseId": "chess_item_6_limbus_bough_a",
+    "goldenId": "chess_item_6_limbus_bough_b",
+    "isGolden": true,
+    "trapId": "trap_1133_acarm133",
+    "iconId": "trap_1133_acarm133",
+    "identifier": 388,
+    "name": "金枝",
+    "itemType": "EQUIP",
+    "tier": 6,
+    "shopSortId": 2,
+    "price": 5,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "shopExcludedBy": null,
+    "mergeable": false,
+    "upgradeNum": 0,
+    "upgradeChessId": null,
+    "duration": 0,
+    "giveBondId": null,
+    "givePowerId": null,
+    "canGiveBond": false,
+    "requiresBondId": "limbusShip",
+    "effectId": "eff_limbus_bough_b",
+    "effectName": "金枝",
+    "desc": "攻击力+55%；若携带者为【边狱公司】盟约干员，战斗开始时获得30点精神值，造成伤害时额外积攒1点金枝共鸣\n若该【边狱公司】盟约干员同时装备“LCB员工证”，全队金枝共鸣上限提升5点，战斗开始时全队获得5点金枝共鸣",
+    "descRaw": "攻击力<@ba.vup>+55%</>；若携带者为【边狱公司】盟约干员，战斗开始时获得<@ba.vup>30</>点精神值，造成伤害时额外积攒<@ba.vup>1</>点金枝共鸣\n<@ba.acrem>若该【边狱公司】盟约干员同时装备“LCB员工证”，全队金枝共鸣上限提升<@ba.vup>5</>点，战斗开始时全队获得<@ba.vup>5</>点金枝共鸣</>",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "atk": 0.55,
+          "init_sanity": 30,
+          "res_on_damage": 1,
+          "combo_cap_bonus": 5,
+          "combo_init_res": 5
+        },
+        "bbStr": {
+          "key": "act1autochess_equip_limbus_bough_buff",
+          "equip_chess_id": "chess_item_2_limbus_lcb_b"
+        }
+      },
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "atk": 0.55
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "atk": 0.55,
+      "init_sanity": 30,
+      "res_on_damage": 1,
+      "combo_cap_bonus": 5,
+      "combo_init_res": 5,
+      "key": "act1autochess_equip_limbus_bough_buff",
+      "equip_chess_id": "chess_item_2_limbus_lcb_b"
+    },
+    "category": "BOND_SIGNATURE",
+    "kind": "passive",
+    "family": null,
+    "implFormula": "ATK% += 55%. If carrier has bond limbusShip: initSanity +30, extra +1 resonance on damage. Combo with LCB员工证: resonance cap +5, start with 5 resonance.",
+    "note": null,
+    "rangeGrid": [
+      [
+        0,
+        0
+      ]
+    ],
+    "flavor": "脑叶公司支部深处所埋藏的心脏，蕴含着无可估量的可能性。\n“它正向我们发出共鸣与呼唤。”"
+  }
+}

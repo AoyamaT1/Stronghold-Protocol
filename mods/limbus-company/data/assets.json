@@ -1,0 +1,2161 @@
+{
+  "chars": {
+    "char_limbus_yisang": {
+      "avatar": "/assets/char/avatar/char_limbus_yisang.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_yisang_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_yisang_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_yisang_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_yisang/front/yisang.json",
+          "atlas": "/assets/spine/op/char_limbus_yisang/front/yisang.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_yisang/front/yisang_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": null,
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 3.683,
+            "attack2": 5.567,
+            "attack3": 3.7,
+            "idle": 1,
+            "die": 1,
+            "move": 1,
+            "guard": 1,
+            "evade": 1,
+            "hit": 1,
+            "parry": 0.283
+          },
+          "events": [],
+          "modelScale": 0.8
+        }
+      },
+      "skins": {
+        "char_limbus_yisang@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_yisang_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_yisang_2.png",
+          "name": "绽放E.G.O::山茶花",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_yisang/front/yisang.json",
+              "atlas": "/assets/spine/op/char_limbus_yisang/front/yisang.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_yisang/front/yisang_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": null,
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "attack1": 3.683,
+                "attack2": 5.567,
+                "attack3": 3.7,
+                "idle": 1,
+                "die": 1,
+                "move": 1,
+                "guard": 1,
+                "evade": 1,
+                "hit": 1,
+                "parry": 0.283
+              },
+              "events": [],
+              "modelScale": 0.8
+            }
+          }
+        }
+      }
+    },
+    "char_limbus_sinclair": {
+      "avatar": "/assets/char/avatar/char_limbus_sinclair.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_sinclair_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_sinclair_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_sinclair_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_sinclair/front/sinclair.json",
+          "atlas": "/assets/spine/op/char_limbus_sinclair/front/sinclair.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_sinclair/front/sinclair_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": null,
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 1.583,
+            "attack2": 2.933,
+            "attack3": 2.9,
+            "idle": 1,
+            "die": 1,
+            "move": 1,
+            "guard": 1,
+            "hit": 1,
+            "parry": 1.083
+          },
+          "events": [],
+          "modelScale": 0.8
+        }
+      },
+      "skins": {
+        "char_limbus_sinclair@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_sinclair_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_sinclair_2.png",
+          "name": "握紧之钉",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_sinclair/front/sinclair.json",
+              "atlas": "/assets/spine/op/char_limbus_sinclair/front/sinclair.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_sinclair/front/sinclair_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": null,
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "attack1": 1.583,
+                "attack2": 2.933,
+                "attack3": 2.9,
+                "idle": 1,
+                "die": 1,
+                "move": 1,
+                "guard": 1,
+                "hit": 1,
+                "parry": 1.083
+              },
+              "events": [],
+              "modelScale": 0.8
+            }
+          }
+        }
+      }
+    },
+    "char_limbus_faust": {
+      "avatar": "/assets/char/avatar/char_limbus_faust.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_faust_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_faust_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_faust_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_faust/front/faust.json",
+          "atlas": "/assets/spine/op/char_limbus_faust/front/faust.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_faust/front/faust_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": null,
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 0.417,
+            "attack2": 1,
+            "attack3": 1.667,
+            "idle": 1,
+            "move": 1,
+            "guard": 1,
+            "evade": 1,
+            "hit": 1,
+            "die": 1
+          },
+          "events": []
+        }
+      },
+      "skins": {
+        "char_limbus_faust@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_faust_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_faust_2.png",
+          "name": "黑兽组·卯分支",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_faust/front/faust.json",
+              "atlas": "/assets/spine/op/char_limbus_faust/front/faust.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_faust/front/faust_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": null,
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "attack1": 0.417,
+                "attack2": 1,
+                "attack3": 1.667,
+                "idle": 1,
+                "move": 1,
+                "guard": 1,
+                "evade": 1,
+                "hit": 1,
+                "die": 1
+              },
+              "events": []
+            }
+          }
+        }
+      }
+    },
+    "char_limbus_donquixote": {
+      "avatar": "/assets/char/avatar/char_limbus_donquixote.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_donquixote_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_donquixote_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_donquixote_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_donquixote/front/donquixote.json",
+          "atlas": "/assets/spine/op/char_limbus_donquixote/front/donquixote.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_donquixote/front/donquixote_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": null,
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 0.967,
+            "attack2": 1.167,
+            "attack3": 2.267,
+            "idle": 2.8,
+            "die": 1,
+            "move": 1,
+            "guard": 1,
+            "evade": 1,
+            "hit": 1,
+            "parry": 3.067
+          }
+        }
+      },
+      "skins": {
+        "char_limbus_donquixote@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_donquixote_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_donquixote_2.png",
+          "name": "拉曼恰管理者",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_donquixote/front/donquixote.json",
+              "atlas": "/assets/spine/op/char_limbus_donquixote/front/donquixote.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_donquixote/front/donquixote_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": null,
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "char_limbus_ryoshu": {
+      "avatar": "/assets/char/avatar/char_limbus_ryoshu.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_ryoshu_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_ryoshu_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_ryoshu_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_ryoshu/front/ryoshu.json",
+          "atlas": "/assets/spine/op/char_limbus_ryoshu/front/ryoshu.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_ryoshu/front/ryoshu_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": null,
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 2.867,
+            "attack2": 4.267,
+            "attack3": 10.267,
+            "attack9": 1.25,
+            "attack10": 1.833,
+            "attack12": 4.65,
+            "defense1": 8.5,
+            "idle": 1,
+            "move": 1,
+            "guard": 1,
+            "evade": 1,
+            "hit": 1,
+            "die": 1,
+            "parry": 3.533
+          },
+          "events": [],
+          "modelScale": 0.8
+        }
+      },
+      "skins": {
+        "char_limbus_ryoshu@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_ryoshu_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_ryoshu_2.png",
+          "name": "小指子辈·蜘蛛巢之刃",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_ryoshu/front/ryoshu.json",
+              "atlas": "/assets/spine/op/char_limbus_ryoshu/front/ryoshu.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_ryoshu/front/ryoshu_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": null,
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "attack1": 2.867,
+                "attack2": 4.267,
+                "attack3": 10.267,
+                "attack9": 1.25,
+                "attack10": 1.833,
+                "attack12": 4.65,
+                "defense1": 8.5,
+                "idle": 1,
+                "move": 1,
+                "guard": 1,
+                "evade": 1,
+                "hit": 1,
+                "die": 1,
+                "parry": 3.533
+              },
+              "events": [],
+              "modelScale": 0.8
+            }
+          }
+        }
+      }
+    },
+    "char_limbus_meursault": {
+      "avatar": "/assets/char/avatar/char_limbus_meursault.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_meursault_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_meursault_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_meursault_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_meursault/front/meursault.json",
+          "atlas": "/assets/spine/op/char_limbus_meursault/front/meursault.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_meursault/front/meursault_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": null,
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 1.483,
+            "attack2": 0.533,
+            "attack3": 17.65,
+            "defense1": 2.233,
+            "idle": 1,
+            "move": 1,
+            "guard": 1,
+            "evade": 1,
+            "hit": 1,
+            "die": 1,
+            "parry": 0.533,
+            "reload": 1.083
+          },
+          "events": [],
+          "modelScale": 0.8
+        }
+      },
+      "skins": {
+        "char_limbus_meursault@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_meursault_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_meursault_2.png",
+          "name": "剑契头领",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_meursault/front/meursault.json",
+              "atlas": "/assets/spine/op/char_limbus_meursault/front/meursault.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_meursault/front/meursault_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": null,
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "attack1": 1.483,
+                "attack2": 0.533,
+                "attack3": 17.65,
+                "defense1": 2.233,
+                "idle": 1,
+                "move": 1,
+                "guard": 1,
+                "evade": 1,
+                "hit": 1,
+                "die": 1,
+                "parry": 0.533,
+                "reload": 1.083
+              },
+              "events": [],
+              "modelScale": 0.8
+            }
+          }
+        }
+      }
+    },
+    "char_limbus_honglu": {
+      "avatar": "/assets/char/avatar/char_limbus_honglu.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_honglu_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_honglu_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_honglu_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_honglu/front/honglu.json",
+          "atlas": "/assets/spine/op/char_limbus_honglu/front/honglu.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_honglu/front/honglu_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": null,
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 1.5,
+            "attack2": 5.033,
+            "attack3": 5.283,
+            "defense1": 0.5,
+            "idle": 1,
+            "move": 1,
+            "guard": 1,
+            "evade": 1,
+            "hit": 1,
+            "die": 1,
+            "parry": 1.567
+          },
+          "events": [],
+          "modelOffsetX": 0.38,
+          "modelScale": 0.8
+        }
+      },
+      "skins": {
+        "char_limbus_honglu@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_honglu_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_honglu_2.png",
+          "name": "鸿园的君主-红露",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_honglu/front/honglu.json",
+              "atlas": "/assets/spine/op/char_limbus_honglu/front/honglu.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_honglu/front/honglu_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": null,
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "attack1": 1.5,
+                "attack2": 5.033,
+                "attack3": 5.283,
+                "defense1": 0.5,
+                "idle": 1,
+                "move": 1,
+                "guard": 1,
+                "evade": 1,
+                "hit": 1,
+                "die": 1,
+                "parry": 1.567
+              },
+              "events": [],
+              "modelOffsetX": 0.38,
+              "modelScale": 0.8
+            }
+          }
+        }
+      }
+    },
+    "char_limbus_heathcliff": {
+      "avatar": "/assets/char/avatar/char_limbus_heathcliff.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_heathcliff_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_heathcliff_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_heathcliff_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_heathcliff/front/heathcliff.json",
+          "atlas": "/assets/spine/op/char_limbus_heathcliff/front/heathcliff.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_heathcliff/front/heathcliff_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": "deploy",
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 0.45,
+            "attack2": 1.217,
+            "attack3": 3.567,
+            "defense1": 1.483,
+            "idle": 2.8,
+            "move": 1,
+            "guard": 1,
+            "evade": 1,
+            "hit": 1,
+            "die": 1,
+            "parry": 3.567,
+            "deploy": 0.9
+          }
+        }
+      },
+      "skins": {
+        "char_limbus_heathcliff@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_heathcliff_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_heathcliff_2.png",
+          "name": "狂猎魔王",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_heathcliff/front/heathcliff.json",
+              "atlas": "/assets/spine/op/char_limbus_heathcliff/front/heathcliff.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_heathcliff/front/heathcliff_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": "deploy",
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "char_limbus_ishmael": {
+      "avatar": "/assets/char/avatar/char_limbus_ishmael.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_ishmael_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_ishmael_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_ishmael_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_ishmael/front/ishmael.json",
+          "atlas": "/assets/spine/op/char_limbus_ishmael/front/ishmael.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_ishmael/front/ishmael_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": null,
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 1.183,
+            "attack2": 1.517,
+            "attack3": 4.867,
+            "idle": 1,
+            "die": 1,
+            "move": 1,
+            "guard": 1,
+            "evade": 1,
+            "hit": 1,
+            "parry": 1.8
+          },
+          "events": [],
+          "modelScale": 0.8
+        }
+      },
+      "skins": {
+        "char_limbus_ishmael@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_ishmael_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_ishmael_2.png",
+          "name": "裴廓德号船长",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_ishmael/front/ishmael.json",
+              "atlas": "/assets/spine/op/char_limbus_ishmael/front/ishmael.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_ishmael/front/ishmael_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": null,
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "attack1": 1.183,
+                "attack2": 1.517,
+                "attack3": 4.867,
+                "idle": 1,
+                "die": 1,
+                "move": 1,
+                "guard": 1,
+                "evade": 1,
+                "hit": 1,
+                "parry": 1.8
+              },
+              "events": [],
+              "modelScale": 0.8
+            }
+          }
+        }
+      }
+    },
+    "char_limbus_rodion": {
+      "avatar": "/assets/char/avatar/char_limbus_rodion.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_rodion_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_rodion_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_rodion_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_rodion/front/rodion.json",
+          "atlas": "/assets/spine/op/char_limbus_rodion/front/rodion.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_rodion/front/rodion_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": null,
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 0.183,
+            "attack2": 0.583,
+            "attack3": 0.917,
+            "attack9": 1.283,
+            "idle": 1,
+            "move": 1,
+            "guard": 1,
+            "evade": 1,
+            "hit": 1,
+            "die": 1,
+            "parry": 0.483
+          },
+          "events": [],
+          "modelOffsetX": 0.18,
+          "modelScale": 0.8
+        }
+      },
+      "skins": {
+        "char_limbus_rodion@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_rodion_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_rodion_2.png",
+          "name": "脑叶E.G.O::泪水磨砺之剑",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_rodion/front/rodion.json",
+              "atlas": "/assets/spine/op/char_limbus_rodion/front/rodion.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_rodion/front/rodion_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": null,
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "attack1": 0.183,
+                "attack2": 0.583,
+                "attack3": 0.917,
+                "attack9": 1.283,
+                "idle": 1,
+                "move": 1,
+                "guard": 1,
+                "evade": 1,
+                "hit": 1,
+                "die": 1,
+                "parry": 0.483
+              },
+              "events": [],
+              "modelOffsetX": 0.18,
+              "modelScale": 0.8
+            }
+          }
+        }
+      }
+    },
+    "char_limbus_outis": {
+      "avatar": "/assets/char/avatar/char_limbus_outis.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_outis_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_outis_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_outis_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_outis/front/outis.json",
+          "atlas": "/assets/spine/op/char_limbus_outis/front/outis.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_outis/front/outis_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": null,
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 1.833,
+            "attack2": 2.7,
+            "attack3": 5.867,
+            "idle": 1,
+            "die": 1,
+            "move": 1,
+            "guard": 1,
+            "evade": 1,
+            "hit": 1,
+            "parry": 0.1
+          },
+          "events": [],
+          "modelScale": 0.8
+        }
+      },
+      "skins": {
+        "char_limbus_outis@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_outis_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_outis_2.png",
+          "name": "魔弹射手",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_outis/front/outis.json",
+              "atlas": "/assets/spine/op/char_limbus_outis/front/outis.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_outis/front/outis_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": null,
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "attack1": 1.833,
+                "attack2": 2.7,
+                "attack3": 5.867,
+                "idle": 1,
+                "die": 1,
+                "move": 1,
+                "guard": 1,
+                "evade": 1,
+                "hit": 1,
+                "parry": 0.1
+              },
+              "events": [],
+              "modelScale": 0.8
+            }
+          }
+        }
+      }
+    },
+    "char_limbus_gregor": {
+      "avatar": "/assets/char/avatar/char_limbus_gregor.png",
+      "avatarE2": "/assets/char/avatar/char_limbus_gregor_2.png",
+      "portrait": "/assets/char/portrait/char_limbus_gregor_1.png",
+      "portraitE2": "/assets/char/portrait/char_limbus_gregor_2.png",
+      "spine": {
+        "front": {
+          "skel": "/assets/spine/op/char_limbus_gregor/front/gregor.json",
+          "atlas": "/assets/spine/op/char_limbus_gregor/front/gregor.atlas",
+          "textures": [
+            "/assets/spine/op/char_limbus_gregor/front/gregor_0.png"
+          ],
+          "pma": false,
+          "anims": {
+            "idle": "idle",
+            "deploy": null,
+            "attack": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null
+            },
+            "attackDown": null,
+            "skill": {
+              "begin": null,
+              "loop": "attack1",
+              "end": null,
+              "via": "attack",
+              "index": 0,
+              "idle": null
+            },
+            "die": "die",
+            "move": "move",
+            "stun": "hit",
+            "skills": {
+              "0": {
+                "begin": null,
+                "loop": "attack1",
+                "end": null,
+                "via": "attack",
+                "index": 0,
+                "idle": null
+              },
+              "1": {
+                "begin": null,
+                "loop": "attack2",
+                "end": null,
+                "via": "attack",
+                "index": 1,
+                "idle": null
+              },
+              "2": {
+                "begin": null,
+                "loop": "attack3",
+                "end": null,
+                "via": "attack",
+                "index": 2,
+                "idle": null
+              }
+            }
+          },
+          "animations": {
+            "attack1": 0.467,
+            "attack2": 0.933,
+            "attack3": 3.433,
+            "attack7": 1,
+            "attack8": 0.067,
+            "defense1": 0.6,
+            "defense2": 2.2,
+            "idle": 1,
+            "move": 1,
+            "guard": 1,
+            "evade": 1,
+            "hit": 1,
+            "die": 1,
+            "parry": 1
+          },
+          "events": [],
+          "modelScale": 0.8
+        }
+      },
+      "skins": {
+        "char_limbus_gregor@limbus#1": {
+          "avatar": "/assets/char/avatar/char_limbus_gregor_2.png",
+          "portrait": "/assets/char/portrait/char_limbus_gregor_2.png",
+          "name": "黎明事务所代表",
+          "group": "边狱公司",
+          "spine": {
+            "front": {
+              "skel": "/assets/spine/op/char_limbus_gregor/front/gregor.json",
+              "atlas": "/assets/spine/op/char_limbus_gregor/front/gregor.atlas",
+              "textures": [
+                "/assets/spine/op/char_limbus_gregor/front/gregor_0.png"
+              ],
+              "pma": false,
+              "anims": {
+                "idle": "idle",
+                "deploy": null,
+                "attack": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null
+                },
+                "attackDown": null,
+                "skill": {
+                  "begin": null,
+                  "loop": "attack1",
+                  "end": null,
+                  "via": "attack",
+                  "index": 0,
+                  "idle": null
+                },
+                "die": "die",
+                "move": "move",
+                "stun": "hit",
+                "skills": {
+                  "0": {
+                    "begin": null,
+                    "loop": "attack1",
+                    "end": null,
+                    "via": "attack",
+                    "index": 0,
+                    "idle": null
+                  },
+                  "1": {
+                    "begin": null,
+                    "loop": "attack2",
+                    "end": null,
+                    "via": "attack",
+                    "index": 1,
+                    "idle": null
+                  },
+                  "2": {
+                    "begin": null,
+                    "loop": "attack3",
+                    "end": null,
+                    "via": "attack",
+                    "index": 2,
+                    "idle": null
+                  }
+                }
+              },
+              "animations": {
+                "attack1": 0.467,
+                "attack2": 0.933,
+                "attack3": 3.433,
+                "attack7": 1,
+                "attack8": 0.067,
+                "defense1": 0.6,
+                "defense2": 2.2,
+                "idle": 1,
+                "move": 1,
+                "guard": 1,
+                "evade": 1,
+                "hit": 1,
+                "die": 1,
+                "parry": 1
+              },
+              "events": [],
+              "modelScale": 0.8
+            }
+          }
+        }
+      }
+    }
+  },
+  "bonds": {
+    "limbusShip": "/assets/bond/limbusShip.png"
+  },
+  "skills": {
+    "skchr_yisang_1": "/assets/skill/skchr_yisang_1.png",
+    "skchr_yisang_2": "/assets/skill/skchr_yisang_2.png",
+    "skchr_yisang_3": "/assets/skill/skchr_yisang_3.png",
+    "skchr_sinclair_1": "/assets/skill/skchr_sinclair_1.png",
+    "skchr_sinclair_2": "/assets/skill/skchr_sinclair_2.png",
+    "skchr_sinclair_3": "/assets/skill/skchr_sinclair_3.png",
+    "skchr_faust_1": "/assets/skill/skchr_faust_1.png",
+    "skchr_faust_2": "/assets/skill/skchr_faust_2.png",
+    "skchr_faust_3": "/assets/skill/skchr_faust_3.png",
+    "skchr_donquixote_1": "/assets/skill/skchr_donquixote_1.png",
+    "skchr_donquixote_2": "/assets/skill/skchr_donquixote_2.png",
+    "skchr_donquixote_3": "/assets/skill/skchr_donquixote_3.png",
+    "skchr_ryoshu_1": "/assets/skill/skchr_ryoshu_1.png",
+    "skchr_ryoshu_2": "/assets/skill/skchr_ryoshu_2.png",
+    "skchr_ryoshu_3": "/assets/skill/skchr_ryoshu_3.png",
+    "skchr_meursault_1": "/assets/skill/skchr_meursault_1.png",
+    "skchr_meursault_2": "/assets/skill/skchr_meursault_2.png",
+    "skchr_meursault_3": "/assets/skill/skchr_meursault_3.png",
+    "skchr_honglu_1": "/assets/skill/skchr_honglu_1.png",
+    "skchr_honglu_2": "/assets/skill/skchr_honglu_2.png",
+    "skchr_honglu_3": "/assets/skill/skchr_honglu_3.png",
+    "skchr_heathcliff_1": "/assets/skill/skchr_heathcliff_1.png",
+    "skchr_heathcliff_2": "/assets/skill/skchr_heathcliff_2.png",
+    "skchr_heathcliff_3": "/assets/skill/skchr_heathcliff_3.png",
+    "skchr_ishmael_1": "/assets/skill/skchr_ishmael_1.png",
+    "skchr_ishmael_2": "/assets/skill/skchr_ishmael_2.png",
+    "skchr_ishmael_3": "/assets/skill/skchr_ishmael_3.png",
+    "skchr_rodion_1": "/assets/skill/skchr_rodion_1.png",
+    "skchr_rodion_2": "/assets/skill/skchr_rodion_2.png",
+    "skchr_rodion_3": "/assets/skill/skchr_rodion_3.png",
+    "skchr_outis_1": "/assets/skill/skchr_outis_1.png",
+    "skchr_outis_2": "/assets/skill/skchr_outis_2.png",
+    "skchr_outis_3": "/assets/skill/skchr_outis_3.png",
+    "skchr_gregor_1": "/assets/skill/skchr_gregor_1.png",
+    "skchr_gregor_2": "/assets/skill/skchr_gregor_2.png",
+    "skchr_gregor_3": "/assets/skill/skchr_gregor_3.png"
+  },
+  "audio": {
+    "voice": {
+      "char_limbus_yisang": {
+        "start": "/assets/audio/voice/cn/char_limbus_yisang/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_yisang/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_yisang/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_yisang/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_yisang/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_yisang/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_yisang/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_yisang/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_yisang/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_yisang/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_yisang/resultLose.wav"
+      },
+      "char_limbus_sinclair": {
+        "start": "/assets/audio/voice/cn/char_limbus_sinclair/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_sinclair/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_sinclair/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_sinclair/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_sinclair/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_sinclair/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_sinclair/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_sinclair/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_sinclair/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_sinclair/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_sinclair/resultLose.wav"
+      },
+      "char_limbus_faust": {
+        "start": "/assets/audio/voice/cn/char_limbus_faust/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_faust/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_faust/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_faust/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_faust/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_faust/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_faust/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_faust/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_faust/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_faust/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_faust/resultLose.wav"
+      },
+      "char_limbus_donquixote": {
+        "start": "/assets/audio/voice/cn/char_limbus_donquixote/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_donquixote/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_donquixote/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_donquixote/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_donquixote/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_donquixote/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_donquixote/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_donquixote/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_donquixote/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_donquixote/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_donquixote/resultLose.wav"
+      },
+      "char_limbus_ryoshu": {
+        "start": "/assets/audio/voice/cn/char_limbus_ryoshu/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_ryoshu/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_ryoshu/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_ryoshu/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_ryoshu/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_ryoshu/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_ryoshu/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_ryoshu/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_ryoshu/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_ryoshu/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_ryoshu/resultLose.wav"
+      },
+      "char_limbus_meursault": {
+        "start": "/assets/audio/voice/cn/char_limbus_meursault/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_meursault/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_meursault/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_meursault/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_meursault/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_meursault/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_meursault/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_meursault/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_meursault/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_meursault/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_meursault/resultLose.wav"
+      },
+      "char_limbus_honglu": {
+        "start": "/assets/audio/voice/cn/char_limbus_honglu/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_honglu/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_honglu/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_honglu/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_honglu/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_honglu/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_honglu/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_honglu/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_honglu/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_honglu/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_honglu/resultLose.wav"
+      },
+      "char_limbus_heathcliff": {
+        "start": "/assets/audio/voice/cn/char_limbus_heathcliff/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_heathcliff/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_heathcliff/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_heathcliff/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_heathcliff/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_heathcliff/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_heathcliff/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_heathcliff/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_heathcliff/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_heathcliff/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_heathcliff/resultLose.wav"
+      },
+      "char_limbus_ishmael": {
+        "start": "/assets/audio/voice/cn/char_limbus_ishmael/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_ishmael/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_ishmael/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_ishmael/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_ishmael/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_ishmael/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_ishmael/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_ishmael/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_ishmael/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_ishmael/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_ishmael/resultLose.wav"
+      },
+      "char_limbus_rodion": {
+        "start": "/assets/audio/voice/cn/char_limbus_rodion/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_rodion/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_rodion/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_rodion/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_rodion/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_rodion/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_rodion/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_rodion/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_rodion/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_rodion/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_rodion/resultLose.wav"
+      },
+      "char_limbus_outis": {
+        "start": "/assets/audio/voice/cn/char_limbus_outis/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_outis/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_outis/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_outis/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_outis/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_outis/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_outis/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_outis/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_outis/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_outis/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_outis/resultLose.wav"
+      },
+      "char_limbus_gregor": {
+        "start": "/assets/audio/voice/cn/char_limbus_gregor/start.wav",
+        "faceEnemy": "/assets/audio/voice/cn/char_limbus_gregor/faceEnemy.wav",
+        "place": [
+          "/assets/audio/voice/cn/char_limbus_gregor/place.wav"
+        ],
+        "select": [
+          "/assets/audio/voice/cn/char_limbus_gregor/select.wav"
+        ],
+        "skill1": "/assets/audio/voice/cn/char_limbus_gregor/skill1.wav",
+        "skill2": "/assets/audio/voice/cn/char_limbus_gregor/skill2.wav",
+        "skill3": "/assets/audio/voice/cn/char_limbus_gregor/skill3.wav",
+        "die": "/assets/audio/voice/cn/char_limbus_gregor/die.wav",
+        "resultThree": "/assets/audio/voice/cn/char_limbus_gregor/resultThree.wav",
+        "resultFour": "/assets/audio/voice/cn/char_limbus_gregor/resultFour.wav",
+        "resultLose": "/assets/audio/voice/cn/char_limbus_gregor/resultLose.wav"
+      }
+    },
+    "sfx": {
+      "units": {
+        "char_limbus_yisang": {
+          "attack": "/assets/audio/sfx/char_limbus_yisang/attack.ogg"
+        },
+        "char_limbus_sinclair": {
+          "attack": "/assets/audio/sfx/char_limbus_sinclair/attack.ogg"
+        },
+        "char_limbus_faust": {
+          "attack": "/assets/audio/sfx/char_limbus_faust/attack.ogg"
+        },
+        "char_limbus_donquixote": {
+          "attack": "/assets/audio/sfx/char_limbus_donquixote/attack.ogg"
+        },
+        "char_limbus_ryoshu": {
+          "attack": "/assets/audio/sfx/char_limbus_ryoshu/attack.ogg"
+        },
+        "char_limbus_meursault": {
+          "attack": "/assets/audio/sfx/char_limbus_meursault/attack.ogg"
+        },
+        "char_limbus_honglu": {
+          "attack": "/assets/audio/sfx/char_limbus_honglu/attack.ogg"
+        },
+        "char_limbus_heathcliff": {
+          "attack": "/assets/audio/sfx/char_limbus_heathcliff/attack.ogg"
+        },
+        "char_limbus_ishmael": {
+          "attack": "/assets/audio/sfx/char_limbus_ishmael/attack.ogg"
+        },
+        "char_limbus_rodion": {
+          "attack": "/assets/audio/sfx/char_limbus_rodion/attack.ogg"
+        },
+        "char_limbus_outis": {
+          "attack": "/assets/audio/sfx/char_limbus_outis/attack.ogg"
+        },
+        "char_limbus_gregor": {
+          "attack": "/assets/audio/sfx/char_limbus_gregor/attack.ogg"
+        }
+      }
+    }
+  },
+  "items": {
+    "trap_1132_acarm132": "/assets/item/trap_1132_acarm132.png",
+    "trap_1133_acarm133": "/assets/item/trap_1133_acarm133.png"
+  }
+}

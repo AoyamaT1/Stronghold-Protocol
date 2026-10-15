@@ -1,0 +1,282 @@
+{
+  "garrison_rhodes_logos_a": {
+    "garrisonId": "garrison_rhodes_logos_a",
+    "desc": "【罗德岛】【奥术】每叠加3层，本干员攻击力+2%",
+    "descRaw": "【罗德岛】【奥术】每叠加3层，本干员攻击力<@ba.vup>+2%</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "作战能力",
+    "eventTypeIcon": "icon_battle",
+    "effectType": "GAIN_BUFF",
+    "effectKey": "act1autochess_gar_eff_attrByBond",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "divide_num": 3,
+      "atk": 0.02
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_eff_attrByBond",
+      "bond_id": "rhodesShip,arcaneShip"
+    },
+    "owners": [
+      "chess_rhodes_logos_a"
+    ]
+  },
+  "garrison_rhodes_logos_b": {
+    "garrisonId": "garrison_rhodes_logos_b",
+    "desc": "【罗德岛】【奥术】每叠加3层，本干员攻击力+4%",
+    "descRaw": "【罗德岛】【奥术】每叠加3层，本干员攻击力<@ba.vup>+4%</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "作战能力",
+    "eventTypeIcon": "icon_battle",
+    "effectType": "GAIN_BUFF",
+    "effectKey": "act1autochess_gar_eff_attrByBond",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "divide_num": 3,
+      "atk": 0.04
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_eff_attrByBond",
+      "bond_id": "rhodesShip,arcaneShip"
+    },
+    "owners": [
+      "chess_rhodes_logos_b"
+    ]
+  },
+  "garrison_rhodes_amiya_a": {
+    "garrisonId": "garrison_rhodes_amiya_a",
+    "desc": "<战斗中>为攻击范围内的干员恢复生命或赋予屏障时，使自身已激活的盟约层数+1（每回合至多12次）",
+    "descRaw": "<战斗中>为攻击范围内的干员恢复生命或赋予屏障时，使自身已激活的盟约层数<@ba.vup>+1</>（每回合至多12次）",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "modautochess_gar_event_heal",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 1,
+      "max_trigger_per_battle": 12,
+      "max_add_count_per_battle": 12
+    },
+    "bbStr": {
+      "key": "modautochess_gar_event_heal",
+      "bond_type": "bond_self",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_rhodes_amiya3_a"
+    ]
+  },
+  "garrison_rhodes_amiya_b": {
+    "garrisonId": "garrison_rhodes_amiya_b",
+    "desc": "<战斗中>为攻击范围内的干员恢复生命或赋予屏障时，使自身已激活的盟约层数+2（每回合至多12次）",
+    "descRaw": "<战斗中>为攻击范围内的干员恢复生命或赋予屏障时，使自身已激活的盟约层数<@ba.vup>+2</>（每回合至多12次）",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "modautochess_gar_event_heal",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 2,
+      "max_trigger_per_battle": 12,
+      "max_add_count_per_battle": 24
+    },
+    "bbStr": {
+      "key": "modautochess_gar_event_heal",
+      "bond_type": "bond_self",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_rhodes_amiya3_b"
+    ]
+  },
+  "garrison_rhodes_closur_a": {
+    "garrisonId": "garrison_rhodes_closur_a",
+    "desc": "<进入休整期时>若已激活【罗德岛】盟约，获得1名不高于当前调度中心等级的【罗德岛】干员",
+    "descRaw": "<进入休整期时>若<@ba.vup>已激活</>【罗德岛】盟约，获得<@ba.vup>1</>名不高于当前<@ba.vup>调度中心等级</>的【罗德岛】干员",
+    "eventType": "SERVER_PREP_START",
+    "eventTypeDesc": "整备能力",
+    "eventTypeIcon": "icon_gold",
+    "effectType": "modautochess_gar_prep_gain_chess_by_bond",
+    "effectKey": "modautochess_gar_prep_gain_chess_by_bond",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 1
+    },
+    "bbStr": {
+      "bond": "rhodesShip",
+      "tier": "shoplv",
+      "conditionkey": "character_target_inboard"
+    },
+    "owners": [
+      "chess_rhodes_closur_a"
+    ]
+  },
+  "garrison_rhodes_closur_b": {
+    "garrisonId": "garrison_rhodes_closur_b",
+    "desc": "<进入休整期时>若已激活【罗德岛】盟约，获得2名不高于当前调度中心等级的【罗德岛】干员",
+    "descRaw": "<进入休整期时>若<@ba.vup>已激活</>【罗德岛】盟约，获得<@ba.vup>2</>名不高于当前<@ba.vup>调度中心等级</>的【罗德岛】干员",
+    "eventType": "SERVER_PREP_START",
+    "eventTypeDesc": "整备能力",
+    "eventTypeIcon": "icon_gold",
+    "effectType": "modautochess_gar_prep_gain_chess_by_bond",
+    "effectKey": "modautochess_gar_prep_gain_chess_by_bond",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "rhodesShip",
+      "tier": "shoplv",
+      "conditionkey": "character_target_inboard"
+    },
+    "owners": [
+      "chess_rhodes_closur_b"
+    ]
+  },
+  "garrison_rhodes_savage_a": {
+    "garrisonId": "garrison_rhodes_savage_a",
+    "desc": "<获得时>自身所属盟约层数+2（无需激活盟约）",
+    "descRaw": "<获得时>自身所属盟约层数<@ba.vup>+2</>（无需激活盟约）",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND_CHESS_ALL",
+    "effectKey": "SERVER_ADD_BOND_CHESS_ALL",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {},
+    "owners": [
+      "chess_rhodes_savage_a"
+    ]
+  },
+  "garrison_rhodes_savage_b": {
+    "garrisonId": "garrison_rhodes_savage_b",
+    "desc": "<获得时>自身所属盟约层数+4（无需激活盟约）",
+    "descRaw": "<获得时>自身所属盟约层数<@ba.vup>+4</>（无需激活盟约）",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND_CHESS_ALL",
+    "effectKey": "SERVER_ADD_BOND_CHESS_ALL",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {},
+    "owners": [
+      "chess_rhodes_savage_b"
+    ]
+  },
+  "garrison_rhodes_ascln_a": {
+    "garrisonId": "garrison_rhodes_ascln_a",
+    "desc": "<战斗中>每击倒1名单位时，使已激活的【罗德岛】层数+1",
+    "descRaw": "<战斗中>每击倒1名单位时，使已激活的【罗德岛】层数<@ba.vup>+1</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_selfkillenemy",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "check_cnt": 1,
+      "bond_add_count": 1
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_selfkillenemy",
+      "bond_type": "bond_by_id",
+      "bond_id": "rhodesShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_rhodes_ascln_a"
+    ]
+  },
+  "garrison_rhodes_ascln_b": {
+    "garrisonId": "garrison_rhodes_ascln_b",
+    "desc": "<战斗中>每击倒1名单位时，使已激活的【罗德岛】层数+2",
+    "descRaw": "<战斗中>每击倒1名单位时，使已激活的【罗德岛】层数<@ba.vup>+2</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_selfkillenemy",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "check_cnt": 1,
+      "bond_add_count": 2
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_selfkillenemy",
+      "bond_type": "bond_by_id",
+      "bond_id": "rhodesShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_rhodes_ascln_b"
+    ]
+  },
+  "garrison_rhodes_monstr_a": {
+    "garrisonId": "garrison_rhodes_monstr_a",
+    "desc": "<战斗中>开启技能时，使已激活的【罗德岛】层数+6（每场战斗至多4次）",
+    "descRaw": "<战斗中>开启技能时，使已激活的【罗德岛】层数<@ba.vup>+6</>（每场战斗至多4次）",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_useskill",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 6,
+      "max_add_count_per_battle": 24
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_useskill",
+      "bond_type": "bond_by_id",
+      "bond_id": "rhodesShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_rhodes_monstr_a"
+    ]
+  },
+  "garrison_rhodes_monstr_b": {
+    "garrisonId": "garrison_rhodes_monstr_b",
+    "desc": "<战斗中>开启技能时，使已激活的【罗德岛】层数+12（每场战斗至多4次）",
+    "descRaw": "<战斗中>开启技能时，使已激活的【罗德岛】层数<@ba.vup>+12</>（每场战斗至多4次）",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_useskill",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 12,
+      "max_add_count_per_battle": 48
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_useskill",
+      "bond_type": "bond_by_id",
+      "bond_id": "rhodesShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_rhodes_monstr_b"
+    ]
+  }
+}

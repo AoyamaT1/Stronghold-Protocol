@@ -1,0 +1,10 @@
+{
+  "id": "sakiko",
+  "name": "丰川祥子（高还原重做）",
+  "version": "1.0.0",
+  "description": "用 LimitlessHPPK/Stronghold-Protocol-Sakiko-Mod 的高还原祥子 kit（op-oblvns，三技能/双天赋/领主音符系统/Fever）替换 ave-mujica 里原来的 Plan-B 祥子。保留 aveMujicaShip 阵营与其它成员不变。需要引擎的 projectiles steer 钩子（已内置）。",
+  "author": "LimitlessHPPK (kit) / 整合: muchiyun",
+  "upstream": "https://github.com/LimitlessHPPK/Stronghold-Protocol-Sakiko-Mod",
+  "bonds": [],
+  "chess": ["chess_char_6_21_a", "chess_char_6_21_b"]
+}

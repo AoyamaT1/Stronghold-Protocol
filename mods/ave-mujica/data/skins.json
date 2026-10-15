@@ -1,0 +1,37 @@
+{
+  "char_4182_oblvns": [
+    {
+      "id": "char_4182_oblvns@avemujica#1",
+      "name": "旋律的主人",
+      "group": "Ave Mujica"
+    }
+  ],
+  "char_4183_mortis": [
+    {
+      "id": "char_4183_mortis@avemujica#1",
+      "name": "提线的本我",
+      "group": "Ave Mujica"
+    }
+  ],
+  "char_4184_dolris": [
+    {
+      "id": "char_4184_dolris@avemujica#1",
+      "name": "笼中歌者",
+      "group": "Ave Mujica"
+    }
+  ],
+  "char_4185_amoris": [
+    {
+      "id": "char_4185_amoris@avemujica#1",
+      "name": "情热魔术师",
+      "group": "Ave Mujica"
+    }
+  ],
+  "char_4186_tmoris": [
+    {
+      "id": "char_4186_tmoris@avemujica#1",
+      "name": "月下执行者",
+      "group": "Ave Mujica"
+    }
+  ]
+}

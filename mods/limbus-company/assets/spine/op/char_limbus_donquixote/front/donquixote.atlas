@@ -1,0 +1,265 @@
+donquixote_0.png
+size: 4096,478
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pma: false
+idle
+  rotate: false
+  xy: 0, 0
+  size: 146, 277
+  orig: 146, 277
+  offset: 0, 0
+  index: -1
+parry_3
+  rotate: false
+  xy: 148, 0
+  size: 146, 277
+  orig: 146, 277
+  offset: 0, 0
+  index: -1
+parry_7
+  rotate: false
+  xy: 296, 0
+  size: 146, 277
+  orig: 146, 277
+  offset: 0, 0
+  index: -1
+parry_9
+  rotate: false
+  xy: 444, 0
+  size: 146, 277
+  orig: 146, 277
+  offset: 0, 0
+  index: -1
+parry_12
+  rotate: false
+  xy: 592, 0
+  size: 146, 277
+  orig: 146, 277
+  offset: 0, 0
+  index: -1
+parry_14
+  rotate: false
+  xy: 740, 0
+  size: 146, 277
+  orig: 146, 277
+  offset: 0, 0
+  index: -1
+hit
+  rotate: false
+  xy: 888, 0
+  size: 221, 273
+  orig: 221, 273
+  offset: 0, 0
+  index: -1
+attack2_2
+  rotate: false
+  xy: 1111, 0
+  size: 191, 242
+  orig: 191, 242
+  offset: 0, 0
+  index: -1
+parry_11
+  rotate: false
+  xy: 1304, 0
+  size: 191, 242
+  orig: 191, 242
+  offset: 0, 0
+  index: -1
+attack3_1
+  rotate: false
+  xy: 1497, 0
+  size: 234, 234
+  orig: 234, 234
+  offset: 0, 0
+  index: -1
+die
+  rotate: false
+  xy: 1733, 0
+  size: 137, 231
+  orig: 137, 231
+  offset: 0, 0
+  index: -1
+evade
+  rotate: false
+  xy: 1872, 0
+  size: 148, 229
+  orig: 148, 229
+  offset: 0, 0
+  index: -1
+attack3_0
+  rotate: false
+  xy: 2022, 0
+  size: 141, 224
+  orig: 141, 224
+  offset: 0, 0
+  index: -1
+guard
+  rotate: false
+  xy: 2165, 0
+  size: 141, 224
+  orig: 141, 224
+  offset: 0, 0
+  index: -1
+attack1_0
+  rotate: false
+  xy: 2308, 0
+  size: 162, 209
+  orig: 162, 209
+  offset: 0, 0
+  index: -1
+parry_0
+  rotate: false
+  xy: 2472, 0
+  size: 162, 209
+  orig: 162, 209
+  offset: 0, 0
+  index: -1
+attack2_3
+  rotate: false
+  xy: 2636, 0
+  size: 213, 199
+  orig: 213, 199
+  offset: 0, 0
+  index: -1
+attack3_4
+  rotate: false
+  xy: 2851, 0
+  size: 213, 199
+  orig: 213, 199
+  offset: 0, 0
+  index: -1
+attack1_3
+  rotate: false
+  xy: 3066, 0
+  size: 212, 198
+  orig: 212, 198
+  offset: 0, 0
+  index: -1
+attack1_4
+  rotate: false
+  xy: 3280, 0
+  size: 212, 198
+  orig: 212, 198
+  offset: 0, 0
+  index: -1
+parry_5
+  rotate: false
+  xy: 3494, 0
+  size: 212, 198
+  orig: 212, 198
+  offset: 0, 0
+  index: -1
+parry_6
+  rotate: false
+  xy: 3708, 0
+  size: 212, 198
+  orig: 212, 198
+  offset: 0, 0
+  index: -1
+move
+  rotate: false
+  xy: 0, 279
+  size: 178, 197
+  orig: 178, 197
+  offset: 0, 0
+  index: -1
+attack3_2
+  rotate: false
+  xy: 180, 279
+  size: 259, 192
+  orig: 259, 192
+  offset: 0, 0
+  index: -1
+attack1_1
+  rotate: false
+  xy: 441, 279
+  size: 247, 182
+  orig: 247, 182
+  offset: 0, 0
+  index: -1
+attack1_2
+  rotate: false
+  xy: 690, 279
+  size: 247, 182
+  orig: 247, 182
+  offset: 0, 0
+  index: -1
+attack2_4
+  rotate: false
+  xy: 939, 279
+  size: 247, 182
+  orig: 247, 182
+  offset: 0, 0
+  index: -1
+attack2_5
+  rotate: false
+  xy: 1188, 279
+  size: 247, 182
+  orig: 247, 182
+  offset: 0, 0
+  index: -1
+parry_1
+  rotate: false
+  xy: 1437, 279
+  size: 247, 182
+  orig: 247, 182
+  offset: 0, 0
+  index: -1
+parry_2
+  rotate: false
+  xy: 1686, 279
+  size: 247, 182
+  orig: 247, 182
+  offset: 0, 0
+  index: -1
+parry_4
+  rotate: false
+  xy: 1935, 279
+  size: 247, 182
+  orig: 247, 182
+  offset: 0, 0
+  index: -1
+attack2_0
+  rotate: false
+  xy: 2184, 279
+  size: 147, 162
+  orig: 147, 162
+  offset: 0, 0
+  index: -1
+attack3_3
+  rotate: false
+  xy: 2333, 279
+  size: 147, 162
+  orig: 147, 162
+  offset: 0, 0
+  index: -1
+parry_13
+  rotate: false
+  xy: 2482, 279
+  size: 147, 162
+  orig: 147, 162
+  offset: 0, 0
+  index: -1
+attack2_1
+  rotate: false
+  xy: 2631, 279
+  size: 298, 160
+  orig: 298, 160
+  offset: 0, 0
+  index: -1
+parry_8
+  rotate: false
+  xy: 2931, 279
+  size: 298, 160
+  orig: 298, 160
+  offset: 0, 0
+  index: -1
+parry_10
+  rotate: false
+  xy: 3231, 279
+  size: 298, 160
+  orig: 298, 160
+  offset: 0, 0
+  index: -1
