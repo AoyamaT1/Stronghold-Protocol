@@ -1,0 +1,240 @@
+{
+  "chars": {
+    "char_x_fgo_round_table_gareth": {
+      "avatar": "art/char/avatar/char_fgo_gareth.png",
+      "avatarE2": "art/char/avatar/char_fgo_gareth_2.png",
+      "portrait": "art/char/portrait/char_fgo_gareth.png",
+      "portraitE2": "art/char/portrait/char_fgo_gareth_2.png"
+    },
+    "char_x_fgo_round_table_bedivere": {
+      "avatar": "art/char/avatar/char_fgo_bedivere.png",
+      "avatarE2": "art/char/avatar/char_fgo_bedivere_2.png",
+      "portrait": "art/char/portrait/char_fgo_bedivere.png",
+      "portraitE2": "art/char/portrait/char_fgo_bedivere_2.png"
+    },
+    "char_x_fgo_round_table_tristan": {
+      "avatar": "art/char/avatar/char_fgo_tristan.png",
+      "avatarE2": "art/char/avatar/char_fgo_tristan_2.png",
+      "portrait": "art/char/portrait/char_fgo_tristan.png",
+      "portraitE2": "art/char/portrait/char_fgo_tristan_2.png"
+    },
+    "char_x_fgo_round_table_percival": {
+      "avatar": "art/char/avatar/char_fgo_percival.png",
+      "avatarE2": "art/char/avatar/char_fgo_percival_2.png",
+      "portrait": "art/char/portrait/char_fgo_percival.png",
+      "portraitE2": "art/char/portrait/char_fgo_percival_2.png"
+    },
+    "char_x_fgo_round_table_baobhan": {
+      "avatar": "art/char/avatar/char_fgo_baobhan.png",
+      "avatarE2": "art/char/avatar/char_fgo_baobhan_2.png",
+      "portrait": "art/char/portrait/char_fgo_baobhan.png",
+      "portraitE2": "art/char/portrait/char_fgo_baobhan_2.png"
+    },
+    "char_x_fgo_round_table_gawain": {
+      "avatar": "art/char/avatar/char_fgo_gawain.png",
+      "avatarE2": "art/char/avatar/char_fgo_gawain_2.png",
+      "portrait": "art/char/portrait/char_fgo_gawain.png",
+      "portraitE2": "art/char/portrait/char_fgo_gawain_2.png"
+    },
+    "char_x_fgo_round_table_barghest": {
+      "avatar": "art/char/avatar/char_fgo_barghest.png",
+      "avatarE2": "art/char/avatar/char_fgo_barghest_2.png",
+      "portrait": "art/char/portrait/char_fgo_barghest.png",
+      "portraitE2": "art/char/portrait/char_fgo_barghest_2.png"
+    },
+    "char_x_fgo_round_table_mash": {
+      "avatar": "art/char/avatar/char_fgo_mash.png",
+      "avatarE2": "art/char/avatar/char_fgo_mash_2.png",
+      "portrait": "art/char/portrait/char_fgo_mash.png",
+      "portraitE2": "art/char/portrait/char_fgo_mash_2.png"
+    },
+    "char_x_fgo_round_table_lancelot": {
+      "avatar": "art/char/avatar/char_fgo_lancelot.png",
+      "avatarE2": "art/char/avatar/char_fgo_lancelot_2.png",
+      "portrait": "art/char/portrait/char_fgo_lancelot.png",
+      "portraitE2": "art/char/portrait/char_fgo_lancelot_2.png"
+    },
+    "char_x_fgo_round_table_mordred": {
+      "avatar": "art/char/avatar/char_fgo_mordred.png",
+      "avatarE2": "art/char/avatar/char_fgo_mordred_2.png",
+      "portrait": "art/char/portrait/char_fgo_mordred.png",
+      "portraitE2": "art/char/portrait/char_fgo_mordred_2.png"
+    },
+    "char_x_fgo_round_table_melusine": {
+      "avatar": "art/char/avatar/char_fgo_melusine.png",
+      "avatarE2": "art/char/avatar/char_fgo_melusine_2.png",
+      "portrait": "art/char/portrait/char_fgo_melusine.png",
+      "portraitE2": "art/char/portrait/char_fgo_melusine_2.png"
+    },
+    "char_x_fgo_round_table_artoria": {
+      "avatar": "art/char/avatar/char_fgo_artoria.png",
+      "avatarE2": "art/char/avatar/char_fgo_artoria_2.png",
+      "portrait": "art/char/portrait/char_fgo_artoria.png",
+      "portraitE2": "art/char/portrait/char_fgo_artoria_2.png"
+    },
+    "char_x_fgo_round_table_merlin": {
+      "avatar": "art/char/avatar/char_fgo_merlin.png",
+      "avatarE2": "art/char/avatar/char_fgo_merlin_2.png",
+      "portrait": "art/char/portrait/char_fgo_merlin.png",
+      "portraitE2": "art/char/portrait/char_fgo_merlin_2.png"
+    },
+    "char_x_fgo_round_table_castoria": {
+      "avatar": "art/char/avatar/char_fgo_castoria.png",
+      "avatarE2": "art/char/avatar/char_fgo_castoria_2.png",
+      "portrait": "art/char/portrait/char_fgo_castoria.png",
+      "portraitE2": "art/char/portrait/char_fgo_castoria_2.png"
+    },
+    "char_x_fgo_round_table_morgan": {
+      "avatar": "art/char/avatar/char_fgo_morgan.png",
+      "avatarE2": "art/char/avatar/char_fgo_morgan_2.png",
+      "portrait": "art/char/portrait/char_fgo_morgan.png",
+      "portraitE2": "art/char/portrait/char_fgo_morgan_2.png"
+    }
+  },
+  "skills": {
+    "skx_fgo_round_table_gareth_1": "art/skill/skchr_fgo_gareth_1.png",
+    "skx_fgo_round_table_gareth_2": "art/skill/skchr_fgo_gareth_2.png",
+    "skx_fgo_round_table_gareth_3": "art/skill/skchr_fgo_gareth_3.png",
+    "skx_fgo_round_table_bedivere_1": "art/skill/skchr_fgo_bedivere_1.png",
+    "skx_fgo_round_table_bedivere_2": "art/skill/skchr_fgo_bedivere_2.png",
+    "skx_fgo_round_table_bedivere_3": "art/skill/skchr_fgo_bedivere_3.png",
+    "skx_fgo_round_table_tristan_1": "art/skill/skchr_fgo_tristan_1.png",
+    "skx_fgo_round_table_tristan_2": "art/skill/skchr_fgo_tristan_2.png",
+    "skx_fgo_round_table_tristan_3": "art/skill/skchr_fgo_tristan_3.png",
+    "skx_fgo_round_table_percival_1": "art/skill/skchr_fgo_percival_1.png",
+    "skx_fgo_round_table_percival_2": "art/skill/skchr_fgo_percival_2.png",
+    "skx_fgo_round_table_percival_3": "art/skill/skchr_fgo_percival_3.png",
+    "skx_fgo_round_table_baobhan_1": "art/skill/skchr_fgo_baobhan_1.png",
+    "skx_fgo_round_table_baobhan_2": "art/skill/skchr_fgo_baobhan_2.png",
+    "skx_fgo_round_table_baobhan_3": "art/skill/skchr_fgo_baobhan_3.png",
+    "skx_fgo_round_table_gawain_1": "art/skill/skchr_fgo_gawain_1.png",
+    "skx_fgo_round_table_gawain_2": "art/skill/skchr_fgo_gawain_2.png",
+    "skx_fgo_round_table_gawain_3": "art/skill/skchr_fgo_gawain_3.png",
+    "skx_fgo_round_table_barghest_1": "art/skill/skchr_fgo_barghest_1.png",
+    "skx_fgo_round_table_barghest_2": "art/skill/skchr_fgo_barghest_2.png",
+    "skx_fgo_round_table_barghest_3": "art/skill/skchr_fgo_barghest_3.png",
+    "skx_fgo_round_table_mash_1": "art/skill/skchr_fgo_mash_1.png",
+    "skx_fgo_round_table_mash_2": "art/skill/skchr_fgo_mash_2.png",
+    "skx_fgo_round_table_mash_3": "art/skill/skchr_fgo_mash_3.png",
+    "skx_fgo_round_table_lancelot_1": "art/skill/skchr_fgo_lancelot_1.png",
+    "skx_fgo_round_table_lancelot_2": "art/skill/skchr_fgo_lancelot_2.png",
+    "skx_fgo_round_table_lancelot_3": "art/skill/skchr_fgo_lancelot_3.png",
+    "skx_fgo_round_table_mordred_1": "art/skill/skchr_fgo_mordred_1.png",
+    "skx_fgo_round_table_mordred_2": "art/skill/skchr_fgo_mordred_2.png",
+    "skx_fgo_round_table_mordred_3": "art/skill/skchr_fgo_mordred_3.png",
+    "skx_fgo_round_table_melusine_1": "art/skill/skchr_fgo_melusine_1.png",
+    "skx_fgo_round_table_melusine_2": "art/skill/skchr_fgo_melusine_2.png",
+    "skx_fgo_round_table_melusine_3": "art/skill/skchr_fgo_melusine_3.png",
+    "skx_fgo_round_table_artoria_1": "art/skill/skchr_fgo_artoria_1.png",
+    "skx_fgo_round_table_artoria_2": "art/skill/skchr_fgo_artoria_2.png",
+    "skx_fgo_round_table_artoria_3": "art/skill/skchr_fgo_artoria_3.png",
+    "skx_fgo_round_table_merlin_1": "art/skill/skchr_fgo_merlin_1.png",
+    "skx_fgo_round_table_merlin_2": "art/skill/skchr_fgo_merlin_2.png",
+    "skx_fgo_round_table_merlin_3": "art/skill/skchr_fgo_merlin_3.png",
+    "skx_fgo_round_table_castoria_1": "art/skill/skchr_fgo_castoria_1.png",
+    "skx_fgo_round_table_castoria_2": "art/skill/skchr_fgo_castoria_2.png",
+    "skx_fgo_round_table_castoria_3": "art/skill/skchr_fgo_castoria_3.png",
+    "skx_fgo_round_table_morgan_1": "art/skill/skchr_fgo_morgan_1.png",
+    "skx_fgo_round_table_morgan_2": "art/skill/skchr_fgo_morgan_2.png",
+    "skx_fgo_round_table_morgan_3": "art/skill/skchr_fgo_morgan_3.png"
+  },
+  "audio": {
+    "voice": {
+      "char_x_fgo_round_table_artoria": {
+        "ref": "char_fgo_artoria"
+      },
+      "char_x_fgo_round_table_baobhan": {
+        "ref": "char_fgo_baobhan"
+      },
+      "char_x_fgo_round_table_barghest": {
+        "ref": "char_fgo_barghest"
+      },
+      "char_x_fgo_round_table_bedivere": {
+        "ref": "char_fgo_bedivere"
+      },
+      "char_x_fgo_round_table_castoria": {
+        "ref": "char_fgo_castoria"
+      },
+      "char_x_fgo_round_table_gareth": {
+        "ref": "char_fgo_gareth"
+      },
+      "char_x_fgo_round_table_gawain": {
+        "ref": "char_fgo_gawain"
+      },
+      "char_x_fgo_round_table_lancelot": {
+        "ref": "char_fgo_lancelot"
+      },
+      "char_x_fgo_round_table_mash": {
+        "ref": "char_fgo_mash"
+      },
+      "char_x_fgo_round_table_melusine": {
+        "ref": "char_fgo_melusine"
+      },
+      "char_x_fgo_round_table_merlin": {
+        "ref": "char_fgo_merlin"
+      },
+      "char_x_fgo_round_table_mordred": {
+        "ref": "char_fgo_mordred"
+      },
+      "char_x_fgo_round_table_morgan": {
+        "ref": "char_fgo_morgan"
+      },
+      "char_x_fgo_round_table_percival": {
+        "ref": "char_fgo_percival"
+      },
+      "char_x_fgo_round_table_tristan": {
+        "ref": "char_fgo_tristan"
+      }
+    },
+    "voiceJp": {
+      "char_x_fgo_round_table_artoria": {
+        "ref": "char_fgo_artoria"
+      },
+      "char_x_fgo_round_table_baobhan": {
+        "ref": "char_fgo_baobhan"
+      },
+      "char_x_fgo_round_table_barghest": {
+        "ref": "char_fgo_barghest"
+      },
+      "char_x_fgo_round_table_bedivere": {
+        "ref": "char_fgo_bedivere"
+      },
+      "char_x_fgo_round_table_castoria": {
+        "ref": "char_fgo_castoria"
+      },
+      "char_x_fgo_round_table_gareth": {
+        "ref": "char_fgo_gareth"
+      },
+      "char_x_fgo_round_table_gawain": {
+        "ref": "char_fgo_gawain"
+      },
+      "char_x_fgo_round_table_lancelot": {
+        "ref": "char_fgo_lancelot"
+      },
+      "char_x_fgo_round_table_mash": {
+        "ref": "char_fgo_mash"
+      },
+      "char_x_fgo_round_table_melusine": {
+        "ref": "char_fgo_melusine"
+      },
+      "char_x_fgo_round_table_merlin": {
+        "ref": "char_fgo_merlin"
+      },
+      "char_x_fgo_round_table_mordred": {
+        "ref": "char_fgo_mordred"
+      },
+      "char_x_fgo_round_table_morgan": {
+        "ref": "char_fgo_morgan"
+      },
+      "char_x_fgo_round_table_percival": {
+        "ref": "char_fgo_percival"
+      },
+      "char_x_fgo_round_table_tristan": {
+        "ref": "char_fgo_tristan"
+      }
+    }
+  },
+  "bonds": {
+    "roundTable": "art/bond/roundTable.png"
+  }
+}
