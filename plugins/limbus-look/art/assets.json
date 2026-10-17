@@ -1,0 +1,169 @@
+{
+  "chars": {
+    "char_x_limbus_company_yisang": {
+      "ref": "char_limbus_yisang",
+      "avatar": "art/char/avatar/char_limbus_yisang.png",
+      "avatarE2": "art/char/avatar/char_limbus_yisang_2.png",
+      "portrait": "art/char/portrait/char_limbus_yisang_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_yisang_2.png"
+    },
+    "char_x_limbus_company_sinclair": {
+      "ref": "char_limbus_sinclair",
+      "avatar": "art/char/avatar/char_limbus_sinclair.png",
+      "avatarE2": "art/char/avatar/char_limbus_sinclair_2.png",
+      "portrait": "art/char/portrait/char_limbus_sinclair_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_sinclair_2.png"
+    },
+    "char_x_limbus_company_faust": {
+      "ref": "char_limbus_faust",
+      "avatar": "art/char/avatar/char_limbus_faust.png",
+      "avatarE2": "art/char/avatar/char_limbus_faust_2.png",
+      "portrait": "art/char/portrait/char_limbus_faust_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_faust_2.png"
+    },
+    "char_x_limbus_company_ishmael": {
+      "ref": "char_limbus_ishmael",
+      "avatar": "art/char/avatar/char_limbus_ishmael.png",
+      "avatarE2": "art/char/avatar/char_limbus_ishmael_2.png",
+      "portrait": "art/char/portrait/char_limbus_ishmael_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_ishmael_2.png"
+    },
+    "char_x_limbus_company_rodion": {
+      "ref": "char_limbus_rodion",
+      "avatar": "art/char/avatar/char_limbus_rodion.png",
+      "avatarE2": "art/char/avatar/char_limbus_rodion_2.png",
+      "portrait": "art/char/portrait/char_limbus_rodion_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_rodion_2.png"
+    },
+    "char_x_limbus_company_heathcliff": {
+      "ref": "char_limbus_heathcliff",
+      "avatar": "art/char/avatar/char_limbus_heathcliff.png",
+      "avatarE2": "art/char/avatar/char_limbus_heathcliff_2.png",
+      "portrait": "art/char/portrait/char_limbus_heathcliff_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_heathcliff_2.png"
+    },
+    "char_x_limbus_company_meursault": {
+      "ref": "char_limbus_meursault",
+      "avatar": "art/char/avatar/char_limbus_meursault.png",
+      "avatarE2": "art/char/avatar/char_limbus_meursault_2.png",
+      "portrait": "art/char/portrait/char_limbus_meursault_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_meursault_2.png"
+    },
+    "char_x_limbus_company_honglu": {
+      "ref": "char_limbus_honglu",
+      "avatar": "art/char/avatar/char_limbus_honglu.png",
+      "avatarE2": "art/char/avatar/char_limbus_honglu_2.png",
+      "portrait": "art/char/portrait/char_limbus_honglu_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_honglu_2.png"
+    },
+    "char_x_limbus_company_ryoshu": {
+      "ref": "char_limbus_ryoshu",
+      "avatar": "art/char/avatar/char_limbus_ryoshu.png",
+      "avatarE2": "art/char/avatar/char_limbus_ryoshu_2.png",
+      "portrait": "art/char/portrait/char_limbus_ryoshu_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_ryoshu_2.png"
+    },
+    "char_x_limbus_company_outis": {
+      "ref": "char_limbus_outis",
+      "avatar": "art/char/avatar/char_limbus_outis.png",
+      "avatarE2": "art/char/avatar/char_limbus_outis_2.png",
+      "portrait": "art/char/portrait/char_limbus_outis_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_outis_2.png"
+    },
+    "char_x_limbus_company_donquixote": {
+      "ref": "char_limbus_donquixote",
+      "avatar": "art/char/avatar/char_limbus_donquixote.png",
+      "avatarE2": "art/char/avatar/char_limbus_donquixote_2.png",
+      "portrait": "art/char/portrait/char_limbus_donquixote_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_donquixote_2.png"
+    },
+    "char_x_limbus_company_gregor": {
+      "ref": "char_limbus_gregor",
+      "avatar": "art/char/avatar/char_limbus_gregor.png",
+      "avatarE2": "art/char/avatar/char_limbus_gregor_2.png",
+      "portrait": "art/char/portrait/char_limbus_gregor_1.png",
+      "portraitE2": "art/char/portrait/char_limbus_gregor_2.png"
+    }
+  },
+  "skills": {
+    "skx_limbus_company_yisang_1": "art/skill/skchr_yisang_1.png",
+    "skx_limbus_company_yisang_2": "art/skill/skchr_yisang_2.png",
+    "skx_limbus_company_yisang_3": "art/skill/skchr_yisang_3.png",
+    "skx_limbus_company_sinclair_1": "art/skill/skchr_sinclair_1.png",
+    "skx_limbus_company_sinclair_2": "art/skill/skchr_sinclair_2.png",
+    "skx_limbus_company_sinclair_3": "art/skill/skchr_sinclair_3.png",
+    "skx_limbus_company_faust_1": "art/skill/skchr_faust_1.png",
+    "skx_limbus_company_faust_2": "art/skill/skchr_faust_2.png",
+    "skx_limbus_company_faust_3": "art/skill/skchr_faust_3.png",
+    "skx_limbus_company_ishmael_1": "art/skill/skchr_ishmael_1.png",
+    "skx_limbus_company_ishmael_2": "art/skill/skchr_ishmael_2.png",
+    "skx_limbus_company_ishmael_3": "art/skill/skchr_ishmael_3.png",
+    "skx_limbus_company_rodion_1": "art/skill/skchr_rodion_1.png",
+    "skx_limbus_company_rodion_2": "art/skill/skchr_rodion_2.png",
+    "skx_limbus_company_rodion_3": "art/skill/skchr_rodion_3.png",
+    "skx_limbus_company_heathcliff_1": "art/skill/skchr_heathcliff_1.png",
+    "skx_limbus_company_heathcliff_2": "art/skill/skchr_heathcliff_2.png",
+    "skx_limbus_company_heathcliff_3": "art/skill/skchr_heathcliff_3.png",
+    "skx_limbus_company_meursault_1": "art/skill/skchr_meursault_1.png",
+    "skx_limbus_company_meursault_2": "art/skill/skchr_meursault_2.png",
+    "skx_limbus_company_meursault_3": "art/skill/skchr_meursault_3.png",
+    "skx_limbus_company_honglu_1": "art/skill/skchr_honglu_1.png",
+    "skx_limbus_company_honglu_2": "art/skill/skchr_honglu_2.png",
+    "skx_limbus_company_honglu_3": "art/skill/skchr_honglu_3.png",
+    "skx_limbus_company_ryoshu_1": "art/skill/skchr_ryoshu_1.png",
+    "skx_limbus_company_ryoshu_2": "art/skill/skchr_ryoshu_2.png",
+    "skx_limbus_company_ryoshu_3": "art/skill/skchr_ryoshu_3.png",
+    "skx_limbus_company_outis_1": "art/skill/skchr_outis_1.png",
+    "skx_limbus_company_outis_2": "art/skill/skchr_outis_2.png",
+    "skx_limbus_company_outis_3": "art/skill/skchr_outis_3.png",
+    "skx_limbus_company_donquixote_1": "art/skill/skchr_donquixote_1.png",
+    "skx_limbus_company_donquixote_2": "art/skill/skchr_donquixote_2.png",
+    "skx_limbus_company_donquixote_3": "art/skill/skchr_donquixote_3.png",
+    "skx_limbus_company_gregor_1": "art/skill/skchr_gregor_1.png",
+    "skx_limbus_company_gregor_2": "art/skill/skchr_gregor_2.png",
+    "skx_limbus_company_gregor_3": "art/skill/skchr_gregor_3.png"
+  },
+  "audio": {
+    "voice": {
+      "char_x_limbus_company_donquixote": {
+        "ref": "char_limbus_donquixote"
+      },
+      "char_x_limbus_company_faust": {
+        "ref": "char_limbus_faust"
+      },
+      "char_x_limbus_company_gregor": {
+        "ref": "char_limbus_gregor"
+      },
+      "char_x_limbus_company_heathcliff": {
+        "ref": "char_limbus_heathcliff"
+      },
+      "char_x_limbus_company_honglu": {
+        "ref": "char_limbus_honglu"
+      },
+      "char_x_limbus_company_ishmael": {
+        "ref": "char_limbus_ishmael"
+      },
+      "char_x_limbus_company_meursault": {
+        "ref": "char_limbus_meursault"
+      },
+      "char_x_limbus_company_outis": {
+        "ref": "char_limbus_outis"
+      },
+      "char_x_limbus_company_rodion": {
+        "ref": "char_limbus_rodion"
+      },
+      "char_x_limbus_company_ryoshu": {
+        "ref": "char_limbus_ryoshu"
+      },
+      "char_x_limbus_company_sinclair": {
+        "ref": "char_limbus_sinclair"
+      },
+      "char_x_limbus_company_yisang": {
+        "ref": "char_limbus_yisang"
+      }
+    }
+  },
+  "bonds": {
+    "limbusShip": "art/bond/limbusShip.png"
+  }
+}
