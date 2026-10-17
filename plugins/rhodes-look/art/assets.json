@@ -1,0 +1,184 @@
+{
+  "chars": {
+    "char_x_rhodes_amiya3": {
+      "avatar": "art/char/avatar/char_1037_amiya3_2.png",
+      "avatarE2": "art/char/avatar/char_1037_amiya3_2.png",
+      "portrait": "art/char/portrait/char_1037_amiya3_2.png",
+      "portraitE2": "art/char/portrait/char_1037_amiya3_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_1037_amiya3/front/char_1037_amiya3.skel",
+          "atlas": "art/spine/op/char_1037_amiya3/front/char_1037_amiya3.atlas",
+          "textures": [
+            "art/spine/op/char_1037_amiya3/front/char_1037_amiya3.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_1037_amiya3/back/char_1037_amiya3.skel",
+          "atlas": "art/spine/op/char_1037_amiya3/back/char_1037_amiya3.atlas",
+          "textures": [
+            "art/spine/op/char_1037_amiya3/back/char_1037_amiya3.png"
+          ]
+        }
+      }
+    },
+    "char_1037_amiya3": {
+      "avatar": "art/char/avatar/char_1037_amiya3_2.png",
+      "avatarE2": "art/char/avatar/char_1037_amiya3_2.png",
+      "portrait": "art/char/portrait/char_1037_amiya3_2.png",
+      "portraitE2": "art/char/portrait/char_1037_amiya3_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_1037_amiya3/front/char_1037_amiya3.skel",
+          "atlas": "art/spine/op/char_1037_amiya3/front/char_1037_amiya3.atlas",
+          "textures": [
+            "art/spine/op/char_1037_amiya3/front/char_1037_amiya3.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_1037_amiya3/back/char_1037_amiya3.skel",
+          "atlas": "art/spine/op/char_1037_amiya3/back/char_1037_amiya3.atlas",
+          "textures": [
+            "art/spine/op/char_1037_amiya3/back/char_1037_amiya3.png"
+          ]
+        }
+      }
+    },
+    "char_x_rhodes_savage": {
+      "avatar": "art/char/avatar/char_230_savage.png",
+      "avatarE2": "art/char/avatar/char_230_savage_2.png",
+      "portrait": "art/char/portrait/char_230_savage_1.png",
+      "portraitE2": "art/char/portrait/char_230_savage_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_230_savage/front/char_230_savage.skel",
+          "atlas": "art/spine/op/char_230_savage/front/char_230_savage.atlas",
+          "textures": [
+            "art/spine/op/char_230_savage/front/char_230_savage.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_230_savage/back/char_230_savage.skel",
+          "atlas": "art/spine/op/char_230_savage/back/char_230_savage.atlas",
+          "textures": [
+            "art/spine/op/char_230_savage/back/char_230_savage.png"
+          ]
+        }
+      }
+    },
+    "char_230_savage": {
+      "avatar": "art/char/avatar/char_230_savage.png",
+      "avatarE2": "art/char/avatar/char_230_savage_2.png",
+      "portrait": "art/char/portrait/char_230_savage_1.png",
+      "portraitE2": "art/char/portrait/char_230_savage_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_230_savage/front/char_230_savage.skel",
+          "atlas": "art/spine/op/char_230_savage/front/char_230_savage.atlas",
+          "textures": [
+            "art/spine/op/char_230_savage/front/char_230_savage.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_230_savage/back/char_230_savage.skel",
+          "atlas": "art/spine/op/char_230_savage/back/char_230_savage.atlas",
+          "textures": [
+            "art/spine/op/char_230_savage/back/char_230_savage.png"
+          ]
+        }
+      }
+    }
+  },
+  "skills": {
+    "skx_rhodes_amiya3_1": "art/skill/skchr_amiya3_1.png",
+    "skchr_amiya3_1": "art/skill/skchr_amiya3_1.png",
+    "skx_rhodes_amiya3_2": "art/skill/skchr_amiya3_2.png",
+    "skchr_amiya3_2": "art/skill/skchr_amiya3_2.png",
+    "skx_rhodes_savage_1": "art/skill/skchr_savage_1.png",
+    "skchr_savage_1": "art/skill/skchr_savage_1.png",
+    "skx_rhodes_savage_2": "art/skill/skchr_savage_2.png",
+    "skchr_savage_2": "art/skill/skchr_savage_2.png"
+  },
+  "bonds": {
+    "rhodesShip": "art/bond/rhodesShip.png"
+  },
+  "tokens": {
+    "token_10050_monstr_prosts": {
+      "spine": {
+        "skel": "art/spine/token/token_10050_monstr_prosts/token_10050_monstr_prosts_boc_11.skel",
+        "atlas": "art/spine/token/token_10050_monstr_prosts/token_10050_monstr_prosts_boc_11.atlas",
+        "textures": [
+          "art/spine/token/token_10050_monstr_prosts/token_10050_monstr_prosts_boc_11.png"
+        ]
+      }
+    }
+  },
+  "audio": {
+    "voice": {
+      "char_x_rhodes_ascln": {
+        "ref": "char_4132_ascln"
+      },
+      "char_x_rhodes_closur": {
+        "ref": "char_4228_closur"
+      },
+      "char_x_rhodes_logos": {
+        "ref": "char_4133_logos"
+      },
+      "char_x_rhodes_monstr": {
+        "ref": "char_4179_monstr"
+      }
+    },
+    "voiceJp": {
+      "char_x_rhodes_ascln": {
+        "ref": "char_4132_ascln"
+      },
+      "char_x_rhodes_closur": {
+        "ref": "char_4228_closur"
+      },
+      "char_x_rhodes_logos": {
+        "ref": "char_4133_logos"
+      },
+      "char_x_rhodes_monstr": {
+        "ref": "char_4179_monstr"
+      }
+    },
+    "voiceEn": {
+      "char_x_rhodes_ascln": {
+        "ref": "char_4132_ascln"
+      },
+      "char_x_rhodes_logos": {
+        "ref": "char_4133_logos"
+      },
+      "char_x_rhodes_monstr": {
+        "ref": "char_4179_monstr"
+      }
+    },
+    "voiceKr": {
+      "char_x_rhodes_ascln": {
+        "ref": "char_4132_ascln"
+      },
+      "char_x_rhodes_logos": {
+        "ref": "char_4133_logos"
+      },
+      "char_x_rhodes_monstr": {
+        "ref": "char_4179_monstr"
+      }
+    },
+    "sfx": {
+      "units": {
+        "char_x_rhodes_ascln": {
+          "ref": "char_4132_ascln"
+        },
+        "char_x_rhodes_closur": {
+          "ref": "char_4228_closur"
+        },
+        "char_x_rhodes_logos": {
+          "ref": "char_4133_logos"
+        },
+        "char_x_rhodes_monstr": {
+          "ref": "char_4179_monstr"
+        }
+      }
+    }
+  }
+}
