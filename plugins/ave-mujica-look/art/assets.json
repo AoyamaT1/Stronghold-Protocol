@@ -1,0 +1,432 @@
+{
+  "chars": {
+    "char_4182_oblvns": {
+      "avatar": "art/char/avatar/char_4182_oblvns.png",
+      "avatarE2": "art/char/avatar/char_4182_oblvns_2.png",
+      "portrait": "art/char/portrait/char_4182_oblvns_1.png",
+      "portraitE2": "art/char/portrait/char_4182_oblvns_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_4182_oblvns/front/char_4182_oblvns.skel",
+          "atlas": "art/spine/op/char_4182_oblvns/front/char_4182_oblvns.atlas",
+          "textures": [
+            "art/spine/op/char_4182_oblvns/front/char_4182_oblvns.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_4182_oblvns/back/char_4182_oblvns.skel",
+          "atlas": "art/spine/op/char_4182_oblvns/back/char_4182_oblvns.atlas",
+          "textures": [
+            "art/spine/op/char_4182_oblvns/back/char_4182_oblvns.png"
+          ]
+        }
+      }
+    },
+    "char_x_ave_mujica_oblvns": {
+      "avatar": "art/char/avatar/char_4182_oblvns.png",
+      "avatarE2": "art/char/avatar/char_4182_oblvns_2.png",
+      "portrait": "art/char/portrait/char_4182_oblvns_1.png",
+      "portraitE2": "art/char/portrait/char_4182_oblvns_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_4182_oblvns/front/char_4182_oblvns.skel",
+          "atlas": "art/spine/op/char_4182_oblvns/front/char_4182_oblvns.atlas",
+          "textures": [
+            "art/spine/op/char_4182_oblvns/front/char_4182_oblvns.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_4182_oblvns/back/char_4182_oblvns.skel",
+          "atlas": "art/spine/op/char_4182_oblvns/back/char_4182_oblvns.atlas",
+          "textures": [
+            "art/spine/op/char_4182_oblvns/back/char_4182_oblvns.png"
+          ]
+        }
+      }
+    },
+    "char_4183_mortis": {
+      "avatar": "art/char/avatar/char_4183_mortis.png",
+      "avatarE2": "art/char/avatar/char_4183_mortis_2.png",
+      "portrait": "art/char/portrait/char_4183_mortis_1.png",
+      "portraitE2": "art/char/portrait/char_4183_mortis_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_4183_mortis/front/char_4183_mortis.skel",
+          "atlas": "art/spine/op/char_4183_mortis/front/char_4183_mortis.atlas",
+          "textures": [
+            "art/spine/op/char_4183_mortis/front/char_4183_mortis.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_4183_mortis/back/char_4183_mortis.skel",
+          "atlas": "art/spine/op/char_4183_mortis/back/char_4183_mortis.atlas",
+          "textures": [
+            "art/spine/op/char_4183_mortis/back/char_4183_mortis.png"
+          ]
+        }
+      }
+    },
+    "char_x_ave_mujica_mortis": {
+      "avatar": "art/char/avatar/char_4183_mortis.png",
+      "avatarE2": "art/char/avatar/char_4183_mortis_2.png",
+      "portrait": "art/char/portrait/char_4183_mortis_1.png",
+      "portraitE2": "art/char/portrait/char_4183_mortis_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_4183_mortis/front/char_4183_mortis.skel",
+          "atlas": "art/spine/op/char_4183_mortis/front/char_4183_mortis.atlas",
+          "textures": [
+            "art/spine/op/char_4183_mortis/front/char_4183_mortis.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_4183_mortis/back/char_4183_mortis.skel",
+          "atlas": "art/spine/op/char_4183_mortis/back/char_4183_mortis.atlas",
+          "textures": [
+            "art/spine/op/char_4183_mortis/back/char_4183_mortis.png"
+          ]
+        }
+      }
+    },
+    "char_4184_dolris": {
+      "avatar": "art/char/avatar/char_4184_dolris.png",
+      "avatarE2": "art/char/avatar/char_4184_dolris_2.png",
+      "portrait": "art/char/portrait/char_4184_dolris_1.png",
+      "portraitE2": "art/char/portrait/char_4184_dolris_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_4184_dolris/front/char_4184_dolris.skel",
+          "atlas": "art/spine/op/char_4184_dolris/front/char_4184_dolris.atlas",
+          "textures": [
+            "art/spine/op/char_4184_dolris/front/char_4184_dolris.png"
+          ]
+        }
+      }
+    },
+    "char_x_ave_mujica_dolris": {
+      "avatar": "art/char/avatar/char_4184_dolris.png",
+      "avatarE2": "art/char/avatar/char_4184_dolris_2.png",
+      "portrait": "art/char/portrait/char_4184_dolris_1.png",
+      "portraitE2": "art/char/portrait/char_4184_dolris_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_4184_dolris/front/char_4184_dolris.skel",
+          "atlas": "art/spine/op/char_4184_dolris/front/char_4184_dolris.atlas",
+          "textures": [
+            "art/spine/op/char_4184_dolris/front/char_4184_dolris.png"
+          ]
+        }
+      }
+    },
+    "char_4185_amoris": {
+      "avatar": "art/char/avatar/char_4185_amoris.png",
+      "avatarE2": "art/char/avatar/char_4185_amoris_2.png",
+      "portrait": "art/char/portrait/char_4185_amoris_1.png",
+      "portraitE2": "art/char/portrait/char_4185_amoris_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_4185_amoris/front/char_4185_amoris.skel",
+          "atlas": "art/spine/op/char_4185_amoris/front/char_4185_amoris.atlas",
+          "textures": [
+            "art/spine/op/char_4185_amoris/front/char_4185_amoris.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_4185_amoris/back/char_4185_amoris.skel",
+          "atlas": "art/spine/op/char_4185_amoris/back/char_4185_amoris.atlas",
+          "textures": [
+            "art/spine/op/char_4185_amoris/back/char_4185_amoris.png"
+          ]
+        }
+      }
+    },
+    "char_x_ave_mujica_amoris": {
+      "avatar": "art/char/avatar/char_4185_amoris.png",
+      "avatarE2": "art/char/avatar/char_4185_amoris_2.png",
+      "portrait": "art/char/portrait/char_4185_amoris_1.png",
+      "portraitE2": "art/char/portrait/char_4185_amoris_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_4185_amoris/front/char_4185_amoris.skel",
+          "atlas": "art/spine/op/char_4185_amoris/front/char_4185_amoris.atlas",
+          "textures": [
+            "art/spine/op/char_4185_amoris/front/char_4185_amoris.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_4185_amoris/back/char_4185_amoris.skel",
+          "atlas": "art/spine/op/char_4185_amoris/back/char_4185_amoris.atlas",
+          "textures": [
+            "art/spine/op/char_4185_amoris/back/char_4185_amoris.png"
+          ]
+        }
+      }
+    },
+    "char_4186_tmoris": {
+      "avatar": "art/char/avatar/char_4186_tmoris.png",
+      "avatarE2": "art/char/avatar/char_4186_tmoris_2.png",
+      "portrait": "art/char/portrait/char_4186_tmoris_1.png",
+      "portraitE2": "art/char/portrait/char_4186_tmoris_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_4186_tmoris/front/char_4186_tmoris.skel",
+          "atlas": "art/spine/op/char_4186_tmoris/front/char_4186_tmoris.atlas",
+          "textures": [
+            "art/spine/op/char_4186_tmoris/front/char_4186_tmoris.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_4186_tmoris/back/char_4186_tmoris.skel",
+          "atlas": "art/spine/op/char_4186_tmoris/back/char_4186_tmoris.atlas",
+          "textures": [
+            "art/spine/op/char_4186_tmoris/back/char_4186_tmoris.png"
+          ]
+        }
+      }
+    },
+    "char_x_ave_mujica_tmoris": {
+      "avatar": "art/char/avatar/char_4186_tmoris.png",
+      "avatarE2": "art/char/avatar/char_4186_tmoris_2.png",
+      "portrait": "art/char/portrait/char_4186_tmoris_1.png",
+      "portraitE2": "art/char/portrait/char_4186_tmoris_2.png",
+      "spine": {
+        "front": {
+          "skel": "art/spine/op/char_4186_tmoris/front/char_4186_tmoris.skel",
+          "atlas": "art/spine/op/char_4186_tmoris/front/char_4186_tmoris.atlas",
+          "textures": [
+            "art/spine/op/char_4186_tmoris/front/char_4186_tmoris.png"
+          ]
+        },
+        "back": {
+          "skel": "art/spine/op/char_4186_tmoris/back/char_4186_tmoris.skel",
+          "atlas": "art/spine/op/char_4186_tmoris/back/char_4186_tmoris.atlas",
+          "textures": [
+            "art/spine/op/char_4186_tmoris/back/char_4186_tmoris.png"
+          ]
+        }
+      }
+    }
+  },
+  "skills": {
+    "skx_ave_mujica_oblvns_1": "art/skill/skchr_oblvns_1.png",
+    "skx_ave_mujica_oblvns_2": "art/skill/skchr_oblvns_2.png",
+    "skx_ave_mujica_oblvns_3": "art/skill/skchr_oblvns_3.png",
+    "skx_ave_mujica_mortis_1": "art/skill/skchr_mortis_1.png",
+    "skx_ave_mujica_mortis_2": "art/skill/skchr_mortis_2.png",
+    "skx_ave_mujica_dolris_1": "art/skill/skchr_dolris_1.png",
+    "skx_ave_mujica_dolris_2": "art/skill/skchr_dolris_2.png",
+    "skx_ave_mujica_amoris_1": "art/skill/skchr_amoris_1.png",
+    "skx_ave_mujica_amoris_2": "art/skill/skchr_amoris_2.png",
+    "skx_ave_mujica_tmoris_1": "art/skill/skchr_tmoris_1.png",
+    "skx_ave_mujica_tmoris_2": "art/skill/skchr_tmoris_2.png"
+  },
+  "bonds": {
+    "aveMujicaShip": "art/bond/aveMujicaShip.png"
+  },
+  "audio": {
+    "voice": {
+      "char_x_ave_mujica_oblvns": {
+        "start": "art/audio/voice/char_4182_oblvns/cn_019.mp3",
+        "faceEnemy": "art/audio/voice/char_4182_oblvns/cn_020.mp3",
+        "select": [
+          "art/audio/voice/char_4182_oblvns/cn_021.mp3",
+          "art/audio/voice/char_4182_oblvns/cn_022.mp3"
+        ],
+        "place": [
+          "art/audio/voice/char_4182_oblvns/cn_023.mp3",
+          "art/audio/voice/char_4182_oblvns/cn_024.mp3"
+        ],
+        "skill1": "art/audio/voice/char_4182_oblvns/cn_025.mp3",
+        "skill2": "art/audio/voice/char_4182_oblvns/cn_026.mp3",
+        "skill3": "art/audio/voice/char_4182_oblvns/cn_027.mp3",
+        "skill4": "art/audio/voice/char_4182_oblvns/cn_028.mp3",
+        "resultFour": "art/audio/voice/char_4182_oblvns/cn_029.mp3",
+        "resultThree": "art/audio/voice/char_4182_oblvns/cn_030.mp3",
+        "resultTwo": "art/audio/voice/char_4182_oblvns/cn_031.mp3",
+        "resultLose": "art/audio/voice/char_4182_oblvns/cn_032.mp3"
+      },
+      "char_x_ave_mujica_mortis": {
+        "start": "art/audio/voice/char_4183_mortis/cn_019.mp3",
+        "faceEnemy": "art/audio/voice/char_4183_mortis/cn_020.mp3",
+        "select": [
+          "art/audio/voice/char_4183_mortis/cn_021.mp3",
+          "art/audio/voice/char_4183_mortis/cn_022.mp3"
+        ],
+        "place": [
+          "art/audio/voice/char_4183_mortis/cn_023.mp3",
+          "art/audio/voice/char_4183_mortis/cn_024.mp3"
+        ],
+        "skill1": "art/audio/voice/char_4183_mortis/cn_025.mp3",
+        "skill2": "art/audio/voice/char_4183_mortis/cn_026.mp3",
+        "skill3": "art/audio/voice/char_4183_mortis/cn_027.mp3",
+        "skill4": "art/audio/voice/char_4183_mortis/cn_028.mp3",
+        "resultFour": "art/audio/voice/char_4183_mortis/cn_029.mp3",
+        "resultThree": "art/audio/voice/char_4183_mortis/cn_030.mp3",
+        "resultTwo": "art/audio/voice/char_4183_mortis/cn_031.mp3",
+        "resultLose": "art/audio/voice/char_4183_mortis/cn_032.mp3"
+      },
+      "char_x_ave_mujica_dolris": {
+        "start": "art/audio/voice/char_4184_dolris/cn_019.mp3",
+        "faceEnemy": "art/audio/voice/char_4184_dolris/cn_020.mp3",
+        "select": [
+          "art/audio/voice/char_4184_dolris/cn_021.mp3",
+          "art/audio/voice/char_4184_dolris/cn_022.mp3"
+        ],
+        "place": [
+          "art/audio/voice/char_4184_dolris/cn_023.mp3",
+          "art/audio/voice/char_4184_dolris/cn_024.mp3"
+        ],
+        "skill1": "art/audio/voice/char_4184_dolris/cn_025.mp3",
+        "skill2": "art/audio/voice/char_4184_dolris/cn_026.mp3",
+        "skill3": "art/audio/voice/char_4184_dolris/cn_027.mp3",
+        "skill4": "art/audio/voice/char_4184_dolris/cn_028.mp3",
+        "resultFour": "art/audio/voice/char_4184_dolris/cn_029.mp3",
+        "resultThree": "art/audio/voice/char_4184_dolris/cn_030.mp3",
+        "resultTwo": "art/audio/voice/char_4184_dolris/cn_031.mp3",
+        "resultLose": "art/audio/voice/char_4184_dolris/cn_032.mp3"
+      },
+      "char_x_ave_mujica_amoris": {
+        "start": "art/audio/voice/char_4185_amoris/cn_019.mp3",
+        "faceEnemy": "art/audio/voice/char_4185_amoris/cn_020.mp3",
+        "select": [
+          "art/audio/voice/char_4185_amoris/cn_021.mp3",
+          "art/audio/voice/char_4185_amoris/cn_022.mp3"
+        ],
+        "place": [
+          "art/audio/voice/char_4185_amoris/cn_023.mp3",
+          "art/audio/voice/char_4185_amoris/cn_024.mp3"
+        ],
+        "skill1": "art/audio/voice/char_4185_amoris/cn_025.mp3",
+        "skill2": "art/audio/voice/char_4185_amoris/cn_026.mp3",
+        "skill3": "art/audio/voice/char_4185_amoris/cn_027.mp3",
+        "skill4": "art/audio/voice/char_4185_amoris/cn_028.mp3",
+        "resultFour": "art/audio/voice/char_4185_amoris/cn_029.mp3",
+        "resultThree": "art/audio/voice/char_4185_amoris/cn_030.mp3",
+        "resultTwo": "art/audio/voice/char_4185_amoris/cn_031.mp3",
+        "resultLose": "art/audio/voice/char_4185_amoris/cn_032.mp3"
+      },
+      "char_x_ave_mujica_tmoris": {
+        "start": "art/audio/voice/char_4186_tmoris/cn_019.mp3",
+        "faceEnemy": "art/audio/voice/char_4186_tmoris/cn_020.mp3",
+        "select": [
+          "art/audio/voice/char_4186_tmoris/cn_021.mp3",
+          "art/audio/voice/char_4186_tmoris/cn_022.mp3"
+        ],
+        "place": [
+          "art/audio/voice/char_4186_tmoris/cn_023.mp3",
+          "art/audio/voice/char_4186_tmoris/cn_024.mp3"
+        ],
+        "skill1": "art/audio/voice/char_4186_tmoris/cn_025.mp3",
+        "skill2": "art/audio/voice/char_4186_tmoris/cn_026.mp3",
+        "skill3": "art/audio/voice/char_4186_tmoris/cn_027.mp3",
+        "skill4": "art/audio/voice/char_4186_tmoris/cn_028.mp3",
+        "resultFour": "art/audio/voice/char_4186_tmoris/cn_029.mp3",
+        "resultThree": "art/audio/voice/char_4186_tmoris/cn_030.mp3",
+        "resultTwo": "art/audio/voice/char_4186_tmoris/cn_031.mp3",
+        "resultLose": "art/audio/voice/char_4186_tmoris/cn_032.mp3"
+      }
+    },
+    "voiceJp": {
+      "char_x_ave_mujica_oblvns": {
+        "start": "art/audio/voice/char_4182_oblvns/cn_019.mp3",
+        "faceEnemy": "art/audio/voice/char_4182_oblvns/cn_020.mp3",
+        "select": [
+          "art/audio/voice/char_4182_oblvns/cn_021.mp3",
+          "art/audio/voice/char_4182_oblvns/cn_022.mp3"
+        ],
+        "place": [
+          "art/audio/voice/char_4182_oblvns/cn_023.mp3",
+          "art/audio/voice/char_4182_oblvns/cn_024.mp3"
+        ],
+        "skill1": "art/audio/voice/char_4182_oblvns/cn_025.mp3",
+        "skill2": "art/audio/voice/char_4182_oblvns/cn_026.mp3",
+        "skill3": "art/audio/voice/char_4182_oblvns/cn_027.mp3",
+        "skill4": "art/audio/voice/char_4182_oblvns/cn_028.mp3",
+        "resultFour": "art/audio/voice/char_4182_oblvns/cn_029.mp3",
+        "resultThree": "art/audio/voice/char_4182_oblvns/cn_030.mp3",
+        "resultTwo": "art/audio/voice/char_4182_oblvns/cn_031.mp3",
+        "resultLose": "art/audio/voice/char_4182_oblvns/cn_032.mp3"
+      },
+      "char_x_ave_mujica_mortis": {
+        "start": "art/audio/voice/char_4183_mortis/cn_019.mp3",
+        "faceEnemy": "art/audio/voice/char_4183_mortis/cn_020.mp3",
+        "select": [
+          "art/audio/voice/char_4183_mortis/cn_021.mp3",
+          "art/audio/voice/char_4183_mortis/cn_022.mp3"
+        ],
+        "place": [
+          "art/audio/voice/char_4183_mortis/cn_023.mp3",
+          "art/audio/voice/char_4183_mortis/cn_024.mp3"
+        ],
+        "skill1": "art/audio/voice/char_4183_mortis/cn_025.mp3",
+        "skill2": "art/audio/voice/char_4183_mortis/cn_026.mp3",
+        "skill3": "art/audio/voice/char_4183_mortis/cn_027.mp3",
+        "skill4": "art/audio/voice/char_4183_mortis/cn_028.mp3",
+        "resultFour": "art/audio/voice/char_4183_mortis/cn_029.mp3",
+        "resultThree": "art/audio/voice/char_4183_mortis/cn_030.mp3",
+        "resultTwo": "art/audio/voice/char_4183_mortis/cn_031.mp3",
+        "resultLose": "art/audio/voice/char_4183_mortis/cn_032.mp3"
+      },
+      "char_x_ave_mujica_dolris": {
+        "start": "art/audio/voice/char_4184_dolris/cn_019.mp3",
+        "faceEnemy": "art/audio/voice/char_4184_dolris/cn_020.mp3",
+        "select": [
+          "art/audio/voice/char_4184_dolris/cn_021.mp3",
+          "art/audio/voice/char_4184_dolris/cn_022.mp3"
+        ],
+        "place": [
+          "art/audio/voice/char_4184_dolris/cn_023.mp3",
+          "art/audio/voice/char_4184_dolris/cn_024.mp3"
+        ],
+        "skill1": "art/audio/voice/char_4184_dolris/cn_025.mp3",
+        "skill2": "art/audio/voice/char_4184_dolris/cn_026.mp3",
+        "skill3": "art/audio/voice/char_4184_dolris/cn_027.mp3",
+        "skill4": "art/audio/voice/char_4184_dolris/cn_028.mp3",
+        "resultFour": "art/audio/voice/char_4184_dolris/cn_029.mp3",
+        "resultThree": "art/audio/voice/char_4184_dolris/cn_030.mp3",
+        "resultTwo": "art/audio/voice/char_4184_dolris/cn_031.mp3",
+        "resultLose": "art/audio/voice/char_4184_dolris/cn_032.mp3"
+      },
+      "char_x_ave_mujica_amoris": {
+        "start": "art/audio/voice/char_4185_amoris/cn_019.mp3",
+        "faceEnemy": "art/audio/voice/char_4185_amoris/cn_020.mp3",
+        "select": [
+          "art/audio/voice/char_4185_amoris/cn_021.mp3",
+          "art/audio/voice/char_4185_amoris/cn_022.mp3"
+        ],
+        "place": [
+          "art/audio/voice/char_4185_amoris/cn_023.mp3",
+          "art/audio/voice/char_4185_amoris/cn_024.mp3"
+        ],
+        "skill1": "art/audio/voice/char_4185_amoris/cn_025.mp3",
+        "skill2": "art/audio/voice/char_4185_amoris/cn_026.mp3",
+        "skill3": "art/audio/voice/char_4185_amoris/cn_027.mp3",
+        "skill4": "art/audio/voice/char_4185_amoris/cn_028.mp3",
+        "resultFour": "art/audio/voice/char_4185_amoris/cn_029.mp3",
+        "resultThree": "art/audio/voice/char_4185_amoris/cn_030.mp3",
+        "resultTwo": "art/audio/voice/char_4185_amoris/cn_031.mp3",
+        "resultLose": "art/audio/voice/char_4185_amoris/cn_032.mp3"
+      },
+      "char_x_ave_mujica_tmoris": {
+        "start": "art/audio/voice/char_4186_tmoris/cn_019.mp3",
+        "faceEnemy": "art/audio/voice/char_4186_tmoris/cn_020.mp3",
+        "select": [
+          "art/audio/voice/char_4186_tmoris/cn_021.mp3",
+          "art/audio/voice/char_4186_tmoris/cn_022.mp3"
+        ],
+        "place": [
+          "art/audio/voice/char_4186_tmoris/cn_023.mp3",
+          "art/audio/voice/char_4186_tmoris/cn_024.mp3"
+        ],
+        "skill1": "art/audio/voice/char_4186_tmoris/cn_025.mp3",
+        "skill2": "art/audio/voice/char_4186_tmoris/cn_026.mp3",
+        "skill3": "art/audio/voice/char_4186_tmoris/cn_027.mp3",
+        "skill4": "art/audio/voice/char_4186_tmoris/cn_028.mp3",
+        "resultFour": "art/audio/voice/char_4186_tmoris/cn_029.mp3",
+        "resultThree": "art/audio/voice/char_4186_tmoris/cn_030.mp3",
+        "resultTwo": "art/audio/voice/char_4186_tmoris/cn_031.mp3",
+        "resultLose": "art/audio/voice/char_4186_tmoris/cn_032.mp3"
+      }
+    }
+  }
+}
