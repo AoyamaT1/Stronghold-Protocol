@@ -1,0 +1,204 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_merlin",
+  "name": "梅林",
+  "appellation": "Merlin",
+  "profession": "MEDIC",
+  "subProfessionId": "bard",
+  "subProfessionName": "吟游者",
+  "position": "RANGED",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 6,
+    "bonds": [
+      "roundTable",
+      "visiShip",
+      "miraShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_merlin_a"
+      ],
+      "golden": [
+        "garrison_fgo_merlin_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1650,
+        "atk": 560,
+        "def": 180,
+        "bat": 1.6,
+        "blockCnt": 1,
+        "cost": 22,
+        "res": 20,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2450,
+        "atk": 980,
+        "def": 280,
+        "bat": 1.6,
+        "blockCnt": 1,
+        "cost": 22,
+        "res": 25,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_merlin_1",
+      "name": "梦幻领导力",
+      "duration": 12,
+      "spCost": 20,
+      "initSp": 12,
+      "desc": "全场所有友方回复 6 点技力，自身鼓舞攻击力最高的友方，使其攻击力提升梅林攻击力的 30%，持续 12 秒",
+      "bb": {
+        "sp_grant": 6,
+        "inspire_ratio": 0.3,
+        "dur": 12
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_merlin_2",
+      "name": "幻术·英雄塑造",
+      "duration": 12,
+      "spCost": 28,
+      "initSp": 18,
+      "desc": "为周围 8 格所有友方干员提供 1 层物理/法术抵挡护盾；使范围内攻击力最高的友方干员生命上限 +50%、攻击力 +60%、暴击伤害提升至 160%，持续 12 秒",
+      "bb": {
+        "shield_layers": 1,
+        "buff_hp": 0.5,
+        "buff_atk": 0.6,
+        "crit_dmg": 1.6,
+        "dur": 12
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_merlin_3",
+      "name": "永久闭锁的乌托邦",
+      "duration": 18,
+      "spCost": 35,
+      "initSp": 22,
+      "desc": "展开理想乡结界 18 秒，全场所有友方干员每 0.5 秒回复梅林 35% 攻击力生命值并回复 0.6 点技力",
+      "bb": {
+        "regen_pct": 0.35,
+        "sp_per_tick": 0.6,
+        "tick_rate": 0.5,
+        "dur": 18
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "梦幻领导力",
+      "desc": "入场时全场所有友方干员获得 10 点技力与 1 层护盾",
+      "bb": {
+        "grant_sp": 10,
+        "shield_layers": 1
+      }
+    }
+  ],
+  "trait": {
+    "desc": "不攻击，持续恢复范围内所有友方生命",
+    "bb": {}
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

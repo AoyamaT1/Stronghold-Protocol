@@ -6,7 +6,6 @@ import { ensureDamageFonts } from './fonts.js';
 import { MAX_PARTICLES } from './limits.js';
 import { FxParticles } from './particles.js';
 import { FxProjectiles } from './projectiles.js';
-import { FxNotes } from './notes.js';
 import { FxBeams } from './beams.js';
 import { FxLocks } from './locks.js';
 import { FxNumbers } from './numbers.js';
@@ -42,8 +41,6 @@ export class FxSystem {
     this.projFree = [];
     this.projLayer = new P.Container();
     ctx.layers.fxAdd.addChild(this.projLayer);
-    this.notes = new Map();   // live content-owned notes (b.snap `proj`): projectile id → { core, halo, … } (fx/notes.js)
-    this.noteFree = [];       // pooled note records (their sprites stay in projLayer)
     this.locks = [];          // lock-on reticles { view, id, src, x, y, z, t, idle, max, out, ring, core, shell }
     this.lockFree = [];
     this._po = {};            // options of the per-frame emitters (see _o)
@@ -85,9 +82,6 @@ export class FxSystem {
     this.parts.length = 0;
     for (const pr of this.projs) this._releaseProj(pr);
     this.projs.length = 0;
-    // the note records keep their pooled sprites (as `projFree` does): the next battle reuses them instead of leaking them
-    for (const n of this.notes.values()) this._freeNote(n);
-    this.notes.clear();
     for (const L of this.locks) this._freeLock(L);
     this.locks.length = 0;
     this._slashAt = null;
@@ -118,7 +112,6 @@ export class FxSystem {
     this.time += dt;
     this._updateParticles(dt);
     this._updateProjs(dt);
-    this._updateNotes(dt);
     this._updateLocks(dt);
     this._updateBeams(dt);
     this._updateFlames(dt);
@@ -144,7 +137,7 @@ export class FxSystem {
   }
 
   get counts() {
-    return { particles: this.parts.length, projectiles: this.projs.length, notes: this.notes.size, numbers: this.nums.length, rings: this.rings.length, auras: this.auras.size, locks: this.locks.length, flames: this.flames.length, promotions: this.promotions || 0 };
+    return { particles: this.parts.length, projectiles: this.projs.length, numbers: this.nums.length, rings: this.rings.length, auras: this.auras.size, locks: this.locks.length, flames: this.flames.length, promotions: this.promotions || 0 };
   }
 
   destroy() {
@@ -165,8 +158,8 @@ export class FxSystem {
   }
 }
 
-const FX_PARTS = [FxParticles, FxProjectiles, FxNotes, FxBeams, FxLocks, FxNumbers, FxRings, FxArrivals, FxSim, FxZones];
-const FX_METHOD_ORDER = ["quality","load","maxParticles","rich","_room","_ts","_groundZ","particle","_o","_freeParticle","_updateParticles","_proj","_onGround","_chest","_bodyPt","burst","attack","_takeProj","_dressProj","_releaseProj","_updateProjs","_shotPoint","_stepShot","_stepBoomerang","_stepMortar","_mote","_puff","_muzzle","_impact","_catch","mortar","_landed","syncNotes","_noteFired","_noteOwner","_takeNote","_freeNote","_noteGone","_noteZ","_updateNotes","_beam","_updateBeams","_flame","_freeFlame","_updateFlames","_lock","_touchLocks","_nearestLock","_releaseLock","_freeLock","_updateLocks","damage","_slash","heal","officialNumber","number","_growFits","_numSlotPx","_layoutNums","_layoutNumsOnce","_sizeNum","_fadeNum","_takeNum","_releaseNum","_updateNums","ring","_updateRings","skill","_aura","_updateAuras","deploy","promote","death","crateBreak","_viewOf","_where","_point","simFx","explosion","smoke","streak","strike","numberAt","_updateLabels","zone","_freeZone","_updateZones","tileFlash","_updateTileFlashes","flashScreen","snowfall","leak","pop","_updatePops"];
+const FX_PARTS = [FxParticles, FxProjectiles, FxBeams, FxLocks, FxNumbers, FxRings, FxArrivals, FxSim, FxZones];
+const FX_METHOD_ORDER = ["quality","load","maxParticles","rich","_room","_ts","_groundZ","particle","_o","_freeParticle","_updateParticles","_proj","_onGround","_chest","_bodyPt","burst","attack","_takeProj","_dressProj","_releaseProj","_updateProjs","_shotPoint","_stepShot","_stepBoomerang","_stepMortar","_mote","_puff","_muzzle","_impact","_catch","mortar","_landed","_beam","_updateBeams","_flame","_freeFlame","_updateFlames","_lock","_touchLocks","_nearestLock","_releaseLock","_freeLock","_updateLocks","damage","_slash","heal","officialNumber","number","_growFits","_numSlotPx","_layoutNums","_layoutNumsOnce","_sizeNum","_fadeNum","_takeNum","_releaseNum","_updateNums","ring","_updateRings","skill","_aura","_updateAuras","deploy","promote","death","crateBreak","_viewOf","_where","_point","simFx","explosion","smoke","streak","strike","numberAt","_updateLabels","zone","_freeZone","_updateZones","tileFlash","_updateTileFlashes","flashScreen","snowfall","leak","pop","_updatePops"];
 
 for (const key of FX_METHOD_ORDER) {
   let found = null;

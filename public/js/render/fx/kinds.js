@@ -66,7 +66,7 @@ export const FX_KINDS = Object.freeze({
   takeoff: { a: 'lift', c: 0xcfe0ff }, levitate: { a: 'lift', c: 0xcfe0ff }, weightless: { a: 'lift', c: 0xcfe0ff },
   sleep: { a: 'sleep', c: 0xa8b6ff }, crit: { a: 'crit', c: 0xffe066 },
   dodge: { a: 'dodge', c: 0xffffff }, riposte: { a: 'counter', c: 0xffd9a0 }, counter: { a: 'counter', c: 0xffd9a0 }, block: { a: 'counter', c: 0xdfe8ff },
-  thorns: { a: 'counter', c: 0xff9aa6 }, downed: { a: 'down', c: 0xbfeee2 }, stone: { a: 'down', c: 0xc0b8a8, smoke: 0x5a5448 },
+  thorns: { a: 'counter', c: 0xff9aa6 }, downed: { a: 'down', c: 0xbfeee2 }, knockout: { a: 'down', c: 0xbfeee2 }, stone: { a: 'down', c: 0xc0b8a8, smoke: 0x5a5448 },
   dp: { a: 'dp', c: 0x9fd4ff }, coin: { a: 'coin', c: 0xffc600 }, steal: { a: 'coin', c: 0xffc600 }, crateBreak: { a: 'crate', c: 0xc89a5a },
   lpLoss: { a: 'lp', c: 0xff3b30 },
   // 限伤 (sim/damage.js leaderHitCancelled): a leader's hit of ≥ 300000 dealt nothing — the official shows no number and
@@ -90,6 +90,32 @@ export const FX_KINDS = Object.freeze({
   // bonds / garrisons (support/index.js fxOn)
   bondMilestone: { a: 'buff', c: 0xffc600 }, bondProc: { a: 'buff', c: 0x4ed8af }, bondShare: { a: 'wave', c: 0x4ed8af },
   garrison: { a: 'buff', c: 0x4ed8af }, layer: { a: 'buff', c: 0xffe066 }, sp: { a: 'sp', c: 0x6fd3ff },
+  // mod & combat effects (Rhodes / Limbus / FGO)
+  ward: { a: 'shield', c: 0xbfeeff }, miss: { a: 'dodge', c: 0x9fe6ff },
+  camellia_deluge: { a: 'blast', c: 0xffa0d0, r: 2.0, heavy: true },
+  clock_rewind: { a: 'wave', c: 0xffd45a, r: 2.5 },
+  faust_energy: { a: 'blast', c: 0x8fe6ff }, faust_leap: { a: 'strike', c: 0x5fe0ff }, faust_overcharge: { a: 'blast', c: 0x9fd4ff, r: 1.5, heavy: true },
+  rodion_tear_slash: { a: 'counter', c: 0x5fe0ff }, rodion_despair_pierce: { a: 'strike', c: 0x3d7eff }, rodion_knight_barrier: { a: 'shield', c: 0x62c0ff },
+  ishmael_harpoon: { a: 'beam', c: 0x5fe0ff }, ishmael_whale_impale: { a: 'strike', c: 0x2e86de, r: 1.5 },
+  ryoshu_tiansha: { a: 'counter', c: 0xff2a40 }, ryoshu_echoshear: { a: 'blast', c: 0xff1e42, r: 1.5 },
+  gregor_dawn_light: { a: 'blast', c: 0xff9c33 }, gregor_sunset_brand: { a: 'strike', c: 0xff5a2a }, gregor_dawn_fire_sea: { a: 'zone', c: 0xff4500, dur: 3, r: 2.5 },
+  resonanceSp: { a: 'sp', c: 0x74b9ff }, roundTableDecision: { a: 'wave', c: 0xffd45a, r: 2.5 },
+  skySupportBurst: { a: 'wave', c: 0xfff0a8, r: 2.0 }, staffSpBurst: { a: 'sp', c: 0xffe066 }, avalonProtect: { a: 'shield', c: 0xfda7df },
+  garethS1: { a: 'strike', c: 0xff5a4a }, garethS2: { a: 'shield', c: 0xff7a5a }, garethS3: { a: 'blast', c: 0xff5a4a, r: 1.5 },
+  bedivereS1: { a: 'buff', c: 0x80ffdb }, bedivereS2: { a: 'counter', c: 0x80ffdb }, bedivereS3: { a: 'strike', c: 0x80ffdb, r: 1.5 },
+  tristanS1: { a: 'wave', c: 0xd2fbf0 }, tristanS2: { a: 'reticle', c: 0xd2fbf0 }, tristanS3: { a: 'counter', c: 0xd2fbf0, r: 1.5 },
+  percivalS1: { a: 'heal', c: 0x74b9ff }, percivalS2: { a: 'shield', c: 0x74b9ff }, percivalS3: { a: 'beam', c: 0x74b9ff, r: 1.5 },
+  baobhanS1: { a: 'mark', c: 0xb53471 }, baobhanS2: { a: 'wave', c: 0xb53471 }, baobhanS3: { a: 'strike', c: 0xb53471, r: 1.5 },
+  gawainS1: { a: 'buff', c: 0xffb142 }, gawainS2: { a: 'zone', c: 0xffb142, dur: 3 }, gawainS3: { a: 'blast', c: 0xffb142, r: 2.0 },
+  barghestS1: { a: 'buff', c: 0xff5252 }, barghestS2: { a: 'wave', c: 0xff5252 }, barghestS3: { a: 'blast', c: 0xff5252, r: 1.8 },
+  mashS1: { a: 'shield', c: 0xf8efba }, mashS2: { a: 'taunt', c: 0xf8efba }, mashS3Form1: { a: 'shield', c: 0xf8efba }, mashS3Form2: { a: 'strike', c: 0x74b9ff },
+  lancelotS1: { a: 'buff', c: 0x2e86de }, lancelotS2: { a: 'crit', c: 0x2e86de }, lancelotS3: { a: 'counter', c: 0x2e86de, r: 1.5 },
+  mordredS1: { a: 'buff', c: 0xff1e42 }, mordredS2: { a: 'blast', c: 0xff1e42 }, mordredS3: { a: 'blast', c: 0xff1e42, r: 2.0 },
+  melusineS1: { a: 'buff', c: 0xff3f34 }, melusineS2: { a: 'strike', c: 0xff3f34 }, melusineTransform: { a: 'summon', c: 0xff3f34 }, melusineS3Beam: { a: 'beam', c: 0xff3f34 },
+  artoriaS1: { a: 'buff', c: 0xffe066 }, artoriaS2: { a: 'wave', c: 0xffe066 }, artoriaExcalibur: { a: 'beam', c: 0xffe066 },
+  merlinS1: { a: 'buff', c: 0xfda7df }, merlinS2: { a: 'shield', c: 0xfda7df }, merlinAvalon: { a: 'healAoe', c: 0xfda7df, r: 2.5 },
+  castoriaS1: { a: 'sp', c: 0x74b9ff }, castoriaS2: { a: 'buff', c: 0x74b9ff }, castoriaS3: { a: 'shield', c: 0x74b9ff, r: 2.0 },
+  morganS1: { a: 'blast', c: 0x341f97 }, morganS2: { a: 'sp', c: 0x341f97 }, morganS3: { a: 'blast', c: 0x341f97, r: 2.0 },
 });
 
 /** Keyword guesses for kinds added later (checked in order), before the generic sparkle. */

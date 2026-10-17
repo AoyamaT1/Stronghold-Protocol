@@ -10,13 +10,37 @@ import { absoluteRangeKeys } from '../../server/sim/targeting.js';
 import { COLS } from '../../server/sim/constants.js';
 import { HANDLERS } from '../../server/sim/content/garrisons/meta.js';
 
+import { pluginDirs } from '../../tools/plugin.mjs';
+import { createPluginRegistry } from '../../server/plugins/registry.js';
+import { buildContentSet } from '../../server/plugins/contentSet.js';
+import { toDataSource } from '../../server/sim/simdata.js';
+
+const dirs = pluginDirs(process.cwd());
+const registry = createPluginRegistry(dirs);
+const set = buildContentSet({ registry, ids: ['limbus-company'] });
+
+const ALIASES = {
+  chess_char_5_limbus_ryoshu_a: 'chess_x_limbus_company_ryoshu_a',
+  chess_char_1_limbus_yisang_a: 'chess_x_limbus_company_yisang_a',
+  chess_char_1_limbus_sinclair_a: 'chess_x_limbus_company_sinclair_a',
+  chess_char_6_limbus_donquixote_a: 'chess_x_limbus_company_donquixote_a',
+  chess_char_5_limbus_outis_a: 'chess_x_limbus_company_outis_a',
+  chess_char_6_limbus_gregor_a: 'chess_x_limbus_company_gregor_a',
+  chess_char_4_limbus_meursault_a: 'chess_x_limbus_company_meursault_a',
+};
+const ds = toDataSource(set.data);
+
 const L = (h) => S.bondLayers(h.b, 'p1', 'limbusShip');
 const charOf = (u) => String(u.def?.raw?.charId || u.def?.charId || '');
 const find = (h, name) => h.allies().find((u) => charOf(u).includes(name));
 const enemy = () => ({ side: 'enemy', kind: 'enemy', alive: false });
 
 function field(units) {
-  const h = makeBattle({ units, bonds: { limbusShip: { count: units.length, active: true, tier: 2, layers: 0 } } });
+  const mapped = units.map(u => ({
+    ...u,
+    chessId: ALIASES[u.chessId] || u.chessId
+  }));
+  const h = makeBattle({ data: ds, units: mapped, bonds: { limbusShip: { count: units.length, active: true, tier: 2, layers: 0 } } });
   h.b.start();
   return h;
 }

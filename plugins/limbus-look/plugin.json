@@ -1,0 +1,24 @@
+{
+  "$schema": "../../schemas/plugin.schema.json",
+  "manifest": 2,
+  "id": "limbus-look",
+  "name": "边狱公司干员外观包 (12罪人立绘与技能图标)",
+  "englishName": "Limbus Company Operator Cosmetics",
+  "version": "1.0.0",
+  "app": ">=0.3.0 <0.4.0",
+  "api": 1,
+  "class": "cosmetic",
+  "scope": [
+    "room",
+    "personal"
+  ],
+  "authors": [
+    "ruka"
+  ],
+  "license": "CC-BY-4.0",
+  "permissions": [
+    "assets.add",
+    "assets.override"
+  ],
+  "assets": "art/assets.json"
+}

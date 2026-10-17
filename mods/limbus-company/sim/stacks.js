@@ -65,7 +65,7 @@ export function installStacks(battle, unit, id) {
       const teamKey = `limbus:teamstack:${def.teamKey || name}`;
       const tmods = n > 0 ? def.team(n) : {};
       const allies = (battle.allies?.(unit.ownerId) || []).filter(
-        (a) => a && a.alive && a.kind === 'op' && a.chess?.nationId === 'limbus' && a !== unit,
+        (a) => a && a.alive && a.kind === 'op' && (a.def?.raw?.nationId === 'limbus' || a.def?.nationId === 'limbus') && a !== unit,
       );
       for (const a of allies) {
         battle.addBuff(a, { key: teamKey, mods: tmods, persist: true, visible: true, source: unit });

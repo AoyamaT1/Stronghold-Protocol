@@ -152,58 +152,6 @@ H.SERVER_ADD_BOND_ACTIVATED_MOST_LAYER = {
   },
 };
 
-// 默尔索「获得时召唤一名同盟约干员(≤N阶)，每回合最多一次」：bbStr.bond 池 / bb.max_tier(或 tier:'shoplv') / bb.count 份；
-// once_per_round:'1' 用每回合计数把触发(含投资人重复)限到 bb.count 次。
-H.SERVER_SUMMON_BOND_CHESS = {
-  run(ctx) {
-    const { bb, bbStr } = ctx.source;
-    const bond = ids(bbStr.bond)[0];
-    if (!bond) return;
-    const count = Math.min(10, Math.max(0, num(bb.count, 1)));
-    if (!(count > 0)) return;
-    if (bbStr.once_per_round === '1' && ctx.incCounter(`summon:${bond}:${ctx.round}`) > count) return;
-    const maxTier = bbStr.tier === 'shoplv' ? ctx.shopLevel() : Math.max(1, Math.min(6, num(bb.max_tier, 4)));
-    for (let i = 0; i < count; i++) { const id = ctx.rollChess({ bond, maxTier }); if (id) ctx.grantChess(id); }
-  },
-};
-
-// 格里高尔「进入休整期时，自身攻击范围内每有一名其他干员，使 bbStr.bond_id 层数 +bb.count」：按棋子 rangeGrid 展开到绝对格，
-// 数自身攻击范围内在场的其它棋子。自身需在场。
-H.SERVER_ADD_BOND_BY_RANGE_UNITS = {
-  run(ctx) {
-    const { bb, bbStr, garrison } = ctx.source;
-    const me = selfView(ctx);
-    if (!onBoard(me)) return;
-    const rec = ctx.chessRecord(me.id);
-    const grid = rec && Array.isArray(rec.rangeGrid) && rec.rangeGrid.length ? rec.rangeGrid : [[0, 0]];
-    const keys = new Set(absoluteRangeKeys(grid, me.row, me.col, me.dir, 0));
-    let cnt = 0;
-    for (const p of chessOnBoard(ctx)) {
-      if (p.uid === me.uid) continue;
-      if (keys.has(p.row * COLS + p.col)) cnt++;
-    }
-    addAll(ctx, ids(bbStr.bond_id), cnt * num(bb.count, 3), requireActiveOf(garrison));
-  },
-};
-
-// MOD (罗德岛可露希尔 / Ave Mujica 祐天寺若麦)「进入休整期时，若已激活该盟约，获得 count 名不高于当前调度中心等级的同盟约干员」。
-// 每张在场棋子触发一次(SERVER_PREP_START→onRoundStart)。`bbStr.bond` 兼作「已激活」门，`bbStr.tier==='shoplv'` 读当前调度中心
-// 等级，干员由共享池 `ctx.rollChess({bond,maxTier})` 滚出——池子空了就少给，上限是过滤而非保证。(0.2.4 升级把本处理器
-// 覆盖回退过，这里补回，否则这些「每回合获得干员」特质静默失效。)
-H.modautochess_gar_prep_gain_chess_by_bond = {
-  run(ctx) {
-    const { bb, bbStr } = ctx.source;
-    const bond = ids(bbStr.bond)[0];
-    if (!bond || !ctx.bondActive(bond)) return;
-    const n = Math.min(10, Math.max(0, num(bb.count, 1)));
-    const maxTier = bbStr.tier === 'shoplv' ? ctx.shopLevel() : Math.max(1, Math.min(6, num(bb.max_tier, 6)));
-    for (let i = 0; i < n; i++) {
-      const id = ctx.rollChess({ bond, maxTier });
-      if (id) ctx.grantChess(id);
-    }
-  },
-};
-
 H.SERVER_ADD_ACT_BOND_DIFF_LV_MOST_LAYER = {
   run(ctx) {
     const b = topActiveBondMeta(ctx);
@@ -389,12 +337,57 @@ H.SERVER_SELL_CHESS_GAIN_SPECIAL_GOODS = {
     const tier = pool && Number.isInteger(pool.tier) ? pool.tier : null;
     const count = Math.max(1, num(ctx.gd.rewardOffer ? ctx.gd.rewardOffer().count : 3, 3));
     const list = [];
-    for (let i = 0; i < count * 4 && list.length < count; i++) {
+    for (let i = 0; i < count * 4 && list.length < count; i++) { // loop-cap: 4 × rewardOffer().count (≤ MAX_OFFER_SLOTS)
       const r = ctx.rollPool(poolId);
       if (r && r.kind === 'chess' && !list.includes(r.id)) list.push(r.id);
     }
     if (list.length) ctx.offerChess(list, { tier });
     else if (tier) ctx.offerChess(null, { tier });
+  },
+};
+
+H.SERVER_SUMMON_BOND_CHESS = {
+  run(ctx) {
+    const { bb, bbStr } = ctx.source;
+    if (bbStr?.once_per_round === '1') {
+      const key = `summon_bond:${ctx.round}`;
+      if (typeof ctx.incCounter === 'function') {
+        const count = ctx.incCounter(key);
+        if (count > 1) return;
+      }
+    }
+    const bond = bbStr?.bond;
+    const maxTier = num(bb?.max_tier, 6);
+    const count = Math.max(1, num(bb?.count, 1));
+    for (let i = 0; i < count; i++) {
+      const id = ctx.rollChess?.({ bond, maxTier });
+      if (id) ctx.grantChess?.(id);
+    }
+  },
+};
+
+H.SERVER_ADD_BOND_BY_RANGE_UNITS = {
+  run(ctx) {
+    const { bb, bbStr, piece, garrison } = ctx.source;
+    const self = (piece && typeof ctx.piece === 'function' ? ctx.piece(piece.uid) : null) || piece || selfView(ctx);
+    if (!self) return;
+    const rec = typeof ctx.chessRecord === 'function' ? ctx.chessRecord(self.id) : null;
+    const grid = rec?.rangeGrid;
+    if (!Array.isArray(grid) || !grid.length) return;
+    const keys = new Set(absoluteRangeKeys(grid, self.row, self.col, self.dir || 'RIGHT', 0));
+    const board = typeof ctx.board === 'function' ? ctx.board() : chessOnBoard(ctx);
+    let count = 0;
+    for (const p of board) {
+      if (p.uid === self.uid) continue;
+      const key = p.row * COLS + p.col;
+      if (keys.has(key)) count++;
+    }
+    if (count <= 0) return;
+    const bond = bbStr?.bond_id;
+    if (!bond) return;
+    const perUnit = num(bb?.count, 1);
+    const requireActive = requireActiveOf(garrison || ctx.source);
+    ctx.addLayers(bond, perUnit * count, { requireActive });
   },
 };
 

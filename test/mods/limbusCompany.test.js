@@ -8,6 +8,8 @@ import { makeBattle } from '../helpers/battleHarness.js';
 import { KITS } from '../../server/sim/content/index.js';
 import { rotateOffset } from '../../server/sim/dir.js';
 import * as assets from '../../public/js/assets.js';
+import { computeBonds } from '../../server/match/bondsMeta.js';
+import { GameData } from '../../server/match/gamedata.js';
 
 const data = loadData();
 
@@ -212,3 +214,108 @@ test('Limbus Company Mod: 金枝共鸣 team pool charges, surfaces in snapshot, 
     assert.equal(n, 0, '金枝共鸣 is drained to 0 after 鸿璐 consumes it');
   }
 });
+
+test('Limbus Company Mod: Equipment (金枝, LCB员工证) data integrity, tier/price, and strict zero parentheses constraint', () => {
+  const itemData = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'items.json'), 'utf8'));
+  const targetItemKeys = [
+    'chess_item_2_limbus_lcb_a',
+    'chess_item_2_limbus_lcb_b',
+    'chess_item_6_limbus_bough_a',
+    'chess_item_6_limbus_bough_b'
+  ];
+
+  for (const k of targetItemKeys) {
+    const it = itemData[k];
+    assert.ok(it, `Item ${k} exists in data/items.json`);
+    assert.ok(it.name, `${k} has name`);
+    assert.ok(it.desc, `${k} has desc`);
+    assert.ok(it.descRaw, `${k} has descRaw`);
+    assert.ok(it.flavor, `${k} has flavor`);
+
+    // Strict constraint: 禁止出现（）加上解释性话语的描述 (zero parentheses in user-facing texts)
+    assert.ok(!it.name.includes('（'), `${k} name has no fullwidth parentheses`);
+    assert.ok(!it.name.includes('）'), `${k} name has no fullwidth parentheses`);
+    assert.ok(!it.name.includes('('), `${k} name has no halfwidth parentheses`);
+    assert.ok(!it.name.includes(')'), `${k} name has no halfwidth parentheses`);
+
+    assert.ok(!it.desc.includes('（'), `${k} desc has no fullwidth parentheses`);
+    assert.ok(!it.desc.includes('）'), `${k} desc has no fullwidth parentheses`);
+    assert.ok(!it.desc.includes('('), `${k} desc has no halfwidth parentheses`);
+    assert.ok(!it.desc.includes(')'), `${k} desc has no halfwidth parentheses`);
+
+    assert.ok(!it.descRaw.includes('（'), `${k} descRaw has no fullwidth parentheses`);
+    assert.ok(!it.descRaw.includes('）'), `${k} descRaw has no fullwidth parentheses`);
+    assert.ok(!it.descRaw.includes('('), `${k} descRaw has no halfwidth parentheses`);
+    assert.ok(!it.descRaw.includes(')'), `${k} descRaw has no halfwidth parentheses`);
+
+    assert.ok(!it.flavor.includes('（'), `${k} flavor has no fullwidth parentheses`);
+    assert.ok(!it.flavor.includes('）'), `${k} flavor has no fullwidth parentheses`);
+    assert.ok(!it.flavor.includes('('), `${k} flavor has no halfwidth parentheses`);
+    assert.ok(!it.flavor.includes(')'), `${k} flavor has no halfwidth parentheses`);
+  }
+
+  // Tier and price verification
+  const lcbA = itemData['chess_item_2_limbus_lcb_a'];
+  assert.equal(lcbA.tier, 2, 'LCB员工证 is Tier 2');
+  assert.equal(lcbA.price, 2, 'LCB员工证 price is 2');
+  assert.equal(lcbA.giveBondId, 'limbusShip', 'LCB员工证 has giveBondId limbusShip');
+  assert.equal(lcbA.canGiveBond, false, 'LCB员工证 canGiveBond is false (pairs with 变形同构体)');
+
+  const boughA = itemData['chess_item_6_limbus_bough_a'];
+  assert.equal(boughA.tier, 6, '金枝 is Tier 6');
+  assert.equal(boughA.price, 4, '金枝 price is 4');
+  assert.equal(boughA.requiresBondId, 'limbusShip', '金枝 requires limbusShip bond');
+});
+
+test('Limbus Company Mod: LCB员工证 + 变形同构体 grants wearer limbusShip covenant tag', () => {
+  const gd = new GameData(data);
+  // Kroos (chess_char_1_01_a) equipped with LCB employee card + morph ball (chess_item_6_09_e_a)
+  const ps = {
+    hand: [],
+    board: new Map([
+      ['0,0', {
+        kind: 'chess',
+        id: 'chess_char_1_01_a',
+        items: [
+          { id: 'chess_item_2_limbus_lcb_a' },
+          { id: 'chess_item_6_09_e_a' }
+        ]
+      }]
+    ])
+  };
+  const bonds = computeBonds(gd, ps);
+  assert.ok(bonds.limbusShip, 'limbusShip covenant is present when LCB card is paired with 变形同构体');
+  assert.equal(bonds.limbusShip.count, 1, 'Wearer successfully contributes to limbusShip covenant count');
+});
+
+test('Limbus Company Mod: 金枝 & LCB员工证 battle synergy (Sanity boost, resonance cap +5, initial resonance)', () => {
+  const h = makeBattle({
+    units: [
+      {
+        chessId: 'chess_char_1_limbus_yisang_a',
+        row: 10,
+        col: 2,
+        dir: 'RIGHT',
+        items: ['chess_item_6_limbus_bough_a', 'chess_item_2_limbus_lcb_a']
+      },
+      { chessId: 'chess_char_2_limbus_faust_a', row: 11, col: 2, dir: 'RIGHT' },
+      { chessId: 'chess_char_1_limbus_sinclair_a', row: 10, col: 4, dir: 'RIGHT' }
+    ],
+    bonds: { limbusShip: { count: 3, active: true, tier: 1, layers: 0 } }
+  });
+  h.b.start();
+
+  // 1. Initial Sanity boost (+20 from 金枝)
+  const yisang = h.allies().find((a) => a.def?.charId?.includes('yisang'));
+  assert.ok(yisang, 'Yi Sang is fielded');
+  assert.equal(yisang.mem.limbusSanity, 20, 'Yi Sang receives +20 initial Sanity from 金枝');
+
+  // 2. Combo synergy: resonance cap +5 (15 -> 20) and initial resonance = 3
+  const snap = h.b.snapshot();
+  assert.ok(snap.resonance, 'Resonance snapshot exists');
+  for (const [, n, cap] of snap.resonance) {
+    assert.equal(cap, 20, 'Team resonance cap increased by 5 (15 -> 20) from LCB + 金枝 combo');
+    assert.equal(n, 3, 'Team starts with 3 initial resonance from LCB + 金枝 combo');
+  }
+});
+

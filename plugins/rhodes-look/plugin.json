@@ -1,0 +1,23 @@
+{
+  "manifest": 2,
+  "id": "rhodes-look",
+  "name": "罗德岛干员外观包 (阿米娅/暴行)",
+  "englishName": "Rhodes Island Operator Cosmetics",
+  "version": "1.4.0",
+  "app": ">=0.3.0 <0.4.0",
+  "api": 1,
+  "class": "cosmetic",
+  "scope": [
+    "room",
+    "personal"
+  ],
+  "authors": [
+    "muchiyun"
+  ],
+  "license": "CC-BY-4.0",
+  "permissions": [
+    "assets.add",
+    "assets.override"
+  ],
+  "assets": "art/assets.json"
+}

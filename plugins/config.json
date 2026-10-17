@@ -1,0 +1,8 @@
+{
+  "rooms": "host",
+  "default": ["rhodes", "rhodes-look", "ave-mujica", "ave-mujica-look", "limbus-company", "limbus-look", "fgo-round-table", "fgo-round-table-look"],
+  "allow": ["*"],
+  "classes": { "cosmetic": true, "content": true },
+  "limits": { "maxSets": 4 },
+  "allowIncompatible": false
+}

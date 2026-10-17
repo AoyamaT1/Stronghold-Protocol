@@ -1,0 +1,135 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_barghest",
+  "name": "巴格斯特",
+  "appellation": "Barghest",
+  "profession": "WARRIOR",
+  "subProfessionId": "musha",
+  "subProfessionName": "武者",
+  "position": "MELEE",
+  "rarity": 5,
+  "as": "both",
+  "chess": {
+    "tier": 4,
+    "bonds": [
+      "roundTable",
+      "steadShip",
+      "indomShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_barghest_a"
+      ],
+      "golden": [
+        "garrison_fgo_barghest_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2600,
+        "atk": 620,
+        "def": 360,
+        "bat": 1.25,
+        "blockCnt": 2,
+        "cost": 22,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2850,
+        "atk": 690,
+        "def": 540,
+        "bat": 1.35,
+        "blockCnt": 2,
+        "cost": 22,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_barghest_1",
+      "name": "强壮捕食",
+      "duration": 8,
+      "spCost": 12,
+      "initSp": 0,
+      "desc": "持续 8 秒，攻击力 +50%，攻击时吸取伤害 8% 的生命值，防御力 +40%",
+      "bb": {
+        "atk_pct": 0.5,
+        "lifesteal": 0.08,
+        "def_pct": 0.4
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_barghest_2",
+      "name": "野性咆哮",
+      "duration": 10,
+      "spCost": 22,
+      "initSp": 12,
+      "desc": "持续 10 秒，防御力 +80%，周围 8 格地带进入烈火灼烧状态，处于其中的敌人每秒受到 120% 法伤与 30% 减速",
+      "bb": {
+        "def_pct": 0.8,
+        "dps_scale": 1.2,
+        "slow_pct": 0.3,
+        "dur": 10
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_barghest_3",
+      "name": "黑犬暴食",
+      "duration": 0,
+      "spCost": 28,
+      "initSp": 15,
+      "desc": "召唤一头黑犬作战 20 秒(继承 55% 攻击力与 30% 最大生命)；永久增加 50% 最大生命(最多叠加 2 次)并立即回复自身 50% 生命",
+      "bb": {
+        "hits": 3,
+        "atk_scale": 1.93,
+        "kill_sp": 8,
+        "perm_hp_pct": 0.05
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "食欲旺盛",
+      "desc": "普攻吸血 5%；击倒敌人时最大生命值 +5%(最多叠加 6 层)，并立即回复 15% 最大生命",
+      "bb": {
+        "lifesteal": 0.05,
+        "hp_per_kill": 0.05,
+        "max_stacks": 6,
+        "heal_on_kill": 0.15
+      }
+    }
+  ],
+  "trait": {
+    "desc": "无法被友方角色治疗，攻击敌人时回复自身生命",
+    "bb": {
+      "self_heal": 1
+    }
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

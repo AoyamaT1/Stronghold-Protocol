@@ -1,0 +1,591 @@
+{
+  "audio": {
+    "voice": {
+      "char_fgo_gareth": {
+        "start": "/assets/audio/voice/jp/char_fgo_gareth/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_gareth/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_gareth/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_gareth/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_gareth/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_gareth/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_gareth/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_gareth/resultThree.mp3",
+        "resultTwo": "/assets/audio/voice/jp/char_fgo_gareth/resultTwo.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_gareth/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_gareth/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_gareth/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_gareth/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/skill3_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/skill3_4.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/skill3_5.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_gareth/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gareth/gacha_2.mp3"
+        ]
+      },
+      "char_fgo_bedivere": {
+        "start": "/assets/audio/voice/jp/char_fgo_bedivere/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_bedivere/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_bedivere/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_bedivere/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_bedivere/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_bedivere/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_bedivere/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_bedivere/resultThree.mp3",
+        "resultTwo": "/assets/audio/voice/jp/char_fgo_bedivere/resultTwo.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_bedivere/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_bedivere/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_bedivere/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_bedivere/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/skill3_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/skill3_4.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_bedivere/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_bedivere/gacha_2.mp3"
+        ]
+      },
+      "char_fgo_tristan": {
+        "start": "/assets/audio/voice/jp/char_fgo_tristan/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_tristan/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_tristan/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_tristan/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_tristan/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_tristan/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_tristan/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_tristan/resultThree.mp3",
+        "resultTwo": "/assets/audio/voice/jp/char_fgo_tristan/resultTwo.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_tristan/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_tristan/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_tristan/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_tristan/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/skill3_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/skill3_4.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_tristan/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_tristan/gacha_2.mp3"
+        ]
+      },
+      "char_fgo_percival": {
+        "start": "/assets/audio/voice/jp/char_fgo_percival/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_percival/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_percival/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_percival/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_percival/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_percival/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_percival/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_percival/resultThree.mp3",
+        "resultTwo": "/assets/audio/voice/jp/char_fgo_percival/resultTwo.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_percival/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_percival/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_percival/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_percival/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/skill3_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/skill3_4.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_percival/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_percival/gacha_2.mp3"
+        ]
+      },
+      "char_fgo_baobhan": {
+        "start": "/assets/audio/voice/jp/char_fgo_baobhan/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_baobhan/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_baobhan/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_baobhan/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_baobhan/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_baobhan/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_baobhan/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_baobhan/resultThree.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_baobhan/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_baobhan/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_baobhan/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_baobhan/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/skill3_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/skill3_4.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_baobhan/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_baobhan/gacha_2.mp3"
+        ]
+      },
+      "char_fgo_gawain": {
+        "start": "/assets/audio/voice/jp/char_fgo_gawain/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_gawain/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_gawain/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_gawain/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_gawain/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_gawain/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_gawain/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_gawain/resultThree.mp3",
+        "resultTwo": "/assets/audio/voice/jp/char_fgo_gawain/resultTwo.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_gawain/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_gawain/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_gawain/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_gawain/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/skill3_3.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_gawain/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_gawain/gacha_2.mp3"
+        ]
+      },
+      "char_fgo_barghest": {
+        "start": "/assets/audio/voice/jp/char_fgo_barghest/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_barghest/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_barghest/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_barghest/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_barghest/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_barghest/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_barghest/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_barghest/resultThree.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_barghest/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_barghest/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_barghest/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_barghest/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/skill3_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/skill3_4.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_barghest/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_barghest/gacha_2.mp3"
+        ]
+      },
+      "char_fgo_mash": {
+        "start": "/assets/audio/voice/jp/char_fgo_mash/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_mash/place.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_mash/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_mash/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_mash/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_mash/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_mash/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_mash/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_mash/resultThree.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_mash/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_mash/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_mash/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_mash/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_mash/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_mash/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_mash/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_mash/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_mash/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_mash/hurt_4.mp3"
+        ],
+        "skill3": "/assets/audio/voice/jp/char_fgo_mash/skill3.mp3"
+      },
+      "char_fgo_lancelot": {
+        "start": "/assets/audio/voice/jp/char_fgo_lancelot/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_lancelot/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_lancelot/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_lancelot/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_lancelot/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_lancelot/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_lancelot/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_lancelot/resultThree.mp3",
+        "resultTwo": "/assets/audio/voice/jp/char_fgo_lancelot/resultTwo.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_lancelot/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_lancelot/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_lancelot/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_lancelot/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/skill3_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/skill3_4.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_lancelot/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_lancelot/gacha_2.mp3"
+        ]
+      },
+      "char_fgo_mordred": {
+        "start": "/assets/audio/voice/jp/char_fgo_mordred/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_mordred/place.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_mordred/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_mordred/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_mordred/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_mordred/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_mordred/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_mordred/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_mordred/resultThree.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_mordred/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_mordred/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_mordred/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_mordred/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_mordred/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_mordred/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_mordred/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_mordred/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_mordred/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_mordred/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_mordred/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_mordred/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_mordred/skill3_3.mp3"
+        ],
+        "gacha": "/assets/audio/voice/jp/char_fgo_mordred/gacha.mp3"
+      },
+      "char_fgo_melusine": {
+        "start": "/assets/audio/voice/jp/char_fgo_melusine/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_melusine/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_melusine/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_melusine/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_melusine/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_melusine/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_melusine/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_melusine/resultThree.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_melusine/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_melusine/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_melusine/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_melusine/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/skill3_3.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_melusine/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_melusine/gacha_2.mp3"
+        ]
+      },
+      "char_fgo_artoria": {
+        "start": "/assets/audio/voice/jp/char_fgo_artoria/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_artoria/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_artoria/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_artoria/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_artoria/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_artoria/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_artoria/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_artoria/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_artoria/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_artoria/resultThree.mp3",
+        "resultTwo": "/assets/audio/voice/jp/char_fgo_artoria/resultTwo.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_artoria/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_artoria/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_artoria/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_artoria/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_artoria/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_artoria/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_artoria/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_artoria/hurt_2.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_artoria/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_artoria/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_artoria/skill3_3.mp3"
+        ],
+        "gacha": "/assets/audio/voice/jp/char_fgo_artoria/gacha.mp3"
+      },
+      "char_fgo_merlin": {
+        "start": "/assets/audio/voice/jp/char_fgo_merlin/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_merlin/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_merlin/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_merlin/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_merlin/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_merlin/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_merlin/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_merlin/resultThree.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_merlin/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_merlin/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_merlin/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_merlin/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/skill3_3.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_merlin/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_merlin/gacha_2.mp3"
+        ]
+      },
+      "char_fgo_castoria": {
+        "start": "/assets/audio/voice/jp/char_fgo_castoria/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_castoria/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_castoria/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_castoria/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_castoria/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_castoria/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_castoria/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_castoria/resultThree.mp3",
+        "resultTwo": "/assets/audio/voice/jp/char_fgo_castoria/resultTwo.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_castoria/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_castoria/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_castoria/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/hurt_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/hurt_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/hurt_4.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_castoria/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/skill3_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/skill3_4.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/skill3_5.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_castoria/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_castoria/gacha_2.mp3"
+        ]
+      },
+      "char_fgo_morgan": {
+        "start": "/assets/audio/voice/jp/char_fgo_morgan/start.mp3",
+        "place": "/assets/audio/voice/jp/char_fgo_morgan/place.mp3",
+        "faceEnemy": "/assets/audio/voice/jp/char_fgo_morgan/faceEnemy.mp3",
+        "select": [
+          "/assets/audio/voice/jp/char_fgo_morgan/select_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/select_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/select_3.mp3"
+        ],
+        "skill1": "/assets/audio/voice/jp/char_fgo_morgan/skill1.mp3",
+        "skill2": "/assets/audio/voice/jp/char_fgo_morgan/skill2.mp3",
+        "resultFour": "/assets/audio/voice/jp/char_fgo_morgan/resultFour.mp3",
+        "resultThree": "/assets/audio/voice/jp/char_fgo_morgan/resultThree.mp3",
+        "resultLose": [
+          "/assets/audio/voice/jp/char_fgo_morgan/resultLose_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/resultLose_2.mp3"
+        ],
+        "attack": [
+          "/assets/audio/voice/jp/char_fgo_morgan/attack_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/attack_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/attack_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/attack_4.mp3"
+        ],
+        "hurt": [
+          "/assets/audio/voice/jp/char_fgo_morgan/hurt_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/hurt_2.mp3"
+        ],
+        "skill3": [
+          "/assets/audio/voice/jp/char_fgo_morgan/skill3_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/skill3_2.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/skill3_3.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/skill3_4.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/skill3_5.mp3"
+        ],
+        "gacha": [
+          "/assets/audio/voice/jp/char_fgo_morgan/gacha_1.mp3",
+          "/assets/audio/voice/jp/char_fgo_morgan/gacha_2.mp3"
+        ]
+      }
+    }
+  }
+}

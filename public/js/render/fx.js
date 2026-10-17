@@ -44,5 +44,3 @@ export { SHOT_HEIGHT, bodyZ } from './fx/camera.js';
 export { ensureDamageFonts } from './fx/fonts.js';
 export { FX_KINDS, fxSpec, tilesAround, wallTiles } from './fx/kinds.js';
 export { FxSystem } from './fx/system.js';
-// 丰川祥子's note glyphs (content-owned projectiles drawn from b.snap `proj`, render/fx/notes.js)
-export { NOTE_FRAMES, pickNoteFrame } from './fx/notes.js';

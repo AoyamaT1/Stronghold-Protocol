@@ -1,0 +1,205 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_castoria",
+  "name": "阿尔托莉雅·卡斯特",
+  "appellation": "Castoria",
+  "profession": "SUPPORT",
+  "subProfessionId": "blessing",
+  "subProfessionName": "护佑者",
+  "position": "RANGED",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 6,
+    "bonds": [
+      "roundTable",
+      "arcaneShip",
+      "deputShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_castoria_a"
+      ],
+      "golden": [
+        "garrison_fgo_castoria_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1750,
+        "atk": 580,
+        "def": 210,
+        "bat": 1.5,
+        "blockCnt": 1,
+        "cost": 22,
+        "res": 20,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2550,
+        "atk": 880,
+        "def": 320,
+        "bat": 1.5,
+        "blockCnt": 1,
+        "cost": 22,
+        "res": 25,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_castoria_1",
+      "name": "希望的领袖",
+      "duration": 0,
+      "spCost": 18,
+      "initSp": 10,
+      "desc": "为周围友方干员充能 10 点技力，并使其技力自然回复 +0.6/秒、技力回复速度 ×1.5，持续 12 秒",
+      "bb": {
+        "team_atk": 0.2,
+        "sp_team": 8,
+        "self_sp": 10
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_castoria_2",
+      "name": "阿瓦隆的加护",
+      "duration": 10,
+      "spCost": 24,
+      "initSp": 14,
+      "desc": "为周围 8 格友方赋予 1 层无敌护盾，法术抗性 +20，技力自然回复速度 +50%，持续 10 秒",
+      "bb": {
+        "shield_layers": 1,
+        "res_add": 20,
+        "sp_rec": 0.5,
+        "dur": 10
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_castoria_3",
+      "name": "怀抱为你而存的希望",
+      "duration": 15,
+      "spCost": 35,
+      "initSp": 22,
+      "desc": "全队清除所有异常状态并获得 2(蓄力 3)层【对肃正防御】护盾，攻击力 +45%，持续 15 秒",
+      "bb": {
+        "cleanse": 1,
+        "trueshield_layers": 2,
+        "charge_layers": 3,
+        "atk_pct": 0.45,
+        "dur": 15,
+        "charged": 1
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "湖之加护",
+      "desc": "生命值低于 50% 的友方干员受到卡斯特治疗时，获得 1 层护盾与 15% 减伤",
+      "bb": {
+        "shield_layers": 1,
+        "dmg_res": 0.15
+      }
+    }
+  ],
+  "trait": {
+    "desc": "攻击造成法术伤害，技能开启时改为治疗友方单位",
+    "bb": {}
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

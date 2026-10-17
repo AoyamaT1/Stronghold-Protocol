@@ -57,7 +57,7 @@ export class MatchMessaging {
    * round's prep also its pair partner's m.private, which shows this board on its other half (bossMate, item 51).
    */
   markPrivate(ps) {
-    if (!ps || !this._privDirty) return;
+    if (!ps) return;
     this._privDirty.add(ps);
     this._pubDirty = true;
     const m = this._bossMateOf(ps);
@@ -107,7 +107,8 @@ export class MatchMessaging {
     const json = JSON.stringify(rest);
     if (!force && json === this._lastPubJson) return;
     this._lastPubJson = json;
-    this._lastPubAt = now;
+    // Snapshot building / serialization can take time; throttle from the actual broadcast, not its start.
+    this._lastPubAt = this.sched.now();
     this.broadcast(view);
   }
 }

@@ -1,0 +1,133 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_mash",
+  "name": "玛修",
+  "appellation": "Mash",
+  "profession": "TANK",
+  "subProfessionId": "protector",
+  "subProfessionName": "铁卫",
+  "position": "MELEE",
+  "rarity": 5,
+  "as": "both",
+  "chess": {
+    "tier": 4,
+    "bonds": [
+      "roundTable",
+      "steadShip",
+      "maniShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_mash_a"
+      ],
+      "golden": [
+        "garrison_fgo_mash_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2400,
+        "atk": 450,
+        "def": 420,
+        "bat": 1.2,
+        "blockCnt": 3,
+        "cost": 18,
+        "res": 10,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2850,
+        "atk": 580,
+        "def": 550,
+        "bat": 1.2,
+        "blockCnt": 3,
+        "cost": 18,
+        "res": 15,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_mash_1",
+      "name": "现在的脆弱雪花之壁",
+      "duration": 12,
+      "spCost": 18,
+      "initSp": 10,
+      "desc": "持续 12 秒，自身阻挡数 +1 并强制嘲讽全场，使周围 8 格所有友方干员防御力 +40%、受到的所有伤害固定减免 250 点",
+      "bb": {
+        "def_pct": 0.4,
+        "block_add": 1,
+        "taunt_level": 2
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_mash_2",
+      "name": "奋起之盾",
+      "duration": 0,
+      "spCost": 24,
+      "initSp": 12,
+      "desc": "立即为自身充能 15 点技力并获得 1 次绝对无敌(持续 5 秒)，使周围 8 格所有友方干员攻速 +30，持续 8 秒",
+      "bb": {
+        "sp_charge": 15,
+        "invulnerable_sec": 5,
+        "aspd_buff": 30,
+        "buff_dur": 8
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_mash_3",
+      "name": "已然遥远的理想之城",
+      "duration": 0,
+      "spCost": 32,
+      "initSp": 20,
+      "desc": "首次开启：全队获得 1 层对肃正防御护盾与 +25% 攻击力；再次开启：发射人理之剑造成 750% 真实伤害(精英或领袖伤害提升至 1125%)",
+      "bb": {
+        "trueshield_layers": 1,
+        "team_atk_pct": 0.25,
+        "atk_scale": 7.5,
+        "boss_atk_scale": 11.25
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "决意之盾",
+      "desc": "自身阻挡敌人时受到伤害降低 25%；身后一格的友方单位受到的伤害降低 15%",
+      "bb": {
+        "block_res": 0.25,
+        "protect_res": 0.15
+      }
+    }
+  ],
+  "trait": {
+    "desc": "阻挡三个敌人",
+    "bb": {
+      "blockCnt": 3
+    }
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

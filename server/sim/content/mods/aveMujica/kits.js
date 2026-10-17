@@ -28,20 +28,31 @@ const extremeEnemy = (battle, stat) => {
   return best;
 };
 
-export default {
+function withPluginAliases(skills) {
+  if (!skills) return skills;
+  const out = { ...skills };
+  for (const [k, v] of Object.entries(skills)) {
+    if (k.startsWith('skchr_')) {
+      out[`skx_ave_mujica_${k.slice(6)}`] = v;
+    }
+  }
+  return out;
+}
+
+const KITS = {
   // =========================================================================
   // 1. 祐天寺若麦 (Amoris, Tier 2) — 撼地者
   // =========================================================================
   chess_char_2_20_a: (bb, chess, def) => ({
     skills: {
-      // S1: 如焰般热烈
+      // S1: 如焰般热烈 (三连击：首击 138% + 溅射，后两次 20%)
       skchr_amoris_1: {
         kind: 'duration',
         duration: num(bb.duration, 15),
         mods: { atkPct: num(bb.atk, 0.6) },
         attack: {
           hits: 3,
-          atkScale: num(bb['attack@atk_scale_heavy'], 2.0),
+          atkScale: num(bb['attack@atk_scale_heavy'], 1.38),
           splashRadius: 1.5,
           splashScale: 1.0
         },
@@ -54,14 +65,14 @@ export default {
           }
         }
       },
-      // S2: 如麦般生长
+      // S2: 如麦般生长 (八连击：第一、五次 107%，其余 10%)
       skchr_amoris_2: {
         kind: 'duration',
         duration: num(bb.duration, 24),
         targeting: { rangeExtend: 1 },
         attack: {
           hits: 8,
-          atkScale: num(bb['attack@atk_scale_heavy'], 2.4),
+          atkScale: num(bb['attack@atk_scale_heavy'], 1.07),
           splashRadius: 2.0,
           splashScale: 1.0
         },
@@ -85,7 +96,19 @@ export default {
           battle.applyStatus?.(target, 'sluggish', { duration: 1.5, source: unit });
         }
       }
-    }
+    },
+    talents: [
+      {
+        install(battle, unit) {
+          // 节奏共振：攻击被阻挡的敌人时攻击力+15%
+          battle.on('hit', (c) => {
+            if (c.source === unit && c.target && c.target.blockedBy) {
+              c.dmg.mul *= (1 + num(bb.atk, 0.15));
+            }
+          }, { owner: unit });
+        }
+      }
+    ]
   }),
 
   // =========================================================================
@@ -93,13 +116,13 @@ export default {
   // =========================================================================
   chess_char_3_22_a: (bb, chess, def) => ({
     skills: {
-      // S1: 颤栗之弦
+      // S1: 颤栗之弦 (5连击法术伤害，每击 61%)
       skchr_tmoris_1: {
         kind: 'instant',
         charges: 2,
         attack: {
-          hits: num(bb.times, 3),
-          atkScale: num(bb.atk_scale, 1.8),
+          hits: num(bb.times, 5),
+          atkScale: num(bb.atk_scale, 0.61),
           dmgType: 'arts'
         },
         onStart({ battle, unit }) {
@@ -111,28 +134,35 @@ export default {
           }
         }
       },
-      // S2: 无存之所
+      // S2: 无存之所 (恐惧1.5s，每秒对范围内敌人造成78%法术伤害)
       skchr_tmoris_2: {
         kind: 'duration',
         duration: num(bb.duration, 15),
         onStart({ battle, unit }) {
           battle.fx('sonic', { x: unit.x, y: unit.y, id: unit.id, r: 2 });
+          unit.mem._tmorisS2Dt = 0;
           // Fear all enemies in range
           for (const e of battle.enemies) {
             if (e.alive && battle.inRange?.(unit, e)) {
-              battle.applyStatus?.(e, 'fear', { duration: 1.5, source: unit });
+              battle.applyStatus?.(e, 'fear', { duration: num(bb.fear, 1.5), source: unit });
             }
           }
         },
-        onTick({ battle, unit }) {
-          for (const e of battle.enemies) {
-            if (e.alive && battle.inRange?.(unit, e)) {
-              battle.dealDamage?.(unit, e, {
-                amount: (unit.s?.atk || 500) * num(bb['attack@atk_scale'], 1.0),
-                type: 'arts',
-                tags: ['skill:tmoris:dot']
-              });
-              battle.applyStatus?.(e, 'sluggish', { duration: 1.0, source: unit });
+        onTick({ battle, unit, dt }) {
+          unit.mem._tmorisS2Dt = (unit.mem._tmorisS2Dt || 0) + (dt || 0.033);
+          const iv = num(bb['attack@interval'], 1.0);
+          if (unit.mem._tmorisS2Dt >= iv) {
+            unit.mem._tmorisS2Dt -= iv;
+            const scale = num(bb['attack@atk_scale'], 0.78);
+            for (const e of battle.enemies) {
+              if (e.alive && battle.inRange?.(unit, e)) {
+                battle.dealDamage?.(unit, e, {
+                  amount: (unit.s?.atk || 680) * scale,
+                  type: 'arts',
+                  tags: ['skill:tmoris:dot']
+                });
+                battle.applyStatus?.(e, 'sluggish', { duration: 1.0, source: unit });
+              }
             }
           }
         }
@@ -141,8 +171,8 @@ export default {
     skill: {
       kind: 'instant',
       attack: {
-        hits: num(bb.times, 3),
-        atkScale: num(bb.atk_scale, 1.8),
+        hits: num(bb.times, 5),
+        atkScale: num(bb.atk_scale, 0.61),
         dmgType: 'arts'
       },
       onHit({ battle, unit, target }) {
@@ -156,6 +186,27 @@ export default {
         unit.s.physDodge = (unit.s.physDodge || 0) + 0.5;
         unit.s.artsDodge = (unit.s.artsDodge || 0) + 0.5;
       }
+    },
+    talents: [
+      {
+        install(battle, unit) {
+          // 精准雇佣：自身获得15%的物理闪避
+          unit.s.physDodge = (unit.s.physDodge || 0) + num(bb.dodge, 0.15);
+        }
+      }
+    ],
+    install(battle, unit) {
+      // 其他Ave Mujica成员开启技能时，额外释放一次 S1
+      battle.on('skillStart', (c) => {
+        if (c.unit !== unit && c.unit?.side === unit.side && (c.unit?.def?.raw?.nationId === 'aveMujica' || c.unit?.bonds?.includes('aveMujicaShip'))) {
+          if (unit.alive && unit.deployed && unit.canAct) {
+            const sk = unit.skill;
+            if (sk && (sk.id === 'skchr_tmoris_1' || sk.id === 'skx_ave_mujica_tmoris_1') && !sk.active) {
+              sk.activate('allySkill');
+            }
+          }
+        }
+      }, { owner: unit });
     }
   }),
 
@@ -164,48 +215,37 @@ export default {
   // =========================================================================
   chess_char_4_27_a: (bb, chess, def) => ({
     skills: {
-      // S1: 多首野兽
+      // S1: 多首野兽 (防御力+65%，阻挡数+2，嘲讽)
       skchr_mortis_1: {
         kind: 'duration',
-        duration: num(bb.duration, 15),
+        duration: num(bb.duration, 14),
         mods: {
-          defPct: num(bb.def, 0.9),
-          blockCnt: num(bb.block_cnt, 1),
-          taunt: 1
+          defPct: num(bb.def, 0.65),
+          blockCnt: num(bb.block_cnt, 2),
+          taunt: num(bb.taunt_level, 1)
         },
         onStart({ battle, unit }) {
           battle.fx('shield', { x: unit.x, y: unit.y, id: unit.id });
-        },
-        onDamaged({ battle, unit, source, amount }) {
-          if (source && source.alive && source.side !== unit.side) {
-            const reflect = num(bb.reflect, 0.5) * (unit.s?.atk || 800);
-            battle.fx('thorns', { x: source.x, y: source.y, id: unit.id, target: source.id });
-            battle.dealDamage?.(unit, source, {
-              amount: reflect,
-              type: 'arts',
-              tags: ['reflect', 'skill:mortis']
-            });
-          }
         }
       },
-      // S2: 破坏与滋养
+      // S2: 破坏与滋养 (攻击范围扩大，三连发，每发75%法伤，自伤20点)
       skchr_mortis_2: {
         kind: 'duration',
         duration: num(bb.duration, 15),
         targeting: { rangeExtend: 1 },
         attack: {
           hits: 3,
-          atkScale: num(bb['attack@atk_scale'], 1.5),
+          atkScale: num(bb['attack@atk_scale'], 0.75),
           dmgType: 'arts'
         },
         onStart({ battle, unit }) {
           battle.fx('burst', { x: unit.x, y: unit.y, id: unit.id });
         },
         onAttack({ battle, unit }) {
-          // Self-recoil
+          // Self-recoil 20 arts damage
           if (unit.alive && !unit.trait?.doll) {
             battle.dealDamage?.(unit, unit, {
-              amount: 50,
+              amount: num(bb.value, 20),
               type: 'arts',
               tags: ['skill:mortis:recoil']
             });
@@ -215,12 +255,28 @@ export default {
     },
     skill: {
       kind: 'duration',
-      duration: num(bb.duration, 15),
+      duration: num(bb.duration, 14),
       mods: {
-        defPct: num(bb.def, 0.9),
-        blockCnt: num(bb.block_cnt, 1)
+        defPct: num(bb.def, 0.65),
+        blockCnt: num(bb.block_cnt, 2),
+        taunt: num(bb.taunt_level, 1)
+      },
+      onStart({ battle, unit }) {
+        battle.fx('shield', { x: unit.x, y: unit.y, id: unit.id });
       }
-    }
+    },
+    talents: [
+      {
+        install(battle, unit) {
+          // 另一个“她”：替身作战期间攻击力+15%
+          battle.on('hit', (c) => {
+            if (c.source === unit && unit.trait?.doll) {
+              c.dmg.mul *= (1 + num(bb.atk, 0.15));
+            }
+          }, { owner: unit });
+        }
+      }
+    ]
   }),
 
   // =========================================================================
@@ -228,7 +284,7 @@ export default {
   // =========================================================================
   chess_char_5_24_a: (bb, chess, def) => ({
     skills: {
-      // S1: 我思念的
+      // S1: 我思念的 (攻击范围扩大，鼓舞30%攻防，受击治疗64/65)
       skchr_dolris_1: {
         kind: 'duration',
         duration: num(bb.duration, 30),
@@ -236,38 +292,48 @@ export default {
         heal: true,
         onStart({ battle, unit }) {
           battle.fx('blessing', { x: unit.x, y: unit.y, id: unit.id, r: 2 });
-          unit._dolrisInspire = 0.70;
+          unit._dolrisInspireAtk = num(bb['attack@atk'], 0.3);
+          unit._dolrisInspireDef = num(bb['attack@def'], 0.3);
         },
         onEnd({ battle, unit }) {
-          unit._dolrisInspire = 0;
+          unit._dolrisInspireAtk = 0;
+          unit._dolrisInspireDef = 0;
         }
       },
-      // S2: 我悲悯的
+      // S2: 我悲悯的 (特性停疗，每0.3秒70%法伤+15%治疗，鼓舞80%攻)
       skchr_dolris_2: {
         kind: 'duration',
         duration: num(bb.duration, 12),
         onStart({ battle, unit }) {
           battle.fx('sermon', { x: unit.x, y: unit.y, id: unit.id, r: 1.5 });
-          unit._dolrisInspire = 0.75;
+          unit._dolrisInspireAtk = num(bb['attack@atk'], 0.8);
+          unit._dolrisInspireDef = 0;
+          unit.mem._dolrisS2Acc = 0;
         },
         onEnd({ battle, unit }) {
-          unit._dolrisInspire = 0;
+          unit._dolrisInspireAtk = 0;
+          unit._dolrisInspireDef = 0;
         },
-        onTick({ battle, unit }) {
-          // Deal arts damage to random enemy & heal ally
-          const enemies = battle.enemies.filter(e => e.alive);
-          if (enemies.length) {
-            const target = enemies[Math.floor(battle.rng() * enemies.length)];
-            battle.dealDamage?.(unit, target, {
-              amount: (unit.s?.atk || 400) * num(bb['attack@atk_scale'], 1.7),
-              type: 'arts',
-              tags: ['skill:dolris:s2']
-            });
-          }
-          const injured = battle.allyUnits.filter(a => a.alive && a.side === unit.side && a.hp < a.maxHp);
-          if (injured.length) {
-            const ally = injured[0];
-            battle.heal?.(unit, ally, { amount: (unit.s?.atk || 400) * 0.7 });
+        onTick({ battle, unit, dt }) {
+          unit.mem._dolrisS2Acc = (unit.mem._dolrisS2Acc || 0) + (dt || 0.033);
+          const iv = Math.max(0.1, num(bb.interval, 0.3));
+          while (unit.mem._dolrisS2Acc >= iv) {
+            unit.mem._dolrisS2Acc -= iv;
+            const inRange = battle.enemies.filter(e => e.alive && battle.inRange?.(unit, e));
+            if (inRange.length) {
+              const target = inRange[Math.floor(battle.rng() * inRange.length)];
+              battle.dealDamage?.(unit, target, {
+                amount: (unit.s?.atk || 290) * num(bb['attack@atk_scale'], 0.7),
+                type: 'arts',
+                tags: ['skill:dolris:s2']
+              });
+            }
+            const alliesInRange = battle.allyUnits.filter(a => a.alive && a.side === unit.side && battle.inRange?.(unit, a));
+            if (alliesInRange.length) {
+              const injured = alliesInRange.filter(a => a.hp < a.maxHp);
+              const target = injured.length ? injured[0] : alliesInRange[0];
+              battle.heal?.(unit, target, (unit.s?.atk || 290) * num(bb['attack@heal_scale'], 0.15));
+            }
           }
         }
       }
@@ -275,28 +341,69 @@ export default {
     skill: {
       kind: 'duration',
       duration: num(bb.duration, 30),
+      targeting: { rangeExtend: 1 },
       heal: true,
       onStart({ battle, unit }) {
-        unit._dolrisInspire = 0.70;
+        battle.fx('blessing', { x: unit.x, y: unit.y, id: unit.id, r: 2 });
+        unit._dolrisInspireAtk = num(bb['attack@atk'], 0.3);
+        unit._dolrisInspireDef = num(bb['attack@def'], 0.3);
       },
       onEnd({ battle, unit }) {
-        unit._dolrisInspire = 0;
+        unit._dolrisInspireAtk = 0;
+        unit._dolrisInspireDef = 0;
       }
     },
     talents: [
       {
         install(battle, unit) {
-          battle.on('tick', () => {
-            if (!unit.alive) return;
-            const boost = (unit.s?.atk || 350) * (unit._dolrisInspire || 0.12);
+          // Trait (10% ATK/s heal) + Inspire aura (1s interval)
+          battle.every(1.0, () => {
+            if (!unit.alive || !unit.deployed) return;
+            const isS2 = unit.skill?.active && (unit.skill?.id === 'skchr_dolris_2' || unit.skill?.id === 'skx_ave_mujica_dolris_2');
+            const atkInspire = (unit.s?.atk || 290) * (unit._dolrisInspireAtk || 0);
+            const defInspire = (unit.s?.def || 220) * (unit._dolrisInspireDef || 0);
+            const traitHeal = isS2 ? 0 : (unit.s?.atk || 290) * 0.10;
+
             for (const ally of battle.allyUnits) {
-              if (ally && ally.alive && ally !== unit && ally.side === unit.side) {
-                if (ally.hp < ally.maxHp) {
-                  battle.heal?.(unit, ally, { amount: boost * 0.2 });
-                }
+              if (!ally || !ally.alive || ally === unit || ally.side !== unit.side) continue;
+              if (!battle.inRange?.(unit, ally)) continue;
+
+              // Inspire buff
+              if (atkInspire > 0 || defInspire > 0) {
+                battle.addBuff(ally, {
+                  key: `dolris:inspire:${unit.id}`,
+                  duration: 1.2,
+                  refresh: 'replace',
+                  source: unit,
+                  mods: { atkFlat: atkInspire, defFlat: defInspire }
+                });
               }
+              // Trait heal (continuous 10% ATK/s)
+              if (traitHeal > 0 && ally.hp < ally.maxHp) {
+                battle.heal?.(unit, ally, traitHeal);
+              }
+              // Talent: physical damage reduction 10%
+              battle.addBuff(ally, {
+                key: `dolris:talent:${unit.id}`,
+                duration: 1.2,
+                refresh: 'replace',
+                source: unit,
+                mods: { physTakenMul: 0.9 }
+              });
             }
-          });
+          }, { owner: unit });
+
+          // S1 on damaged: heal 64/65 HP
+          battle.on('damaged', (c) => {
+            if (!unit.alive || !unit.skill?.active) return;
+            const skId = unit.skill?.id;
+            if (skId !== 'skchr_dolris_1' && skId !== 'skx_ave_mujica_dolris_1') return;
+            const t = c.target;
+            if (t && t.alive && t.side === unit.side && battle.inRange?.(unit, t)) {
+              const healVal = num(bb['attack@heal_value_s1'], 65);
+              battle.heal?.(unit, t, healVal);
+            }
+          }, { owner: unit });
         }
       }
     ]
@@ -396,7 +503,7 @@ export default {
               applyAura(battle, unit, 12); // base value; max-potential +16 lands with the 0.2.2 baseline
               const sk = unit.skill;
               // 「充能至最大层数时自动释放一次」 — direct activate, engine索敌不参与
-              if (sk && sk.id === 'skchr_oblvns_1' && !sk.active && !sk.pending &&
+              if (sk && (sk.id === 'skchr_oblvns_1' || sk.id === 'skx_ave_mujica_oblvns_1') && !sk.active && !sk.pending &&
                   sk.charges >= sk.maxCharges && unit.canAct && !unit.s.flags.silence) {
                 sk.activate('fullCharge');
               }
@@ -407,3 +514,15 @@ export default {
     };
   }
 };
+
+export default Object.fromEntries(
+  Object.entries(KITS).map(([k, fn]) => [
+    k,
+    (bb, chess, def) => {
+      const res = fn(bb, chess, def);
+      if (res && res.skills) res.skills = withPluginAliases(res.skills);
+      return res;
+    }
+  ])
+);
+

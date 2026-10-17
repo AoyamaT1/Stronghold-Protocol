@@ -1,0 +1,144 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_artoria",
+  "name": "阿尔托莉雅",
+  "appellation": "Artoria",
+  "profession": "WARRIOR",
+  "subProfessionId": "lord",
+  "subProfessionName": "领主",
+  "position": "MELEE",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 6,
+    "bonds": [
+      "roundTable",
+      "skillfulShip",
+      "deputShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_artoria_a"
+      ],
+      "golden": [
+        "garrison_fgo_artoria_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2300,
+        "atk": 750,
+        "def": 350,
+        "bat": 1.3,
+        "blockCnt": 2,
+        "cost": 25,
+        "res": 10,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2680,
+        "atk": 800,
+        "def": 440,
+        "bat": 1.3,
+        "blockCnt": 2,
+        "cost": 25,
+        "res": 15,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_artoria_1",
+      "name": "领导力",
+      "duration": 15,
+      "spCost": 20,
+      "initSp": 12,
+      "desc": "全场我方干员攻击力 +25%(圆桌干员提升至 +45%)，阿尔托莉雅自身攻击力 +80% 且普攻回复 1 技力，持续 15 秒",
+      "bb": {
+        "team_atk": 0.25,
+        "round_table_team_atk": 0.45,
+        "self_atk": 0.8,
+        "attack_sp": 1
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_artoria_2",
+      "name": "风王结界",
+      "duration": 12,
+      "spCost": 24,
+      "initSp": 15,
+      "desc": "持续 12 秒，攻击力 +140%，攻击转化为弱点伤害，开启立即充能 8 点技力",
+      "bb": {
+        "atk_pct": 1.4,
+        "weakness_dmg": 1,
+        "sp_charge": 8
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_artoria_3",
+      "name": "誓约胜利之剑",
+      "duration": 12,
+      "spCost": 35,
+      "initSp": 22,
+      "desc": "拆为 6 段独立 Hit，造成 820%(蓄力 1150%)全屏直线弱点伤害，并返还 12(蓄力 18)点技力，持续 12 秒普攻可同时攻击 3 个目标",
+      "bb": {
+        "hits": 6,
+        "atk_scale": 1.366,
+        "charge_atk_scale": 1.916,
+        "sp_refund": 12,
+        "charge_refund": 18,
+        "targets": 3,
+        "charged": 1
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "龙之炉心",
+      "desc": "自身与周围 8 格友方【圆桌】干员攻击力 +12%，每 3 秒回复 1 点技力",
+      "bb": {
+        "aura_atk_pct": 0.12,
+        "aura_sp": 1
+      }
+    }
+  ],
+  "trait": {
+    "desc": "可以进行远程攻击，但此时攻击力降低至 80%",
+    "bb": {
+      "blockCnt": 2
+    }
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

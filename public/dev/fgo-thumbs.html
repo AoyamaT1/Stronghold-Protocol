@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>fgo thumbs probe</title>
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+  <link rel="stylesheet" href="/css/theme.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <script type="importmap">
+    { "imports": { "preact": "/vendor/preact.module.js", "preact/hooks": "/vendor/hooks.module.js", "htm": "/vendor/htm.module.js" } }
+  </script>
+  <style>
+    body { padding: 16px; font: 13px/1.5 sans-serif; }
+    .row { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 22px; flex-wrap: wrap; }
+    .cell { text-align: center; }
+    .cell b { display: block; margin-top: 6px; font-size: 11px; color: #9ab; }
+    #log { background: #111; color: #6f6; padding: 10px; white-space: pre-wrap; font: 12px/1.4 monospace; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <pre id="log">running…</pre>
+  <script type="module">
+    import '/js/ui/compat.js';
+    import { render } from '/vendor/preact.module.js';
+    import { html } from '/js/ui/components.js';
+    import { UnitThumb } from '/js/ui/gameComponents.js';
+    import { data } from '/js/data.js';
+    import { chessAvatarUrl, chessPortraitUrl, skillIconUrl, skillRecordIconUrl, itemIconUrl, bondIconUrl } from '/js/ui/assetUrls.js';
+
+    const logEl = document.getElementById('log');
+    const log = (...a) => { logEl.textContent += '\n' + a.map(String).join(' '); };
+    logEl.textContent = 'loading…';
+
+    try {
+      await data.loadAll(['assets', 'chess', 'items', 'bonds']);
+      const m = data.get('assets');
+      logEl.textContent = 'status assets/chess/items = ' + ['assets', 'chess', 'items'].map((n) => data.status(n)).join('/');
+
+      const cases = [
+        ['fgo 加雷斯', 'chess', 'chess_fgo_1_gareth_a'],
+        ['fgo 加雷斯金', 'chess', 'chess_fgo_1_gareth_b'],
+        ['fgo 摩根', 'chess', 'chess_fgo_6_morgan_a'],
+        ['原版 kalts', 'chess', 'chess_char_1_01_a'],
+        ['fgo 圣晶石碎片', 'item', 'chess_item_1_fgo_sqshard_a'],
+        ['fgo 阿瓦隆', 'item', 'chess_item_6_fgo_avalon_a'],
+        ['原版 维式重锤', 'item', 'chess_item_1_01_e_a'],
+      ];
+
+      const thumbs = cases.map(([label, kind, id]) => {
+        const rec = kind === 'chess' ? data.lookup('chess', id) : data.lookup('items', id);
+        log(`--- ${label} (${kind} ${id}) 记录=${rec ? '找到' : '缺失'}`);
+        if (kind === 'chess') {
+          log('    avatar=', chessAvatarUrl(m, rec), ' portrait=', chessPortraitUrl(m, rec));
+          log('    skillIcon=', skillIconUrl(m, rec));
+          const sk = rec && rec.skills && rec.skills[0];
+          log('    skillRecordIcon=', sk ? skillRecordIconUrl(m, sk, { empty: false }) : 'n/a');
+        } else {
+          log('    iconId=', rec && rec.iconId, ' itemIcon=', itemIconUrl(m, rec));
+        }
+        return { label, id, kind, node: html`<${UnitThumb} kind=${kind} id=${id} size="lg" showTier=${true} />` };
+      });
+
+      log('bond roundTable=', bondIconUrl(m, 'roundTable'));
+
+      render(html`<div class="row">${thumbs.map((t) => html`
+        <div class="cell" key=${t.id}>${t.node}<b>${t.label}<br/>${t.id}</b></div>`)}</div>`, document.getElementById('app'));
+      log('RENDERED');
+    } catch (e) {
+      log('ERROR', e && e.message, e && e.stack);
+    }
+  </script>
+</body>
+</html>

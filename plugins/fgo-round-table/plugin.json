@@ -1,0 +1,45 @@
+{
+  "$schema": "../../schemas/plugin.schema.json",
+  "manifest": 2,
+  "id": "fgo-round-table",
+  "name": "Fate/Grand Order: 圆桌骑士 (Round Table)",
+  "englishName": "Fate/Grand Order Round Table",
+  "version": "1.0.0",
+  "app": ">=0.3.0 <0.4.0",
+  "api": 1,
+  "class": "content",
+  "scope": [
+    "room"
+  ],
+  "authors": [
+    "Antigravity & FGO Mod Team"
+  ],
+  "license": "CC-BY-4.0",
+  "permissions": [
+    "data.add",
+    "dsl"
+  ],
+  "optional": {
+    "fgo-round-table-look": ">=1.0.0"
+  },
+  "operators": [
+    "operators/gareth.json",
+    "operators/bedivere.json",
+    "operators/tristan.json",
+    "operators/percival.json",
+    "operators/baobhan.json",
+    "operators/gawain.json",
+    "operators/barghest.json",
+    "operators/mash.json",
+    "operators/lancelot.json",
+    "operators/mordred.json",
+    "operators/melusine.json",
+    "operators/artoria.json",
+    "operators/merlin.json",
+    "operators/castoria.json",
+    "operators/morgan.json"
+  ],
+  "dsl": [
+    "dsl/relics.json"
+  ]
+}

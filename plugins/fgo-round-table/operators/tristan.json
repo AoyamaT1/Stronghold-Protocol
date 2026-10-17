@@ -1,0 +1,204 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_tristan",
+  "name": "崔斯坦",
+  "appellation": "Tristan",
+  "profession": "SNIPER",
+  "subProfessionId": "fastshot",
+  "subProfessionName": "神射手",
+  "position": "RANGED",
+  "rarity": 5,
+  "as": "both",
+  "chess": {
+    "tier": 2,
+    "bonds": [
+      "roundTable",
+      "preciShip",
+      "swiftShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_tristan_a"
+      ],
+      "golden": [
+        "garrison_fgo_tristan_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1450,
+        "atk": 540,
+        "def": 160,
+        "bat": 1.6,
+        "blockCnt": 1,
+        "cost": 13,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -1,
+          3
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2150,
+        "atk": 720,
+        "def": 240,
+        "bat": 1.6,
+        "blockCnt": 1,
+        "cost": 13,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -1,
+          3
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_tristan_1",
+      "name": "绝音的哀歌",
+      "duration": 0,
+      "spCost": 16,
+      "initSp": 10,
+      "desc": "解除自身周围 8 格友方的眩晕与沉默，回复相当于 120% 攻击力的生命值，并获得 40% 物理与法术闪避，持续 6 秒",
+      "bb": {
+        "heal_scale": 1.2,
+        "dodge_rate": 0.4,
+        "buff_dur": 6
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_tristan_2",
+      "name": "骑士王的挽歌",
+      "duration": 0,
+      "spCost": 20,
+      "initSp": 12,
+      "desc": "对生命值最高的敌人发射 3 连弦音，每箭造成 160% 物理伤害并施加 6 秒沉默，目标攻击力 -20%",
+      "bb": {
+        "hits": 3,
+        "atk_scale": 1.6,
+        "silence_dur": 6,
+        "atk_debuff": -0.2
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_tristan_3",
+      "name": "痛哭的幻奏",
+      "duration": 0,
+      "spCost": 26,
+      "initSp": 16,
+      "desc": "锁定场上最大生命值最高的敌方首领或精英，发射 7 道真空音波弦，每道造成 105% 物理伤害(无视闪避与 30% 防御力)，并施加 25% 物理脆弱，持续 5 秒",
+      "bb": {
+        "hits": 7,
+        "atk_scale": 1.05,
+        "def_ignore": 0.3,
+        "fragile": 0.25,
+        "debuff_dur": 5
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "悲痛之琴",
+      "desc": "攻击使目标移动速度 -25%，持续 2 秒；对处于移动减速状态的敌人造成的伤害提升 20%",
+      "bb": {
+        "slow_pct": 0.25,
+        "bonus_dmg": 0.2
+      }
+    }
+  ],
+  "trait": {
+    "desc": "优先攻击空中单位",
+    "bb": {}
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

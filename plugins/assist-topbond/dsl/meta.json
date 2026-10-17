@@ -1,0 +1,51 @@
+{
+  "dsl": 1,
+  "meta": {
+    "on": [
+      {
+        "when": "income",
+        "if": {
+          "round": 1
+        },
+        "do": [
+          {
+            "funds": {
+              "amount": 0,
+              "setIncome": true
+            }
+          }
+        ]
+      },
+      {
+        "when": "income",
+        "if": {
+          "round": 2
+        },
+        "do": [
+          {
+            "funds": {
+              "amount": 0,
+              "setIncome": true
+            }
+          }
+        ]
+      },
+      {
+        "when": "income",
+        "if": {
+          "round": 3
+        },
+        "do": [
+          {
+            "funds": {
+              "amount": 15,
+              "setIncome": true
+            }
+          }
+        ]
+      }
+    ],
+    "key": "effect:assist-topbond:income"
+  },
+  "pluginId": "assist-topbond"
+}

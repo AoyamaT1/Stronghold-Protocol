@@ -1,0 +1,142 @@
+{
+  "op": 1,
+  "charId": "char_x_limbus_company_gregor",
+  "name": "格里高尔",
+  "appellation": "Gregor",
+  "profession": "WARRIOR",
+  "subProfessionId": "fearless",
+  "subProfessionName": "无畏者",
+  "position": "MELEE",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 6,
+    "bonds": [
+      "limbusShip",
+      "indomShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_limbus_gregor_a"
+      ],
+      "golden": [
+        "garrison_limbus_gregor_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2600,
+        "atk": 900,
+        "def": 430,
+        "bat": 1.5,
+        "blockCnt": 1,
+        "cost": 26,
+        "res": 10,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2680,
+        "atk": 930,
+        "def": 435,
+        "bat": 1.5,
+        "blockCnt": 1,
+        "cost": 26,
+        "res": 20,
+        "aspd": 110,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_limbus_company_gregor_1",
+      "name": "黎明闪光",
+      "duration": 0,
+      "spCost": 7,
+      "initSp": 0,
+      "desc": "攻击力 +50%\n攻击时使目标获得 1 层灼燃损伤并附加 2 层【神经损伤】\n目标灼燃损伤与【神经损伤】层数之和每 4 级，攻击力额外 +10%，至多 +30%",
+      "bb": {
+        "atk_scale": 2.2,
+        "burst_scale": 1.5
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_gregor_2",
+      "name": "霞光剑刃",
+      "duration": 0,
+      "spCost": 35,
+      "initSp": 12,
+      "desc": "攻击力 +80%，攻击目标数 +1\n攻击时使目标获得 2 层灼燃损伤并附加 1 层【神经损伤】\n目标灼燃损伤与【神经损伤】层数之和每 4 级，攻击力额外 +10%，至多 +40%",
+      "bb": {
+        "atk_pct": 0.8,
+        "def_pct": 0.4,
+        "block_add": 1,
+        "vuln": 0.2
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_gregor_3",
+      "name": "撕裂黎明之剑",
+      "duration": 0,
+      "spCost": 50,
+      "initSp": 18,
+      "desc": "攻击力 +150%\n攻击时使目标获得 2 层灼燃损伤并附加 2 层【神经损伤】\n自身灼燃损伤与目标灼燃损伤之和每 1 级，造成伤害 +1%，至多 +30%\n战斗开始时使攻击范围内 2 名友方干员获得 2 层庇护；攻击后下回合使全体友方干员攻击力 +10%",
+      "bb": {
+        "atk_scale": 7.5,
+        "burst_scale": 11,
+        "trail_dur": 10
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "曙光之手",
+      "desc": "攻击命中时使目标获得 1 层灼燃损伤；目标每有 1 级灼燃损伤，自身攻击力 +2%，至多 +30%",
+      "bb": {}
+    },
+    {
+      "index": 1,
+      "name": "黎明庇护",
+      "desc": "战斗开始时使攻击范围内 2 名友方干员获得 2 层庇护；自身攻击后，下回合使全体友方干员攻击力 +10%",
+      "bb": {}
+    }
+  ],
+  "trait": {
+    "desc": "攻击造成法术伤害并施加【灼燃】，开启技能后，全体友方获得【灼燃】伤害提升。",
+    "bb": {}
+  },
+  "kit": "generic",
+  "nationId": "limbus",
+  "art": {
+    "ref": "char_limbus_gregor"
+  }
+}

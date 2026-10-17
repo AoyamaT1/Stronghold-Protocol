@@ -1,0 +1,170 @@
+{
+  "op": 1,
+  "charId": "char_x_limbus_company_ishmael",
+  "name": "以实玛利",
+  "appellation": "Ishmael",
+  "profession": "WARRIOR",
+  "subProfessionId": "instructor",
+  "subProfessionName": "教官",
+  "position": "MELEE",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 2,
+    "bonds": [
+      "limbusShip",
+      "skillfulShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_limbus_ishmael_a"
+      ],
+      "golden": [
+        "garrison_limbus_ishmael_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2450,
+        "atk": 560,
+        "def": 370,
+        "bat": 1.35,
+        "blockCnt": 2,
+        "cost": 14,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2850,
+        "atk": 640,
+        "def": 490,
+        "bat": 1.35,
+        "blockCnt": 2,
+        "cost": 14,
+        "res": 0,
+        "aspd": 110,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_limbus_company_ishmael_1",
+      "name": "到我身边！",
+      "duration": 0,
+      "spCost": 7,
+      "initSp": 0,
+      "desc": "攻击力 +50%，攻击目标数 +1\n战斗开始时使攻击范围内的友方干员防御力 +15%\n攻击时使目标获得 2 层【流血】",
+      "bb": {
+        "atk_pct": 0.5,
+        "extra_targets": 1,
+        "ally_def": 0.15,
+        "ally_dur": 15,
+        "bleed": 2
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_ishmael_2",
+      "name": "追踪到底！",
+      "duration": 0,
+      "spCost": 30,
+      "initSp": 12,
+      "desc": "攻击力 +90%\n战斗开始时使攻击范围内的友方干员攻击力 +15%\n攻击时使目标获得 2 层【流血】，并有 40% 概率使其额外获得 1 级灼燃损伤\n命中后使攻击范围内 1 名友方干员追加一次攻击",
+      "bb": {
+        "atk_pct": 0.9,
+        "ally_atk": 0.15,
+        "bleed": 2,
+        "burn_chance": 0.4,
+        "followup_cd": 1.2,
+        "duration": 20
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_ishmael_3",
+      "name": "执着鱼叉",
+      "duration": 0,
+      "spCost": 45,
+      "initSp": 20,
+      "desc": "攻击力 +160%\n目标每失去 1% 生命，造成伤害 +0.3%，至多 +30%\n目标每有 5 级【流血】，造成伤害额外 +10%，至多 +20%\n攻击时使目标获得 3 层【流血】\n击倒目标时，使理智值最低的 2 名友方干员回复 10 点理智",
+      "bb": {
+        "atk_pct": 1.6,
+        "missing_per": 0.003,
+        "missing_cap": 0.3,
+        "bleed_atk_per5": 0.1,
+        "bleed_atk_cap": 0.2,
+        "bleed": 3,
+        "ally_sanity": 10,
+        "ally_cnt": 2
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "追踪到底",
+      "desc": "攻击范围内的友方干员攻击力 +12%，攻击速度 +15；自身攻击时使目标获得 1 层【流血】",
+      "bb": {
+        "ally_atk": 0.12,
+        "ally_aspd": 15,
+        "range": 2,
+        "aura_dur": 1
+      }
+    },
+    {
+      "index": 1,
+      "name": "全船之力",
+      "desc": "每编入 1 名其他【边狱公司】干员，自身攻击力 +4%",
+      "bb": {
+        "team_atk": 0.04
+      }
+    }
+  ],
+  "trait": {
+    "desc": "可以攻击空中与较远的敌人；攻击使目标陷入【脆弱】，受到的伤害提升",
+    "bb": {
+      "vuln": 0.15,
+      "vuln_dur": 4
+    }
+  },
+  "kit": "generic",
+  "nationId": "limbus",
+  "art": {
+    "ref": "char_limbus_ishmael"
+  }
+}

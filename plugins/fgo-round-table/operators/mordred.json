@@ -1,0 +1,142 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_mordred",
+  "name": "莫德雷德",
+  "appellation": "Mordred",
+  "profession": "TANK",
+  "subProfessionId": "guardian",
+  "subProfessionName": "守护者",
+  "position": "MELEE",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 5,
+    "bonds": [
+      "roundTable",
+      "raidShip",
+      "soloShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_mordred_a"
+      ],
+      "golden": [
+        "garrison_fgo_mordred_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2850,
+        "atk": 740,
+        "def": 360,
+        "bat": 1.3,
+        "blockCnt": 3,
+        "cost": 24,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 3950,
+        "atk": 825,
+        "def": 510,
+        "bat": 1.3,
+        "blockCnt": 3,
+        "cost": 24,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_mordred_1",
+      "name": "魔力放出",
+      "duration": 10,
+      "spCost": 18,
+      "initSp": 10,
+      "desc": "持续 10 秒，攻击力 +65%，每次攻击造成 165% 物理伤害并使目标短暂晕眩 1 秒",
+      "bb": {
+        "atk_pct": 0.65,
+        "atk_scale": 1.65,
+        "stun_sec": 1
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_mordred_2",
+      "name": "隐藏不贞的头盔",
+      "duration": 10,
+      "spCost": 22,
+      "initSp": 14,
+      "desc": "解除自身所有负面状态，立即回复 8 点技力，持续 10 秒防御力 +120%、法抗 +25，受击时反弹 120% 赤雷法伤",
+      "bb": {
+        "cleanse": 1,
+        "sp_charge": 8,
+        "def_pct": 1.2,
+        "res_add": 25,
+        "reflect_arts": 1.2
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_mordred_3",
+      "name": "对吾高洁之父的叛逆",
+      "duration": 0,
+      "spCost": 32,
+      "initSp": 20,
+      "desc": "拆为 5 段独立 Hit，造成 680%(蓄力 920%)物理 AoE，对首领或精英无视 40% 防御力，击杀敌人回复 3 点技力",
+      "bb": {
+        "hits": 5,
+        "atk_scale": 1.36,
+        "charge_atk_scale": 1.84,
+        "boss_def_ignore": 0.4,
+        "kill_sp": 3,
+        "charged": 1
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "叛逆之雷",
+      "desc": "受到伤害时有 25% 概率触发赤雷反击，对来源造成 80% 攻击力的法术反伤",
+      "bb": {
+        "counter_prob": 0.25,
+        "counter_scale": 0.8
+      }
+    }
+  ],
+  "trait": {
+    "desc": "技能可以治疗友方单位",
+    "bb": {}
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

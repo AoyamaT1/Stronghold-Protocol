@@ -1,0 +1,366 @@
+{
+  "op": 1,
+  "charId": "char_x_rhodes_monstr",
+  "name": "Mon3tr",
+  "profession": "MEDIC",
+  "subProfessionId": "chainhealer",
+  "position": "RANGED",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 4,
+    "bonds": [
+      "rhodesShip",
+      "swiftShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_rhodes_monstr_a"
+      ],
+      "golden": [
+        "garrison_rhodes_monstr_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1492,
+        "atk": 422,
+        "def": 176,
+        "bat": 2.85,
+        "blockCnt": 1,
+        "cost": 18,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 1653,
+        "atk": 532,
+        "def": 236,
+        "bat": 2.85,
+        "blockCnt": 1,
+        "cost": 18,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skchr_monstr_1",
+      "name": "策略：超压链接",
+      "duration": -1,
+      "spCost": 5,
+      "initSp": 0,
+      "desc": "被动效果：使重构体的生命上限提升50%，Mon3tr的普通攻击造成的伤害提升至相当于自身攻击力140%的物理伤害，每次攻击时治疗重构体相当于攻击力30%的生命值",
+      "bb": {
+        "max_hp": 0.5,
+        "atk_scale": 1.4,
+        "heal_scale": 0.3
+      },
+      "rangeGrid": [
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ]
+      ],
+      "default": false
+    },
+    {
+      "skillId": "skchr_monstr_2",
+      "name": "策略：超负荷",
+      "duration": 30,
+      "spCost": 15,
+      "initSp": 7,
+      "desc": "技能期间优先治疗重构体，重构体每受到一次Mon3tr的治疗，就会进行一次跳跃治疗，第二天赋的效果提升至1.8倍",
+      "bb": {
+        "talent_scale": 1.8
+      },
+      "rangeGrid": [
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ]
+      ],
+      "default": false
+    },
+    {
+      "skillId": "skchr_monstr_3",
+      "name": "策略：熔毁",
+      "duration": 25,
+      "spCost": 15,
+      "initSp": 5,
+      "desc": "攻击范围改变，移动至重构体位置，攻击力+250%，攻击间隔降低，阻挡数+2，生命上限+5000，每秒流失80点生命值，同时攻击阻挡的所有敌人，伤害类型变为真实，攻击治疗自身相当于攻击力50%的生命值\n技能结束或受到致命伤害时，返回初始位置",
+      "bb": {
+        "atk": 2.5,
+        "damage_per_second": 80,
+        "max_hp": 5000,
+        "block_cnt": 2,
+        "base_attack_time": -1.5,
+        "attack@heal_scale": 0.5
+      },
+      "rangeGrid": [
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "自我修复",
+      "desc": "可以在攻击范围内的地面使用一个仅可被自身治疗的重构体，重构体周围友方单位的攻击力+15%，重构体受到自身和Mon3tr治疗时，可额外进行一次不会衰减的治疗跳跃",
+      "bb": {
+        "cnt": 1,
+        "atk": 0.15
+      }
+    },
+    {
+      "index": 1,
+      "name": "战术协同",
+      "desc": "自身或重构体造成治疗时，使目标及自身的攻击速度+20，持续10秒(无法叠加)",
+      "bb": {
+        "buff_duration": 10,
+        "attack_speed": 20
+      }
+    }
+  ],
+  "trait": {
+    "desc": "恢复友方单位生命，且会在3个友方单位间跳跃，每次跳跃治疗量降低25%"
+  },
+  "kit": {
+    "ref": "char_4179_monstr"
+  },
+  "art": {
+    "ref": "char_4179_monstr"
+  },
+  "nationId": "rhodes"
+}

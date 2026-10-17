@@ -18,7 +18,7 @@ const yisangKit = (bb, chess, def) => {
   const addOsc = (unit, n) => { unit.mem = unit.mem || {}; unit.mem.oscillation = Math.min(10, (unit.mem.oscillation || 0) + n); };
   const lowestSanityAlly = (battle, unit) => {
     const list = (battle.allies?.(unit.ownerId) || []).filter(
-      (a) => a && a.alive && a.chess?.nationId === 'limbus' && typeof a.mem?.limbusSanity === 'number' && !a.mem?.negSanityPersona);
+      (a) => a && a.alive && (a.def?.raw?.nationId === 'limbus' || a.def?.nationId === 'limbus') && typeof a.mem?.limbusSanity === 'number' && !a.mem?.negSanityPersona);
     let low = null, min = Infinity;
     for (const a of list) if (a.mem.limbusSanity < min) { min = a.mem.limbusSanity; low = a; }
     return low;
@@ -90,7 +90,7 @@ const yisangKit = (bb, chess, def) => {
           onHit({ battle, unit, target }) {
             sink(battle, unit, target, num(bb.dot_ep_damage, 150), true);
             if (target && target.alive && (unit.mem?.oscillation || 0) >= num(bb.osc_threshold, 10)) {
-              battle.dealDamage(unit, target, { amount: unit.s.atk * num(bb.extra_dmg_ratio, 0.4), type: 'magic' });
+              battle.dealDamage(unit, target, { amount: unit.s.atk * num(bb.extra_dmg_ratio, 0.4), type: 'arts' });
             }
           }
         }
@@ -106,8 +106,8 @@ const yisangKit = (bb, chess, def) => {
             unit.mem = unit.mem || {};
             unit.mem._yiMulti = (ctx.targets?.length || 0) >= 2;
           }, { owner: unit });
-          battle.on('beforeDamage', (ev) => {
-            if (ev.source === unit && unit.mem?._yiMulti) ev.amount *= num(tb.bloom_mul, 1.3);
+          battle.on('hit', (ev) => {
+            if (ev.source === unit && unit.mem?._yiMulti) ev.dmg.mul *= num(tb.bloom_mul, 1.3);
           }, { owner: unit });
           battle.on('damaged', (ev) => {
             if (ev.source !== unit || ev.type === 'element' || !unit.alive) return;
@@ -175,7 +175,8 @@ const faustKit = (bb, chess, def) => {
         kind: 'charges',
         attack: {
           canHitFly: true,
-          atkScale({ unit }) { return num(b3.atk_scale, 2.6) * ((unit.mem?.wcharge || 0) >= num(b3.overcharge_cost, 5) ? num(b3.overcharge_mul, 1.4) : 1); },
+          atkScale: num(b3.atk_scale, 2.6),
+          dmgMul({ unit }) { return (unit.mem?.wcharge || 0) >= num(b3.overcharge_cost, 5) ? num(b3.overcharge_mul, 1.4) : 1; },
           onHit({ battle, unit, target }) {
             if (!target || !target.alive) return;
             const cost = num(b3.overcharge_cost, 5);
@@ -1212,7 +1213,7 @@ const gregorKit = (bb, chess, def) => {
           onHit({ battle, unit, target }) {
             if (target && target.alive) {
               applyElementDmg(battle, unit, target, 'burn', 150);
-              battle.dealDamage(unit, target, { amount: unit.s.atk * 1.5, type: 'magic' });
+              battle.dealDamage(unit, target, { amount: unit.s.atk * 1.5, type: 'arts' });
             }
             battle.fx?.('gregor_dawn_light', { x: target ? target.x : unit.x, y: target ? target.y : unit.y });
           }
@@ -1234,7 +1235,7 @@ const gregorKit = (bb, chess, def) => {
       },
       skchr_gregor_3: {
         kind: 'instant',
-        onCast({ battle, unit }) {
+        onStart({ battle, unit }) {
           const dir = unit.dir || 'RIGHT';
           const line = battle.enemies.filter(e => {
             if (!e || !e.alive || e.side !== 'enemy') return false;
@@ -1247,7 +1248,7 @@ const gregorKit = (bb, chess, def) => {
           });
           for (const t of line) {
             battle.dealDamage(unit, t, { amount: unit.s.atk * 7.5, type: 'phys' });
-            battle.dealDamage(unit, t, { amount: unit.s.atk * 3.5, type: 'magic' });
+            battle.dealDamage(unit, t, { amount: unit.s.atk * 3.5, type: 'arts' });
             applyElementDmg(battle, unit, t, 'burn', 300);
           }
           battle.fx?.('gregor_sunset_brand', { x: unit.x, y: unit.y, dir });
@@ -1257,20 +1258,20 @@ const gregorKit = (bb, chess, def) => {
     talents: [
       {
         install(battle, unit) {
-          battle.on('beforeDamage', (ev) => {
+          battle.on('hit', (ev) => {
             if (ev.source === unit && ev.target) {
-              ev.amount *= 1.3;
+              ev.dmg.mul *= 1.3;
             }
           }, { owner: unit });
         }
       },
       {
         install(battle, unit) {
-          battle.on('beforeDamage', (ev) => {
-            if (ev.target === unit && unit.hp - ev.amount <= 0 && !unit.mem?.dawnRevived) {
+          battle.on('fatal', (ev) => {
+            if (ev.unit === unit && !unit.mem?.dawnRevived) {
               unit.mem = unit.mem || {};
               unit.mem.dawnRevived = true;
-              ev.amount = 0;
+              ev.prevented = true;
               unit.hp = Math.floor(unit.s.maxHp * 0.5);
               battle.fx?.('gregor_dawn_fire_sea', { x: unit.x, y: unit.y, r: 3 });
             }
@@ -1379,7 +1380,7 @@ function installTraits(battle, unit, id) {
     }, { owner: unit });
   } else if (name === 'meursault') {
     // 对带【神经损伤】的敌人增伤（引爆由其技能负责）
-    battle.on('beforeDamage', (ev) => { if (selfSrc(ev) && (ev.target?.elem?.neural ?? 0) > 0) ev.amount *= 1.2; }, { owner: unit });
+    battle.on('hit', (ev) => { if (selfSrc(ev) && (ev.target?.elem?.neural ?? 0) > 0) ev.dmg.mul *= 1.2; }, { owner: unit });
   } else if (name === 'gregor') {
     // 特质：攻击附带【灼燃】；开启技能后，全体友方获得【灼燃】伤害提升（applyElementDmg 读 mem 窗口）
     battle.on('damaged', (ev) => {
@@ -1399,7 +1400,7 @@ function installTraits(battle, unit, id) {
     battle.on('kill', (ev) => {
       if ((ev.killer || ev.source) !== unit || !unit.alive) return;
       const allies = (battle.allies?.(unit.ownerId) || []).filter(
-        (a) => a && a.alive && a !== unit && a.chess?.nationId === 'limbus' && Math.hypot(a.x - unit.x, a.y - unit.y) <= 2.5);
+        (a) => a && a.alive && a !== unit && (a.def?.raw?.nationId === 'limbus' || a.def?.nationId === 'limbus') && Math.hypot(a.x - unit.x, a.y - unit.y) <= 2.5);
       for (const a of allies) a.skill?.gainSp?.(2, 'talent');
     }, { owner: unit });
   } else if (name === 'faust') {
@@ -1407,7 +1408,7 @@ function installTraits(battle, unit, id) {
     battle.on('tick', () => {
       if (!unit.alive) return;
       const allies = (battle.allies?.(unit.ownerId) || []).filter(
-        (a) => a && a.alive && a !== unit && a.chess?.nationId === 'limbus' && Math.hypot(a.x - unit.x, a.y - unit.y) <= 1.5);
+        (a) => a && a.alive && a !== unit && (a.def?.raw?.nationId === 'limbus' || a.def?.nationId === 'limbus') && Math.hypot(a.x - unit.x, a.y - unit.y) <= 1.5);
       for (const a of allies) battle.addBuff(a, { key: 'buff:faust:tempo', mods: { spCostFlat: -1 }, duration: 1.2, visible: true, source: unit });
     }, { owner: unit });
   }

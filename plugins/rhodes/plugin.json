@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/plugin.schema.json",
+  "manifest": 2,
+  "id": "rhodes",
+  "name": "罗德岛干员组 (阿米娅/可露希尔/Mon3tr/阿斯卡纶/逻各斯/暴行/思衡凯尔希)",
+  "englishName": "Rhodes Island Operators",
+  "version": "1.4.0",
+  "app": ">=0.3.0 <0.4.0",
+  "api": 1,
+  "class": "content",
+  "scope": [
+    "room"
+  ],
+  "authors": [
+    "muchiyun"
+  ],
+  "license": "CC-BY-4.0",
+  "optional": {
+    "rhodes-look": ">=1.4.0"
+  },
+  "permissions": [
+    "data.add"
+  ],
+  "operators": [
+    "operators/amiya3.json",
+    "operators/closur.json",
+    "operators/monstr.json",
+    "operators/ascln.json",
+    "operators/logos.json",
+    "operators/savage.json",
+    "operators/kalts2.json"
+  ]
+}

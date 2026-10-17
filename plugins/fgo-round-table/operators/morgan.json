@@ -1,0 +1,207 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_morgan",
+  "name": "摩根",
+  "appellation": "Morgan",
+  "profession": "CASTER",
+  "subProfessionId": "phalanx",
+  "subProfessionName": "阵法术士",
+  "position": "RANGED",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 6,
+    "bonds": [
+      "roundTable",
+      "arcaneShip",
+      "visiShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_morgan_a"
+      ],
+      "golden": [
+        "garrison_fgo_morgan_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1950,
+        "atk": 780,
+        "def": 260,
+        "bat": 2.3,
+        "blockCnt": 1,
+        "cost": 28,
+        "res": 20,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2650,
+        "atk": 1100,
+        "def": 380,
+        "bat": 2.3,
+        "blockCnt": 1,
+        "cost": 28,
+        "res": 25,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_morgan_1",
+      "name": "渴爱的魅力",
+      "duration": 12,
+      "spCost": 18,
+      "initSp": 10,
+      "desc": "全场敌人防御力 -40%、法术抗性 -30、受到的所有伤害 +25%，持续 12 秒；自身充能 6 点技力",
+      "bb": {
+        "team_atk": 0.2,
+        "enemy_def_down": -0.15,
+        "sp_charge": 6,
+        "dur": 12
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_morgan_2",
+      "name": "天性的湖光",
+      "duration": 14,
+      "spCost": 26,
+      "initSp": 16,
+      "desc": "持续 14 秒，攻击力 +75%，攻速 +30，获得 1 次致命伤抵挡；普攻对目标附加 300 点凋亡损伤与 40% 减速",
+      "bb": {
+        "atk_pct": 0.75,
+        "aspd": 30,
+        "undying": 1,
+        "slow_pct": 0.4,
+        "dur": 14
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_morgan_3",
+      "name": "业已无法抵达的理想乡",
+      "duration": 0,
+      "spCost": 36,
+      "initSp": 22,
+      "desc": "前方 4x5 范围 6 段黑枪轰炸，总计 720%(蓄力 1080%)群法伤害，全场友方回 8 技力与【蓄力就绪】",
+      "bb": {
+        "hits": 6,
+        "atk_scale": 1.2,
+        "charge_atk_scale": 1.8,
+        "sp_grant": 8,
+        "charged": 1
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "冬之女王",
+      "desc": "全场敌人移动速度 -15%，受到法术伤害提升 15%；自身每击倒一名敌人回复 3 点技力",
+      "bb": {
+        "slow_pct": 0.15,
+        "arts_fragile": 0.15,
+        "kill_sp": 3
+      }
+    }
+  ],
+  "trait": {
+    "desc": "通常不攻击且防御力和法术抗性提升，技能开启时造成超远距离群体法术攻击",
+    "bb": {}
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

@@ -3,11 +3,6 @@
 // A projectile homes on `target` (a unit) or flies to a fixed point `to` ({x,y}). On arrival `onHit(ctx)` runs
 // with ctx = { battle, projectile, target (null if it died / point shot), x, y }. When a homing target dies
 // mid-flight the projectile fizzles, unless `hitDead: true` (then it lands at the last known position).
-//
-// `steer(p, dt) → boolean` hands ONE projectile's movement to its content: the system then calls it every step
-// instead of the straight-line move (returning true = the arrival, so `onHit` runs as usual). 丰川祥子's notes need
-// it — their flight is the official 【自由移动】/【追踪移动】/【已命中】 state machine (mods/sakiko). Backward
-// compatible: a projectile without `steer` flies the ordinary straight-line path.
 
 import { PROJECTILE_SPEED } from './constants.js';
 import { hypot } from './detmath.js';

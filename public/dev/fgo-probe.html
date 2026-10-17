@@ -1,0 +1,63 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>fgo-probe</title>
+<pre id="out">running…</pre>
+<script type="module">
+// 临时诊断页：走和 UnitThumb 完全相同的客户端路径，验证 fgo 的图片能不能解析出来。
+import { data } from '/js/data.js';
+import { chessAvatarUrl, chessPortraitUrl, skillIconUrl, skillRecordIconUrl, itemIconUrl, bondIconUrl } from '/js/ui/assetUrls.js';
+
+const out = document.getElementById('out');
+const log = (...a) => { out.textContent += '\n' + a.map(String).join(' '); };
+out.textContent = '';
+
+try {
+  const t0 = performance.now();
+  await data.loadAll(['assets', 'chess', 'items', 'bonds']);
+  log('loadAll 用时:', Math.round(performance.now() - t0), 'ms');
+  log('status(assets):', data.status('assets'));
+  log('status(chess):', data.status('chess'));
+  log('status(items):', data.status('items'));
+
+  const m = data.get('assets');
+  log('manifest:', m ? 'len=' + JSON.stringify(m).length : 'NULL');
+  log('manifest.chars count:', m && m.chars ? Object.keys(m.chars).length : 'n/a');
+  log('manifest.skills count:', m && m.skills ? Object.keys(m.skills).length : 'n/a');
+  log('manifest.items count:', m && m.items ? Object.keys(m.items).length : 'n/a');
+
+  const g = data.lookup('chess', 'chess_fgo_1_gareth_a');
+  log('--- chess_fgo_1_gareth_a:', g ? g.name : 'MISSING');
+  log('  assets field:', JSON.stringify(g && g.assets));
+  log('  chessAvatarUrl  ->', chessAvatarUrl(m, g));
+  log('  chessPortraitUrl->', chessPortraitUrl(m, g));
+  log('  skillIconUrl    ->', skillIconUrl(m, g));
+
+  const sk = g && g.skills && g.skills[2];
+  log('  skills[2]:', sk ? sk.skillId : 'n/a');
+  log('  skillRecordIconUrl ->', sk ? skillRecordIconUrl(m, sk, { empty: false }) : 'n/a');
+
+  const it = data.lookup('items', 'chess_item_1_fgo_sqshard_a');
+  log('--- chess_item_1_fgo_sqshard_a:', it ? it.name : 'MISSING');
+  log('  iconId:', it && it.iconId);
+  log('  itemIconUrl ->', itemIconUrl(m, it));
+
+  log('--- bond roundTable ->', bondIconUrl(m, 'roundTable'));
+
+  // 真实加载图片，确认 URL 能取到像素
+  const tryLoad = (u) => new Promise((r) => {
+    if (!u) return r('no-url');
+    const i = new Image();
+    i.onload = () => r('OK ' + i.naturalWidth + 'x' + i.naturalHeight);
+    i.onerror = () => r('LOAD-FAIL');
+    i.src = u;
+  });
+  log('avatar  img:', await tryLoad(chessAvatarUrl(m, g)));
+  log('standee img:', await tryLoad('/assets/char/standee/char_fgo_gareth.png'));
+  log('skill   img:', await tryLoad(skillIconUrl(m, g)));
+  log('bond    img:', await tryLoad(bondIconUrl(m, 'roundTable')));
+  log('DONE');
+} catch (e) {
+  log('ERROR', e && e.message, e && e.stack);
+  log('DONE');
+}
+</script>

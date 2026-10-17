@@ -22,25 +22,27 @@ function lazySkills(builders) {
 
 function amiyaMedic(bb, chess) {
   const t0 = (chess?.talents || []).find((t) => t && t.index === 0)?.bb ?? {}; // 诚挚期许 { max_hp, hp_recovery_… }
-  const s1rec = (chess?.skills || []).find((s) => s && s.skillId === 'skchr_amiya3_1');
+  const s1rec = (chess?.skills || []).find((s) => s && (s.skillId === 'skchr_amiya3_1' || s.skillId === 'skx_rhodes_amiya3_1'));
   const grid1 = Array.isArray(s1rec?.rangeGrid) && s1rec.rangeGrid.length ? s1rec.rangeGrid : null;
+  const buildS1 = () => ({
+    kind: 'duration',
+    mods: modsOut({ aspd: num(bb.attack_speed) }),
+    ...(grid1 ? { trigger: { rule: 'SKILL_RANGE', grid: grid1 } } : {}),
+    onAttack({ battle, unit }) {
+      const heal = unit.s.atk * num(bb.heal_scale, 0.15);
+      if (!(heal > 0)) return;
+      const area = battle.unitsInGrid(unit, grid1 || [[0, 0]], { side: 'ally' })
+        .filter((a) => a.kind !== 'device' && !(a.s.flags.noHeal || a.profile?.noHeal));
+      if (!area.length) return;
+      for (const a of area) battle.heal(unit, a, heal, { tags: ['skill', 'incantation', 'amiya3:empathy'] });
+      battle.fx('healAoe', { x: unit.x, y: unit.y, id: unit.id, r: 2 });
+    },
+  });
   return {
     skills: lazySkills({
       // bb is the SELECTED skill's blackboard (simdata getChess), so this builder only ever sees S1's own numbers.
-      skchr_amiya3_1: () => ({
-        kind: 'duration',
-        mods: modsOut({ aspd: num(bb.attack_speed) }),
-        ...(grid1 ? { trigger: { rule: 'SKILL_RANGE', grid: grid1 } } : {}),
-        onAttack({ battle, unit }) {
-          const heal = unit.s.atk * num(bb.heal_scale, 0.15);
-          if (!(heal > 0)) return;
-          const area = battle.unitsInGrid(unit, grid1 || [[0, 0]], { side: 'ally' })
-            .filter((a) => a.kind !== 'device' && !(a.s.flags.noHeal || a.profile?.noHeal));
-          if (!area.length) return;
-          for (const a of area) battle.heal(unit, a, heal, { tags: ['skill', 'incantation', 'amiya3:empathy'] });
-          battle.fx('healAoe', { x: unit.x, y: unit.y, id: unit.id, r: 2 });
-        },
-      }),
+      skchr_amiya3_1: buildS1,
+      skx_rhodes_amiya3_1: buildS1,
     }),
     // S2 慈悲愿景 is the chess's default skill (isDefault) → the `skill` spec.
     skill: {

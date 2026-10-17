@@ -83,7 +83,13 @@ export function installFakePixi() {
     drawRect() { return this; } drawCircle() { return this; } drawEllipse() { return this; } drawPolygon() { return this; } drawRoundedRect() { return this; } closePath() { return this; }
     quadraticCurveTo() { return this; } bezierCurveTo() { return this; } arc() { return this; }
   }
-  class Text extends Sprite { constructor(text = '', style = {}) { super(); this.text = text; this.style = style; } }
+  // `updateText` is a real PIXI.Text method (it re-rasterises the glyph canvas); render/textures.js downLabel /
+  // refreshDownLabels call it, so the stand-in needs it too — without it every view test that touches a redeploy ring
+  // (or any shared down label) throws `t.updateText is not a function`.
+  class Text extends Sprite {
+    constructor(text = '', style = {}) { super(); this.text = text; this.style = style; this.resolution = 1; }
+    updateText() { return this; }
+  }
   class BitmapText extends Text {}
   class Matrix { constructor() { this.a = 1; this.b = 0; this.c = 0; this.d = 1; this.tx = 0; this.ty = 0; } set() { return this; } translate() { return this; } scale() { return this; } identity() { return this; } }
   class RenderTexture extends Texture { static create({ width = 1, height = 1 } = {}) { return new RenderTexture(new BaseTexture({ width, height })); } resize() {} }

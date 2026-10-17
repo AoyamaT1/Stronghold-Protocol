@@ -1,0 +1,158 @@
+{
+  "op": 1,
+  "charId": "char_x_limbus_company_sinclair",
+  "name": "辛克莱",
+  "appellation": "Sinclair",
+  "profession": "WARRIOR",
+  "subProfessionId": "centurion",
+  "subProfessionName": "强攻手",
+  "position": "MELEE",
+  "rarity": 5,
+  "as": "both",
+  "chess": {
+    "tier": 1,
+    "bonds": [
+      "limbusShip",
+      "raidShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_limbus_sinclair_a"
+      ],
+      "golden": [
+        "garrison_limbus_sinclair_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1850,
+        "atk": 500,
+        "def": 240,
+        "bat": 1.2,
+        "blockCnt": 2,
+        "cost": 12,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2450,
+        "atk": 600,
+        "def": 420,
+        "bat": 1.2,
+        "blockCnt": 3,
+        "cost": 12,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_limbus_company_sinclair_1",
+      "name": "迫不得已的审判",
+      "duration": 0,
+      "spCost": 7,
+      "initSp": 0,
+      "desc": "下一次攻击的攻击力 +60%，命中施加 120 点灼燃损伤，并使自身获得 1 层【狂信】，每次技能至多 1 层\n开启时失去 7 点【精神值】",
+      "bb": {
+        "atk_pct": 0.6,
+        "sanity": 7,
+        "fanatic": 1
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_sinclair_2",
+      "name": "黑白不分的执行",
+      "duration": 0,
+      "spCost": 30,
+      "initSp": 10,
+      "desc": "下一次攻击进行 2 段斩击，本次攻击力 +90%\n命中每名目标施加 240 点灼燃损伤与 1 层【流血】，两段共结算一次\n开启时失去 10 点【精神值】；持有【狂信】时，本技能物理伤害 +10%",
+      "bb": {
+        "atk_pct": 0.9,
+        "sanity": 10,
+        "hits": 2,
+        "bleed": 1,
+        "fanatic_dmg": 0.1
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_sinclair_3",
+      "name": "自我毁灭的净化",
+      "duration": 0,
+      "spCost": 45,
+      "initSp": 15,
+      "desc": "接下来 3 次攻击的攻击力 +150%，命中施加 360 点灼燃损伤\n目标【流血】达到 5 层时，额外施加 840 点灼燃损伤\n开启时失去 15 点【精神值】；持有【狂信】时，本技能物理伤害 +15%\n本技能攻击击倒敌人后，下一次攻击的攻击力 +20%，不叠加；3 次攻击用尽后结束",
+      "bb": {
+        "atk_pct": 1.5,
+        "sanity": 15,
+        "attacks": 3,
+        "bleed_req": 5,
+        "fanatic_dmg": 0.15,
+        "kill_atk": 0.2
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "狂信",
+      "desc": "累计每失去 15 点【精神值】，获得 1 层【狂信】，至多 3 层；每层使攻击力 +8%",
+      "bb": {
+        "per": 15,
+        "max": 3,
+        "atk": 0.08
+      }
+    },
+    {
+      "index": 1,
+      "name": "自我毁灭",
+      "desc": "攻击力 +18%；【精神值】低于 0 时，攻击速度 +35",
+      "bb": {
+        "atk": 0.18,
+        "neg_aspd": 35
+      }
+    }
+  ],
+  "trait": {
+    "desc": "同时攻击攻击范围内所有地面敌人；命中【流血】目标时，每层流血额外造成攻击力 12% 的物理伤害，至多结算 10 层",
+    "bb": {
+      "all_in_range": 1,
+      "bleed_ratio": 0.12,
+      "bleed_max": 10
+    }
+  },
+  "kit": "generic",
+  "nationId": "limbus",
+  "art": {
+    "ref": "char_limbus_sinclair"
+  }
+}

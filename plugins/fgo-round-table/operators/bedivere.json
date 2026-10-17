@@ -1,0 +1,227 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_bedivere",
+  "name": "贝德维尔",
+  "appellation": "Bedivere",
+  "profession": "SUPPORT",
+  "subProfessionId": "bard",
+  "subProfessionName": "吟游者",
+  "position": "RANGED",
+  "rarity": 5,
+  "as": "both",
+  "chess": {
+    "tier": 2,
+    "bonds": [
+      "roundTable",
+      "deputShip",
+      "preciShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_bedivere_a"
+      ],
+      "golden": [
+        "garrison_fgo_bedivere_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2200,
+        "atk": 580,
+        "def": 230,
+        "bat": 1.5,
+        "blockCnt": 1,
+        "cost": 14,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          -2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -2,
+          0
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2800,
+        "atk": 710,
+        "def": 350,
+        "bat": 1.5,
+        "blockCnt": 1,
+        "cost": 14,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          -2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -2,
+          0
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_bedivere_1",
+      "name": "沉着冷静",
+      "duration": 8,
+      "spCost": 14,
+      "initSp": 10,
+      "desc": "立即回复周围 4 格随机 1 名友方 4 点技力，自身攻击力 +55% 并获得抵抗，持续 8 秒",
+      "bb": {
+        "sp_grant": 4,
+        "atk_pct": 0.55,
+        "buffres": 1
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_bedivere_2",
+      "name": "守护的誓约",
+      "duration": 10,
+      "spCost": 22,
+      "initSp": 12,
+      "desc": "持续 10 秒，周围 8 格所有我方干员防御力 +35%、法术抗性 +15，并清除 1 个异常状态",
+      "bb": {
+        "def_pct": 0.35,
+        "res_add": 15,
+        "cleanse_count": 1
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_bedivere_3",
+      "name": "紧握其剑，银之臂",
+      "duration": 0,
+      "spCost": 24,
+      "initSp": 15,
+      "desc": "对目标打出银臂重拳造成 480% 物理伤害；蓄力状态伤害提升至 720% 且无视 40% 防御力，同时使已激活【圆桌】层数 +2",
+      "bb": {
+        "atk_scale": 4.8,
+        "charge_atk_scale": 7.2,
+        "def_ignore": 0.4,
+        "round_table_layer": 2,
+        "charged": 1
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "执著之心",
+      "desc": "技能未开启时，攻击力 +15%；受到致死伤害时保留 1 点生命值并无敌 2 秒(每场战斗 1 次)",
+      "bb": {
+        "idle_atk_pct": 0.15,
+        "undying_sec": 2
+      }
+    }
+  ],
+  "trait": {
+    "desc": "不攻击，持续恢复范围内所有友军生命(每秒相当于自身攻击力10%的生命)，自身不受鼓舞影响",
+    "bb": {}
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

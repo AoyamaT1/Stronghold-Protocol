@@ -693,6 +693,11 @@ function applyUiVariants() {
   if (VARIANTS.has('collapsed')) clickSel('.funds__collapse', 400);
   // the first tap on a shop card selects it and opens its detail (there is no ⓘ corner)
   if (VARIANTS.has('detail')) clickSel('.shopbar__cards .scard:not(.scard--sold)', 500);
+  // the same, on the FGO round-table servant in the hand (its card face, skill icon and 装备 rows)
+  if (VARIANTS.has('detailfgo')) setTimeout(() => {
+    const cards = [...document.querySelectorAll('.shopbar__cards .scard:not(.scard--sold)')];
+    (cards.find((c) => c.textContent.includes('加雷斯')) || cards[2])?.click();
+  }, 550);
   if (VARIANTS.has('detailpiece')) setTimeout(() => {
     const el = document.querySelector('.ff-piece.is-golden') || document.querySelector('.ff-piece');
     el?.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, clientX: 10, clientY: 10 }));

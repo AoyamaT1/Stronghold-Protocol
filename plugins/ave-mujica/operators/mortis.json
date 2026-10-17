@@ -1,0 +1,121 @@
+{
+  "op": 1,
+  "charId": "char_x_ave_mujica_mortis",
+  "name": "若叶睦",
+  "profession": "SPECIAL",
+  "subProfessionId": "dollkeeper",
+  "position": "MELEE",
+  "rarity": 5,
+  "as": "both",
+  "chess": {
+    "tier": 4,
+    "bonds": [
+      "aveMujicaShip",
+      "indomShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_mortis_a"
+      ],
+      "golden": [
+        "garrison_mortis_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1850,
+        "atk": 620,
+        "def": 260,
+        "bat": 1.2,
+        "blockCnt": 2,
+        "cost": 15,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2650,
+        "atk": 780,
+        "def": 360,
+        "bat": 1.2,
+        "blockCnt": 2,
+        "cost": 15,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_ave_mujica_mortis_1",
+      "name": "多首野兽",
+      "duration": 14,
+      "spCost": 26,
+      "initSp": 10,
+      "desc": "防御力+65%，阻挡数+2，更容易成为敌人的攻击目标；技能期间被击倒后，<替身>也能阻挡敌人且享受技能效果，直到<替身>退场",
+      "bb": {
+        "def": 0.65,
+        "block_cnt": 2,
+        "taunt_level": 1
+      },
+      "default": true
+    },
+    {
+      "skillId": "skx_ave_mujica_mortis_2",
+      "name": "破坏与滋养",
+      "duration": 15,
+      "spCost": 27,
+      "initSp": 7,
+      "desc": "攻击范围扩大，每次攻击变为攻击力75%法术伤害的三连发，随机攻击范围内的目标，每次攻击到敌人时自身受到20点法术伤害",
+      "bb": {
+        "base_attack_time": 0,
+        "attack@atk_scale": 0.75,
+        "value": 20
+      },
+      "default": false
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "另一个“她”",
+      "desc": "替身作战期间攻击力+15%",
+      "bb": {
+        "atk": 0.15
+      }
+    }
+  ],
+  "trait": {
+    "desc": "受到致命伤时不撤退，切换成<替身>作战(替身阻挡数为0)，持续20秒后自身再次替换<替身>"
+  },
+  "kit": "generic",
+  "art": {
+    "ref": "char_4183_mortis"
+  },
+  "nationId": "aveMujica"
+}

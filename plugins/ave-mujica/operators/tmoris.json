@@ -1,0 +1,187 @@
+{
+  "op": 1,
+  "charId": "char_x_ave_mujica_tmoris",
+  "name": "八幡海铃",
+  "profession": "SPECIAL",
+  "subProfessionId": "stalker",
+  "position": "MELEE",
+  "rarity": 5,
+  "as": "both",
+  "chess": {
+    "tier": 3,
+    "bonds": [
+      "aveMujicaShip",
+      "deputShip",
+      "swiftShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_tmoris_a"
+      ],
+      "golden": [
+        "garrison_tmoris_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1650,
+        "atk": 680,
+        "def": 290,
+        "bat": 3.5,
+        "blockCnt": 0,
+        "cost": 19,
+        "res": 30,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2255,
+        "atk": 865,
+        "def": 360,
+        "bat": 3.5,
+        "blockCnt": 0,
+        "cost": 19,
+        "res": 30,
+        "aspd": 105,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_ave_mujica_tmoris_1",
+      "name": "颤栗之弦",
+      "duration": 2.1,
+      "spCost": 5,
+      "initSp": 0,
+      "maxChargeTime": 2,
+      "desc": "发动一次5连击，对攻击范围内的地面敌人每次造成相当于61%攻击力的法术伤害。\n其他Ave Mujica成员开启技能时，额外释放一次\n可充能2次",
+      "bb": {
+        "atk_scale": 0.61,
+        "times": 5
+      },
+      "default": true
+    },
+    {
+      "skillId": "skx_ave_mujica_tmoris_2",
+      "name": "无存之所",
+      "duration": 15,
+      "spCost": 46,
+      "initSp": 20,
+      "desc": "立即使攻击范围内的敌人恐惧1.5秒，每秒对攻击范围内的敌人造成攻击力78%的法术伤害，第一天赋造成停顿的概率提升至1.7倍",
+      "bb": {
+        "attack@atk_scale": 0.78,
+        "attack@interval": 1,
+        "fear": 1.5,
+        "talent_scale": 1.7
+      },
+      "default": false
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "精准雇佣",
+      "desc": "自身获得15%的物理闪避",
+      "bb": {
+        "dodge": 0.15
+      }
+    }
+  ],
+  "trait": {
+    "desc": "对攻击范围内所有敌人造成物理伤害，拥有50%的物理和法术闪避且不容易成为敌人的攻击目标"
+  },
+  "kit": "generic",
+  "art": {
+    "ref": "char_4186_tmoris"
+  },
+  "nationId": "aveMujica"
+}

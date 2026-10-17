@@ -1,0 +1,219 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_percival",
+  "name": "珀西瓦尔",
+  "appellation": "Percival",
+  "profession": "MEDIC",
+  "subProfessionId": "ringhealer",
+  "subProfessionName": "群愈师",
+  "position": "RANGED",
+  "rarity": 5,
+  "as": "both",
+  "chess": {
+    "tier": 3,
+    "bonds": [
+      "roundTable",
+      "steadShip",
+      "miraShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_percival_a"
+      ],
+      "golden": [
+        "garrison_fgo_percival_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2350,
+        "atk": 490,
+        "def": 380,
+        "bat": 1.2,
+        "blockCnt": 1,
+        "cost": 18,
+        "res": 10,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2850,
+        "atk": 680,
+        "def": 520,
+        "bat": 1.2,
+        "blockCnt": 1,
+        "cost": 18,
+        "res": 15,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_percival_1",
+      "name": "圣枪守护",
+      "duration": 6,
+      "spCost": 15,
+      "initSp": 0,
+      "desc": "生命值低于 50% 时立即触发，为周围 8 格生命最低友方回复 220% 攻击力的生命值，且自身防御力 +50%，持续 6 秒",
+      "bb": {
+        "heal_scale": 2.2,
+        "def_pct": 0.5,
+        "duration": 6
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_percival_2",
+      "name": "骑士的礼节",
+      "duration": 10,
+      "spCost": 20,
+      "initSp": 10,
+      "desc": "持续 10 秒，防御力 +85%，阻挡数 +1，每次阻挡敌人时使自身与受保护友方获得 1 层护盾并持续回复生命",
+      "bb": {
+        "def_pct": 0.85,
+        "block_add": 1,
+        "shield_layers": 1,
+        "heal_scale": 2
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_percival_3",
+      "name": "光芒耀眼，圣枪之辉",
+      "duration": 0,
+      "spCost": 28,
+      "initSp": 14,
+      "desc": "向前方 3x3 范围突刺圣枪，造成 4 段共 400% 法术伤害(对巨型或魔生生物提升至 600%)，并治疗周围 8 格友方 260% 攻击力生命",
+      "bb": {
+        "hits": 4,
+        "atk_scale": 1,
+        "beast_atk_scale": 1.5,
+        "heal_scale": 2.6
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "巡礼之护",
+      "desc": "受到攻击时，有 30% 概率回复自身 4% 最大生命",
+      "bb": {
+        "heal_prob": 0.3,
+        "heal_ratio": 0.04
+      }
+    }
+  ],
+  "trait": {
+    "desc": "同时恢复三个友方单位的生命",
+    "bb": {}
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

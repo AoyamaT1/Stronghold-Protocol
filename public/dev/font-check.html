@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>宝具字幕字体对比</title>
+  <style>
+    body { margin: 0; background: #10161a; }
+    #out { position: fixed; right: 4px; bottom: 4px; z-index: 9; color: #7f8; font: 11px monospace; background: #000c; padding: 4px; white-space: pre; }
+  </style>
+</head>
+<body>
+  <pre id="out">boot</pre>
+  <script type="module">
+    // 对比几个候选字体渲染宝具名的效果（Pixi Text，与实际横幅同一条渲染路径），
+    // 并用 document.fonts.check 确认系统字体在浏览器里真的可用。
+    import { ensurePixi } from '/js/render/app/pixi.js';
+
+    const out = document.getElementById('out');
+    const log = (s) => { out.textContent += '\n' + s; };
+    out.textContent = '';
+
+    // 1) 系统字体可用性
+    const faces = ['Noto Sans SC', 'Noto Sans JP', 'Microsoft YaHei', 'SimHei', 'DengXian', 'Source Han Sans SC'];
+    for (const f of faces) {
+      let ok = '?';
+      try { ok = document.fonts.check(`900 26px "${f}"`); } catch (e) { ok = 'ERR'; }
+      log(`check 900 26px "${f}" -> ${ok}`);
+    }
+
+    const Pixi = await ensurePixi();
+    const app = new Pixi.Application({ width: 780, height: 540, backgroundColor: 0x1a2b26, antialias: true });
+    document.body.appendChild(app.view);
+
+    // 战场底纹：证明字要压在复杂背景上也读得清
+    const bg = new Pixi.Graphics();
+    for (let i = 0; i < 8; i++) {
+      bg.beginFill([0x4ed8af, 0xff9c33, 0xe05a5a, 0x6aa9ff][i % 4], 0.5);
+      bg.drawRect(i * 97, 0, 90, 540);
+      bg.endFill();
+    }
+    app.stage.addChild(bg);
+
+    const NP = '誓约胜利之剑';
+    const OP = '阿尔托莉雅';
+
+    const CASES = [
+      ['A 当前 sans-serif 900', 'sans-serif', '900', 0xffe066, 4],
+      ['B Noto Sans SC 900', 'Noto Sans SC', '900', 0xffe066, 4],
+      ['C 思源黑 900 + 8px 粗描边', 'Noto Sans SC', '900', 0xfff4c0, 8],
+      ['D 微软雅黑 700', 'Microsoft YaHei', '700', 0xffe066, 4],
+      ['E 思源黑 900 + 光晕(双层)', 'Noto Sans SC', '900', 0xfff4c0, 8],
+    ];
+
+    CASES.forEach(([label, family, weight, fill, stroke], i) => {
+      const y = 52 + i * 90;
+      // E 行附带一层加粗的金色光晕垫底（FGO 宝具字幕的那种发光感）
+      if (label.startsWith('E')) {
+        const glow = new Pixi.Text(NP, {
+          fontFamily: family, fontSize: 34, fontWeight: weight, fill: 0xffd700,
+          stroke: 0xffd700, strokeThickness: 14, letterSpacing: 4,
+        });
+        glow.anchor.set(0, 0.5);
+        glow.position.set(14, y);
+        glow.alpha = 0.32;
+        app.stage.addChild(glow);
+      }
+      const t = new Pixi.Text(NP, {
+        fontFamily: family, fontSize: 34, fontWeight: weight, fill,
+        stroke: 0x141a22, strokeThickness: stroke, letterSpacing: 4,
+      });
+      t.anchor.set(0, 0.5);
+      t.position.set(14, y);
+      app.stage.addChild(t);
+
+      const lb = new Pixi.Text(label, { fontFamily: 'monospace', fontSize: 12, fill: 0xd8ffe8 });
+      lb.anchor.set(0, 0.5);
+      lb.position.set(420, y);
+      app.stage.addChild(lb);
+    });
+
+    const opLine = new Pixi.Text(OP, {
+      fontFamily: 'Noto Sans SC', fontSize: 17, fontWeight: '900', fill: 0xd4af37,
+      stroke: 0x141a22, strokeThickness: 4, letterSpacing: 2,
+    });
+    opLine.anchor.set(0, 0.5);
+    opLine.position.set(14, 462);
+    app.stage.addChild(opLine);
+
+    log('\nDONE');
+    setTimeout(() => { app.ticker.stop(); document.title = 'FROZEN'; }, 500);
+  </script>
+</body>
+</html>

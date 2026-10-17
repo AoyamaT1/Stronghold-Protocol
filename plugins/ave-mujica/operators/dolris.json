@@ -1,0 +1,210 @@
+{
+  "op": 1,
+  "charId": "char_x_ave_mujica_dolris",
+  "name": "三角初华",
+  "profession": "SUPPORT",
+  "subProfessionId": "bard",
+  "position": "RANGED",
+  "rarity": 5,
+  "as": "both",
+  "chess": {
+    "tier": 5,
+    "bonds": [
+      "aveMujicaShip",
+      "visiShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_dolris_a"
+      ],
+      "golden": [
+        "garrison_dolris_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1200,
+        "atk": 290,
+        "def": 220,
+        "bat": 1.3,
+        "blockCnt": 1,
+        "cost": 7,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          -2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -2,
+          0
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 1692,
+        "atk": 373,
+        "def": 280,
+        "bat": 1.3,
+        "blockCnt": 1,
+        "cost": 7,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          -2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -2,
+          0
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_ave_mujica_dolris_1",
+      "name": "我思念的",
+      "duration": 30,
+      "spCost": 45,
+      "initSp": 21,
+      "desc": "攻击范围扩大，攻击范围内所有友方单位获得相当于三角初华30%攻击力与防御力的鼓舞效果，目标受到伤害时三角初华会为其治疗65点生命",
+      "bb": {
+        "attack@atk": 0.3,
+        "attack@def": 0.3,
+        "attack@heal_value_s1": 64
+      },
+      "default": true
+    },
+    {
+      "skillId": "skx_ave_mujica_dolris_2",
+      "name": "我悲悯的",
+      "duration": 12,
+      "spCost": 37,
+      "initSp": 12,
+      "desc": "技能期间特性不再恢复生命，每0.3秒对攻击范围内随机一名敌人造成相当于攻击力70%的法术伤害并为一名友方治疗相当于攻击力15%的生命；攻击范围内所有其他友方单位获得相当于三角初华80%攻击力的鼓舞效果",
+      "bb": {
+        "attack@atk": 0.8,
+        "interval": 0.3,
+        "attack@atk_scale": 0.7,
+        "attack@heal_scale": 0.15
+      },
+      "default": false
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "谎言的假面",
+      "desc": "范围内友军受到的物理伤害降低10%",
+      "bb": {
+        "def_res": 0.1
+      }
+    }
+  ],
+  "trait": {
+    "desc": "不攻击，持续恢复范围内所有友军生命(每秒恢复相当于自身攻击力10%的生命)，自身不受鼓舞影响"
+  },
+  "kit": "generic",
+  "art": {
+    "ref": "char_4184_dolris"
+  },
+  "nationId": "aveMujica"
+}

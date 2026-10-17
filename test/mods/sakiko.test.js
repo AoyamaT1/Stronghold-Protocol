@@ -3,12 +3,15 @@
 // and deal damage, and the battle stays invariant-clean.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import { makeBattle, enemyRec } from '../helpers/battleHarness.js';
+
+const MUJICA_CHESS = JSON.parse(fs.readFileSync(new URL('../../mods/ave-mujica/data/chess.json', import.meta.url), 'utf-8'));
 
 test('祥子 (chess_char_6_21_a) runs her ported kit: notes fly via steer and deal damage', () => {
   const h = makeBattle({
     seed: 7,
-    defs: { enemies: { enemy_test: enemyRec({ key: 'enemy_test', hp: 200000, def: 300, res: 20, speed: 0.6 }) } },
+    defs: { chess: MUJICA_CHESS, enemies: { enemy_test: enemyRec({ key: 'enemy_test', hp: 200000, def: 300, res: 20, speed: 0.6 }) } },
     units: [{ chessId: 'chess_char_6_21_a', row: 10, col: 4 }],
     enemies: [{ key: 'enemy_test', time: 0, route: 0 }],
   });
@@ -40,7 +43,7 @@ test('祥子 (chess_char_6_21_a) runs her ported kit: notes fly via steer and de
 test('祥子 attack carrier: the arrow deals nothing, the note settles damage + attack SP exactly once', () => {
   const h = makeBattle({
     seed: 3, autoFinish: false, timeLimit: 90, captureNoisy: true, hooks: ['damaged', 'spGain', 'attack'],
-    defs: { enemies: { enemy_dummy: enemyRec({ key: 'enemy_dummy', hp: 1e9, def: 0, res: 0, speed: 0, atk: 0 }) } },
+    defs: { chess: MUJICA_CHESS, enemies: { enemy_dummy: enemyRec({ key: 'enemy_dummy', hp: 1e9, def: 0, res: 0, speed: 0, atk: 0 }) } },
     units: [{ chessId: 'chess_char_6_21_a', row: 10, col: 4 }],
     enemies: [{ key: 'enemy_dummy', pos: [10, 6] }],
   });
@@ -85,7 +88,7 @@ test('祥子天赋二【毋畏遗忘】: Ave Mujica干员重叠时攻击范围�
   // Mortis at [10, 7] has range covering [10, 7] and [10, 8].
   // [10, 7] overlaps Sakiko's range, so Sakiko's range extends to include [10, 8].
   const h = makeBattle({
-    defs: { enemies: { enemy_dummy: enemyRec({ key: 'enemy_dummy', hp: 100000, def: 0, res: 0, speed: 0, atk: 0 }) } },
+    defs: { chess: MUJICA_CHESS, enemies: { enemy_dummy: enemyRec({ key: 'enemy_dummy', hp: 100000, def: 0, res: 0, speed: 0, atk: 0 }) } },
     units: [
       { chessId: 'chess_char_6_21_a', row: 10, col: 4 },
       { chessId: 'chess_char_4_27_a', row: 10, col: 7 },
@@ -115,6 +118,7 @@ test('祥子天赋二【毋畏遗忘】: Ave Mujica干员重叠时攻击范围�
   // Dolris also covers [10, 10], [10, 11], [10, 12].
   // Sakiko's range must transitively extend to Dolris's range tiles!
   const h2 = makeBattle({
+    defs: { chess: MUJICA_CHESS },
     units: [
       { chessId: 'chess_char_6_21_a', row: 10, col: 4 },
       { chessId: 'chess_char_4_27_a', row: 10, col: 7 },
@@ -143,6 +147,7 @@ test('祥子天赋二【毋畏遗忘】: Ave Mujica干员重叠时攻击范围�
 // S3 (残月的余响): Continuous attack fires enhanced notes (2 piano phys + 2 organ arts) even when range is empty.
 test('祥子三技能【残月的余响】: 攻击范围内无敌人时持续攻击仍释放强化音符', () => {
   const h = makeBattle({
+    defs: { chess: MUJICA_CHESS },
     units: [{ chessId: 'chess_char_6_21_a', row: 10, col: 4, loadout: { skillId: 'skchr_oblvns_3' } }],
   });
   h.step();

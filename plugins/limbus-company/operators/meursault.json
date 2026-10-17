@@ -1,0 +1,158 @@
+{
+  "op": 1,
+  "charId": "char_x_limbus_company_meursault",
+  "name": "默尔索",
+  "appellation": "Meursault",
+  "profession": "TANK",
+  "subProfessionId": "unyield",
+  "subProfessionName": "决战者",
+  "position": "MELEE",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 4,
+    "bonds": [
+      "limbusShip",
+      "indomShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_limbus_meursault_a"
+      ],
+      "golden": [
+        "garrison_limbus_meursault_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2600,
+        "atk": 630,
+        "def": 500,
+        "bat": 1.5,
+        "blockCnt": 3,
+        "cost": 22,
+        "res": 15,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2850,
+        "atk": 760,
+        "def": 557,
+        "bat": 1.5,
+        "blockCnt": 3,
+        "cost": 22,
+        "res": 20,
+        "aspd": 105,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_limbus_company_meursault_1",
+      "name": "二连斩-爆",
+      "duration": 0,
+      "spCost": 7,
+      "initSp": 0,
+      "desc": "攻击力 +50%，命中使目标获得 1 级【神经损伤】与 1 级灼燃损伤\n技能攻击时消耗 1 发【虎标弹】，使目标额外获得 2 级【神经损伤】与 2 级灼燃损伤",
+      "bb": {
+        "atk_pct": 0.5,
+        "neural": 1,
+        "burn": 1,
+        "bullet_neural": 2,
+        "bullet_burn": 2
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_meursault_2",
+      "name": "三连击-爆",
+      "duration": 0,
+      "spCost": 32,
+      "initSp": 12,
+      "desc": "一次性进行 3 段攻击，攻击力 +100%，攻击目标数 +1\n每命中目标使其获得 2 级【神经损伤】与 2 级灼燃损伤并消耗 1 发【虎标弹】\n目标【神经损伤】不低于 3 级时将其引爆为麻痹",
+      "bb": {
+        "atk_pct": 1,
+        "hits": 3,
+        "extra_targets": 1,
+        "neural": 2,
+        "burn": 2,
+        "detonate_req": 3
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_meursault_3",
+      "name": "快刀乱麻",
+      "duration": 0,
+      "spCost": 48,
+      "initSp": 20,
+      "desc": "一次性斩击，攻击力 +160%\n根据眼前敌人数量消耗【虎标弹】，每消耗 1 发便多攻击 1 格目标，原本为单体，至多消耗 3 发\n被额外攻击的目标受到的本次伤害提升 50%\n命中使目标获得 3 级【神经损伤】与 3 级灼燃损伤并将其引爆为麻痹\n目标灼燃与【神经损伤】层数之和每 8 级，本技能攻击力额外 +10%，至多 +20%",
+      "bb": {
+        "atk_pct": 1.6,
+        "max_bullets": 3,
+        "neural": 3,
+        "burn": 3,
+        "bone_scale": 8,
+        "bone_cap": 0.2
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "虎标弹",
+      "desc": "进入战斗时持有 12 发【虎标弹】；技能攻击消耗【虎标弹】进行强化：多攻击 1 格目标并使该格伤害提升 50%",
+      "bb": {
+        "bullets": 12,
+        "dmg": 0.5
+      }
+    },
+    {
+      "index": 1,
+      "name": "神经损伤爆发（麻痹）",
+      "desc": "攻击时使目标获得【神经损伤】；目标【神经损伤】层数达到上限时将其引爆为麻痹",
+      "bb": {
+        "neural": 1
+      }
+    }
+  ],
+  "trait": {
+    "desc": "能够阻挡 3 个敌人；对带有【神经损伤】的敌人伤害提升，普通攻击与技能命中叠加【神经损伤】，满层时引爆为麻痹",
+    "bb": {
+      "block": 3,
+      "neural_dmg": 0.2
+    }
+  },
+  "kit": "generic",
+  "nationId": "limbus",
+  "art": {
+    "ref": "char_limbus_meursault"
+  }
+}

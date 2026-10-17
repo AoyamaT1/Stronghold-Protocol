@@ -1,0 +1,151 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_melusine",
+  "name": "美露莘",
+  "appellation": "Melusine",
+  "profession": "SPECIAL",
+  "subProfessionId": "skywalker",
+  "subProfessionName": "巡空者",
+  "position": "MELEE",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 5,
+    "bonds": [
+      "roundTable",
+      "raidShip",
+      "preciShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_melusine_a"
+      ],
+      "golden": [
+        "garrison_fgo_melusine_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2400,
+        "atk": 520,
+        "def": 360,
+        "bat": 1,
+        "blockCnt": 2,
+        "cost": 21,
+        "res": 15,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 3250,
+        "atk": 635,
+        "def": 500,
+        "bat": 1,
+        "blockCnt": 2,
+        "cost": 21,
+        "res": 20,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_melusine_1",
+      "name": "无垢之湖光",
+      "duration": 0,
+      "spCost": 15,
+      "initSp": 8,
+      "desc": "对单体发动 5 段零距离切割，总计造成 380% 法术伤害，自身技力回复速度 +40%，目标受到伤害增加 15%，持续 6 秒",
+      "bb": {
+        "hits": 5,
+        "atk_scale": 0.76,
+        "sp_rec": 0.4,
+        "vuln": 0.15,
+        "debuff_dur": 6
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_melusine_2",
+      "name": "银之脉动",
+      "duration": 14,
+      "spCost": 26,
+      "initSp": 15,
+      "desc": "生命上限 +35%，攻击力 +70%，攻速 +45，暴击率 +50%，暴伤提升至 160%，并使【圆桌】【精准】层数 +4，持续 14 秒",
+      "bb": {
+        "hp_pct": 0.35,
+        "atk_pct": 0.7,
+        "aspd": 45,
+        "crit_rate": 0.5,
+        "crit_dmg": 1.6,
+        "add_layers": 4
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_melusine_3",
+      "name": "无人知晓之无垢鼓动",
+      "duration": 0,
+      "spCost": 32,
+      "initSp": 22,
+      "desc": "首次开启：阿尔比恩龙骸化，永久进入【驭空】起飞状态；后续开启：5 段彩虹激光，总计 720% 法伤 + 450 灼燃",
+      "bb": {
+        "transform": 1,
+        "hits": 5,
+        "atk_scale": 1.44
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "龙之心",
+      "desc": "初始技力 +15；开启技能后获得 25 攻击速度与 20% 物理闪避持续 10 秒",
+      "bb": {
+        "init_sp": 15,
+        "aspd": 25,
+        "dodge": 0.2
+      }
+    }
+  ],
+  "trait": {
+    "desc": "起飞后能够阻挡 2 个飞行敌人",
+    "bb": {}
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

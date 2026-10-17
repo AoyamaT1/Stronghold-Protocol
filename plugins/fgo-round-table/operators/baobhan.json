@@ -1,0 +1,203 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_baobhan",
+  "name": "芭万·希",
+  "appellation": "Baobhan Sith",
+  "profession": "CASTER",
+  "subProfessionId": "witch",
+  "subProfessionName": "巫役",
+  "position": "RANGED",
+  "rarity": 5,
+  "as": "both",
+  "chess": {
+    "tier": 3,
+    "bonds": [
+      "roundTable",
+      "arcaneShip",
+      "swiftShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_baobhan_a"
+      ],
+      "golden": [
+        "garrison_fgo_baobhan_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1550,
+        "atk": 520,
+        "def": 180,
+        "bat": 1.4,
+        "blockCnt": 1,
+        "cost": 16,
+        "res": 15,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2280,
+        "atk": 750,
+        "def": 270,
+        "bat": 1.4,
+        "blockCnt": 1,
+        "cost": 16,
+        "res": 20,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_baobhan_1",
+      "name": "痛苦汲取",
+      "duration": 0,
+      "spCost": 15,
+      "initSp": 8,
+      "desc": "对目标造成 260% 法术伤害并造成 250 点凋亡损伤，回复等量造成的生命值并偷取 4 点技力",
+      "bb": {
+        "atk_scale": 2.6,
+        "sp_drain": 4
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_baobhan_2",
+      "name": "受虐狂热",
+      "duration": 0,
+      "spCost": 24,
+      "initSp": 12,
+      "desc": "使周围 8 格敌人全部沉默 6 秒并减速 50%，友方单位承受 150 点纯粹伤害但攻速 +25、闪避 +35%，持续 8 秒",
+      "bb": {
+        "silence_dur": 6,
+        "slow_pct": 0.5,
+        "aspd_buff": 25,
+        "dodge_buff": 0.35,
+        "dur": 8
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_baobhan_3",
+      "name": "绝叫之血池",
+      "duration": 0,
+      "spCost": 30,
+      "initSp": 18,
+      "desc": "在自身所在位置展开血池 12 秒：池内敌人每秒受到 90% 攻击力的法术伤害(视为凋亡损伤)并被减速 40%",
+      "bb": {
+        "hits": 6,
+        "atk_scale": 0.9,
+        "debuff_mult": 1.4,
+        "sp_grant_on_kill": 3
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "鲜血恩赐",
+      "desc": "对处于凋亡损伤状态的敌人造成的法术伤害提升 25%，且攻击时恢复造成伤害 20% 的生命",
+      "bb": {
+        "bonus_dmg": 0.25,
+        "lifesteal": 0.2
+      }
+    }
+  ],
+  "trait": {
+    "desc": "攻击造成法术伤害",
+    "bb": {}
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

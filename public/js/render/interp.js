@@ -34,6 +34,9 @@
 //       `ammo`   [[id, rounds left, rounds in the magazine]]  → sample().ammo   [left, magazine] | null (whole numbers only)
 //       `wolves` [[id, 狼影 left, the talent's maximum]]      → sample().wolves [left, maximum]  | null
 //       `neg`    [[id, fill]] (0.01–1: the negative-HP pool's share of its cap) → sample().neg  number (0: none)
+//     and two the official effects read (render/vfx/talentfx.js, skillfx.js), the same way:
+//       `layers`  [[id, n]] (the hit-negating 护盾 layers, n ≥ 1)                → sample().layers  number (0: none)
+//       `charges` [[id, stored, maximum]] (a charge skill's stored charges)   → sample().charges [stored, maximum] | null
 //     An entry that is malformed, or names a unit the snapshot does not list, is dropped; a snapshot without the list
 //     clears the readout (render/units.js: the segmented ammo bar, the wolf pips, the red bar of 斩业星熊's 我执).
 //   * `stand` [[id, until]] — the game time an enemy's attack recovery ends (sim atkStandUntil, PR #381): the position
@@ -67,7 +70,7 @@ function movementStart(a, b, id) {
 }
 
 /** Cosmetic event kinds that may be dropped when far behind (never state-changing). */
-export const COSMETIC_EVENTS = new Set(['atk', 'dmg', 'heal', 'fx', 'layer', 'bounty']);
+export const COSMETIC_EVENTS = new Set(['atk', 'dmg', 'heal', 'fx', 'layer', 'bounty', 'cast']);
 /**
  * Whether an event may be dropped when stale or shed from a full queue. An 'fx' that carries an enemy's model `form`
  * (shared/protocol.js fxForm) is state: dropping it left the view on the old model after a long main-thread stall, on a
@@ -117,12 +120,12 @@ export function normalizeSnapshot(snap) {
     }
   }
   const ammo = countList(snap.ammo, units), wolves = countList(snap.wolves, units), coins = countList(snap.coins, units);
-  const resonance = countList(snap.resonance, units);   // 边狱【金枝共鸣】全队池 [n, cap]
-  let sanity = null;
-  if (Array.isArray(snap.sanity)) {
-    for (const e of snap.sanity) {
-      if (!Array.isArray(e) || !units.has(e[0]) || typeof e[1] !== 'number' || !Number.isFinite(e[1])) continue;
-      (sanity || (sanity = new Map())).set(e[0], Math.max(-45, Math.min(45, Math.round(e[1]))));
+  const energy = countList(snap.energy, units), charges = countList(snap.charges, units);
+  let layers = null;
+  if (Array.isArray(snap.layers)) {
+    for (const e of snap.layers) {
+      if (!Array.isArray(e) || !units.has(e[0]) || !Number.isSafeInteger(e[1]) || e[1] < 1) continue;
+      (layers || (layers = new Map())).set(e[0], e[1]);
     }
   }
   let neg = null;
@@ -155,28 +158,12 @@ export function normalizeSnapshot(snap) {
       (standCut || (standCut = new Map())).set(e[0], e[1]);
     }
   }
-  let proj = null;
-  if (Array.isArray(snap.proj)) {
-    for (const p of snap.proj) {
-      if (!Array.isArray(p) || !(typeof p[0] === 'number' || typeof p[0] === 'string')) continue;
-      if (typeof p[1] !== 'number' || typeof p[2] !== 'number' || !Number.isFinite(p[1]) || !Number.isFinite(p[2])) continue;
-      (proj || (proj = [])).push([p[0], p[1], p[2], typeof p[3] === 'string' ? p[3] : 'note']);
-    }
-  }
-  let fever = null;
-  if (Array.isArray(snap.fever)) {
-    for (const f of snap.fever) {
-      if (!Array.isArray(f) || !(typeof f[0] === 'number' || typeof f[0] === 'string')) continue;
-      if (typeof f[1] !== 'number' || !Number.isFinite(f[1])) continue;
-      (fever || (fever = new Map())).set(f[0], clamp(f[1], 0, 100));
-    }
-  }
-  return { t, units, down, ammo, wolves, coins, neg, resonance, sanity, stand, standCut, proj, fever, raw: snap };
+  return { t, units, down, ammo, wolves, coins, energy, charges, layers, neg, stand, standCut, raw: snap };
 }
 
 /**
  * `[[id, left, max]]` → Map id → [left, max] for the ids in `units`: whole numbers with 0 ≤ left ≤ max and max ≥ 1 (the
- * `ammo` and `wolves` lists); null without a valid entry.
+ * `ammo`, `wolves`, `coins` and `energy` lists); null without a valid entry.
  */
 function countList(list, units) {
   if (!Array.isArray(list)) return null;
@@ -361,38 +348,6 @@ export class SnapshotBuffer {
   }
 
   /**
-   * The content-owned projectiles (丰川祥子's 音符, `snap.proj` = [[id, x, y, kind]]) shown at `time`, with x/y
-   * interpolated between the two bracketing snapshots like a unit's (fx/notes.js syncNotes). null when none.
-   */
-  projAt(time = this.renderT) {
-    const s = this.snaps;
-    if (!s.length || !Number.isFinite(time)) return null;
-    let ia = this._indexAt(time);
-    if (ia < 0) ia = 0;
-    const A = s[ia];
-    const a = A.proj;
-    if (!a || !a.length) return null;
-    const B = ia + 1 < s.length ? s[ia + 1] : null;
-    const b = B && B.proj && B.proj.length ? B.proj : null;
-    const span = B ? B.t - A.t : 0;
-    const alpha = b && span > 0 ? clamp((time - A.t) / span, 0, 1) : 0;
-    if (!b || alpha <= 0) return a;
-    if (alpha >= 1) return b;
-    const map = this._projIdx || (this._projIdx = new Map());
-    map.clear();
-    for (const p of b) map.set(p[0], p);
-    const out = [];
-    for (const p of a) {
-      const q = map.get(p[0]);
-      if (!q) { out.push(p); continue; }
-      const dx = q[1] - p[1], dy = q[2] - p[2];
-      if (dx * dx + dy * dy > this.teleport * this.teleport) { out.push(q); continue; }
-      out.push([p[0], p[1] + dx * alpha, p[2] + dy * alpha, q[3]]);
-    }
-    return out;
-  }
-
-  /**
    * Interpolated state at `time` (default renderT). Fills and returns `out` (a Map id → sample object reused
    * across calls: `{ id, x, y, hp, maxHp, sp, spMax, flags, anim, vx, vy, seen, el, elFill, elUntil, elDur, ammo, wolves,
    * neg }` — `el` = the shown element gauge (null: none), `ammo` / `wolves` / `neg` the HP-bar readouts (null / null / 0:
@@ -459,9 +414,10 @@ export class SnapshotBuffer {
       o.ammo = A.ammo ? A.ammo.get(id) || null : null;
       o.wolves = A.wolves ? A.wolves.get(id) || null : null;
       o.coins = A.coins?.get(id) ?? null;
+      o.energy = A.energy?.get(id) ?? null;
+      o.charges = A.charges?.get(id) ?? null;
+      o.layers = A.layers?.get(id) ?? 0;
       o.neg = A.neg ? A.neg.get(id) || 0 : 0;
-      o.resonance = A.resonance ? A.resonance.get(id) || null : null;
-      o.sanity = A.sanity ? (A.sanity.has(id) ? A.sanity.get(id) : null) : null;
       o.seen = stamp;
     }
     for (const id of out.keys()) if (!A.units.has(id)) out.delete(id);

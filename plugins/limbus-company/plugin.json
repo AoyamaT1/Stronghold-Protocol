@@ -1,0 +1,38 @@
+{
+  "$schema": "../../schemas/plugin.schema.json",
+  "manifest": 2,
+  "id": "limbus-company",
+  "name": "边狱公司干员组 (12罪人全员集结)",
+  "englishName": "Limbus Company Operators",
+  "version": "1.0.0",
+  "app": ">=0.3.0 <0.4.0",
+  "api": 1,
+  "class": "content",
+  "scope": [
+    "room"
+  ],
+  "authors": [
+    "ruka"
+  ],
+  "license": "CC-BY-4.0",
+  "optional": {
+    "limbus-look": ">=1.0.0"
+  },
+  "permissions": [
+    "data.add"
+  ],
+  "operators": [
+    "operators/yisang.json",
+    "operators/sinclair.json",
+    "operators/faust.json",
+    "operators/ishmael.json",
+    "operators/rodion.json",
+    "operators/heathcliff.json",
+    "operators/meursault.json",
+    "operators/honglu.json",
+    "operators/ryoshu.json",
+    "operators/outis.json",
+    "operators/donquixote.json",
+    "operators/gregor.json"
+  ]
+}

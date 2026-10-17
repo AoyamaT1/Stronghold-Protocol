@@ -5586,626 +5586,6 @@
       "chess_char_6_17_b"
     ]
   },
-  "garrison_limbus_yisang_a": {
-    "garrisonId": "garrison_limbus_yisang_a",
-    "eventType": "SERVER_GAIN",
-    "effectType": "SERVER_ADD_BOND_METHOD",
-    "effectKey": "SERVER_ADD_BOND_METHOD",
-    "desc": "<获得时>获得等于当前调度中心等级的【边狱公司】层数（无需激活盟约）",
-    "bb": {
-      "multi": 1
-    },
-    "bbStr": {
-      "add_method": "shoplv",
-      "bond": "limbusShip"
-    },
-    "descRaw": "<获得时>获得等于当前调度中心等级的【边狱公司】层数（无需激活盟约）"
-  },
-  "garrison_limbus_yisang_b": {
-    "garrisonId": "garrison_limbus_yisang_b",
-    "eventType": "SERVER_GAIN",
-    "effectType": "SERVER_ADD_BOND_METHOD",
-    "effectKey": "SERVER_ADD_BOND_METHOD",
-    "desc": "<获得时>获得等于当前调度中心等级的【边狱公司】层数（无需激活盟约）",
-    "bb": {
-      "multi": 2
-    },
-    "bbStr": {
-      "add_method": "shoplv",
-      "bond": "limbusShip"
-    },
-    "descRaw": "<获得时>获得等于当前调度中心等级的【边狱公司】层数（无需激活盟约）"
-  },
-  "garrison_limbus_sinclair_a": {
-    "garrisonId": "garrison_limbus_sinclair_a",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_eff_attrByBond",
-    "effectKey": "act1autochess_gar_eff_attrByBond",
-    "desc": "【边狱公司】每叠加 3 层，本干员攻击力 +1%",
-    "bb": {
-      "divide_num": 3,
-      "atk": 0.01
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_eff_attrByBond",
-      "bond_id": "limbusShip"
-    },
-    "descRaw": "【边狱公司】每叠加 3 层，本干员攻击力 +1%"
-  },
-  "garrison_limbus_sinclair_b": {
-    "garrisonId": "garrison_limbus_sinclair_b",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_eff_attrByBond",
-    "effectKey": "act1autochess_gar_eff_attrByBond",
-    "desc": "【边狱公司】每叠加 3 层，本干员攻击力 +2%",
-    "bb": {
-      "divide_num": 3,
-      "atk": 0.02
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_eff_attrByBond",
-      "bond_id": "limbusShip"
-    },
-    "descRaw": "【边狱公司】每叠加 3 层，本干员攻击力 +2%"
-  },
-  "garrison_amoris_a": {
-    "garrisonId": "garrison_amoris_a",
-    "desc": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 1 名不高于当前调度中心等级的【Ave Mujica】干员",
-    "descRaw": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 1 名不高于当前调度中心等级的【Ave Mujica】干员",
-    "eventType": "SERVER_PREP_START",
-    "eventTypeDesc": "整备能力",
-    "eventTypeIcon": "icon_gold",
-    "effectType": "modautochess_gar_prep_gain_chess_by_bond",
-    "effectKey": "modautochess_gar_prep_gain_chess_by_bond",
-    "battleRuneKey": null,
-    "charLevel": 0,
-    "bb": {
-      "count": 1
-    },
-    "bbStr": {
-      "bond": "aveMujicaShip",
-      "tier": "shoplv",
-      "conditionkey": "character_target_inboard"
-    },
-    "owners": [
-      "chess_char_2_20_a"
-    ]
-  },
-  "garrison_amoris_b": {
-    "garrisonId": "garrison_amoris_b",
-    "desc": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 2 名不高于当前调度中心等级的【Ave Mujica】干员",
-    "descRaw": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 2 名不高于当前调度中心等级的【Ave Mujica】干员",
-    "eventType": "SERVER_PREP_START",
-    "eventTypeDesc": "整备能力",
-    "eventTypeIcon": "icon_gold",
-    "effectType": "modautochess_gar_prep_gain_chess_by_bond",
-    "effectKey": "modautochess_gar_prep_gain_chess_by_bond",
-    "battleRuneKey": null,
-    "charLevel": 0,
-    "bb": {
-      "count": 2
-    },
-    "bbStr": {
-      "bond": "aveMujicaShip",
-      "tier": "shoplv",
-      "conditionkey": "character_target_inboard"
-    },
-    "owners": [
-      "chess_char_2_20_b"
-    ]
-  },
-  "garrison_tmoris_a": {
-    "garrisonId": "garrison_tmoris_a",
-    "desc": "<进入休整期时>若上场作战，额外获得1资金，并使已激活的【Ave Mujica】层数+2",
-    "descRaw": "<进入休整期时>若上场作战，额外获得<@ba.vup>1</>资金，并使已激活的【Ave Mujica】层数<@ba.vup>+2</>",
-    "eventType": "SERVER_PREP_START",
-    "eventTypeDesc": "整备能力",
-    "eventTypeIcon": "icon_gold",
-    "effectType": "SERVER_ONCE_GOLD_AND_BOND",
-    "effectKey": "SERVER_ONCE_GOLD_AND_BOND",
-    "battleRuneKey": null,
-    "charLevel": 0,
-    "bb": {
-      "gold": 1,
-      "count": 2
-    },
-    "bbStr": {
-      "bond": "aveMujicaShip",
-      "conditionkey": "character_target_inboard"
-    },
-    "owners": [
-      "chess_char_3_22_a"
-    ]
-  },
-  "garrison_tmoris_b": {
-    "garrisonId": "garrison_tmoris_b",
-    "desc": "<进入休整期时>若上场作战，额外获得2资金，并使已激活的【Ave Mujica】层数+4",
-    "descRaw": "<进入休整期时>若上场作战，额外获得<@ba.vup>2</>资金，并使已激活的【Ave Mujica】层数<@ba.vup>+4</>",
-    "eventType": "SERVER_PREP_START",
-    "eventTypeDesc": "整备能力",
-    "eventTypeIcon": "icon_gold",
-    "effectType": "SERVER_ONCE_GOLD_AND_BOND",
-    "effectKey": "SERVER_ONCE_GOLD_AND_BOND",
-    "battleRuneKey": null,
-    "charLevel": 0,
-    "bb": {
-      "gold": 2,
-      "count": 4
-    },
-    "bbStr": {
-      "bond": "aveMujicaShip",
-      "conditionkey": "character_target_inboard"
-    },
-    "owners": [
-      "chess_char_3_22_b"
-    ]
-  },
-  "garrison_mortis_a": {
-    "garrisonId": "garrison_mortis_a",
-    "desc": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数+5、【不屈】层数+5",
-    "descRaw": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数<@ba.vup>+5</>、【不屈】层数<@ba.vup>+5</>",
-    "eventType": "IN_BATTLE",
-    "eventTypeDesc": "持续叠加",
-    "eventTypeIcon": "icon_bond",
-    "effectType": "ADD_BOND",
-    "effectKey": "act1autochess_gar_event_selfdead",
-    "battleRuneKey": "env_gbuff_new_with_verify",
-    "charLevel": 0,
-    "bb": {
-      "bond_add_count": 5
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_selfdead",
-      "bond_type": "bond_by_id",
-      "bond_id": "aveMujicaShip,indomShip",
-      "bond_add_type": "by_count"
-    },
-    "owners": [
-      "chess_char_4_27_a"
-    ]
-  },
-  "garrison_mortis_b": {
-    "garrisonId": "garrison_mortis_b",
-    "desc": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数+10、【不屈】层数+10",
-    "descRaw": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数<@ba.vup>+10</>、【不屈】层数<@ba.vup>+10</>",
-    "eventType": "IN_BATTLE",
-    "eventTypeDesc": "持续叠加",
-    "eventTypeIcon": "icon_bond",
-    "effectType": "ADD_BOND",
-    "effectKey": "act1autochess_gar_event_selfdead",
-    "battleRuneKey": "env_gbuff_new_with_verify",
-    "charLevel": 0,
-    "bb": {
-      "bond_add_count": 10
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_selfdead",
-      "bond_type": "bond_by_id",
-      "bond_id": "aveMujicaShip,indomShip",
-      "bond_add_type": "by_count"
-    },
-    "owners": [
-      "chess_char_4_27_b"
-    ]
-  },
-  "garrison_dolris_a": {
-    "garrisonId": "garrison_dolris_a",
-    "desc": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数+1",
-    "descRaw": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数<@ba.vup>+1</>",
-    "eventType": "IN_BATTLE",
-    "eventTypeDesc": "持续叠加",
-    "eventTypeIcon": "icon_bond",
-    "effectType": "ADD_BOND",
-    "effectKey": "act1autochess_gar_event_allykillenemy",
-    "battleRuneKey": "env_gbuff_new_with_verify",
-    "charLevel": 0,
-    "bb": {
-      "bond_add_count": 1
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_allykillenemy",
-      "bond_type": "bond_by_id",
-      "bond_id": "aveMujicaShip",
-      "bond_add_type": "by_count"
-    },
-    "owners": [
-      "chess_char_5_24_a"
-    ]
-  },
-  "garrison_dolris_b": {
-    "garrisonId": "garrison_dolris_b",
-    "desc": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数+2",
-    "descRaw": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数<@ba.vup>+2</>",
-    "eventType": "IN_BATTLE",
-    "eventTypeDesc": "持续叠加",
-    "eventTypeIcon": "icon_bond",
-    "effectType": "ADD_BOND",
-    "effectKey": "act1autochess_gar_event_allykillenemy",
-    "battleRuneKey": "env_gbuff_new_with_verify",
-    "charLevel": 0,
-    "bb": {
-      "bond_add_count": 2
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_allykillenemy",
-      "bond_type": "bond_by_id",
-      "bond_id": "aveMujicaShip",
-      "bond_add_type": "by_count"
-    },
-    "owners": [
-      "chess_char_5_24_b"
-    ]
-  },
-  "garrison_oblvns_a": {
-    "garrisonId": "garrison_oblvns_a",
-    "desc": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数+6",
-    "descRaw": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数<@ba.vup>+6</>",
-    "eventType": "IN_BATTLE",
-    "eventTypeDesc": "持续叠加",
-    "eventTypeIcon": "icon_bond",
-    "effectType": "ADD_BOND",
-    "effectKey": "act1autochess_gar_event_useskill",
-    "battleRuneKey": "env_gbuff_new_with_verify",
-    "charLevel": 0,
-    "bb": {
-      "bond_add_count": 6
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_useskill",
-      "bond_type": "bond_by_id",
-      "bond_id": "aveMujicaShip",
-      "bond_add_type": "by_count"
-    },
-    "owners": [
-      "chess_char_6_21_a"
-    ]
-  },
-  "garrison_oblvns_b": {
-    "garrisonId": "garrison_oblvns_b",
-    "desc": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数+12",
-    "descRaw": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数<@ba.vup>+12</>",
-    "eventType": "IN_BATTLE",
-    "eventTypeDesc": "持续叠加",
-    "eventTypeIcon": "icon_bond",
-    "effectType": "ADD_BOND",
-    "effectKey": "act1autochess_gar_event_useskill",
-    "battleRuneKey": "env_gbuff_new_with_verify",
-    "charLevel": 0,
-    "bb": {
-      "bond_add_count": 12
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_useskill",
-      "bond_type": "bond_by_id",
-      "bond_id": "aveMujicaShip",
-      "bond_add_type": "by_count"
-    },
-    "owners": [
-      "chess_char_6_21_b"
-    ]
-  },
-  "garrison_limbus_faust_a": {
-    "garrisonId": "garrison_limbus_faust_a",
-    "eventType": "SERVER_GAIN",
-    "effectType": "SERVER_ONCE_GOLD",
-    "effectKey": "SERVER_ONCE_GOLD",
-    "desc": "<获得时>使下个休整期额外获得 2 资金",
-    "bb": {
-      "count": 2
-    },
-    "bbStr": {},
-    "descRaw": "<获得时>使下个休整期额外获得 2 资金"
-  },
-  "garrison_limbus_faust_b": {
-    "garrisonId": "garrison_limbus_faust_b",
-    "eventType": "SERVER_GAIN",
-    "effectType": "SERVER_ONCE_GOLD",
-    "effectKey": "SERVER_ONCE_GOLD",
-    "desc": "<获得时>使下个休整期额外获得 4 资金",
-    "bb": {
-      "count": 4
-    },
-    "bbStr": {},
-    "descRaw": "<获得时>使下个休整期额外获得 4 资金"
-  },
-  "garrison_limbus_rodion_a": {
-    "garrisonId": "garrison_limbus_rodion_a",
-    "eventType": "SERVER_GAIN",
-    "effectType": "SERVER_ADD_BOND",
-    "effectKey": "SERVER_ADD_BOND",
-    "desc": "<获得时>【边狱公司】层数 +5（无需激活盟约）",
-    "bb": {
-      "count": 5
-    },
-    "bbStr": {
-      "bond": "limbusShip"
-    },
-    "descRaw": "<获得时>【边狱公司】层数 +5（无需激活盟约）"
-  },
-  "garrison_limbus_rodion_b": {
-    "garrisonId": "garrison_limbus_rodion_b",
-    "eventType": "SERVER_GAIN",
-    "effectType": "SERVER_ADD_BOND",
-    "effectKey": "SERVER_ADD_BOND",
-    "desc": "<获得时>【边狱公司】层数 +10（无需激活盟约）",
-    "bb": {
-      "count": 10
-    },
-    "bbStr": {
-      "bond": "limbusShip"
-    },
-    "descRaw": "<获得时>【边狱公司】层数 +10（无需激活盟约）"
-  },
-  "garrison_limbus_donquixote_a": {
-    "garrisonId": "garrison_limbus_donquixote_a",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_event_bondmate_skillkill",
-    "effectKey": "act1autochess_gar_event_bondmate_skillkill",
-    "desc": "<战斗中>每有一名【边狱公司】干员使用技能击杀一名敌人，使已激活的【边狱公司】层数 +1",
-    "bb": {
-      "bond_add_count": 1
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_bondmate_skillkill",
-      "bond_type": "bond_by_id",
-      "bond_id": "limbusShip",
-      "bond_add_type": "by_count"
-    },
-    "descRaw": "<战斗中>每有一名【边狱公司】干员使用技能击杀一名敌人，使已激活的【边狱公司】层数 +1"
-  },
-  "garrison_limbus_donquixote_b": {
-    "garrisonId": "garrison_limbus_donquixote_b",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_event_bondmate_skillkill",
-    "effectKey": "act1autochess_gar_event_bondmate_skillkill",
-    "desc": "<战斗中>每有一名【边狱公司】干员使用技能击杀一名敌人，使已激活的【边狱公司】层数 +2",
-    "bb": {
-      "bond_add_count": 2
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_bondmate_skillkill",
-      "bond_type": "bond_by_id",
-      "bond_id": "limbusShip",
-      "bond_add_type": "by_count"
-    },
-    "descRaw": "<战斗中>每有一名【边狱公司】干员使用技能击杀一名敌人，使已激活的【边狱公司】层数 +2"
-  },
-  "garrison_limbus_meursault_a": {
-    "garrisonId": "garrison_limbus_meursault_a",
-    "eventType": "SERVER_GAIN",
-    "effectType": "SERVER_SUMMON_BOND_CHESS",
-    "effectKey": "SERVER_SUMMON_BOND_CHESS",
-    "desc": "<获得时>召唤一名【边狱公司】干员（不超过 4 阶），该效果每回合最多触发一次",
-    "bb": {
-      "count": 1,
-      "max_tier": 4
-    },
-    "bbStr": {
-      "bond": "limbusShip",
-      "once_per_round": "1"
-    },
-    "descRaw": "<获得时>召唤一名【边狱公司】干员（不超过 4 阶），该效果每回合最多触发一次"
-  },
-  "garrison_limbus_meursault_b": {
-    "garrisonId": "garrison_limbus_meursault_b",
-    "eventType": "SERVER_GAIN",
-    "effectType": "SERVER_SUMMON_BOND_CHESS",
-    "effectKey": "SERVER_SUMMON_BOND_CHESS",
-    "desc": "<获得时>召唤一名【边狱公司】干员（不超过 4 阶），该效果每回合最多触发一次",
-    "bb": {
-      "count": 1,
-      "max_tier": 4
-    },
-    "bbStr": {
-      "bond": "limbusShip",
-      "once_per_round": "1"
-    },
-    "descRaw": "<获得时>召唤一名【边狱公司】干员（不超过 4 阶），该效果每回合最多触发一次"
-  },
-  "garrison_limbus_ishmael_a": {
-    "garrisonId": "garrison_limbus_ishmael_a",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_event_selfkillenemy",
-    "effectKey": "act1autochess_gar_event_selfkillenemy",
-    "desc": "<战斗中>每击倒 2 名单位时，使已激活的【边狱公司】层数 +1",
-    "bb": {
-      "check_cnt": 2,
-      "bond_add_count": 1
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_selfkillenemy",
-      "bond_type": "bond_by_id",
-      "bond_id": "limbusShip",
-      "bond_add_type": "by_count"
-    },
-    "descRaw": "<战斗中>每击倒 2 名单位时，使已激活的【边狱公司】层数 +1"
-  },
-  "garrison_limbus_ishmael_b": {
-    "garrisonId": "garrison_limbus_ishmael_b",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_event_selfkillenemy",
-    "effectKey": "act1autochess_gar_event_selfkillenemy",
-    "desc": "<战斗中>每击倒 1 名单位时，使已激活的【边狱公司】层数 +1",
-    "bb": {
-      "check_cnt": 1,
-      "bond_add_count": 1
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_selfkillenemy",
-      "bond_type": "bond_by_id",
-      "bond_id": "limbusShip",
-      "bond_add_type": "by_count"
-    },
-    "descRaw": "<战斗中>每击倒 1 名单位时，使已激活的【边狱公司】层数 +1"
-  },
-  "garrison_limbus_ryoshu_a": {
-    "garrisonId": "garrison_limbus_ryoshu_a",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_event_selfkillenemy",
-    "effectKey": "act1autochess_gar_event_selfkillenemy",
-    "desc": "<战斗中>每使用技能击杀一名敌人，使自身已激活的盟约层数 +3（每场作战至多 15 层）",
-    "bb": {
-      "check_cnt": 1,
-      "bond_add_count": 3,
-      "max_add_count_per_battle": 15
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_selfkillenemy",
-      "bond_type": "bond_self",
-      "bond_add_type": "by_count"
-    },
-    "descRaw": "<战斗中>每使用技能击杀一名敌人，使自身已激活的盟约层数 +3（每场作战至多 15 层）"
-  },
-  "garrison_limbus_ryoshu_b": {
-    "garrisonId": "garrison_limbus_ryoshu_b",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_event_selfkillenemy",
-    "effectKey": "act1autochess_gar_event_selfkillenemy",
-    "desc": "<战斗中>每使用技能击杀一名敌人，使自身已激活的盟约层数 +6（每场作战至多 30 层）",
-    "bb": {
-      "check_cnt": 1,
-      "bond_add_count": 6,
-      "max_add_count_per_battle": 30
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_selfkillenemy",
-      "bond_type": "bond_self",
-      "bond_add_type": "by_count"
-    },
-    "descRaw": "<战斗中>每使用技能击杀一名敌人，使自身已激活的盟约层数 +6（每场作战至多 30 层）"
-  },
-  "garrison_limbus_outis_a": {
-    "garrisonId": "garrison_limbus_outis_a",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_event_frontunit_useskill",
-    "effectKey": "act1autochess_gar_event_frontunit_useskill",
-    "desc": "<战斗中>身前一格的友方干员每使用一次技能，使当前激活且层数最高的盟约层数 +2（每场作战至多 12 层）",
-    "bb": {
-      "bond_add_count": 2,
-      "max_add_count_per_battle": 12
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_frontunit_useskill",
-      "bond_type": "bond_actived_maxstack"
-    },
-    "descRaw": "<战斗中>身前一格的友方干员每使用一次技能，使当前激活且层数最高的盟约层数 +2（每场作战至多 12 层）"
-  },
-  "garrison_limbus_outis_b": {
-    "garrisonId": "garrison_limbus_outis_b",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_event_frontunit_useskill",
-    "effectKey": "act1autochess_gar_event_frontunit_useskill",
-    "desc": "<战斗中>身前一格的友方干员每使用一次技能，使当前激活且层数最高的盟约层数 +2（每场作战至多 24 层）",
-    "bb": {
-      "bond_add_count": 2,
-      "max_add_count_per_battle": 24
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_frontunit_useskill",
-      "bond_type": "bond_actived_maxstack"
-    },
-    "descRaw": "<战斗中>身前一格的友方干员每使用一次技能，使当前激活且层数最高的盟约层数 +2（每场作战至多 24 层）"
-  },
-  "garrison_limbus_heathcliff_a": {
-    "garrisonId": "garrison_limbus_heathcliff_a",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_event_useskill",
-    "effectKey": "act1autochess_gar_event_useskill",
-    "desc": "<战斗中>首次开启技能时，使已激活的【边狱公司】层数 +5",
-    "bb": {
-      "bond_add_count": 5,
-      "max_add_count_per_battle": 5
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_useskill",
-      "bond_type": "bond_by_id",
-      "bond_id": "limbusShip",
-      "bond_add_type": "by_count",
-      "garrison_key": "garrison_limbus_heathcliff_a"
-    },
-    "descRaw": "<战斗中>首次开启技能时，使已激活的【边狱公司】层数 +5"
-  },
-  "garrison_limbus_heathcliff_b": {
-    "garrisonId": "garrison_limbus_heathcliff_b",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_event_useskill",
-    "effectKey": "act1autochess_gar_event_useskill",
-    "desc": "<战斗中>首次开启技能时，使已激活的【边狱公司】层数 +8",
-    "bb": {
-      "bond_add_count": 8,
-      "max_add_count_per_battle": 8
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_event_useskill",
-      "bond_type": "bond_by_id",
-      "bond_id": "limbusShip",
-      "bond_add_type": "by_count",
-      "garrison_key": "garrison_limbus_heathcliff_b"
-    },
-    "descRaw": "<战斗中>首次开启技能时，使已激活的【边狱公司】层数 +8"
-  },
-  "garrison_limbus_honglu_a": {
-    "garrisonId": "garrison_limbus_honglu_a",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_eff_attrByBond",
-    "effectKey": "act1autochess_gar_eff_attrByBond",
-    "desc": "攻击力和生命值 +20%；【边狱公司】每叠加 3 层，本干员攻击力和生命值 +1%",
-    "bb": {
-      "divide_num": 3,
-      "atk": 0.01,
-      "max_hp": 0.01
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_eff_attrByBond",
-      "bond_id": "limbusShip"
-    },
-    "descRaw": "攻击力和生命值 +20%；【边狱公司】每叠加 3 层，本干员攻击力和生命值 +1%"
-  },
-  "garrison_limbus_honglu_b": {
-    "garrisonId": "garrison_limbus_honglu_b",
-    "eventType": "IN_BATTLE",
-    "effectType": "act1autochess_gar_eff_attrByBond",
-    "effectKey": "act1autochess_gar_eff_attrByBond",
-    "desc": "攻击力和生命值 +20%；【边狱公司】每叠加 3 层，本干员攻击力和生命值 +2%",
-    "bb": {
-      "divide_num": 3,
-      "atk": 0.02,
-      "max_hp": 0.02
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_eff_attrByBond",
-      "bond_id": "limbusShip"
-    },
-    "descRaw": "攻击力和生命值 +20%；【边狱公司】每叠加 3 层，本干员攻击力和生命值 +2%"
-  },
-  "garrison_limbus_gregor_a": {
-    "garrisonId": "garrison_limbus_gregor_a",
-    "eventType": "SERVER_PREP_START",
-    "effectType": "SERVER_ADD_BOND_BY_RANGE_UNITS",
-    "effectKey": "SERVER_ADD_BOND_BY_RANGE_UNITS",
-    "desc": "<休整期开始时>自身攻击范围内每有一名其他干员，使【边狱公司】层数 +3（无需激活盟约）",
-    "bb": {
-      "count": 3
-    },
-    "bbStr": {
-      "bond_id": "limbusShip"
-    },
-    "descRaw": "<休整期开始时>自身攻击范围内每有一名其他干员，使【边狱公司】层数 +3（无需激活盟约）"
-  },
-  "garrison_limbus_gregor_b": {
-    "garrisonId": "garrison_limbus_gregor_b",
-    "eventType": "SERVER_PREP_START",
-    "effectType": "SERVER_ADD_BOND_BY_RANGE_UNITS",
-    "effectKey": "SERVER_ADD_BOND_BY_RANGE_UNITS",
-    "desc": "<休整期开始时>自身攻击范围内每有一名其他干员，使【边狱公司】层数 +3（无需激活盟约）",
-    "bb": {
-      "count": 3
-    },
-    "bbStr": {
-      "bond_id": "limbusShip"
-    },
-    "descRaw": "<休整期开始时>自身攻击范围内每有一名其他干员，使【边狱公司】层数 +3（无需激活盟约）"
-  },
   "garrison_rhodes_logos_a": {
     "garrisonId": "garrison_rhodes_logos_a",
     "desc": "【罗德岛】【奥术】每叠加3层，本干员攻击力+2%",
@@ -6484,6 +5864,1256 @@
     },
     "owners": [
       "chess_rhodes_monstr_b"
+    ]
+  },
+  "garrison_amoris_a": {
+    "garrisonId": "garrison_amoris_a",
+    "desc": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 1 名不高于当前调度中心等级的【Ave Mujica】干员",
+    "descRaw": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 1 名不高于当前调度中心等级的【Ave Mujica】干员",
+    "eventType": "SERVER_PREP_START",
+    "eventTypeDesc": "整备能力",
+    "eventTypeIcon": "icon_gold",
+    "effectType": "modautochess_gar_prep_gain_chess_by_bond",
+    "effectKey": "modautochess_gar_prep_gain_chess_by_bond",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 1
+    },
+    "bbStr": {
+      "bond": "aveMujicaShip",
+      "tier": "shoplv",
+      "conditionkey": "character_target_inboard"
+    },
+    "owners": [
+      "chess_char_2_20_a"
+    ]
+  },
+  "garrison_amoris_b": {
+    "garrisonId": "garrison_amoris_b",
+    "desc": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 2 名不高于当前调度中心等级的【Ave Mujica】干员",
+    "descRaw": "<进入休整期时>若已激活【Ave Mujica】盟约，获得 2 名不高于当前调度中心等级的【Ave Mujica】干员",
+    "eventType": "SERVER_PREP_START",
+    "eventTypeDesc": "整备能力",
+    "eventTypeIcon": "icon_gold",
+    "effectType": "modautochess_gar_prep_gain_chess_by_bond",
+    "effectKey": "modautochess_gar_prep_gain_chess_by_bond",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "aveMujicaShip",
+      "tier": "shoplv",
+      "conditionkey": "character_target_inboard"
+    },
+    "owners": [
+      "chess_char_2_20_b"
+    ]
+  },
+  "garrison_tmoris_a": {
+    "garrisonId": "garrison_tmoris_a",
+    "desc": "<进入休整期时>若上场作战，额外获得1资金，并使已激活的【Ave Mujica】层数+2",
+    "descRaw": "<进入休整期时>若上场作战，额外获得<@ba.vup>1</>资金，并使已激活的【Ave Mujica】层数<@ba.vup>+2</>",
+    "eventType": "SERVER_PREP_START",
+    "eventTypeDesc": "整备能力",
+    "eventTypeIcon": "icon_gold",
+    "effectType": "SERVER_ONCE_GOLD_AND_BOND",
+    "effectKey": "SERVER_ONCE_GOLD_AND_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "gold": 1,
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "aveMujicaShip",
+      "conditionkey": "character_target_inboard"
+    },
+    "owners": [
+      "chess_char_3_22_a"
+    ]
+  },
+  "garrison_tmoris_b": {
+    "garrisonId": "garrison_tmoris_b",
+    "desc": "<进入休整期时>若上场作战，额外获得2资金，并使已激活的【Ave Mujica】层数+4",
+    "descRaw": "<进入休整期时>若上场作战，额外获得<@ba.vup>2</>资金，并使已激活的【Ave Mujica】层数<@ba.vup>+4</>",
+    "eventType": "SERVER_PREP_START",
+    "eventTypeDesc": "整备能力",
+    "eventTypeIcon": "icon_gold",
+    "effectType": "SERVER_ONCE_GOLD_AND_BOND",
+    "effectKey": "SERVER_ONCE_GOLD_AND_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "gold": 2,
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "aveMujicaShip",
+      "conditionkey": "character_target_inboard"
+    },
+    "owners": [
+      "chess_char_3_22_b"
+    ]
+  },
+  "garrison_mortis_a": {
+    "garrisonId": "garrison_mortis_a",
+    "desc": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数+5、【不屈】层数+5",
+    "descRaw": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数<@ba.vup>+5</>、【不屈】层数<@ba.vup>+5</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_selfdead",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 5
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_selfdead",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip,indomShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_4_27_a"
+    ]
+  },
+  "garrison_mortis_b": {
+    "garrisonId": "garrison_mortis_b",
+    "desc": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数+10、【不屈】层数+10",
+    "descRaw": "<战斗中>自身被击倒或替身与本体进行切换时，使已激活的【Ave Mujica】层数<@ba.vup>+10</>、【不屈】层数<@ba.vup>+10</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_selfdead",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 10
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_selfdead",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip,indomShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_4_27_b"
+    ]
+  },
+  "garrison_dolris_a": {
+    "garrisonId": "garrison_dolris_a",
+    "desc": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数+1",
+    "descRaw": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数<@ba.vup>+1</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_allykillenemy",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 1
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_allykillenemy",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_5_24_a"
+    ]
+  },
+  "garrison_dolris_b": {
+    "garrisonId": "garrison_dolris_b",
+    "desc": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数+2",
+    "descRaw": "<战斗中>【Ave Mujica】干员击倒敌人时，使已激活的【Ave Mujica】层数<@ba.vup>+2</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_allykillenemy",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 2
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_allykillenemy",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_5_24_b"
+    ]
+  },
+  "garrison_oblvns_a": {
+    "garrisonId": "garrison_oblvns_a",
+    "desc": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数+6",
+    "descRaw": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数<@ba.vup>+6</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_useskill",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 6
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_useskill",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_6_21_a"
+    ]
+  },
+  "garrison_oblvns_b": {
+    "garrisonId": "garrison_oblvns_b",
+    "desc": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数+12",
+    "descRaw": "<战斗中>自身开启技能时，使已激活的【Ave Mujica】层数<@ba.vup>+12</>",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "持续叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "ADD_BOND",
+    "effectKey": "act1autochess_gar_event_useskill",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "bond_add_count": 12
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_useskill",
+      "bond_type": "bond_by_id",
+      "bond_id": "aveMujicaShip",
+      "bond_add_type": "by_count"
+    },
+    "owners": [
+      "chess_char_6_21_b"
+    ]
+  },
+  "garrison_limbus_yisang_a": {
+    "garrisonId": "garrison_limbus_yisang_a",
+    "eventType": "SERVER_GAIN",
+    "effectType": "SERVER_ADD_BOND_METHOD",
+    "effectKey": "SERVER_ADD_BOND_METHOD",
+    "desc": "<获得时>获得等于当前调度中心等级的【边狱公司】层数（无需激活盟约）",
+    "bb": {
+      "multi": 1
+    },
+    "bbStr": {
+      "add_method": "shoplv",
+      "bond": "limbusShip"
+    },
+    "descRaw": "<获得时>获得等于当前调度中心等级的【边狱公司】层数（无需激活盟约）"
+  },
+  "garrison_limbus_yisang_b": {
+    "garrisonId": "garrison_limbus_yisang_b",
+    "eventType": "SERVER_GAIN",
+    "effectType": "SERVER_ADD_BOND_METHOD",
+    "effectKey": "SERVER_ADD_BOND_METHOD",
+    "desc": "<获得时>获得等于当前调度中心等级的【边狱公司】层数（无需激活盟约）",
+    "bb": {
+      "multi": 2
+    },
+    "bbStr": {
+      "add_method": "shoplv",
+      "bond": "limbusShip"
+    },
+    "descRaw": "<获得时>获得等于当前调度中心等级的【边狱公司】层数（无需激活盟约）"
+  },
+  "garrison_limbus_faust_a": {
+    "garrisonId": "garrison_limbus_faust_a",
+    "eventType": "SERVER_GAIN",
+    "effectType": "SERVER_ONCE_GOLD",
+    "effectKey": "SERVER_ONCE_GOLD",
+    "desc": "<获得时>使下个休整期额外获得 2 资金",
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {},
+    "descRaw": "<获得时>使下个休整期额外获得 2 资金"
+  },
+  "garrison_limbus_faust_b": {
+    "garrisonId": "garrison_limbus_faust_b",
+    "eventType": "SERVER_GAIN",
+    "effectType": "SERVER_ONCE_GOLD",
+    "effectKey": "SERVER_ONCE_GOLD",
+    "desc": "<获得时>使下个休整期额外获得 4 资金",
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {},
+    "descRaw": "<获得时>使下个休整期额外获得 4 资金"
+  },
+  "garrison_limbus_sinclair_a": {
+    "garrisonId": "garrison_limbus_sinclair_a",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_eff_attrByBond",
+    "effectKey": "act1autochess_gar_eff_attrByBond",
+    "desc": "【边狱公司】每叠加 3 层，本干员攻击力 +1%",
+    "bb": {
+      "divide_num": 3,
+      "atk": 0.01
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_eff_attrByBond",
+      "bond_id": "limbusShip"
+    },
+    "descRaw": "【边狱公司】每叠加 3 层，本干员攻击力 +1%"
+  },
+  "garrison_limbus_sinclair_b": {
+    "garrisonId": "garrison_limbus_sinclair_b",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_eff_attrByBond",
+    "effectKey": "act1autochess_gar_eff_attrByBond",
+    "desc": "【边狱公司】每叠加 3 层，本干员攻击力 +2%",
+    "bb": {
+      "divide_num": 3,
+      "atk": 0.02
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_eff_attrByBond",
+      "bond_id": "limbusShip"
+    },
+    "descRaw": "【边狱公司】每叠加 3 层，本干员攻击力 +2%"
+  },
+  "garrison_limbus_rodion_a": {
+    "garrisonId": "garrison_limbus_rodion_a",
+    "eventType": "SERVER_GAIN",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "desc": "<获得时>【边狱公司】层数 +5（无需激活盟约）",
+    "bb": {
+      "count": 5
+    },
+    "bbStr": {
+      "bond": "limbusShip"
+    },
+    "descRaw": "<获得时>【边狱公司】层数 +5（无需激活盟约）"
+  },
+  "garrison_limbus_rodion_b": {
+    "garrisonId": "garrison_limbus_rodion_b",
+    "eventType": "SERVER_GAIN",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "desc": "<获得时>【边狱公司】层数 +10（无需激活盟约）",
+    "bb": {
+      "count": 10
+    },
+    "bbStr": {
+      "bond": "limbusShip"
+    },
+    "descRaw": "<获得时>【边狱公司】层数 +10（无需激活盟约）"
+  },
+  "garrison_limbus_ishmael_a": {
+    "garrisonId": "garrison_limbus_ishmael_a",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_event_selfkillenemy",
+    "effectKey": "act1autochess_gar_event_selfkillenemy",
+    "desc": "<战斗中>每击倒 2 名单位时，使已激活的【边狱公司】层数 +1",
+    "bb": {
+      "check_cnt": 2,
+      "bond_add_count": 1
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_selfkillenemy",
+      "bond_type": "bond_by_id",
+      "bond_id": "limbusShip",
+      "bond_add_type": "by_count"
+    },
+    "descRaw": "<战斗中>每击倒 2 名单位时，使已激活的【边狱公司】层数 +1"
+  },
+  "garrison_limbus_ishmael_b": {
+    "garrisonId": "garrison_limbus_ishmael_b",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_event_selfkillenemy",
+    "effectKey": "act1autochess_gar_event_selfkillenemy",
+    "desc": "<战斗中>每击倒 1 名单位时，使已激活的【边狱公司】层数 +1",
+    "bb": {
+      "check_cnt": 1,
+      "bond_add_count": 1
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_selfkillenemy",
+      "bond_type": "bond_by_id",
+      "bond_id": "limbusShip",
+      "bond_add_type": "by_count"
+    },
+    "descRaw": "<战斗中>每击倒 1 名单位时，使已激活的【边狱公司】层数 +1"
+  },
+  "garrison_limbus_heathcliff_a": {
+    "garrisonId": "garrison_limbus_heathcliff_a",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_event_useskill",
+    "effectKey": "act1autochess_gar_event_useskill",
+    "desc": "<战斗中>首次开启技能时，使已激活的【边狱公司】层数 +5",
+    "bb": {
+      "bond_add_count": 5,
+      "max_add_count_per_battle": 5
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_useskill",
+      "bond_type": "bond_by_id",
+      "bond_id": "limbusShip",
+      "bond_add_type": "by_count",
+      "garrison_key": "garrison_limbus_heathcliff_a"
+    },
+    "descRaw": "<战斗中>首次开启技能时，使已激活的【边狱公司】层数 +5"
+  },
+  "garrison_limbus_heathcliff_b": {
+    "garrisonId": "garrison_limbus_heathcliff_b",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_event_useskill",
+    "effectKey": "act1autochess_gar_event_useskill",
+    "desc": "<战斗中>首次开启技能时，使已激活的【边狱公司】层数 +8",
+    "bb": {
+      "bond_add_count": 8,
+      "max_add_count_per_battle": 8
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_useskill",
+      "bond_type": "bond_by_id",
+      "bond_id": "limbusShip",
+      "bond_add_type": "by_count",
+      "garrison_key": "garrison_limbus_heathcliff_b"
+    },
+    "descRaw": "<战斗中>首次开启技能时，使已激活的【边狱公司】层数 +8"
+  },
+  "garrison_limbus_donquixote_a": {
+    "garrisonId": "garrison_limbus_donquixote_a",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_event_bondmate_skillkill",
+    "effectKey": "act1autochess_gar_event_bondmate_skillkill",
+    "desc": "<战斗中>每有一名【边狱公司】干员使用技能击杀一名敌人，使已激活的【边狱公司】层数 +1",
+    "bb": {
+      "bond_add_count": 1
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_bondmate_skillkill",
+      "bond_type": "bond_by_id",
+      "bond_id": "limbusShip",
+      "bond_add_type": "by_count"
+    },
+    "descRaw": "<战斗中>每有一名【边狱公司】干员使用技能击杀一名敌人，使已激活的【边狱公司】层数 +1"
+  },
+  "garrison_limbus_donquixote_b": {
+    "garrisonId": "garrison_limbus_donquixote_b",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_event_bondmate_skillkill",
+    "effectKey": "act1autochess_gar_event_bondmate_skillkill",
+    "desc": "<战斗中>每有一名【边狱公司】干员使用技能击杀一名敌人，使已激活的【边狱公司】层数 +2",
+    "bb": {
+      "bond_add_count": 2
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_bondmate_skillkill",
+      "bond_type": "bond_by_id",
+      "bond_id": "limbusShip",
+      "bond_add_type": "by_count"
+    },
+    "descRaw": "<战斗中>每有一名【边狱公司】干员使用技能击杀一名敌人，使已激活的【边狱公司】层数 +2"
+  },
+  "garrison_limbus_honglu_a": {
+    "garrisonId": "garrison_limbus_honglu_a",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_eff_attrByBond",
+    "effectKey": "act1autochess_gar_eff_attrByBond",
+    "desc": "攻击力和生命值 +20%；【边狱公司】每叠加 3 层，本干员攻击力和生命值 +1%",
+    "bb": {
+      "divide_num": 3,
+      "atk": 0.01,
+      "max_hp": 0.01
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_eff_attrByBond",
+      "bond_id": "limbusShip"
+    },
+    "descRaw": "攻击力和生命值 +20%；【边狱公司】每叠加 3 层，本干员攻击力和生命值 +1%"
+  },
+  "garrison_limbus_honglu_b": {
+    "garrisonId": "garrison_limbus_honglu_b",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_eff_attrByBond",
+    "effectKey": "act1autochess_gar_eff_attrByBond",
+    "desc": "攻击力和生命值 +20%；【边狱公司】每叠加 3 层，本干员攻击力和生命值 +2%",
+    "bb": {
+      "divide_num": 3,
+      "atk": 0.02,
+      "max_hp": 0.02
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_eff_attrByBond",
+      "bond_id": "limbusShip"
+    },
+    "descRaw": "攻击力和生命值 +20%；【边狱公司】每叠加 3 层，本干员攻击力和生命值 +2%"
+  },
+  "garrison_limbus_ryoshu_a": {
+    "garrisonId": "garrison_limbus_ryoshu_a",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_event_selfkillenemy",
+    "effectKey": "act1autochess_gar_event_selfkillenemy",
+    "desc": "<战斗中>每使用技能击杀一名敌人，使自身已激活的盟约层数 +3（每场作战至多 15 层）",
+    "bb": {
+      "check_cnt": 1,
+      "bond_add_count": 3,
+      "max_add_count_per_battle": 15
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_selfkillenemy",
+      "bond_type": "bond_self",
+      "bond_add_type": "by_count"
+    },
+    "descRaw": "<战斗中>每使用技能击杀一名敌人，使自身已激活的盟约层数 +3（每场作战至多 15 层）"
+  },
+  "garrison_limbus_ryoshu_b": {
+    "garrisonId": "garrison_limbus_ryoshu_b",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_event_selfkillenemy",
+    "effectKey": "act1autochess_gar_event_selfkillenemy",
+    "desc": "<战斗中>每使用技能击杀一名敌人，使自身已激活的盟约层数 +6（每场作战至多 30 层）",
+    "bb": {
+      "check_cnt": 1,
+      "bond_add_count": 6,
+      "max_add_count_per_battle": 30
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_selfkillenemy",
+      "bond_type": "bond_self",
+      "bond_add_type": "by_count"
+    },
+    "descRaw": "<战斗中>每使用技能击杀一名敌人，使自身已激活的盟约层数 +6（每场作战至多 30 层）"
+  },
+  "garrison_limbus_meursault_a": {
+    "garrisonId": "garrison_limbus_meursault_a",
+    "eventType": "SERVER_GAIN",
+    "effectType": "SERVER_SUMMON_BOND_CHESS",
+    "effectKey": "SERVER_SUMMON_BOND_CHESS",
+    "desc": "<获得时>召唤一名【边狱公司】干员（不超过 4 阶），该效果每回合最多触发一次",
+    "bb": {
+      "count": 1,
+      "max_tier": 4
+    },
+    "bbStr": {
+      "bond": "limbusShip",
+      "once_per_round": "1"
+    },
+    "descRaw": "<获得时>召唤一名【边狱公司】干员（不超过 4 阶），该效果每回合最多触发一次"
+  },
+  "garrison_limbus_meursault_b": {
+    "garrisonId": "garrison_limbus_meursault_b",
+    "eventType": "SERVER_GAIN",
+    "effectType": "SERVER_SUMMON_BOND_CHESS",
+    "effectKey": "SERVER_SUMMON_BOND_CHESS",
+    "desc": "<获得时>召唤一名【边狱公司】干员（不超过 4 阶），该效果每回合最多触发一次",
+    "bb": {
+      "count": 1,
+      "max_tier": 4
+    },
+    "bbStr": {
+      "bond": "limbusShip",
+      "once_per_round": "1"
+    },
+    "descRaw": "<获得时>召唤一名【边狱公司】干员（不超过 4 阶），该效果每回合最多触发一次"
+  },
+  "garrison_limbus_outis_a": {
+    "garrisonId": "garrison_limbus_outis_a",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_event_frontunit_useskill",
+    "effectKey": "act1autochess_gar_event_frontunit_useskill",
+    "desc": "<战斗中>身前一格的友方干员每使用一次技能，使当前激活且层数最高的盟约层数 +2（每场作战至多 12 层）",
+    "bb": {
+      "bond_add_count": 2,
+      "max_add_count_per_battle": 12
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_frontunit_useskill",
+      "bond_type": "bond_actived_maxstack"
+    },
+    "descRaw": "<战斗中>身前一格的友方干员每使用一次技能，使当前激活且层数最高的盟约层数 +2（每场作战至多 12 层）"
+  },
+  "garrison_limbus_outis_b": {
+    "garrisonId": "garrison_limbus_outis_b",
+    "eventType": "IN_BATTLE",
+    "effectType": "act1autochess_gar_event_frontunit_useskill",
+    "effectKey": "act1autochess_gar_event_frontunit_useskill",
+    "desc": "<战斗中>身前一格的友方干员每使用一次技能，使当前激活且层数最高的盟约层数 +2（每场作战至多 24 层）",
+    "bb": {
+      "bond_add_count": 2,
+      "max_add_count_per_battle": 24
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_event_frontunit_useskill",
+      "bond_type": "bond_actived_maxstack"
+    },
+    "descRaw": "<战斗中>身前一格的友方干员每使用一次技能，使当前激活且层数最高的盟约层数 +2（每场作战至多 24 层）"
+  },
+  "garrison_limbus_gregor_a": {
+    "garrisonId": "garrison_limbus_gregor_a",
+    "eventType": "SERVER_PREP_START",
+    "effectType": "SERVER_ADD_BOND_BY_RANGE_UNITS",
+    "effectKey": "SERVER_ADD_BOND_BY_RANGE_UNITS",
+    "desc": "<休整期开始时>自身攻击范围内每有一名其他干员，使【边狱公司】层数 +3（无需激活盟约）",
+    "bb": {
+      "count": 3
+    },
+    "bbStr": {
+      "bond_id": "limbusShip"
+    },
+    "descRaw": "<休整期开始时>自身攻击范围内每有一名其他干员，使【边狱公司】层数 +3（无需激活盟约）"
+  },
+  "garrison_limbus_gregor_b": {
+    "garrisonId": "garrison_limbus_gregor_b",
+    "eventType": "SERVER_PREP_START",
+    "effectType": "SERVER_ADD_BOND_BY_RANGE_UNITS",
+    "effectKey": "SERVER_ADD_BOND_BY_RANGE_UNITS",
+    "desc": "<休整期开始时>自身攻击范围内每有一名其他干员，使【边狱公司】层数 +3（无需激活盟约）",
+    "bb": {
+      "count": 3
+    },
+    "bbStr": {
+      "bond_id": "limbusShip"
+    },
+    "descRaw": "<休整期开始时>自身攻击范围内每有一名其他干员，使【边狱公司】层数 +3（无需激活盟约）"
+  },
+  "garrison_fgo_gareth_a": {
+    "garrisonId": "garrison_fgo_gareth_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,indomShip,steadShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_1_gareth_a"
+    ]
+  },
+  "garrison_fgo_gareth_b": {
+    "garrisonId": "garrison_fgo_gareth_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,indomShip,steadShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_1_gareth_b"
+    ]
+  },
+  "garrison_fgo_bedivere_a": {
+    "garrisonId": "garrison_fgo_bedivere_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,deputShip,preciShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_2_bedivere_a"
+    ]
+  },
+  "garrison_fgo_bedivere_b": {
+    "garrisonId": "garrison_fgo_bedivere_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,deputShip,preciShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_2_bedivere_b"
+    ]
+  },
+  "garrison_fgo_tristan_a": {
+    "garrisonId": "garrison_fgo_tristan_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,preciShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_2_tristan_a"
+    ]
+  },
+  "garrison_fgo_tristan_b": {
+    "garrisonId": "garrison_fgo_tristan_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,preciShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_2_tristan_b"
+    ]
+  },
+  "garrison_fgo_percival_a": {
+    "garrisonId": "garrison_fgo_percival_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,miraShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_3_percival_a"
+    ]
+  },
+  "garrison_fgo_percival_b": {
+    "garrisonId": "garrison_fgo_percival_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,miraShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_3_percival_b"
+    ]
+  },
+  "garrison_fgo_baobhan_a": {
+    "garrisonId": "garrison_fgo_baobhan_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_3_baobhan_a"
+    ]
+  },
+  "garrison_fgo_baobhan_b": {
+    "garrisonId": "garrison_fgo_baobhan_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_3_baobhan_b"
+    ]
+  },
+  "garrison_fgo_gawain_a": {
+    "garrisonId": "garrison_fgo_gawain_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,indomShip,raidShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_gawain_a"
+    ]
+  },
+  "garrison_fgo_gawain_b": {
+    "garrisonId": "garrison_fgo_gawain_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,indomShip,raidShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_gawain_b"
+    ]
+  },
+  "garrison_fgo_barghest_a": {
+    "garrisonId": "garrison_fgo_barghest_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,indomShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_barghest_a"
+    ]
+  },
+  "garrison_fgo_barghest_b": {
+    "garrisonId": "garrison_fgo_barghest_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,indomShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_barghest_b"
+    ]
+  },
+  "garrison_fgo_mash_a": {
+    "garrisonId": "garrison_fgo_mash_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,maniShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_mash_a"
+    ]
+  },
+  "garrison_fgo_mash_b": {
+    "garrisonId": "garrison_fgo_mash_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,maniShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_mash_b"
+    ]
+  },
+  "garrison_fgo_lancelot_a": {
+    "garrisonId": "garrison_fgo_lancelot_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_lancelot_a"
+    ]
+  },
+  "garrison_fgo_lancelot_b": {
+    "garrisonId": "garrison_fgo_lancelot_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_lancelot_b"
+    ]
+  },
+  "garrison_fgo_mordred_a": {
+    "garrisonId": "garrison_fgo_mordred_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,raidShip,soloShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_mordred_a"
+    ]
+  },
+  "garrison_fgo_mordred_b": {
+    "garrisonId": "garrison_fgo_mordred_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,raidShip,soloShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_mordred_b"
+    ]
+  },
+  "garrison_fgo_melusine_a": {
+    "garrisonId": "garrison_fgo_melusine_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,raidShip,preciShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_melusine_a"
+    ]
+  },
+  "garrison_fgo_melusine_b": {
+    "garrisonId": "garrison_fgo_melusine_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,raidShip,preciShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_melusine_b"
+    ]
+  },
+  "garrison_fgo_artoria_a": {
+    "garrisonId": "garrison_fgo_artoria_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,skillfulShip,deputShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_artoria_a"
+    ]
+  },
+  "garrison_fgo_artoria_b": {
+    "garrisonId": "garrison_fgo_artoria_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,skillfulShip,deputShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_artoria_b"
+    ]
+  },
+  "garrison_fgo_merlin_a": {
+    "garrisonId": "garrison_fgo_merlin_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,visiShip,miraShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_merlin_a"
+    ]
+  },
+  "garrison_fgo_merlin_b": {
+    "garrisonId": "garrison_fgo_merlin_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,visiShip,miraShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_merlin_b"
+    ]
+  },
+  "garrison_fgo_castoria_a": {
+    "garrisonId": "garrison_fgo_castoria_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,deputShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_castoria_a"
+    ]
+  },
+  "garrison_fgo_castoria_b": {
+    "garrisonId": "garrison_fgo_castoria_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,deputShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_castoria_b"
+    ]
+  },
+  "garrison_fgo_morgan_a": {
+    "garrisonId": "garrison_fgo_morgan_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,visiShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_morgan_a"
+    ]
+  },
+  "garrison_fgo_morgan_b": {
+    "garrisonId": "garrison_fgo_morgan_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,visiShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_morgan_b"
     ]
   }
 }

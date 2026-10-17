@@ -1,0 +1,561 @@
+{
+  "lock": 1,
+  "id": "fgo-round-table-look",
+  "version": "1.0.0",
+  "generator": "tools/plugin.mjs pack",
+  "files": {
+    "art/assets.json": {
+      "sha256": "eb490e37ccbf538c6a7417c4c3d78eb65dc0355223803334140e360ca472ce5a",
+      "bytes": 10316
+    },
+    "art/bond/roundTable.png": {
+      "sha256": "1e0c79de9f01c1590b1527ae55f0593e0ad3ce9f05de64f0a8f69177edde7559",
+      "bytes": 1660
+    },
+    "art/char/avatar/char_fgo_artoria.png": {
+      "sha256": "cb447cf3d104ba46a3fa9ad0c7ca7412b1ec9c7d7eac0d1c91e6ed4ce6f46515",
+      "bytes": 54337
+    },
+    "art/char/avatar/char_fgo_artoria_2.png": {
+      "sha256": "cb447cf3d104ba46a3fa9ad0c7ca7412b1ec9c7d7eac0d1c91e6ed4ce6f46515",
+      "bytes": 54337
+    },
+    "art/char/avatar/char_fgo_baobhan.png": {
+      "sha256": "4d2da4a20bb709616d67b63b9c83426c535e0a507b44b8bab6d7e1bd65bce90f",
+      "bytes": 52249
+    },
+    "art/char/avatar/char_fgo_baobhan_2.png": {
+      "sha256": "4d2da4a20bb709616d67b63b9c83426c535e0a507b44b8bab6d7e1bd65bce90f",
+      "bytes": 52249
+    },
+    "art/char/avatar/char_fgo_barghest.png": {
+      "sha256": "9d84594c78076ee6eda6fa4bc63558d90a051a6663323c189a6581b529f344e9",
+      "bytes": 45529
+    },
+    "art/char/avatar/char_fgo_barghest_2.png": {
+      "sha256": "9d84594c78076ee6eda6fa4bc63558d90a051a6663323c189a6581b529f344e9",
+      "bytes": 45529
+    },
+    "art/char/avatar/char_fgo_bedivere.png": {
+      "sha256": "e8052342ef1437876db307db0189ffd019ee6d2a8bafcba199bf785491b37f98",
+      "bytes": 46814
+    },
+    "art/char/avatar/char_fgo_bedivere_2.png": {
+      "sha256": "e8052342ef1437876db307db0189ffd019ee6d2a8bafcba199bf785491b37f98",
+      "bytes": 46814
+    },
+    "art/char/avatar/char_fgo_castoria.png": {
+      "sha256": "443e75f401a5d0fed9f8c70b21fe5f5b69559de4dddd220be4c377e8becf2f95",
+      "bytes": 51081
+    },
+    "art/char/avatar/char_fgo_castoria_2.png": {
+      "sha256": "443e75f401a5d0fed9f8c70b21fe5f5b69559de4dddd220be4c377e8becf2f95",
+      "bytes": 51081
+    },
+    "art/char/avatar/char_fgo_gareth.png": {
+      "sha256": "13985ac6e24677917ebee71bf3c136257b6abe840c4cf585a5e328057fce42f3",
+      "bytes": 49176
+    },
+    "art/char/avatar/char_fgo_gareth_2.png": {
+      "sha256": "13985ac6e24677917ebee71bf3c136257b6abe840c4cf585a5e328057fce42f3",
+      "bytes": 49176
+    },
+    "art/char/avatar/char_fgo_gawain.png": {
+      "sha256": "c825c1cec01a4cb5a367ed817450ee834af1543c587d97ec9df35a3b40e6a05d",
+      "bytes": 52593
+    },
+    "art/char/avatar/char_fgo_gawain_2.png": {
+      "sha256": "c825c1cec01a4cb5a367ed817450ee834af1543c587d97ec9df35a3b40e6a05d",
+      "bytes": 52593
+    },
+    "art/char/avatar/char_fgo_lancelot.png": {
+      "sha256": "db102512bcf5add9c55b306e5caecdbc280aae1c73be1898ba04d302769e8611",
+      "bytes": 51692
+    },
+    "art/char/avatar/char_fgo_lancelot_2.png": {
+      "sha256": "db102512bcf5add9c55b306e5caecdbc280aae1c73be1898ba04d302769e8611",
+      "bytes": 51692
+    },
+    "art/char/avatar/char_fgo_mash.png": {
+      "sha256": "b2a31e1f834be2faf2552457bba460669f31c90d48ff58809867a2e7d4e19943",
+      "bytes": 45284
+    },
+    "art/char/avatar/char_fgo_mash_2.png": {
+      "sha256": "b2a31e1f834be2faf2552457bba460669f31c90d48ff58809867a2e7d4e19943",
+      "bytes": 45284
+    },
+    "art/char/avatar/char_fgo_melusine.png": {
+      "sha256": "9884b75753d63f7d9a4eb35d9cd3dbc783aa3e049ce1b2e789f652493725c973",
+      "bytes": 52295
+    },
+    "art/char/avatar/char_fgo_melusine_2.png": {
+      "sha256": "9884b75753d63f7d9a4eb35d9cd3dbc783aa3e049ce1b2e789f652493725c973",
+      "bytes": 52295
+    },
+    "art/char/avatar/char_fgo_merlin.png": {
+      "sha256": "ceee5a72de0390a3660fbd74d4a1d81d9a4881d52f38ca447446727e6efbf0cc",
+      "bytes": 66642
+    },
+    "art/char/avatar/char_fgo_merlin_2.png": {
+      "sha256": "ceee5a72de0390a3660fbd74d4a1d81d9a4881d52f38ca447446727e6efbf0cc",
+      "bytes": 66642
+    },
+    "art/char/avatar/char_fgo_mordred.png": {
+      "sha256": "971667ebbaf8520983607e8dec5a056cd331e523c5c04cba3840e55dffc0e420",
+      "bytes": 49394
+    },
+    "art/char/avatar/char_fgo_mordred_2.png": {
+      "sha256": "971667ebbaf8520983607e8dec5a056cd331e523c5c04cba3840e55dffc0e420",
+      "bytes": 49394
+    },
+    "art/char/avatar/char_fgo_morgan.png": {
+      "sha256": "84966e208a999294cb3d7870f1416a835be7c383a070bc25fc074eb9ebfaf1ee",
+      "bytes": 35443
+    },
+    "art/char/avatar/char_fgo_morgan_2.png": {
+      "sha256": "84966e208a999294cb3d7870f1416a835be7c383a070bc25fc074eb9ebfaf1ee",
+      "bytes": 35443
+    },
+    "art/char/avatar/char_fgo_percival.png": {
+      "sha256": "0e613ca191d975a091cd690cce73ffcf1b7fcfed27587a3805c8fa9d056f861f",
+      "bytes": 41703
+    },
+    "art/char/avatar/char_fgo_percival_2.png": {
+      "sha256": "0e613ca191d975a091cd690cce73ffcf1b7fcfed27587a3805c8fa9d056f861f",
+      "bytes": 41703
+    },
+    "art/char/avatar/char_fgo_tristan.png": {
+      "sha256": "ac1963546e05110e4a2d09935168c6ce7e605c88d4abb368fb5a1f3b9742c1a5",
+      "bytes": 39400
+    },
+    "art/char/avatar/char_fgo_tristan_2.png": {
+      "sha256": "ac1963546e05110e4a2d09935168c6ce7e605c88d4abb368fb5a1f3b9742c1a5",
+      "bytes": 39400
+    },
+    "art/char/portrait/char_fgo_artoria.png": {
+      "sha256": "35a4c8f006fdede3662041130d45acb803c581a32c91876c8cee4454161166b4",
+      "bytes": 118579
+    },
+    "art/char/portrait/char_fgo_artoria_2.png": {
+      "sha256": "35a4c8f006fdede3662041130d45acb803c581a32c91876c8cee4454161166b4",
+      "bytes": 118579
+    },
+    "art/char/portrait/char_fgo_baobhan.png": {
+      "sha256": "97e5fa4402466253d72f06ec8949405e844ffbae605b2678823c0291bc6b8d34",
+      "bytes": 122146
+    },
+    "art/char/portrait/char_fgo_baobhan_2.png": {
+      "sha256": "97e5fa4402466253d72f06ec8949405e844ffbae605b2678823c0291bc6b8d34",
+      "bytes": 122146
+    },
+    "art/char/portrait/char_fgo_barghest.png": {
+      "sha256": "f1f3001a253cbb33460b48f5b471ba6890be261760c3a808028176a525776bc1",
+      "bytes": 81269
+    },
+    "art/char/portrait/char_fgo_barghest_2.png": {
+      "sha256": "f1f3001a253cbb33460b48f5b471ba6890be261760c3a808028176a525776bc1",
+      "bytes": 81269
+    },
+    "art/char/portrait/char_fgo_bedivere.png": {
+      "sha256": "2b3984b7183b02820186e70fb1f7d588eb952788b563ea01f2fe901e7faa7026",
+      "bytes": 118061
+    },
+    "art/char/portrait/char_fgo_bedivere_2.png": {
+      "sha256": "2b3984b7183b02820186e70fb1f7d588eb952788b563ea01f2fe901e7faa7026",
+      "bytes": 118061
+    },
+    "art/char/portrait/char_fgo_castoria.png": {
+      "sha256": "cd97b69c8c1e7f571de99a7ef8ad741c1cebf0c4e1cb349c516ab795838e9ce3",
+      "bytes": 114526
+    },
+    "art/char/portrait/char_fgo_castoria_2.png": {
+      "sha256": "cd97b69c8c1e7f571de99a7ef8ad741c1cebf0c4e1cb349c516ab795838e9ce3",
+      "bytes": 114526
+    },
+    "art/char/portrait/char_fgo_gareth.png": {
+      "sha256": "35053ae1c6b82a4571023c14625a0a98e343a11341215ce4a3840dcd372399ab",
+      "bytes": 99232
+    },
+    "art/char/portrait/char_fgo_gareth_2.png": {
+      "sha256": "35053ae1c6b82a4571023c14625a0a98e343a11341215ce4a3840dcd372399ab",
+      "bytes": 99232
+    },
+    "art/char/portrait/char_fgo_gawain.png": {
+      "sha256": "c82613e2bfd9cd89bea146a5d7ef985b5135cb4ebce0212c4252d5cc09d4c48e",
+      "bytes": 140423
+    },
+    "art/char/portrait/char_fgo_gawain_2.png": {
+      "sha256": "c82613e2bfd9cd89bea146a5d7ef985b5135cb4ebce0212c4252d5cc09d4c48e",
+      "bytes": 140423
+    },
+    "art/char/portrait/char_fgo_lancelot.png": {
+      "sha256": "42aacdf49737e0a5eb487132255831a511428a4fcf811a9d30c105aed30e9e34",
+      "bytes": 173420
+    },
+    "art/char/portrait/char_fgo_lancelot_2.png": {
+      "sha256": "42aacdf49737e0a5eb487132255831a511428a4fcf811a9d30c105aed30e9e34",
+      "bytes": 173420
+    },
+    "art/char/portrait/char_fgo_mash.png": {
+      "sha256": "7205d2b0f2f5e972ffa55defc3d600e9d5e5e3ec3bd2a6d2bf2b235df07e6ff7",
+      "bytes": 113950
+    },
+    "art/char/portrait/char_fgo_mash_2.png": {
+      "sha256": "7205d2b0f2f5e972ffa55defc3d600e9d5e5e3ec3bd2a6d2bf2b235df07e6ff7",
+      "bytes": 113950
+    },
+    "art/char/portrait/char_fgo_melusine.png": {
+      "sha256": "eba117f34e1b2b68c6b9de5364bc06af8dba29597a306047f6d786ad5f25e6d3",
+      "bytes": 86029
+    },
+    "art/char/portrait/char_fgo_melusine_2.png": {
+      "sha256": "eba117f34e1b2b68c6b9de5364bc06af8dba29597a306047f6d786ad5f25e6d3",
+      "bytes": 86029
+    },
+    "art/char/portrait/char_fgo_merlin.png": {
+      "sha256": "6be8eb1cec99b3fba9774e0422f50c411bb0168b99e922ad02630a5a898c858e",
+      "bytes": 142561
+    },
+    "art/char/portrait/char_fgo_merlin_2.png": {
+      "sha256": "6be8eb1cec99b3fba9774e0422f50c411bb0168b99e922ad02630a5a898c858e",
+      "bytes": 142561
+    },
+    "art/char/portrait/char_fgo_mordred.png": {
+      "sha256": "243496e2a8a31bf9dfcaad2de075ad9993cf2693e4cc0278edbdb3ddf3d8df66",
+      "bytes": 108159
+    },
+    "art/char/portrait/char_fgo_mordred_2.png": {
+      "sha256": "243496e2a8a31bf9dfcaad2de075ad9993cf2693e4cc0278edbdb3ddf3d8df66",
+      "bytes": 108159
+    },
+    "art/char/portrait/char_fgo_morgan.png": {
+      "sha256": "b6ec2b679a14dae22ecf989fe568426ae549265cf495136cb4c78a86b2c609cc",
+      "bytes": 99288
+    },
+    "art/char/portrait/char_fgo_morgan_2.png": {
+      "sha256": "b6ec2b679a14dae22ecf989fe568426ae549265cf495136cb4c78a86b2c609cc",
+      "bytes": 99288
+    },
+    "art/char/portrait/char_fgo_percival.png": {
+      "sha256": "30a9717682f441193ea165a981e5926e5cd8134245d2b86d8cb370558d8633e3",
+      "bytes": 116483
+    },
+    "art/char/portrait/char_fgo_percival_2.png": {
+      "sha256": "30a9717682f441193ea165a981e5926e5cd8134245d2b86d8cb370558d8633e3",
+      "bytes": 116483
+    },
+    "art/char/portrait/char_fgo_tristan.png": {
+      "sha256": "5277f216d7ff806ef29bbb9aab9f7f79a631cc269be64630f1d97c971c69fe0a",
+      "bytes": 103750
+    },
+    "art/char/portrait/char_fgo_tristan_2.png": {
+      "sha256": "5277f216d7ff806ef29bbb9aab9f7f79a631cc269be64630f1d97c971c69fe0a",
+      "bytes": 103750
+    },
+    "art/char/standee/char_fgo_artoria.png": {
+      "sha256": "c1bace77987401b1669f292fc60452ad315f0dbd6ff20833b6d8263bb46f5483",
+      "bytes": 104993
+    },
+    "art/char/standee/char_fgo_artoria_2.png": {
+      "sha256": "c1bace77987401b1669f292fc60452ad315f0dbd6ff20833b6d8263bb46f5483",
+      "bytes": 104993
+    },
+    "art/char/standee/char_fgo_baobhan.png": {
+      "sha256": "1160506f20f74123fd6de1c32d4657f9eee390a065573e0c8244ec3c95602f33",
+      "bytes": 120316
+    },
+    "art/char/standee/char_fgo_baobhan_2.png": {
+      "sha256": "1160506f20f74123fd6de1c32d4657f9eee390a065573e0c8244ec3c95602f33",
+      "bytes": 120316
+    },
+    "art/char/standee/char_fgo_barghest.png": {
+      "sha256": "d41aac8b5a79ce062ca1c040ff5245cc1a730565bc8d5967251da412f055cfc3",
+      "bytes": 214971
+    },
+    "art/char/standee/char_fgo_barghest_2.png": {
+      "sha256": "d41aac8b5a79ce062ca1c040ff5245cc1a730565bc8d5967251da412f055cfc3",
+      "bytes": 214971
+    },
+    "art/char/standee/char_fgo_bedivere.png": {
+      "sha256": "3dea7b05d16a06ff9a397d42fc99dd3babc4c7d6eae716d0e0d8e02434988112",
+      "bytes": 104686
+    },
+    "art/char/standee/char_fgo_bedivere_2.png": {
+      "sha256": "3dea7b05d16a06ff9a397d42fc99dd3babc4c7d6eae716d0e0d8e02434988112",
+      "bytes": 104686
+    },
+    "art/char/standee/char_fgo_castoria.png": {
+      "sha256": "85522466ad9f4ea065e79e484d78246ee87221ea765d4e8da4a4769eb5314571",
+      "bytes": 136105
+    },
+    "art/char/standee/char_fgo_castoria_2.png": {
+      "sha256": "85522466ad9f4ea065e79e484d78246ee87221ea765d4e8da4a4769eb5314571",
+      "bytes": 136105
+    },
+    "art/char/standee/char_fgo_gareth.png": {
+      "sha256": "d2c28da19ef4978a1f288ecfc14ab3775b19cccc2ce8b6dbc5329c60d9b764c4",
+      "bytes": 105629
+    },
+    "art/char/standee/char_fgo_gareth_2.png": {
+      "sha256": "d2c28da19ef4978a1f288ecfc14ab3775b19cccc2ce8b6dbc5329c60d9b764c4",
+      "bytes": 105629
+    },
+    "art/char/standee/char_fgo_gawain.png": {
+      "sha256": "45b9f57e121ed413511e01138a845393778cd9a77b335731d092387a30872a95",
+      "bytes": 157061
+    },
+    "art/char/standee/char_fgo_gawain_2.png": {
+      "sha256": "45b9f57e121ed413511e01138a845393778cd9a77b335731d092387a30872a95",
+      "bytes": 157061
+    },
+    "art/char/standee/char_fgo_lancelot.png": {
+      "sha256": "c8c03b5a9f8c76af65254be7a981ae626c83030b65b3650821995af02e796e69",
+      "bytes": 126841
+    },
+    "art/char/standee/char_fgo_lancelot_2.png": {
+      "sha256": "c8c03b5a9f8c76af65254be7a981ae626c83030b65b3650821995af02e796e69",
+      "bytes": 126841
+    },
+    "art/char/standee/char_fgo_mash.png": {
+      "sha256": "d0ef35f46aaa268d2ecb6506a5735da9fb11e4784c562d2c12b18b93df76ec80",
+      "bytes": 106680
+    },
+    "art/char/standee/char_fgo_mash_2.png": {
+      "sha256": "d0ef35f46aaa268d2ecb6506a5735da9fb11e4784c562d2c12b18b93df76ec80",
+      "bytes": 106680
+    },
+    "art/char/standee/char_fgo_melusine.png": {
+      "sha256": "bd567fb2dd71d841a69324a63a1a7eb50795c132c5df391c47ecfb5d050ad7ee",
+      "bytes": 139327
+    },
+    "art/char/standee/char_fgo_melusine_2.png": {
+      "sha256": "bd567fb2dd71d841a69324a63a1a7eb50795c132c5df391c47ecfb5d050ad7ee",
+      "bytes": 139327
+    },
+    "art/char/standee/char_fgo_merlin.png": {
+      "sha256": "f77eec9792339e39dcb6db3c161842eb4a4509a72028956136c6d13514b5be85",
+      "bytes": 177749
+    },
+    "art/char/standee/char_fgo_merlin_2.png": {
+      "sha256": "f77eec9792339e39dcb6db3c161842eb4a4509a72028956136c6d13514b5be85",
+      "bytes": 177749
+    },
+    "art/char/standee/char_fgo_mordred.png": {
+      "sha256": "a37ed1042bc27cd80faf96016999372544b4f96ef5e12c59ca4a54021b485d59",
+      "bytes": 118272
+    },
+    "art/char/standee/char_fgo_mordred_2.png": {
+      "sha256": "a37ed1042bc27cd80faf96016999372544b4f96ef5e12c59ca4a54021b485d59",
+      "bytes": 118272
+    },
+    "art/char/standee/char_fgo_morgan.png": {
+      "sha256": "3f475974ff7484f7eb7b37c0d55488ed56f7cf9db8792d68069858131beae108",
+      "bytes": 120669
+    },
+    "art/char/standee/char_fgo_morgan_2.png": {
+      "sha256": "3f475974ff7484f7eb7b37c0d55488ed56f7cf9db8792d68069858131beae108",
+      "bytes": 120669
+    },
+    "art/char/standee/char_fgo_percival.png": {
+      "sha256": "803bc6e9e61c88a9efe4d43863d762fd78cf37ea9d456124b2f0f1d16c85f2ad",
+      "bytes": 136359
+    },
+    "art/char/standee/char_fgo_percival_2.png": {
+      "sha256": "803bc6e9e61c88a9efe4d43863d762fd78cf37ea9d456124b2f0f1d16c85f2ad",
+      "bytes": 136359
+    },
+    "art/char/standee/char_fgo_tristan.png": {
+      "sha256": "c8f35eb23fcd7873ad415a448ee6830867303aae5f4eabe6e6c099c1973553ee",
+      "bytes": 127223
+    },
+    "art/char/standee/char_fgo_tristan_2.png": {
+      "sha256": "c8f35eb23fcd7873ad415a448ee6830867303aae5f4eabe6e6c099c1973553ee",
+      "bytes": 127223
+    },
+    "art/skill/skchr_fgo_artoria_1.png": {
+      "sha256": "d4d9d8fb3495944eabb18bd0590f167c414d3e74b033eb85a46eec9ee705af39",
+      "bytes": 36691
+    },
+    "art/skill/skchr_fgo_artoria_2.png": {
+      "sha256": "087a78747ff3d271c7c2c81dfe73eafd734b3a404549778355ccde1e87f1deba",
+      "bytes": 32723
+    },
+    "art/skill/skchr_fgo_artoria_3.png": {
+      "sha256": "83c7c7f47cd9978d3f92231cabafd7c8fe735dfdf685ea7711c53dd0a4be1862",
+      "bytes": 28639
+    },
+    "art/skill/skchr_fgo_baobhan_1.png": {
+      "sha256": "f857e0dd4da70ffdffa535c8c78eadfb1d8904540f592ba256d131d60f69b389",
+      "bytes": 34809
+    },
+    "art/skill/skchr_fgo_baobhan_2.png": {
+      "sha256": "9110fec176a3df1b0bee37a7a9b98ec6900be4fc04fe368e3ff54acc204639ff",
+      "bytes": 33102
+    },
+    "art/skill/skchr_fgo_baobhan_3.png": {
+      "sha256": "802d0e591685930792733e2f63b1989ef6c4ee488b3d3058d79b3ca939a42608",
+      "bytes": 33050
+    },
+    "art/skill/skchr_fgo_barghest_1.png": {
+      "sha256": "d4d9d8fb3495944eabb18bd0590f167c414d3e74b033eb85a46eec9ee705af39",
+      "bytes": 36691
+    },
+    "art/skill/skchr_fgo_barghest_2.png": {
+      "sha256": "087a78747ff3d271c7c2c81dfe73eafd734b3a404549778355ccde1e87f1deba",
+      "bytes": 32723
+    },
+    "art/skill/skchr_fgo_barghest_3.png": {
+      "sha256": "971a558df10dd8b39b59902a5cccc0b61abf2f0da170f05686ab38e78de50655",
+      "bytes": 33330
+    },
+    "art/skill/skchr_fgo_bedivere_1.png": {
+      "sha256": "6066613ca9a38d570a2e0a4b87810172f0f8ab5a7340fe113636a35033886f9e",
+      "bytes": 25641
+    },
+    "art/skill/skchr_fgo_bedivere_2.png": {
+      "sha256": "7775909e7724e594ae70bc6f7b76e2630be470df53c3985376e642a332c612b8",
+      "bytes": 28802
+    },
+    "art/skill/skchr_fgo_bedivere_3.png": {
+      "sha256": "971a558df10dd8b39b59902a5cccc0b61abf2f0da170f05686ab38e78de50655",
+      "bytes": 33330
+    },
+    "art/skill/skchr_fgo_castoria_1.png": {
+      "sha256": "d4d9d8fb3495944eabb18bd0590f167c414d3e74b033eb85a46eec9ee705af39",
+      "bytes": 36691
+    },
+    "art/skill/skchr_fgo_castoria_2.png": {
+      "sha256": "7775909e7724e594ae70bc6f7b76e2630be470df53c3985376e642a332c612b8",
+      "bytes": 28802
+    },
+    "art/skill/skchr_fgo_castoria_3.png": {
+      "sha256": "ddfb62ade52bd4f8b5342204adb8f1b410f695ca5c5fd2c318d7dad04f89753d",
+      "bytes": 33489
+    },
+    "art/skill/skchr_fgo_gareth_1.png": {
+      "sha256": "76e2aa31a8433c5c8746cc7daa12110046ba130f015bc5707f08b9105e52c885",
+      "bytes": 28667
+    },
+    "art/skill/skchr_fgo_gareth_2.png": {
+      "sha256": "7775909e7724e594ae70bc6f7b76e2630be470df53c3985376e642a332c612b8",
+      "bytes": 28802
+    },
+    "art/skill/skchr_fgo_gareth_3.png": {
+      "sha256": "ec335554446a7c2b9389e652be2ff73c59cfd93026717c12cd84bbed8352d0ed",
+      "bytes": 32363
+    },
+    "art/skill/skchr_fgo_gawain_1.png": {
+      "sha256": "d4d9d8fb3495944eabb18bd0590f167c414d3e74b033eb85a46eec9ee705af39",
+      "bytes": 36691
+    },
+    "art/skill/skchr_fgo_gawain_2.png": {
+      "sha256": "d4d9d8fb3495944eabb18bd0590f167c414d3e74b033eb85a46eec9ee705af39",
+      "bytes": 36691
+    },
+    "art/skill/skchr_fgo_gawain_3.png": {
+      "sha256": "7775909e7724e594ae70bc6f7b76e2630be470df53c3985376e642a332c612b8",
+      "bytes": 28802
+    },
+    "art/skill/skchr_fgo_lancelot_1.png": {
+      "sha256": "7775909e7724e594ae70bc6f7b76e2630be470df53c3985376e642a332c612b8",
+      "bytes": 28802
+    },
+    "art/skill/skchr_fgo_lancelot_2.png": {
+      "sha256": "4ea157c4157481ceac13297f8c4d15f187a895dfa0f33f3507643eff0b105282",
+      "bytes": 33593
+    },
+    "art/skill/skchr_fgo_lancelot_3.png": {
+      "sha256": "d29b893bd1d52a157784c24ced5819f46a2f7a8fb435de28abcdc788f6c594b9",
+      "bytes": 31638
+    },
+    "art/skill/skchr_fgo_mash_1.png": {
+      "sha256": "971a558df10dd8b39b59902a5cccc0b61abf2f0da170f05686ab38e78de50655",
+      "bytes": 33330
+    },
+    "art/skill/skchr_fgo_mash_2.png": {
+      "sha256": "3ee946d7f65b5de904ecebf3d80a991c7d1069e62d5ac586466075d631c9826a",
+      "bytes": 32951
+    },
+    "art/skill/skchr_fgo_mash_3.png": {
+      "sha256": "ec335554446a7c2b9389e652be2ff73c59cfd93026717c12cd84bbed8352d0ed",
+      "bytes": 32363
+    },
+    "art/skill/skchr_fgo_melusine_1.png": {
+      "sha256": "d4d9d8fb3495944eabb18bd0590f167c414d3e74b033eb85a46eec9ee705af39",
+      "bytes": 36691
+    },
+    "art/skill/skchr_fgo_melusine_2.png": {
+      "sha256": "4ea157c4157481ceac13297f8c4d15f187a895dfa0f33f3507643eff0b105282",
+      "bytes": 33593
+    },
+    "art/skill/skchr_fgo_melusine_3.png": {
+      "sha256": "10a461bc70f56861bfca72305221d485b5ba717ce01e4e06fcfd79f8d8b67fcc",
+      "bytes": 18749
+    },
+    "art/skill/skchr_fgo_merlin_1.png": {
+      "sha256": "d4d9d8fb3495944eabb18bd0590f167c414d3e74b033eb85a46eec9ee705af39",
+      "bytes": 36691
+    },
+    "art/skill/skchr_fgo_merlin_2.png": {
+      "sha256": "3ee946d7f65b5de904ecebf3d80a991c7d1069e62d5ac586466075d631c9826a",
+      "bytes": 32951
+    },
+    "art/skill/skchr_fgo_merlin_3.png": {
+      "sha256": "087a78747ff3d271c7c2c81dfe73eafd734b3a404549778355ccde1e87f1deba",
+      "bytes": 32723
+    },
+    "art/skill/skchr_fgo_mordred_1.png": {
+      "sha256": "087a78747ff3d271c7c2c81dfe73eafd734b3a404549778355ccde1e87f1deba",
+      "bytes": 32723
+    },
+    "art/skill/skchr_fgo_mordred_2.png": {
+      "sha256": "83c7c7f47cd9978d3f92231cabafd7c8fe735dfdf685ea7711c53dd0a4be1862",
+      "bytes": 28639
+    },
+    "art/skill/skchr_fgo_mordred_3.png": {
+      "sha256": "971a558df10dd8b39b59902a5cccc0b61abf2f0da170f05686ab38e78de50655",
+      "bytes": 33330
+    },
+    "art/skill/skchr_fgo_morgan_1.png": {
+      "sha256": "d4d9d8fb3495944eabb18bd0590f167c414d3e74b033eb85a46eec9ee705af39",
+      "bytes": 36691
+    },
+    "art/skill/skchr_fgo_morgan_2.png": {
+      "sha256": "7775909e7724e594ae70bc6f7b76e2630be470df53c3985376e642a332c612b8",
+      "bytes": 28802
+    },
+    "art/skill/skchr_fgo_morgan_3.png": {
+      "sha256": "76e2aa31a8433c5c8746cc7daa12110046ba130f015bc5707f08b9105e52c885",
+      "bytes": 28667
+    },
+    "art/skill/skchr_fgo_percival_1.png": {
+      "sha256": "ddfb62ade52bd4f8b5342204adb8f1b410f695ca5c5fd2c318d7dad04f89753d",
+      "bytes": 33489
+    },
+    "art/skill/skchr_fgo_percival_2.png": {
+      "sha256": "ec335554446a7c2b9389e652be2ff73c59cfd93026717c12cd84bbed8352d0ed",
+      "bytes": 32363
+    },
+    "art/skill/skchr_fgo_percival_3.png": {
+      "sha256": "3ee946d7f65b5de904ecebf3d80a991c7d1069e62d5ac586466075d631c9826a",
+      "bytes": 32951
+    },
+    "art/skill/skchr_fgo_tristan_1.png": {
+      "sha256": "280a7b42b6e08e5e98a8871c69965d1327be38c801ad6de5ff5eb3e2a981d1cc",
+      "bytes": 23910
+    },
+    "art/skill/skchr_fgo_tristan_2.png": {
+      "sha256": "7775909e7724e594ae70bc6f7b76e2630be470df53c3985376e642a332c612b8",
+      "bytes": 28802
+    },
+    "art/skill/skchr_fgo_tristan_3.png": {
+      "sha256": "9110fec176a3df1b0bee37a7a9b98ec6900be4fc04fe368e3ff54acc204639ff",
+      "bytes": 33102
+    },
+    "plugin.json": {
+      "sha256": "9166d3090d6e1ec3f155c7ea02b50c122e9f21621cf08d27abe0fe8c03afaeb2",
+      "bytes": 535
+    }
+  },
+  "spine": {}
+}

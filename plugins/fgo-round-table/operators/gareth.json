@@ -1,0 +1,144 @@
+{
+  "op": 1,
+  "charId": "char_x_fgo_round_table_gareth",
+  "name": "加雷斯",
+  "appellation": "Gareth",
+  "profession": "PIONEER",
+  "subProfessionId": "pioneer",
+  "subProfessionName": "尖兵",
+  "position": "MELEE",
+  "rarity": 4,
+  "as": "both",
+  "chess": {
+    "tier": 1,
+    "bonds": [
+      "roundTable",
+      "indomShip",
+      "steadShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_fgo_gareth_a"
+      ],
+      "golden": [
+        "garrison_fgo_gareth_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1650,
+        "atk": 420,
+        "def": 280,
+        "bat": 1.05,
+        "blockCnt": 2,
+        "cost": 10,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2450,
+        "atk": 520,
+        "def": 410,
+        "bat": 1.05,
+        "blockCnt": 2,
+        "cost": 10,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_fgo_round_table_gareth_1",
+      "name": "美掌加雷斯",
+      "duration": 0,
+      "spCost": 4,
+      "initSp": 0,
+      "desc": "下次攻击造成 190% 物理伤害，并使自身攻击力 +15%，持续 8 秒，最多叠加 3 层",
+      "bb": {
+        "atk_scale": 1.9,
+        "atk_buff": 0.15,
+        "buff_dur": 8,
+        "max_stacks": 3
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_gareth_2",
+      "name": "变身戒指",
+      "duration": 8,
+      "spCost": 18,
+      "initSp": 8,
+      "desc": "持续 8 秒，更容易受到攻击，防御力 +70%，获得 1 层物理护盾，受击时额外回复 1 点技力",
+      "bb": {
+        "def_pct": 0.7,
+        "shield_layers": 1,
+        "hit_sp": 1,
+        "taunt_level": 1
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_fgo_round_table_gareth_3",
+      "name": "狂暴少女狼",
+      "duration": 0,
+      "spCost": 22,
+      "initSp": 10,
+      "desc": "获得 1 次持续 6 秒的致命伤锁血【狼不眠】，立即对前方一格目标发动 5 段连续枪刺，每段造成 110% 物理伤害(无视闪避)并使目标防御力 -20%，持续 6 秒",
+      "bb": {
+        "undying_sec": 6,
+        "hits": 5,
+        "atk_scale": 1.1,
+        "def_reduction": -0.2,
+        "debuff_dur": 6
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "狼之怒",
+      "desc": "生命值低于 50% 时防御力 +30% 且获得 15% 物理闪避",
+      "bb": {
+        "hp_threshold": 0.5,
+        "def_pct": 0.3,
+        "dodge": 0.15
+      }
+    }
+  ],
+  "trait": {
+    "desc": "阻挡两个敌人",
+    "bb": {
+      "blockCnt": 2
+    }
+  },
+  "kit": "generic",
+  "nationId": "fgo"
+}

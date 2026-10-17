@@ -64,7 +64,7 @@ export function install(battle) {
       u.mem.limbusSanity = initSanity;
       u.mem.danteClockUsed = false;
       // 负理智人格（辛克莱 / 罗佳）：精神为负反而增强；其余罪人精神为负是虚弱/紊乱
-      const who = String(u.charId || u.chess?.charId || u.def || '');
+      const who = String(u.charId || u.def?.charId || u.defId || u.def?.id || '');
       u.mem.negSanityPersona = /limbus_(sinclair|rodion)\b/.test(who);
       updateSanityBuff(battle, u, bb, bondTier, count);
     }
@@ -74,7 +74,7 @@ export function install(battle) {
     //   良秀 (t5) 强力爆发：每次开启技能 +5 层，每场上限 25。
     // 其余罪人不再叠主盟约层（各自的自叠层/理智是个人机制，保留），所以“谁在叠主盟约”一目了然。
     for (const u of members) {
-      const who = String(u.charId || u.chess?.charId || u.def || '');
+      const who = String(u.charId || u.def?.charId || u.defId || u.def?.id || '');
       if (/limbus_rodion\b/.test(who)) {
         u.mem = u.mem || {};
         u.mem._limbusHits = 0;
@@ -119,10 +119,33 @@ export function install(battle) {
     // 2b. 【金枝共鸣】(罪恶共鸣) — 全队共享引擎：任意罪人把精神推到极值(满 +45 或 跌破 0)就为全队充能，
     //     金枝共鸣越高全队攻击/攻速越强，并每满一档引爆敌人身上的四类损伤。把原来 12 条散装自叠层统一成这一条团队线。
     //     负理智人格(辛克莱/罗佳)跌破 0 时充能更多，是主充能手。
-    const RES_CAP = num(bb.resonance_cap, 15);
+    // 道具联动：金枝 (Golden Bough) 与 LCB员工证
+    let boughResCapBonus = 0;
+    let boughInitResBonus = 0;
+    const boughCarriers = [];
+    for (const u of members) {
+      const items = (u.items || []).map((it) => (typeof it === 'string' ? it : it?.id || ''));
+      const hasBough = items.some((it) => it.includes('chess_item_6_limbus_bough'));
+      const hasLcb = items.some((it) => it.includes('chess_item_2_limbus_lcb'));
+      if (hasBough) {
+        const isBoughGolden = items.some((it) => it.endsWith('chess_item_6_limbus_bough_b'));
+        const extraSan = isBoughGolden ? 30 : 20;
+        u.mem = u.mem || {};
+        u.mem.limbusSanity = Math.min(45, (u.mem.limbusSanity ?? 0) + extraSan);
+        updateSanityBuff(battle, u, bb, bondTier, count);
+        boughCarriers.push(u);
+
+        if (hasLcb) {
+          boughResCapBonus += 5;
+          boughInitResBonus += (isBoughGolden ? 5 : 3);
+        }
+      }
+    }
+
+    const RES_CAP = num(bb.resonance_cap, 15) + boughResCapBonus;
     const DETO_STEP = Math.max(1, num(bb.detonate_step, 5));
     battle._limbusRes = battle._limbusRes || {};
-    const st = (battle._limbusRes[pid] = { n: 0, cap: RES_CAP });   // 暴露给快照(HUD 金枝共鸣条)与鸿璐的放大 kit
+    const st = (battle._limbusRes[pid] = { n: boughInitResBonus, cap: RES_CAP });   // 暴露给快照(HUD 金枝共鸣条)与鸿璐的放大 kit
     let detoPaid = 0;
     const applyResonance = () => {
       const n = Math.min(RES_CAP, st.n);
@@ -145,6 +168,13 @@ export function install(battle) {
       applyResonance();
       while (st.n >= (detoPaid + 1) * DETO_STEP) { detoPaid++; detonate(); }
     };
+    for (const u of boughCarriers) {
+      battle.on('damaged', (ev) => {
+        if (ev.source === u && u.alive) {
+          chargeResonance(1);
+        }
+      }, { owner: u });
+    }
     // 鸿璐「消耗金枝共鸣放一次大爆发」：清空全队金枝共鸣，并同步重置引爆档位与持续增益/HUD（返回被消耗掉的层数）
     st.spendAll = () => { const had = st.n; st.n = 0; detoPaid = 0; applyResonance(); return had; };
     st.applyResonance = applyResonance;

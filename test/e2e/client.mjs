@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 export const OUT = path.join(ROOT, 'test/e2e/out');
-export const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+export const CHROME = process.env.CHROME_PATH || (process.platform === 'win32' ? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 export const hasChrome = () => existsSync(CHROME);
 
@@ -95,7 +95,14 @@ export class Client {
 
   async open(query = '') {
     mkdirSync(OUT, { recursive: true });
-    this.browser = await this.puppeteer.launch({ executablePath: CHROME, headless: true, args: CHROME_ARGS, protocolTimeout: 90000 });
+    const launchOpts = { executablePath: CHROME, headless: true, args: CHROME_ARGS, protocolTimeout: 90000 };
+    if (process.platform === 'win32') {
+      const os = await import('node:os');
+      const fs = await import('node:fs');
+      this._udir = fs.mkdtempSync(path.join(os.tmpdir(), 'sp-e2e-'));
+      launchOpts.userDataDir = this._udir;
+    }
+    this.browser = await this.puppeteer.launch(launchOpts);
     const [first] = await this.browser.pages();
     const page = first || await this.browser.newPage();
     this.page = page;
@@ -152,7 +159,12 @@ export class Client {
     throw new Error(`${this.label}: timed out waiting for ${what} (last: ${JSON.stringify(last)})`);
   }
 
-  async close() { await this.browser?.close().catch(() => {}); }
+  async close() {
+    await this.browser?.close().catch(() => {});
+    if (this._udir) {
+      try { (await import('node:fs')).rmSync(this._udir, { recursive: true, force: true }); } catch {}
+    }
+  }
 
   /** Real mouse click on the `nth` visible, uncovered element matching `sel` whose text includes `text`. */
   async click(sel, text = null, { timeout = 15000, optional = false, nth = 0, button = 'left', any = false } = {}) {

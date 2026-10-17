@@ -511,7 +511,6 @@ export function createFallbackView(host, opts = {}) {
       schedule();
     },
     setSettings(s) { st.settings = { ...st.settings, ...(s || {}) }; schedule(); },
-    setPaused(on) {},
     on(type, fn) {
       if (typeof fn !== 'function') return () => {};
       if (!listeners.has(type)) listeners.set(type, new Set());
@@ -519,6 +518,15 @@ export function createFallbackView(host, opts = {}) {
       return () => listeners.get(type)?.delete(fn);
     },
     off(type, fn) { listeners.get(type)?.delete(fn); },
+    /** Resolve the live DOM target, never a remembered hover or selected piece. */
+    pieceAtClientPoint(clientX, clientY) {
+      if (st.destroyed || st.mode !== 'prep' || st.camera === 'pen' || st.drag
+        || !Number.isFinite(clientX) || !Number.isFinite(clientY)) return null;
+      const el = document.elementFromPoint(clientX, clientY)?.closest('.ff-piece[data-uid]');
+      if (!el || !root.contains(el)) return null;
+      const uid = Number(el.dataset.uid);
+      return Number.isInteger(uid) ? uid : null;
+    },
     pieceScreenRect(uid) {
       const el = root.querySelector(`[data-uid="${Number(uid)}"]`);
       return el ? el.getBoundingClientRect() : null;

@@ -1,0 +1,141 @@
+{
+  "op": 1,
+  "charId": "char_x_rhodes_kalts2",
+  "name": "凯尔希·思衡托",
+  "profession": "MEDIC",
+  "subProfessionId": "watchman",
+  "position": "RANGED",
+  "rarity": 6,
+  "as": "chess",
+  "chess": {
+    "tier": 5,
+    "bonds": [
+      "rhodesShip",
+      "deputShip"
+    ],
+    "garrisonIds": {
+      "normal": [],
+      "golden": []
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1393,
+        "atk": 433,
+        "def": 220,
+        "bat": 2.85,
+        "blockCnt": 1,
+        "cost": 17,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [2, 0], [2, 1],
+        [1, -1], [1, 0], [1, 1], [1, 2],
+        [0, -1], [0, 0], [0, 1], [0, 2],
+        [-1, -1], [-1, 0], [-1, 1], [-1, 2],
+        [-2, 0], [-2, 1]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 1543,
+        "atk": 501,
+        "def": 257,
+        "bat": 2.85,
+        "blockCnt": 1,
+        "cost": 17,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [2, 0], [2, 1],
+        [1, -1], [1, 0], [1, 1], [1, 2],
+        [0, -1], [0, 0], [0, 1], [0, 2],
+        [-1, -1], [-1, 0], [-1, 1], [-1, 2],
+        [-2, 0], [-2, 1]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skchr_kalts2_1",
+      "name": "应急肃正防线",
+      "duration": 35,
+      "spCost": 35,
+      "initSp": 18,
+      "desc": "攻击力+75%，攻击速度+35，场上其它所有起飞干员阻挡半径倍率+0.23",
+      "bb": {
+        "atk": 0.75,
+        "attack_speed": 35,
+        "attack@block_radius_scale": 0.23
+      },
+      "default": false
+    },
+    {
+      "skillId": "skchr_kalts2_2",
+      "name": "保护性拒止",
+      "duration": -1,
+      "spCost": 35,
+      "initSp": 18,
+      "desc": "攻击力+75%，攻击范围扩大，进行10次攻击，弹药击中时对目标周围造成范围真实伤害与停顿并治疗友方",
+      "bb": {
+        "atk": 0.75,
+        "attack@atk_scale": 1.4,
+        "attack@heal_scale": 1.4,
+        "attack@sluggish": 5
+      },
+      "default": false
+    },
+    {
+      "skillId": "skchr_kalts2_3",
+      "name": "破梏重生",
+      "duration": 35,
+      "spCost": 65,
+      "initSp": 25,
+      "desc": "攻击力+75%，攻击间隔缩短(-1.55秒)，同时治疗2个目标；立刻获得战术锚点并飞向锚点",
+      "bb": {
+        "atk": 0.75,
+        "base_attack_time": -1.55,
+        "target_num": 2
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "遗尘守望",
+      "desc": "最大生命与防御力+30%，阻挡数+1，阻挡半径倍率+0.23，起飞",
+      "bb": {
+        "max_hp": 0.3,
+        "def": 0.3,
+        "block_cnt": 1,
+        "block_radius_scale": 0.23
+      }
+    },
+    {
+      "index": 1,
+      "name": "医者丰碑",
+      "desc": "友方干员进入自身攻击范围时获得1层护盾与生命回复加成(罗德岛干员效果翻倍)",
+      "bb": {
+        "buff_duration": 30,
+        "hp_recovery_per_sec": 60,
+        "rhodes_bonus": 2
+      }
+    }
+  ],
+  "trait": {
+    "desc": "恢复友方单位生命，并且可以起飞"
+  },
+  "kit": {
+    "ref": "char_1052_kalts2"
+  },
+  "art": {
+    "ref": "char_1052_kalts2"
+  },
+  "nationId": "rhodes"
+}

@@ -1,0 +1,220 @@
+{
+  "op": 1,
+  "charId": "char_x_limbus_company_honglu",
+  "name": "鸿璐",
+  "appellation": "Hong Lu",
+  "profession": "CASTER",
+  "subProfessionId": "mystic",
+  "subProfessionName": "秘术师",
+  "position": "RANGED",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 4,
+    "bonds": [
+      "limbusShip",
+      "arcaneShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_limbus_honglu_a"
+      ],
+      "golden": [
+        "garrison_limbus_honglu_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1800,
+        "atk": 1000,
+        "def": 140,
+        "bat": 3,
+        "blockCnt": 1,
+        "cost": 22,
+        "res": 25,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -1,
+          3
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2800,
+        "atk": 1020,
+        "def": 240,
+        "bat": 3,
+        "blockCnt": 1,
+        "cost": 22,
+        "res": 30,
+        "aspd": 110,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -1,
+          3
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_limbus_company_honglu_1",
+      "name": "我愿开辟前路",
+      "duration": 0,
+      "spCost": 8,
+      "initSp": 0,
+      "desc": "攻击力 +60%\n战斗开始时使攻击范围内 1 名友方干员获得 1 层庇护\n攻击时使自身获得 2 层【呼吸法】，使目标获得 1 层脆弱\n目标脆弱与自身【呼吸法】层数之和每 6 级，攻击力额外 +10%",
+      "bb": {
+        "atk_pct": 0.6,
+        "slow_dur": 1.5,
+        "shelter_scale": 1
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_honglu_2",
+      "name": "污血绝志竟成",
+      "duration": 0,
+      "spCost": 35,
+      "initSp": 12,
+      "desc": "攻击力 +100%，攻击目标数 +1\n攻击时使目标获得 1 层脆弱，使自身获得 2 层【呼吸法】\n目标脆弱与自身【呼吸法】层数之和每 6 级，攻击力额外 +10%，至多 +20%",
+      "bb": {
+        "atk_pct": 1,
+        "extra_targets": 1,
+        "magic_vuln": 0.4,
+        "duration": 8
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_honglu_3",
+      "name": "全体黑兽，回应于我",
+      "duration": 0,
+      "spCost": 50,
+      "initSp": 20,
+      "desc": "攻击力 +150%\n技能开启时使自身获得 3 层【呼吸法】\n在自身前方一格召唤 1 名卯兔，继承鸿璐 60% 的攻击力与生命上限\n卯兔登场后立即对目标及周围敌人释放一次爆发，造成脆弱损伤，随后离场\n目标脆弱与自身【呼吸法】层数之和每 4 级，攻击力额外 +10%，至多 +30%",
+      "bb": {
+        "atk_pct": 1.5,
+        "jaro_scale": 3.5,
+        "jaro_inherit": 0.6
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "呼吸法",
+      "desc": "攻击时使自身获得 1 层【呼吸法】；自身每 2 层【呼吸法】使攻击力 +3%",
+      "bb": {
+        "breath_gain": 1,
+        "spirit_thr": 30
+      }
+    },
+    {
+      "index": 1,
+      "name": "君主的威仪",
+      "desc": "攻击时使目标获得 1 层脆弱；目标脆弱层数达到上限时，造成伤害 +35%",
+      "bb": {
+        "vuln_cap": 5,
+        "vuln_step": 0.1,
+        "regal_dmg": 0.35
+      }
+    }
+  ],
+  "trait": {
+    "desc": "攻击造成法术伤害；【精神值】越高叠加【呼吸法】越快，叠满时向全体【边狱公司】释放一次攻击力与攻击速度爆发",
+    "bb": {
+      "breath_cap": 10,
+      "breath_step": 0.03,
+      "burst_atk": 0.25,
+      "burst_aspd": 20,
+      "burst_dur": 8
+    }
+  },
+  "kit": "generic",
+  "nationId": "limbus",
+  "art": {
+    "ref": "char_limbus_honglu"
+  }
+}

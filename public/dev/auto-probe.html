@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>auto-probe · 自动进游戏看调配界面</title>
+  <style>
+    body { margin: 0; background: #111; font: 12px/1.4 monospace; color: #9f9; }
+    #game { width: 1400px; height: 900px; border: 0; display: block; }
+    #log { position: fixed; right: 0; top: 0; width: 380px; max-height: 100vh; overflow: auto; padding: 8px;
+           background: rgba(0,0,0,.86); white-space: pre-wrap; z-index: 9; }
+  </style>
+</head>
+<body>
+  <iframe id="game" src="/"></iframe>
+  <pre id="log">booting…</pre>
+  <script type="module">
+    // 同源 iframe 直接驱动游戏：登录 → 大厅 → 干员调配。用来截取真实界面（headless Chrome 无法交互）。
+    const logEl = document.getElementById('log');
+    let me = 't0';
+    const log = (...a) => { logEl.textContent += `\n[${me}] ` + a.map(String).join(' '); };
+
+    const f = document.getElementById('game');
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+    /** 在 iframe 里按可见文本找元素。 */
+    function findByText(doc, re, sel = 'button, a, [role=button], .lo-tab, .tab, li') {
+      return [...doc.querySelectorAll(sel)].find((el) => el.offsetParent !== null && re.test(el.textContent || ''));
+    }
+
+    async function run() {
+      const d = () => f.contentDocument;
+      const w = () => f.contentWindow;
+
+      await sleep(2500);
+      log('title:', d().title);
+
+      // 1) 登录
+      const input = d().querySelector('input');
+      if (input) {
+        input.focus();
+        input.value = '探测员';
+        const EW = w().Event;
+        input.dispatchEvent(new EW('input', { bubbles: true }));
+        log('输入代号 ok');
+        await sleep(400);
+        const startBtn = findByText(d(), /开始/, 'button, [role=button]');
+        if (startBtn) { startBtn.click(); log('点击开始'); }
+        else log('!! 没找到开始按钮');
+      } else log('!! 没找到输入框');
+
+      // 2) 等大厅/房间
+      await sleep(4000);
+      log('当前按钮:', [...d().querySelectorAll('button')].filter((b) => b.offsetParent).map((b) => (b.textContent || '').trim().slice(0, 12)).filter(Boolean).join(' | '));
+
+      // 3) 找「干员调配」入口并点击
+      for (let i = 0; i < 12; i++) {
+        const entry = findByText(d(), /干员调配|调配|编队/);
+        if (entry) { entry.click(); log('点击入口:', (entry.textContent || '').trim().slice(0, 20)); break; }
+        await sleep(1000);
+      }
+
+      await sleep(3500);
+      // 4) dump 结果
+      const cards = [...d().querySelectorAll('[data-chess], .lo-card, .lo-dhead, .lo-detail, .uthumb, img')];
+      log('卡片/图片元素数:', cards.length);
+      const fgoCards = [...d().querySelectorAll('[data-chess*="fgo"]')];
+      log('fgo 卡片数:', fgoCards.length);
+      for (const c of fgoCards.slice(0, 6)) {
+        const img = c.querySelector('img');
+        log('  ', c.getAttribute('data-chess'), 'img=', img ? (img.getAttribute('src') || '').slice(0, 70) : 'NO-IMG',
+            'naturalW=', img ? img.naturalWidth : '-', 'displayed=', img ? getComputedStyle(img).display : '-');
+      }
+
+      // 4.5) ?goto=shop：退出调配，进一局单人模拟，看游戏内商店
+      if (new URLSearchParams(location.search).get('goto') === 'shop') {
+        const back = findByText(d(), /返回/);
+        if (back) { back.click(); log('返回大厅'); await sleep(2000); }
+        const solo = findByText(d(), /标准模拟|SOLO/i);
+        if (solo) { solo.click(); log('点击进入对局:', (solo.textContent || '').trim().slice(0, 20)); }
+        else log('!! 没找到模拟入口');
+        await sleep(9000);
+        // 对局的准备阶段：dump 商店卡片
+        const scards = [...d().querySelectorAll('.scard')];
+        log('商店卡数:', scards.length);
+        for (const c of scards.slice(0, 6)) {
+          const img = c.querySelector('img');
+          const nm = c.querySelector('.scard__name, [class*=name]');
+          log('  ', (nm ? nm.textContent : c.textContent || '').trim().slice(0, 10),
+              'img=', img ? (img.getAttribute('src') || '').split('/').pop().slice(0, 40) : 'NO-IMG',
+              'natural=', img ? img.naturalWidth + 'x' + img.naturalHeight : '-');
+        }
+        log('DONE-SHOP');
+        return;
+      }
+
+      // 5) 点开加雷斯，dump 右侧详情面板（立绘所在的框）
+      const probeId = new URLSearchParams(location.search).get('chess') || 'chess_fgo_1_gareth_a';
+      const gareth = d().querySelector(`[data-chess="${probeId}"]`);
+      if (gareth) {
+        (gareth.querySelector('button') || gareth).click();
+        log('点击加雷斯');
+        await sleep(1800);
+        const head = d().querySelector('.lo-dhead__art');
+        if (head) {
+          const img = head.querySelector('img');
+          const cs = img ? getComputedStyle(img) : null;
+          log('详情立绘框 .lo-dhead__art:', JSON.stringify({
+            box: head.getBoundingClientRect().width.toFixed(0) + 'x' + head.getBoundingClientRect().height.toFixed(0),
+            src: img ? (img.getAttribute('src') || '').slice(0, 80) : 'NO-IMG',
+            natural: img ? img.naturalWidth + 'x' + img.naturalHeight : '-',
+            objectFit: cs ? cs.objectFit : '-',
+            w: cs ? cs.width : '-', h: cs ? cs.height : '-',
+          }));
+        } else log('!! 没有 .lo-dhead__art');
+        // 详情卡的其他图片
+        for (const im of d().querySelectorAll('.lo-detail img, .lo-dhead img')) {
+          const r = im.getBoundingClientRect();
+          log('   详情图', (im.getAttribute('src') || '').slice(0, 60), im.naturalWidth + 'x' + im.naturalHeight,
+              'box=' + r.width.toFixed(0) + 'x' + r.height.toFixed(0));
+        }
+      } else log('!! 列表里没有加雷斯');
+      log('DONE');
+    }
+
+    run().catch((e) => log('ERROR', e.message));
+  </script>
+</body>
+</html>

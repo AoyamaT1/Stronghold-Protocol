@@ -23,6 +23,14 @@
 // by its view (`spine.restart(entry)`, RefLru.restart); such a fresh load — and any load after a failure — drops PIXI's
 // still-pending requests of that skeleton first (forgetPendingSpine), so it does not join them.
 //
+// Cosmetic plugins (DESIGN §32 P1a, docs/PLUGINS.md §9): the manifest the helpers read is the installation's with the
+// cosmetic layers laid over it — `cosmetics` (public/js/cosmetics.js createCosmeticLayers; public/js/content.js sets
+// them): the room's visual set, then the player's personal plugins, composed on the page's own manifest (every plugin
+// URL built from a set's checked composition, every reference copied out of that manifest: shared/plugins/visual.js). A
+// layer change is told like a late manifest (onChange 'manifest'). A plugin file that fails to load (an image, a model)
+// is reported (`cosmetics.fail`): its entry falls back to the art beneath it. This store itself loads with the first
+// match (ui/fieldHost.js), as in 0.2.6: the title page needs neither it nor its Spine cache.
+//
 // Pure at import time: no PIXI, no DOM access until a loader actually runs (Node tests import this file).
 //
 //   import { assets } from './assets.js';          // browser singleton (manifest fetched on first use, or seeded)
@@ -42,6 +50,8 @@
 // so it can be unit tested without a browser. Helpers never throw on unknown ids — they return null and the
 // caller falls back (docs/ASSETS.md "Other fallbacks").
 
+import { cosmetics, createCosmeticLayers, EMPTY_MANIFEST } from './cosmetics.js';
+
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
 const str = (v) => (typeof v === 'string' && v ? v : null);
 const get = (o, k) => (isObj(o) && Object.hasOwn(o, k) ? o[k] : undefined);
@@ -55,6 +65,31 @@ export function baseCharId(id) {
   return s.replace(/_(1|2)$/, '');
 }
 
+/** Canonical base game / mod charId for plugin and chess prefixes. */
+export function canonicalCharId(id) {
+  const s = str(id);
+  if (!s) return null;
+  let m = s.match(/^(?:chess_x_|char_x_)fgo_round_table_([a-z0-9_]+?)(?:_[ab])?$/);
+  if (m) return 'char_fgo_' + m[1];
+  m = s.match(/^(?:chess_fgo_|char_fgo_)([a-z0-9_]+?)(?:_[ab])?$/);
+  if (m) return 'char_fgo_' + m[1];
+  m = s.match(/^(?:chess_x_|char_x_)limbus_company_([a-z0-9_]+?)(?:_[ab])?$/);
+  if (m) return 'char_limbus_' + m[1];
+  m = s.match(/^(?:chess_limbus_|char_limbus_)([a-z0-9_]+?)(?:_[ab])?$/);
+  if (m) return 'char_limbus_' + m[1];
+  m = s.match(/^(?:chess_x_|char_x_)ave_mujica_([a-z0-9_]+?)(?:_[ab])?$/);
+  if (m) {
+    const ALIAS = { oblvns: 'char_4182_oblvns', mortis: 'char_4183_mortis', dolris: 'char_4184_dolris', amoris: 'char_4185_amoris', tmoris: 'char_4186_tmoris' };
+    return ALIAS[m[1]] || ('char_418_' + m[1]);
+  }
+  m = s.match(/^(?:chess_x_|char_x_)rhodes_([a-z0-9_]+?)(?:_[ab])?$/);
+  if (m) {
+    const ALIAS = { amiya3: 'char_1037_amiya3', savage: 'char_230_savage', ascln: 'char_4132_ascln', closur: 'char_4228_closur', logos: 'char_4133_logos', monstr: 'char_4179_monstr', kalts2: 'char_1052_kalts2' };
+    return ALIAS[m[1]] || s;
+  }
+  return s;
+}
+
 /**
  * Operator avatar. Accepts a charId (`char_002_amiya`) or an asset id with the E2 suffix (`char_002_amiya_2`).
  * `opts.e2` prefers the E2 art. Falls back to the base avatar, then null.
@@ -62,22 +97,17 @@ export function baseCharId(id) {
 export function avatarUrl(m, id, opts) {
   const s = str(id);
   if (!s) return null;
-  const direct = get(get(m, 'chars'), s);
+  const canon = canonicalCharId(s);
+  const direct = get(get(m, 'chars'), s) || (canon ? get(get(m, 'chars'), canon) : null);
   let rec = direct, e2 = !!(opts && opts.e2);
   if (!rec) {
-    const base = baseCharId(s);
+    const base = baseCharId(s) || (canon ? baseCharId(canon) : null);
     rec = get(get(m, 'chars'), base);
     if (rec && /_2$/.test(s)) e2 = true;
   }
-  if (rec) {
-    // 皮肤 (docs/SKINS.md): an installed skin may ship its own avatar; `opts.skin` is a skinId, and an unknown one
-    // (this install does not have it) falls back to the operator's own avatar rather than failing
-    if (opts && str(opts.skin)) {
-      const skin = get(get(rec, 'skins'), opts.skin);
-      if (skin && str(skin.avatar)) return str(skin.avatar);
-    }
-    return str(e2 && rec.avatarE2) || str(rec.avatar) || null;
-  }
+  if (rec) return str(e2 && rec.avatarE2) || str(rec.avatar) || null;
+  if (canon && canon.startsWith('char_fgo_')) return `/assets/char/avatar/${canon}${e2 ? '_2' : ''}.png`;
+  if (canon && canon.startsWith('char_limbus_')) return `/assets/char/avatar/${canon}${e2 ? '_2' : ''}.png`;
   return null;
 }
 
@@ -85,17 +115,42 @@ export function avatarUrl(m, id, opts) {
 export function portraitUrl(m, id, opts) {
   const s = str(id);
   if (!s) return null;
-  let rec = get(get(m, 'chars'), s), e2 = !!(opts && opts.e2);
+  const canon = canonicalCharId(s);
+  let rec = get(get(m, 'chars'), s) || (canon ? get(get(m, 'chars'), canon) : null), e2 = !!(opts && opts.e2);
   if (!rec) {
-    rec = get(get(m, 'chars'), baseCharId(s));
+    const base = baseCharId(s) || (canon ? baseCharId(canon) : null);
+    rec = get(get(m, 'chars'), base);
     if (rec && /_2$/.test(s)) e2 = true;
   }
-  if (!rec) return null;
+  if (rec) return str(e2 && rec.portraitE2) || str(rec.portrait) || null;
+  if (canon && canon.startsWith('char_fgo_')) return `/assets/char/portrait/${canon}${e2 ? '_2' : ''}.png`;
+  if (canon && canon.startsWith('char_limbus_')) return `/assets/char/portrait/${canon}_${e2 ? '2' : '1'}.png`;
+  return null;
+}
+
+/** Operator standee / full figure (`_1` base, `_2` E2). */
+export function standeeUrl(m, id, opts) {
+  const s = str(id);
+  if (!s) return null;
+  const canon = canonicalCharId(s);
+  let rec = get(get(m, 'chars'), s) || (canon ? get(get(m, 'chars'), canon) : null), e2 = !!(opts && opts.e2);
+  if (!rec) {
+    const base = baseCharId(s) || (canon ? baseCharId(canon) : null);
+    rec = get(get(m, 'chars'), base);
+    if (rec && /_2$/.test(s)) e2 = true;
+  }
   if (opts && str(opts.skin)) {
     const skin = get(get(rec, 'skins'), opts.skin);
-    if (skin && str(skin.portrait)) return str(skin.portrait);
+    if (skin && str(skin.standee)) return str(skin.standee);
   }
-  return str(e2 && rec.portraitE2) || str(rec.portrait) || null;
+  const found = rec ? (str(e2 && rec.standeeE2) || str(rec.standee) || null) : null;
+  if (found) return found;
+  const fgoId = (canon && canon.startsWith('char_fgo_')) ? canon : (s.startsWith('char_fgo_') ? s : null);
+  if (fgoId) {
+    const clean = baseCharId(fgoId);
+    return `/assets/char/standee/${clean}${e2 ? '_2' : ''}.png`;
+  }
+  return null;
 }
 
 export function enemyIconUrl(m, enemyId) {
@@ -128,6 +183,12 @@ export function skillIconUrl(m, id, opts) {
   if (!url && s) {
     const icon = str(get(get(m, 'skillsById'), s));
     if (icon) url = str(get(skills, icon));
+  }
+  if (!url && s) {
+    const aliased = s.replace(/^skx_fgo_round_table_/, 'skchr_fgo_').replace(/^skx_limbus_company_/, 'skchr_');
+    if (aliased !== s) {
+      url = str(get(skills, aliased)) || `/assets/skill/${aliased}.png`;
+    }
   }
   return url || (fallback ? uiUrl(m, 'skillIcon/empty') : null);
 }
@@ -163,24 +224,19 @@ export function subProfIconUrl(m, sub) {
 export function spineEntry(m, id, opts) {
   const s = str(id);
   if (!s) return null;
-  const ch = get(get(m, 'chars'), s) || get(get(m, 'chars'), baseCharId(s));
-  if (ch) {
-    // 皮肤 (docs/SKINS.md): an installed skin replaces the operator's own model. `opts.skin` is a skinId; when it
-    // is absent — or names a skin this install does not have — the operator's default model is used, so a client
-    // meeting a manifest without that skin still works.
-    const skin = opts && str(opts.skin) ? get(get(ch, 'skins'), opts.skin) : null;
-    const src = (skin && isObj(skin.spine)) ? skin.spine : ch.spine;
-    if (isObj(src)) {
-      const sp = (opts && opts.back && isObj(src.back)) ? src.back : src.front;
-      return validSpine(sp) ? sp : null;
-    }
+  const canon = canonicalCharId(s);
+  const ch = get(get(m, 'chars'), s) || (canon ? get(get(m, 'chars'), canon) : null)
+    || get(get(m, 'chars'), baseCharId(s)) || (canon ? get(get(m, 'chars'), baseCharId(canon)) : null);
+  if (ch && isObj(ch.spine)) {
+    const sp = (opts && opts.back && isObj(ch.spine.back)) ? ch.spine.back : ch.spine.front;
+    return validSpine(sp) ? sp : null;
   }
-  const tk = get(get(m, 'tokens'), s);
+  const tk = get(get(m, 'tokens'), s) || (canon ? get(get(m, 'tokens'), canon) : null);
   if (tk) {
     const web = validSpine(tk.spine) ? tk.spine : null;
     return (opts && opts.local && localSpineEntry(tk.spineLocal, opts.local, web)) || web;
   }
-  const en = get(get(m, 'enemies'), s);
+  const en = get(get(m, 'enemies'), s) || (canon ? get(get(m, 'enemies'), canon) : null);
   if (en) {
     let web = null;
     if (validSpine(en.spine)) web = en.spine;
@@ -218,13 +274,14 @@ export function localSpineEntry(sl, local, web) {
   return entry;
 }
 
-/** Whether an operator/token/enemy has a Back model. `skinId` asks about an installed skin (docs/SKINS.md). */
-export function hasBackSpine(m, id, skinId) {
-  const ch = get(get(m, 'chars'), str(id) || '') || get(get(m, 'chars'), baseCharId(id) || '');
-  if (!ch) return false;
-  const skin = str(skinId) ? get(get(ch, 'skins'), skinId) : null;
-  const src = (skin && isObj(skin.spine)) ? skin.spine : ch.spine;
-  return !!(isObj(src) && validSpine(src.back));
+/** Whether an operator/token/enemy has a Back model. */
+export function hasBackSpine(m, id) {
+  const s = str(id);
+  if (!s) return false;
+  const canon = canonicalCharId(s);
+  const ch = get(get(m, 'chars'), s) || (canon ? get(get(m, 'chars'), canon) : null)
+    || get(get(m, 'chars'), baseCharId(s)) || (canon ? get(get(m, 'chars'), baseCharId(canon)) : null);
+  return !!(ch && isObj(ch.spine) && validSpine(ch.spine.back));
 }
 
 export function validSpine(sp) {
@@ -232,8 +289,8 @@ export function validSpine(sp) {
 }
 
 /** Best 2D picture for a unit asset id (operator avatar, token avatar, enemy icon, item icon). */
-export function unitPictureUrl(m, id, opts) {
-  return avatarUrl(m, id, opts) || tokenAvatarUrl(m, id) || enemyIconUrl(m, id) || itemIconUrl(m, id) || null;
+export function unitPictureUrl(m, id) {
+  return avatarUrl(m, id) || tokenAvatarUrl(m, id) || enemyIconUrl(m, id) || itemIconUrl(m, id) || null;
 }
 
 // ---- audio ---------------------------------------------------------------------------------------------------
@@ -267,6 +324,12 @@ export function unitSfxUrl(m, id, kind, skillIndex) {
   }
   return str(u[kind]);
 }
+
+// ---- cosmetic plugins (DESIGN §32 P1a) ---------------------------------------------------------------------------
+
+// The layers live in public/js/cosmetics.js (small: the title page loads it, not this store); re-exported for the code
+// and the tests that read them from here.
+export { createCosmeticLayers, cosmetics };
 
 // ---- generic caches ----------------------------------------------------------------------------------------
 
@@ -587,19 +650,7 @@ export async function loadSpineData(entry, opts) {
   if (!PIXI || !PIXI.Assets || !PIXI.spine) throw new Error('PIXI / pixi-spine not loaded');
   if (opts && opts.fresh) forgetPendingSpine(entry, opts.keep);
   const res = await PIXI.Assets.load(entry.skel);
-  let data = res && (res.spineData || res);
-  if (data && !Array.isArray(data.animations) && typeof data === 'object') {
-    try {
-      const atlasRes = await PIXI.Assets.load(entry.atlas);
-      const atlas = atlasRes?.spineAtlas || atlasRes;
-      const SpineRuntime = PIXI.spine.SkeletonJson ? PIXI.spine : (PIXI.spine.core || PIXI.spine);
-      const loader = new SpineRuntime.AtlasAttachmentLoader(atlas);
-      const parser = new SpineRuntime.SkeletonJson(loader);
-      data = parser.readSkeletonData(data);
-    } catch (e) {
-      console.warn('[assets] manual spine json parse fallback error:', e);
-    }
-  }
+  const data = res && (res.spineData || res);
   if (!data || !Array.isArray(data.animations)) throw new Error(`bad spine data: ${entry.skel}`);
   return data;
 }
@@ -748,15 +799,20 @@ const transientFetch = (err) => {
  * after MANIFEST_BACKOFF_MS (bounded; a 404 or a body that is no JSON only on the next `ready()`). `onChange(fn)` is told
  * when the manifest (`'manifest'`) or the optional local-client manifest (`'local'`) arrives, so views built without it
  * resolve their models then (render/app.js → UnitView.retryAssets).
+ * Cosmetic plugins (`opts.cosmetics`, createCosmeticLayers; the browser singleton has the page's `cosmetics`): every
+ * helper reads the manifest with the layers laid over it, `manifest` is that one, and a layer change is told as
+ * 'manifest' (the views re-resolve what they draw next).
  * @param {{ url?: string, fetch?: typeof fetch, manifest?: object, localManifest?: object, loadImage?: (url) => Promise<any>,
  *           loadSpine?: (entry) => Promise<any>, unloadSpine?: (entry, value, keepPages:Set<string>) => (Promise<void>|void),
  *           spineMax?: number, spineTimeout?: number, spineWeigh?: (key, spineData) => number, spineIdleBytes?: number,
  *           spineQuietBytes?: number, spineIdleGrace?: number, spineEvictDelay?: number, spineQuietDelay?: number,
  *           spineTimers?: { set, clear }, spineNow?: () => number, retryDelays?: number[], backoff?: number[],
- *           wait?: (ms: number) => Promise<void>, timers?: { set, clear } }} [opts]
+ *           wait?: (ms: number) => Promise<void>, timers?: { set, clear },
+ *           cosmetics?: ReturnType<typeof createCosmeticLayers> | null }} [opts]
  */
 export function createAssets(options) {
   const opts = options && typeof options === 'object' ? options : {};
+  const layers = opts.cosmetics && typeof opts.cosmetics.apply === 'function' ? opts.cosmetics : null;
   const url = opts.url || '/data/assets.json';
   const localUrl = opts.localUrl || '/data/local-assets.json';
   let localPromise = isObj(opts.localManifest) ? Promise.resolve(opts.localManifest) : null;
@@ -873,7 +929,13 @@ export function createAssets(options) {
     now: opts.spineNow,
   });
 
-  /** Image element (cached; failures resolve to null). */
+  /**
+   * A file of a cosmetic layer failed to load (DESIGN §32 P1a): its entry falls back to the art beneath it from now on
+   * (createCosmeticLayers fail — the listeners re-resolve their art). Whether it was a layer's file.
+   */
+  const failed = (u) => { try { return !!layers?.fail?.(u); } catch { return false; } };
+
+  /** Image element (cached; failures resolve to null — a cosmetic plugin's image that failed falls back: `failed`). */
   function image(u, { retry = false } = {}) {
     const s = str(u);
     if (!s) return Promise.resolve(null);
@@ -882,8 +944,8 @@ export function createAssets(options) {
     if (!e) {
       e = { value: null, done: false, promise: null };
       e.promise = Promise.resolve().then(() => loadImage(s)).then(
-        (img) => { e.value = img; e.done = true; return img; },
-        () => { e.done = true; return null; },
+        (img) => { e.value = img; e.done = true; if (!img) failed(s); return img; },
+        () => { e.done = true; failed(s); return null; },
       );
       images.set(s, e);
     }
@@ -906,7 +968,9 @@ export function createAssets(options) {
     return localPromise;
   }
 
-  const m = () => manifest || {};
+  const m = () => (layers ? layers.apply(manifest || EMPTY_MANIFEST) : manifest || {});
+  // a layer switched on or off draws like a manifest that arrived: the views re-resolve their art (render/app.js)
+  if (layers) layers.subscribe(() => notify('manifest'));
   return {
     ready,
     local,
@@ -930,10 +994,12 @@ export function createAssets(options) {
       return () => listeners.delete(fn);
     },
     localUrl: (group, name) => localAssetUrl(localManifest, group, name),
-    get manifest() { return manifest; },
+    /** The manifest the helpers read (the cosmetic layers over the loaded one), null until one is loaded. */
+    get manifest() { return manifest ? m() : null; },
     get loaded() { return !!manifest; },
     avatar: (id, o) => avatarUrl(m(), id, o),
     portrait: (id, o) => portraitUrl(m(), id, o),
+    standee: (id, o) => standeeUrl(m(), id, o),
     enemyIcon: (id) => enemyIconUrl(m(), id),
     tokenAvatar: (id) => tokenAvatarUrl(m(), id),
     bondIcon: (id) => bondIconUrl(m(), id),
@@ -943,9 +1009,9 @@ export function createAssets(options) {
     profIcon: (p, kind) => profIconUrl(m(), p, kind),
     subProfIcon: (s) => subProfIconUrl(m(), s),
     ui: (name) => uiUrl(m(), name),
-    picture: (id, o) => unitPictureUrl(m(), id, o),
+    picture: (id) => unitPictureUrl(m(), id),
     spineEntry: (id, o) => spineEntry(m(), id, localManifest ? { ...o, local: localManifest } : o),
-    hasBack: (id, skinId) => hasBackSpine(m(), id, skinId),
+    hasBack: (id) => hasBackSpine(m(), id),
     audio: {
       bgm: (kind) => bgmEntry(m(), kind),
       sfx: (group, key) => sfxUrl(m(), group, key),
@@ -953,6 +1019,12 @@ export function createAssets(options) {
     },
     /** Cached image element promise (null on failure). */
     image,
+    /**
+     * Report a file that failed to load outside this store (a texture another loader made — render/app.js's shadow, an
+     * `<img>` of the interface: public/js/content.js): a cosmetic plugin's file falls back. Whether it was one.
+     * @param {string} u
+     */
+    failed,
     /** Already-loaded image element or null (sync). */
     imageNow(u) { const e = images.get(str(u) || ''); return e && e.done ? e.value : null; },
     /**
@@ -974,7 +1046,13 @@ export function createAssets(options) {
      * hold() → release function (a scene that will need its skeletons again: RefLru).
      */
     spine: {
-      acquire: (entry, o) => (validSpine(entry) ? spine.acquire(entry.skel, entry, o) : Promise.reject(new Error('no spine entry'))),
+      // a cosmetic plugin's model that fails to load (any of its files) falls back to the installation's: its view loads
+      // that one (render/units.js retryAssets) — not while the tab is hidden (a load the hidden tab left hanging times out
+      // without the file being at fault: GitHub #68; the view tries again when it is shown)
+      acquire: (entry, o) => (validSpine(entry) ? spine.acquire(entry.skel, entry, o).catch((err) => {
+        if (!globalThis.document?.hidden) failed(entry.skel);
+        throw err;
+      }) : Promise.reject(new Error('no spine entry'))),
       restart: (entry) => (validSpine(entry) ? spine.restart(entry.skel, entry) : false),
       release: (entry) => { if (entry && entry.skel) spine.release(entry.skel); },
       peek: (entry) => (entry && entry.skel ? spine.peek(entry.skel) : null),
@@ -986,5 +1064,5 @@ export function createAssets(options) {
   };
 }
 
-/** Browser singleton. */
-export const assets = createAssets();
+/** Browser singleton (with the page's cosmetic layers). */
+export const assets = createAssets({ cosmetics });

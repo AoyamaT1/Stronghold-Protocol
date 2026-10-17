@@ -1,0 +1,24 @@
+{
+  "$schema": "../../schemas/plugin.schema.json",
+  "manifest": 2,
+  "id": "ave-mujica-look",
+  "name": "Ave Mujica 干员外观包",
+  "englishName": "Ave Mujica Operator Cosmetics",
+  "version": "1.0.0",
+  "app": ">=0.3.0 <0.4.0",
+  "api": 1,
+  "class": "cosmetic",
+  "scope": [
+    "room",
+    "personal"
+  ],
+  "authors": [
+    "ruka"
+  ],
+  "license": "CC-BY-4.0",
+  "permissions": [
+    "assets.add",
+    "assets.override"
+  ],
+  "assets": "art/assets.json"
+}

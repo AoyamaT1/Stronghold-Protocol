@@ -1,0 +1,357 @@
+{
+  "lock": 1,
+  "id": "limbus-look",
+  "version": "1.0.0",
+  "generator": "tools/plugin.mjs pack",
+  "files": {
+    "art/assets.json": {
+      "sha256": "3117c12916b2d729e864538086d39dc7811cb82923368f626cf829c665947e3d",
+      "bytes": 7686
+    },
+    "art/bond/limbusShip.png": {
+      "sha256": "ee44a09b625d801a998ee483fa328961b323355329b11b8329a052d8fb51678b",
+      "bytes": 5466
+    },
+    "art/char/avatar/char_limbus_donquixote.png": {
+      "sha256": "9b30684d7a84397ee50f22cfbc4a8852c01240a01f26737f2e675a82b2702dc5",
+      "bytes": 73720
+    },
+    "art/char/avatar/char_limbus_donquixote_2.png": {
+      "sha256": "2eaf35a39763bda0e2e0a32e05de84c43ea2f8d1f2290919cdcfbb08fa47e5d7",
+      "bytes": 75233
+    },
+    "art/char/avatar/char_limbus_faust.png": {
+      "sha256": "1f2c36fd0fa623542373c9d3397d1ba77cce53a22628452e359348716b3d580d",
+      "bytes": 67611
+    },
+    "art/char/avatar/char_limbus_faust_2.png": {
+      "sha256": "6ed70a2965dd6db78fef86a2b01caa4cc01c36593ad0603437e41cd8a2b3295d",
+      "bytes": 73713
+    },
+    "art/char/avatar/char_limbus_gregor.png": {
+      "sha256": "1a2be2c0f47c43e91467d6f84590cfd4f5b4abb8727408f8551117a9c5676442",
+      "bytes": 63736
+    },
+    "art/char/avatar/char_limbus_gregor_2.png": {
+      "sha256": "3f612233fbfa83b9f14850e1391a3aaec22d7c81266231bea3fd6baf5f20f8d6",
+      "bytes": 76222
+    },
+    "art/char/avatar/char_limbus_heathcliff.png": {
+      "sha256": "a94de06512154bda25d132eff20cd33df45e3f4bad6cd0063254f6ec1af1dfc7",
+      "bytes": 70387
+    },
+    "art/char/avatar/char_limbus_heathcliff_2.png": {
+      "sha256": "aff3961d58e130285a652b17566b635f85c23b04f17d62948820ca75d1ad1533",
+      "bytes": 76821
+    },
+    "art/char/avatar/char_limbus_honglu.png": {
+      "sha256": "1eb48f52a626501c46112d6039147cb3fd57e5514af8a3808cf7ea116a6ba8e0",
+      "bytes": 79049
+    },
+    "art/char/avatar/char_limbus_honglu_2.png": {
+      "sha256": "7f94cdce22fa28c91a779e19c8a96bb9059e40dfaeb8b2658e81483decca4c96",
+      "bytes": 77313
+    },
+    "art/char/avatar/char_limbus_ishmael.png": {
+      "sha256": "f57d15c901abbdb1f0553f1239db5fbfcb373ff18d481a1a2c23bfe19461eb29",
+      "bytes": 69311
+    },
+    "art/char/avatar/char_limbus_ishmael_2.png": {
+      "sha256": "bc7b5306afc5f6dd6ea8d33867794034c32b8c57118c8e9ab8eed00aa537fcf8",
+      "bytes": 80060
+    },
+    "art/char/avatar/char_limbus_meursault.png": {
+      "sha256": "fabd01f504c673a13075dfa04a4999a9e999180824256a659edca76aeb77894b",
+      "bytes": 73693
+    },
+    "art/char/avatar/char_limbus_meursault_2.png": {
+      "sha256": "8f9c3e7404012869bbbd8e00f92a6742db6a6558f5204b06e4cbda98bdf44866",
+      "bytes": 76014
+    },
+    "art/char/avatar/char_limbus_outis.png": {
+      "sha256": "3468afd44318601e6faa686b343e2bbcd5dbbb77e79961efee72d2227b17bec9",
+      "bytes": 69425
+    },
+    "art/char/avatar/char_limbus_outis_2.png": {
+      "sha256": "b3ced3811be59bfdd2d1ddf69159cd00992f9368307687b481309251a3c8db72",
+      "bytes": 70987
+    },
+    "art/char/avatar/char_limbus_rodion.png": {
+      "sha256": "23481a16f0437deffa06d165f8d05e29f29d7ebf8365fdfb006e50209e3410b1",
+      "bytes": 67506
+    },
+    "art/char/avatar/char_limbus_rodion_2.png": {
+      "sha256": "536d80b8da4b76a83b4167a382471c853b4c3ce5d30f979367683979449e952b",
+      "bytes": 76735
+    },
+    "art/char/avatar/char_limbus_ryoshu.png": {
+      "sha256": "c927cc93414ec94a75471bfd17c16375e086f5127bb28e760e0f7c95d45e6141",
+      "bytes": 79888
+    },
+    "art/char/avatar/char_limbus_ryoshu_2.png": {
+      "sha256": "a28821e27a05541c6128a353bc547cbfba6c7ce6752658b0773c60c85c60e0ad",
+      "bytes": 78333
+    },
+    "art/char/avatar/char_limbus_sinclair.png": {
+      "sha256": "6085ff1a6b3880265e32c5825c53dcf78615814a7f1cba29eeab7f7a918f5b2c",
+      "bytes": 93343
+    },
+    "art/char/avatar/char_limbus_sinclair_2.png": {
+      "sha256": "545d61a995b9a3305018b9d1cebe12936ca411810e5ec5a29ad90c7e992a7043",
+      "bytes": 104146
+    },
+    "art/char/avatar/char_limbus_yisang.png": {
+      "sha256": "e7183ae83017e67c74aa807a24da68383bb597a87b3d6ed4a1d55a6cf46bdaa9",
+      "bytes": 86235
+    },
+    "art/char/avatar/char_limbus_yisang_2.png": {
+      "sha256": "299362da6f606f86c3d1c5add506f44fb127cfde5a79753a715897c3b4cf2d31",
+      "bytes": 86864
+    },
+    "art/char/portrait/char_limbus_donquixote_1.png": {
+      "sha256": "424d3c0790c8e135274fb3ae7dff2bb50e2a987c2f79e276a95c3cbee5fbeca4",
+      "bytes": 2190368
+    },
+    "art/char/portrait/char_limbus_donquixote_2.png": {
+      "sha256": "bb90cf5abc4f3e56b215e120ef0234dd5ca18cf5e3c9821541a27cc84441b7e1",
+      "bytes": 2276783
+    },
+    "art/char/portrait/char_limbus_faust_1.png": {
+      "sha256": "d47a82329d1bc9edbb2bd8be4c8c16659f717412390acec544ebc8666bda8b90",
+      "bytes": 1752002
+    },
+    "art/char/portrait/char_limbus_faust_2.png": {
+      "sha256": "f18b82804c1fdd84423e65601cfb4976e066af958417c634beac4eeef8a937e7",
+      "bytes": 2275526
+    },
+    "art/char/portrait/char_limbus_gregor_1.png": {
+      "sha256": "c944ffcaf6737a2b0826b2ce3ececf994afd7be32666fdea968f93d984e09ada",
+      "bytes": 139536
+    },
+    "art/char/portrait/char_limbus_gregor_2.png": {
+      "sha256": "387198ec8edbb30ef32c93da3f5e7c27f7c5b50b8548a2f07a275f13d3a85d84",
+      "bytes": 182270
+    },
+    "art/char/portrait/char_limbus_heathcliff_1.png": {
+      "sha256": "8ebd23d4c5a46e8c30c345da963d4fcaffd24e1cae51e5be57485d4b16b63cc8",
+      "bytes": 2373516
+    },
+    "art/char/portrait/char_limbus_heathcliff_2.png": {
+      "sha256": "8531d7b7532bb930cda397a1dc93b4b71be9b69c52a89d66fe5130b472da3ef6",
+      "bytes": 2410044
+    },
+    "art/char/portrait/char_limbus_honglu_1.png": {
+      "sha256": "46d6aa83c06089db47a290c13f306d0964c5524572e4730829de5bddbea50b76",
+      "bytes": 2868902
+    },
+    "art/char/portrait/char_limbus_honglu_2.png": {
+      "sha256": "6d06ffb5f764c7c1d0e4e300f261eecfa5c2e2d280d9b5491de29187a0e83ea1",
+      "bytes": 2112969
+    },
+    "art/char/portrait/char_limbus_ishmael_1.png": {
+      "sha256": "6e8fac76ddb911e85393d78b9def515fe1017c170f2f3c3605ce10f1d13c4da5",
+      "bytes": 2339107
+    },
+    "art/char/portrait/char_limbus_ishmael_2.png": {
+      "sha256": "9d0eb9f4fc364718f9c23e6770fbd814a925ee948ebffe7ef3978f5c547e6362",
+      "bytes": 2872843
+    },
+    "art/char/portrait/char_limbus_meursault_1.png": {
+      "sha256": "19943b6e59fd73d56939c39e313a3a0e05944b1e6087da6ad5f36ad46696742c",
+      "bytes": 2415406
+    },
+    "art/char/portrait/char_limbus_meursault_2.png": {
+      "sha256": "8c1335677a58c8f34d2005d43b6d316ad710b2f4125b044adce1af38a78e4ce8",
+      "bytes": 2883667
+    },
+    "art/char/portrait/char_limbus_outis_1.png": {
+      "sha256": "1f9311289ccd81e086b05be4dc705638465e02f23704b02130b53ca96dd52c7a",
+      "bytes": 2012014
+    },
+    "art/char/portrait/char_limbus_outis_2.png": {
+      "sha256": "0f82e28cfb6c964482e02f1deff591d3381c6564d17956ad28e6dab624d86858",
+      "bytes": 2340761
+    },
+    "art/char/portrait/char_limbus_rodion_1.png": {
+      "sha256": "299688e9600b64a179568dc80f3cdeb96eb46b0ead4f2529ed71b200f759cf05",
+      "bytes": 151131
+    },
+    "art/char/portrait/char_limbus_rodion_2.png": {
+      "sha256": "820764e1b9c96f0fc8a9955c9a10c50ce7b1fb6a3edb61dd643adf29ba5cee42",
+      "bytes": 164757
+    },
+    "art/char/portrait/char_limbus_ryoshu_1.png": {
+      "sha256": "54b4df0aa08f24d77622d0bcc40b04475c284c37303fe15434f7d65916aece0e",
+      "bytes": 182309
+    },
+    "art/char/portrait/char_limbus_ryoshu_2.png": {
+      "sha256": "7e27426d903b9fbe85f9e8c3ddc6527d7adac7be33328eefc89425f55a019ea6",
+      "bytes": 182964
+    },
+    "art/char/portrait/char_limbus_sinclair_1.png": {
+      "sha256": "4e386bc1f2eeb03fb9ddfd261ee98660bcc24419967c3a77aa7cb59e406c2e7a",
+      "bytes": 1908390
+    },
+    "art/char/portrait/char_limbus_sinclair_2.png": {
+      "sha256": "27a37a7028ce313bca103ee06545c7dba922e1c866d7d9d263d1ddab7aebc037",
+      "bytes": 1906312
+    },
+    "art/char/portrait/char_limbus_yisang_1.png": {
+      "sha256": "7795902d58e3505299013fa83bed7d7eccb58b73b6690b30b9bf959855f76bbc",
+      "bytes": 1581782
+    },
+    "art/char/portrait/char_limbus_yisang_2.png": {
+      "sha256": "e630be52bfa2a4102f2d21dac68f5da8916104980a2fba74912b58a8f59ce1a2",
+      "bytes": 1966697
+    },
+    "art/skill/skchr_donquixote_1.png": {
+      "sha256": "44a6b72d7bb154c179bb54d8816ea54be7d8e6fed85b587fb4b1de47646778e3",
+      "bytes": 111032
+    },
+    "art/skill/skchr_donquixote_2.png": {
+      "sha256": "c31b7f45a7b9aa14734deec26005e536129ad085b61fe948bedf1eb0cfca3303",
+      "bytes": 99746
+    },
+    "art/skill/skchr_donquixote_3.png": {
+      "sha256": "c1bb47968e912d0210368d690c83a570b6b21a24b12499c95e5740ea2e730da0",
+      "bytes": 107857
+    },
+    "art/skill/skchr_faust_1.png": {
+      "sha256": "2c957df7c2d629a8b565a546256381d7843973c6dcef50688b3a79107a684552",
+      "bytes": 116070
+    },
+    "art/skill/skchr_faust_2.png": {
+      "sha256": "c6c8e5e75ecc6407b61a8f59455687f389f75b5333b669db6419470a5bf20566",
+      "bytes": 119170
+    },
+    "art/skill/skchr_faust_3.png": {
+      "sha256": "bfb98160ed1f317bd933326112e4b9d412e599b25f4ed895913c1d213bcbd638",
+      "bytes": 127852
+    },
+    "art/skill/skchr_gregor_1.png": {
+      "sha256": "175a9393df230fcab330a984d548a4f6ae91d676576e70e56dfa7acd0da3bd95",
+      "bytes": 41826
+    },
+    "art/skill/skchr_gregor_2.png": {
+      "sha256": "a2f1546d29353e42d7af3ba43a539a5c074abe064b84ee9483efb053ce92c7d2",
+      "bytes": 38658
+    },
+    "art/skill/skchr_gregor_3.png": {
+      "sha256": "239870816cd83289dbce6d968e2dbca51f04d7d601da3ea9c5d16d8ecc1a19ac",
+      "bytes": 33429
+    },
+    "art/skill/skchr_heathcliff_1.png": {
+      "sha256": "394dcf8c463ce9fca44f03cfe8fa3d448a00d66f728bc164912f2e7d86991dfc",
+      "bytes": 123740
+    },
+    "art/skill/skchr_heathcliff_2.png": {
+      "sha256": "55e746179c180e9dca81356ce437f13e345b7baeadedcf3209180e415ef69898",
+      "bytes": 121489
+    },
+    "art/skill/skchr_heathcliff_3.png": {
+      "sha256": "b1483c40a5b5d280a90f5bdb175272d6e21ec9b5e7c5600e43807f9e07890481",
+      "bytes": 147039
+    },
+    "art/skill/skchr_honglu_1.png": {
+      "sha256": "c70f11ae1ce9baea14b3dfd60b0e5e51d5fc3b9b492dabc73836a8e5d478435f",
+      "bytes": 132875
+    },
+    "art/skill/skchr_honglu_2.png": {
+      "sha256": "770b84a56a7929681071833ffa8edb8c4f2bb11e1df8433ce3a324d84185ce4b",
+      "bytes": 136673
+    },
+    "art/skill/skchr_honglu_3.png": {
+      "sha256": "c1d802546614681a9412215fec103e20902238fef43fa2ab6ed09fa541c38d01",
+      "bytes": 129984
+    },
+    "art/skill/skchr_ishmael_1.png": {
+      "sha256": "c42c39b82b3904d3a3b1a54a1e9fd81da77980a1ab66a111de9955ff52316834",
+      "bytes": 120202
+    },
+    "art/skill/skchr_ishmael_2.png": {
+      "sha256": "132837fe4c09f00eb8e9e5d38afd5f4d7ff4acf0a9cd34698cb6d0b76a002c91",
+      "bytes": 120021
+    },
+    "art/skill/skchr_ishmael_3.png": {
+      "sha256": "a4857ecd27f761efcdef91759d736d7238287fd31855474aea75c2a2929e8e8b",
+      "bytes": 130540
+    },
+    "art/skill/skchr_meursault_1.png": {
+      "sha256": "6d86ce19e7c1d0b8aa8a586df59734c9084999d70ba8596d56be8422e361ca86",
+      "bytes": 75526
+    },
+    "art/skill/skchr_meursault_2.png": {
+      "sha256": "c7f612fc9562d3f6bb265c16b3cb74b2c8e5a1acf443732277f2c00b1bd944a5",
+      "bytes": 104132
+    },
+    "art/skill/skchr_meursault_3.png": {
+      "sha256": "ec2dab08f6291335bbe5d939103e0f43f79bbca1a135b7808ea0b97eeaa7e16a",
+      "bytes": 114851
+    },
+    "art/skill/skchr_outis_1.png": {
+      "sha256": "09549bfa063f43835b8847a5dbf4ca676c96abea5fe988a877d5aaca256f6e0a",
+      "bytes": 104621
+    },
+    "art/skill/skchr_outis_2.png": {
+      "sha256": "58ef39e2b88f71e93ed16127fc24d736241fe2a578b544f5ed27fbeff346b9d8",
+      "bytes": 116726
+    },
+    "art/skill/skchr_outis_3.png": {
+      "sha256": "3f346ec1c45cfc68034b1fb7ab4b7d3d88973262b861fa9459c5ac2f3213d5a4",
+      "bytes": 127857
+    },
+    "art/skill/skchr_rodion_1.png": {
+      "sha256": "44f47f4a7ddc40df3674b5418302c0d35d5f5f3f15e6f6716c174a0c26f92bfc",
+      "bytes": 37069
+    },
+    "art/skill/skchr_rodion_2.png": {
+      "sha256": "ac67c50c23354f9ddb33343a97220c3da91ae4704da56673f40c85a14550d88a",
+      "bytes": 37179
+    },
+    "art/skill/skchr_rodion_3.png": {
+      "sha256": "db173f6cd57d6de68d1c492535f25e0de20a0dc8fe32c737377584d00d0a777f",
+      "bytes": 37118
+    },
+    "art/skill/skchr_ryoshu_1.png": {
+      "sha256": "11f667d7e481358c878eb7d930111629eff3073bca3f4f95e1d90795986befa7",
+      "bytes": 39180
+    },
+    "art/skill/skchr_ryoshu_2.png": {
+      "sha256": "7e43de64d2e1ae8f6f87e30a816690255e160a5d3a673841080f126ac4f44d16",
+      "bytes": 37537
+    },
+    "art/skill/skchr_ryoshu_3.png": {
+      "sha256": "88d53e8060f4e41675246fcf2a2360da66c4f055f9d3f45c7933a4582e48b1ae",
+      "bytes": 40199
+    },
+    "art/skill/skchr_sinclair_1.png": {
+      "sha256": "ce317485a09c976f9f07289021a08a7eeed9909ba9e19059112e8ce86fd805a7",
+      "bytes": 54716
+    },
+    "art/skill/skchr_sinclair_2.png": {
+      "sha256": "2b94ef317643efa9f83a13208a30a702e86703b1f2b77fa4c6307b9c9328492c",
+      "bytes": 57042
+    },
+    "art/skill/skchr_sinclair_3.png": {
+      "sha256": "7a1d5822b92241fd4d097b8b540a2fb49e349367acee8a2afe78e34037db3f8b",
+      "bytes": 67508
+    },
+    "art/skill/skchr_yisang_1.png": {
+      "sha256": "47fd5c8da4adee01d050c23fa8f8d9be4eb383997bd69b0e13cff96af017c9c6",
+      "bytes": 50537
+    },
+    "art/skill/skchr_yisang_2.png": {
+      "sha256": "b3959658cd6b70fd47178d292bfa46055a3f5b8cbfefaa6b64de4c54bc6496f0",
+      "bytes": 64061
+    },
+    "art/skill/skchr_yisang_3.png": {
+      "sha256": "f114bfc1340ec85adae0b33aa1cfffa45e9133c2ed3d0294c375848f4e526f41",
+      "bytes": 61616
+    },
+    "plugin.json": {
+      "sha256": "2e38b1bccfb088309287e8998ea0b9aba41f48c2e3af487c64afe914985b1a17",
+      "bytes": 499
+    }
+  },
+  "spine": {}
+}

@@ -1,0 +1,33 @@
+{
+  "dsl": 1,
+  "pluginId": "fgo-round-table",
+  "meta": {
+    "key": "effect:fgo-round-table:sqshard",
+    "on": [
+      {
+        "when": "roundStart",
+        "if": {
+          "bondActive": "indomShip"
+        },
+        "do": [
+          {
+            "layers": {
+              "bond": "indomShip",
+              "amount": 3
+            }
+          }
+        ]
+      },
+      {
+        "when": "income",
+        "do": [
+          {
+            "funds": {
+              "amount": 1
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

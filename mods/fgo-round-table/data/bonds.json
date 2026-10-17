@@ -1,0 +1,120 @@
+{
+  "roundTable": {
+    "bondId": "roundTable",
+    "name": "圆桌",
+    "identifier": 77,
+    "isCore": true,
+    "bondType": "FACTION",
+    "bondOrder": 1,
+    "powerIdList": [
+      "roundTable"
+    ],
+    "iconId": "icon_roundTable",
+    "activeCount": 3,
+    "thresholds": [
+      3,
+      6,
+      9
+    ],
+    "maxCount": null,
+    "thresholdTemplate": "count_threshold_upward",
+    "countMode": "BOARD",
+    "countsHand": false,
+    "countsGoldenOnly": false,
+    "activeType": "BATTLE",
+    "isActiveInDeck": false,
+    "noStack": false,
+    "weight": 12,
+    "maxInactiveBondCount": -1,
+    "layerMilestones": [
+      25,
+      50,
+      75,
+      100,
+      125,
+      150
+    ],
+    "desc": "【圆桌】干员随盟约层数强化攻防与战技回转。\n<在场3名不同【圆桌】干员>四重拘束解放：全体【圆桌】干员攻击力+(20+0.8×层数)%，防御力+(16+0.5×层数)%。【誓约共鸣】：战斗中任意【圆桌】干员开技能时全队回3点技力（每人每5秒至多1次），首次技能叠加2层盟约。每叠加25层获得1件专属装备。\n<在场6名不同【圆桌】干员>八重拘束解放：战斗开始时全体【圆桌】干员获得1层护盾与常驻抵抗。【圆桌议决】：战斗中累计开启6次技能或盟约达120层时解放议决，全体伤害转为弱点伤害，蓄力技能无需双倍SP直接以Overcharge释放。\n<在场9名不同【圆桌】干员>十三拘束全解放：开局直接完成【圆桌议决】，全体初始技力+20且技力消耗-25%。战场每22秒触发天际支援，为全场友方恢复25%最大生命与1层护盾，并对敌全场造成100%总攻击力的真实伤害与2.5秒晕眩。",
+    "descRaw": "【圆桌】干员随盟约层数强化攻防与战技回转。\n<在场<@autochess.dgreen>3</>名不同【圆桌】干员><@ba.vup>四重拘束解放</>：全体【圆桌】干员攻击力<@ba.vup>+(20+0.8×层数)%</>，防御力<@ba.vup>+(16+0.5×层数)%</>。<@ba.vup>【誓约共鸣】</>：战斗中任意【圆桌】干员开技能时全队回3点技力（每人每5秒至多1次），首次技能叠加2层盟约。每叠加25层获得1件专属装备。\n<在场<@autochess.dgreen>6</>名不同【圆桌】干员><@ba.vup>八重拘束解放</>：战斗开始时全体【圆桌】干员获得1层护盾与常驻抵抗。<@ba.vup>【圆桌议决】</>：战斗中累计开启6次技能或盟约达120层时解放议决，全体伤害转为弱点伤害，蓄力技能无需双倍SP直接以Overcharge释放。\n<在场<@autochess.dgreen>9</>名不同【圆桌】干员><@ba.vup>十三拘束全解放</>：开局直接完成【圆桌议决】，全体初始技力<@ba.vup>+20</>且技力消耗<@ba.vup>-25%</>。战场每22秒触发天际支援，为全场友方恢复25%最大生命与1层护盾，并对敌全场造成100%总攻击力的真实伤害与2.5秒晕眩。",
+    "effectId": "bondeffect_round_table",
+    "effectName": "圆桌",
+    "effectDesc": "【圆桌】干员攻击力与防御力随层数提升。\n<在场3人>攻防提升并开启誓约共鸣，技能回SP与叠层；每25层军备发放\n<在场6人>开局护盾与抵抗；圆桌议决弱点伤害与蓄力瞬发\n<在场9人>开局满议决，技力减免与全屏天际支援",
+    "effectDescRaw": "【圆桌】干员攻击力与防御力随层数提升。\n<在场3人>攻防提升并开启誓约共鸣，技能回SP与叠层；每25层军备发放\n<在场6人>开局护盾与抵抗；圆桌议决弱点伤害与蓄力瞬发\n<在场9人>开局满议决，技力减免与全屏天际支援",
+    "effectDescParams": [],
+    "bb": {
+      "atk_base": 0.2,
+      "atk_step": 0.008,
+      "def_base": 0.16,
+      "def_step": 0.005,
+      "resonance_sp": 3,
+      "resonance_cd": 5,
+      "resonance_layer": 2,
+      "decision_skills": 6,
+      "decision_layer": 120,
+      "t9_sp_init": 20,
+      "t9_sp_cost_pct": -0.25,
+      "t9_sky_interval": 22,
+      "t9_sky_heal": 0.25,
+      "t9_sky_stun": 2.5
+    },
+    "bbStr": {
+      "key": "act1autochess_bond_eff_round_table"
+    },
+    "buffs": [
+      {
+        "key": "env_gbuff_new",
+        "bb": {
+          "atk_base": 0.2,
+          "atk_step": 0.008,
+          "def_base": 0.16,
+          "def_step": 0.005
+        },
+        "bbStr": {
+          "key": "act1autochess_bond_eff_round_table"
+        }
+      }
+    ],
+    "baseParams": [
+      "atk_base",
+      "def_base"
+    ],
+    "perStackParams": [
+      "atk_step",
+      "def_step"
+    ],
+    "members": [
+      "chess_fgo_1_gareth_a",
+      "chess_fgo_2_bedivere_a",
+      "chess_fgo_2_tristan_a",
+      "chess_fgo_3_percival_a",
+      "chess_fgo_3_baobhan_a",
+      "chess_fgo_4_gawain_a",
+      "chess_fgo_4_barghest_a",
+      "chess_fgo_4_mash_a",
+      "chess_fgo_5_lancelot_a",
+      "chess_fgo_5_mordred_a",
+      "chess_fgo_5_melusine_a",
+      "chess_fgo_6_artoria_a",
+      "chess_fgo_6_merlin_a",
+      "chess_fgo_6_castoria_a",
+      "chess_fgo_6_morgan_a"
+    ],
+    "visibleMembers": [
+      "chess_fgo_1_gareth_a",
+      "chess_fgo_2_bedivere_a",
+      "chess_fgo_2_tristan_a",
+      "chess_fgo_3_percival_a",
+      "chess_fgo_3_baobhan_a",
+      "chess_fgo_4_gawain_a",
+      "chess_fgo_4_barghest_a",
+      "chess_fgo_4_mash_a",
+      "chess_fgo_5_lancelot_a",
+      "chess_fgo_5_mordred_a",
+      "chess_fgo_5_melusine_a",
+      "chess_fgo_6_artoria_a",
+      "chess_fgo_6_merlin_a",
+      "chess_fgo_6_castoria_a",
+      "chess_fgo_6_morgan_a"
+    ]
+  }
+}

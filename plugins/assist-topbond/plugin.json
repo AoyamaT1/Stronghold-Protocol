@@ -1,0 +1,20 @@
+{
+  "$schema": "../../schemas/plugin.schema.json",
+  "manifest": 2,
+  "name": {
+    "zh": "主盟约刷新加成规则"
+  },
+  "version": "1.0.0",
+  "app": ">=0.3.0 <0.4.0",
+  "api": 1,
+  "class": "content",
+  "scope": [
+    "room"
+  ],
+  "permissions": [
+    "dsl"
+  ],
+  "dsl": [
+    "dsl/meta.json"
+  ]
+}

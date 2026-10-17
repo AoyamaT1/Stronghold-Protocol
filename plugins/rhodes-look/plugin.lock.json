@@ -1,0 +1,487 @@
+{
+  "lock": 1,
+  "id": "rhodes-look",
+  "version": "1.4.0",
+  "generator": "tools/plugin.mjs pack",
+  "files": {
+    "art/assets.json": {
+      "sha256": "3c6ee22de0be99c653d915d57eb74dccd47a045c16fefcbd96d50f50895d3965",
+      "bytes": 6000
+    },
+    "art/bond/rhodesShip.png": {
+      "sha256": "c1aafd771ed19a83ef254f5baa446f76ca2d39391e98b3447ff0432f532ca5e6",
+      "bytes": 988
+    },
+    "art/char/avatar/char_1037_amiya3_2.png": {
+      "sha256": "52118a69c8f67a0ed92ed9da3ba2222770f5ee2b90609a8a20a40d7b3b7db30d",
+      "bytes": 67922
+    },
+    "art/char/avatar/char_230_savage.png": {
+      "sha256": "3ecdc911a812cf01315caab7decf29863594a825d74191bcbc0cbb16ffd0fda6",
+      "bytes": 53574
+    },
+    "art/char/avatar/char_230_savage_2.png": {
+      "sha256": "9e889c1bd60a450d96cee4303d0d575b5defdff72d9bbc5ae351d121828d5e09",
+      "bytes": 54525
+    },
+    "art/char/portrait/char_1037_amiya3_2.png": {
+      "sha256": "376ad72ece4ac8fe63d4334687728dee70a29dce177321c4ded3f7d60bce0e9e",
+      "bytes": 138317
+    },
+    "art/char/portrait/char_230_savage_1.png": {
+      "sha256": "5efaafa9f134de6d8c3a03b163fcd87045a9ef35fa18ed2e30647c57fd362dcf",
+      "bytes": 102962
+    },
+    "art/char/portrait/char_230_savage_2.png": {
+      "sha256": "a7779c25b587d2174ad5e6725cca073485331d5bd24dc6780ef527511441c0ea",
+      "bytes": 92080
+    },
+    "art/item/trap_1130_acarm130.png": {
+      "sha256": "c1aafd771ed19a83ef254f5baa446f76ca2d39391e98b3447ff0432f532ca5e6",
+      "bytes": 988
+    },
+    "art/item/trap_1131_acarm131.png": {
+      "sha256": "9374de10a4877747b326aedfe4f89f030100e93f9894f7a73a07b864572003ce",
+      "bytes": 7406
+    },
+    "art/skill/skchr_amiya3_1.png": {
+      "sha256": "6655d1e70c29d00644a8ca3d592604ff513e134d28cef9bb5655dd3919c1b334",
+      "bytes": 16221
+    },
+    "art/skill/skchr_amiya3_2.png": {
+      "sha256": "6d0466da14490404162f9ad03c8266d8812ae94ac8eac20c01fd8f632e13de1f",
+      "bytes": 23414
+    },
+    "art/skill/skchr_savage_1.png": {
+      "sha256": "7d3ed9fe5c6d2685ba941c1222dd4b1f5f19c3cbe6162f297f50cd1328a4330d",
+      "bytes": 14794
+    },
+    "art/skill/skchr_savage_2.png": {
+      "sha256": "dae2ebdf83b885e48bc7c1fd6388b9e357d3581e96bdc2cdf90807e99eac5cc3",
+      "bytes": 20383
+    },
+    "art/spine/op/char_1037_amiya3/back/char_1037_amiya3.atlas": {
+      "sha256": "9a091fc70fe566ac5f742a99f127691cad4d4b6ffcb0d4f58b2f6287329fb1ef",
+      "bytes": 7040
+    },
+    "art/spine/op/char_1037_amiya3/back/char_1037_amiya3.png": {
+      "sha256": "e5578becc147b19ab86f9668f1c73f72968ec7ce64185ef8ba09bcf456bd28d0",
+      "bytes": 95999
+    },
+    "art/spine/op/char_1037_amiya3/back/char_1037_amiya3.skel": {
+      "sha256": "e80d96f6b542b26cae91596613ddd290c54c41d803e93dd301c39e4638a81e69",
+      "bytes": 308420
+    },
+    "art/spine/op/char_1037_amiya3/front/char_1037_amiya3.atlas": {
+      "sha256": "3c4fd8de0e3d84e772ce2e0507481ff81050ace9317181a1e7b166df131d1fcc",
+      "bytes": 10659
+    },
+    "art/spine/op/char_1037_amiya3/front/char_1037_amiya3.png": {
+      "sha256": "9dbaae59caea27be1a5906974a13eb429d26e9002f1a1dabaee70c73b5fa347c",
+      "bytes": 106135
+    },
+    "art/spine/op/char_1037_amiya3/front/char_1037_amiya3.skel": {
+      "sha256": "75ab06cad33c2ea236b914843c09ee7f4ee9181e46fb360fcde0cf6706e185e2",
+      "bytes": 493240
+    },
+    "art/spine/op/char_230_savage/back/char_230_savage.atlas": {
+      "sha256": "797503eecc36d7fd4c522fcc8bf416d1484bd48da0a5911c285d75d72fa5d113",
+      "bytes": 2777
+    },
+    "art/spine/op/char_230_savage/back/char_230_savage.png": {
+      "sha256": "6e37a3576c369ba898006b33870d507f6b35834efe338c47d281fce17cc2b0c8",
+      "bytes": 44122
+    },
+    "art/spine/op/char_230_savage/back/char_230_savage.skel": {
+      "sha256": "0dc6456d0685dfce9a9373a89701c25932ee6b2b422391e757ef399044048f1d",
+      "bytes": 64614
+    },
+    "art/spine/op/char_230_savage/front/char_230_savage.atlas": {
+      "sha256": "ed5286aae11640bb72a9509eeb9a2527681f2e3d51c934a4bf6e288c40099626",
+      "bytes": 6842
+    },
+    "art/spine/op/char_230_savage/front/char_230_savage.png": {
+      "sha256": "19a33ddd0a8f6338f4a6bee1094e67fb2c58690bc6b1e75b5343df9759ebfd72",
+      "bytes": 57401
+    },
+    "art/spine/op/char_230_savage/front/char_230_savage.skel": {
+      "sha256": "12ecd1e14cfe090bc64708cd39d29cbbf70a075724ee8c01a7d0add6de958529",
+      "bytes": 137840
+    },
+    "art/spine/token/token_10050_monstr_prosts/token_10050_monstr_prosts_boc_11.atlas": {
+      "sha256": "fc152481ee1b6ca24598467463355af6a7554aff2c3efde0962347808e1de801",
+      "bytes": 783
+    },
+    "art/spine/token/token_10050_monstr_prosts/token_10050_monstr_prosts_boc_11.png": {
+      "sha256": "861e54fb4650a2aa1afd261a91ae45057071f3bf6026f6cc4138ab7287f0702d",
+      "bytes": 29487
+    },
+    "art/spine/token/token_10050_monstr_prosts/token_10050_monstr_prosts_boc_11.skel": {
+      "sha256": "a75e7fd1497e600f93c4a7f4a4c76cf913505fc72c2a345bd96d0cee84353ecb",
+      "bytes": 9614
+    },
+    "plugin.json": {
+      "sha256": "f9cad5c1cb3f75cca89032821243a26539c1efa6cf09ef779047de988d1bd139",
+      "bytes": 437
+    }
+  },
+  "spine": {
+    "art/spine/op/char_1037_amiya3/front/char_1037_amiya3.skel": {
+      "sha256": "75ab06cad33c2ea236b914843c09ee7f4ee9181e46fb360fcde0cf6706e185e2",
+      "anims": {
+        "idle": "Idle",
+        "deploy": "Start",
+        "attack": {
+          "begin": null,
+          "loop": "Attack",
+          "end": null
+        },
+        "attackDown": null,
+        "skill": {
+          "begin": "Skill_1_Begin",
+          "loop": "Skill_1_Loop",
+          "end": "Skill_1_End",
+          "index": 0,
+          "idle": null
+        },
+        "die": "Die",
+        "move": null,
+        "stun": null,
+        "skills": {
+          "0": {
+            "begin": "Skill_1_Begin",
+            "loop": "Skill_1_Loop",
+            "end": "Skill_1_End",
+            "index": 0,
+            "idle": null
+          },
+          "1": {
+            "begin": "Skill_2_Begin",
+            "loop": "Skill_2_Loop",
+            "end": "Skill_2_End",
+            "index": 1,
+            "idle": null
+          },
+          "2": {
+            "begin": null,
+            "loop": "Attack",
+            "end": null,
+            "via": "attack",
+            "index": 2,
+            "idle": null
+          }
+        }
+      },
+      "animations": {
+        "Attack": 1.6,
+        "Default": 0,
+        "Die": 0.833,
+        "Idle": 4,
+        "Skill_1_Attack": 1,
+        "Skill_1_Begin": 0.167,
+        "Skill_1_End": 0.167,
+        "Skill_1_Loop": 4,
+        "Skill_2_Attack": 1.6,
+        "Skill_2_Begin": 1.833,
+        "Skill_2_End": 0.167,
+        "Skill_2_Loop": 6.133,
+        "Start": 1
+      },
+      "events": [
+        "OnAttack",
+        "OnStart"
+      ],
+      "hits": {
+        "Attack": [
+          0.767
+        ],
+        "Skill_1_Attack": [
+          0.433
+        ],
+        "Skill_2_Attack": [
+          0.633
+        ],
+        "Skill_2_Begin": [
+          1.1
+        ]
+      },
+      "bounds": {
+        "x": -163.548,
+        "y": -1.805,
+        "width": 946.49,
+        "height": 686.421
+      }
+    },
+    "art/spine/op/char_1037_amiya3/back/char_1037_amiya3.skel": {
+      "sha256": "e80d96f6b542b26cae91596613ddd290c54c41d803e93dd301c39e4638a81e69",
+      "anims": {
+        "idle": "Idle",
+        "deploy": "Start",
+        "attack": {
+          "begin": null,
+          "loop": "Attack",
+          "end": null
+        },
+        "attackDown": null,
+        "skill": {
+          "begin": "Skill_1_Begin",
+          "loop": "Skill_1_Loop",
+          "end": "Skill_1_End",
+          "index": 0,
+          "idle": null
+        },
+        "die": null,
+        "move": null,
+        "stun": null,
+        "skills": {
+          "0": {
+            "begin": "Skill_1_Begin",
+            "loop": "Skill_1_Loop",
+            "end": "Skill_1_End",
+            "index": 0,
+            "idle": null
+          },
+          "1": {
+            "begin": "Skill_2_Begin",
+            "loop": "Skill_2_Loop",
+            "end": "Skill_2_End",
+            "index": 1,
+            "idle": null
+          },
+          "2": {
+            "begin": null,
+            "loop": "Attack",
+            "end": null,
+            "via": "attack",
+            "index": 2,
+            "idle": null
+          }
+        }
+      },
+      "animations": {
+        "Attack": 1.6,
+        "Default": 0,
+        "Idle": 4,
+        "Skill_1_Attack": 1,
+        "Skill_1_Begin": 0.233,
+        "Skill_1_End": 0.167,
+        "Skill_1_Loop": 4,
+        "Skill_2_Attack": 1.6,
+        "Skill_2_Begin": 1.833,
+        "Skill_2_End": 0.167,
+        "Skill_2_Loop": 6.133,
+        "Start": 1
+      },
+      "events": [
+        "OnAttack",
+        "OnStart"
+      ],
+      "hits": {
+        "Attack": [
+          0.767
+        ],
+        "Skill_1_Attack": [
+          0.433
+        ],
+        "Skill_2_Attack": [
+          0.633
+        ],
+        "Skill_2_Begin": [
+          1.1
+        ]
+      },
+      "bounds": {
+        "x": -163.548,
+        "y": -1.805,
+        "width": 946.49,
+        "height": 686.421
+      }
+    },
+    "art/spine/op/char_230_savage/front/char_230_savage.skel": {
+      "sha256": "12ecd1e14cfe090bc64708cd39d29cbbf70a075724ee8c01a7d0add6de958529",
+      "anims": {
+        "idle": "Idle",
+        "deploy": "Start",
+        "attack": {
+          "begin": null,
+          "loop": "Attack",
+          "end": null
+        },
+        "attackDown": null,
+        "skill": {
+          "begin": null,
+          "loop": "Skill",
+          "end": null,
+          "index": 0,
+          "idle": null
+        },
+        "die": "Die",
+        "move": null,
+        "stun": null,
+        "skills": {
+          "0": {
+            "begin": null,
+            "loop": "Skill",
+            "end": null,
+            "index": 0,
+            "idle": null
+          },
+          "1": {
+            "begin": null,
+            "loop": "Skill",
+            "end": null,
+            "index": 1,
+            "idle": null
+          },
+          "2": {
+            "begin": null,
+            "loop": "Skill",
+            "end": null,
+            "index": 2,
+            "idle": null
+          }
+        }
+      },
+      "animations": {
+        "Attack": 1.167,
+        "Default": 0,
+        "Die": 1,
+        "Idle": 2,
+        "Skill": 1.167,
+        "Start": 1
+      },
+      "events": [
+        "OnAttack",
+        "OnStart"
+      ],
+      "hits": {
+        "Attack": [
+          0.4
+        ],
+        "Skill": [
+          0.6
+        ]
+      },
+      "bounds": {
+        "x": -152.247,
+        "y": -26.48,
+        "width": 417.266,
+        "height": 480.525
+      }
+    },
+    "art/spine/op/char_230_savage/back/char_230_savage.skel": {
+      "sha256": "0dc6456d0685dfce9a9373a89701c25932ee6b2b422391e757ef399044048f1d",
+      "anims": {
+        "idle": "Idle",
+        "deploy": "Start",
+        "attack": {
+          "begin": null,
+          "loop": "Attack",
+          "end": null
+        },
+        "attackDown": null,
+        "skill": {
+          "begin": null,
+          "loop": "Skill",
+          "end": null,
+          "index": 0,
+          "idle": null
+        },
+        "die": null,
+        "move": null,
+        "stun": null,
+        "skills": {
+          "0": {
+            "begin": null,
+            "loop": "Skill",
+            "end": null,
+            "index": 0,
+            "idle": null
+          },
+          "1": {
+            "begin": null,
+            "loop": "Skill",
+            "end": null,
+            "index": 1,
+            "idle": null
+          },
+          "2": {
+            "begin": null,
+            "loop": "Skill",
+            "end": null,
+            "index": 2,
+            "idle": null
+          }
+        }
+      },
+      "animations": {
+        "Attack": 1.167,
+        "Default": 0,
+        "Idle": 1,
+        "Skill": 1.167,
+        "Start": 1
+      },
+      "events": [
+        "OnAttack",
+        "OnStart"
+      ],
+      "hits": {
+        "Attack": [
+          0.4
+        ],
+        "Skill": [
+          0.6
+        ]
+      },
+      "bounds": {
+        "x": -156.763,
+        "y": -13.942,
+        "width": 421.613,
+        "height": 468.958
+      }
+    },
+    "art/spine/token/token_10050_monstr_prosts/token_10050_monstr_prosts_boc_11.skel": {
+      "sha256": "a75e7fd1497e600f93c4a7f4a4c76cf913505fc72c2a345bd96d0cee84353ecb",
+      "anims": {
+        "idle": "Idle",
+        "deploy": "Start",
+        "attack": {
+          "begin": null,
+          "loop": "Attack",
+          "end": null
+        },
+        "attackDown": null,
+        "skill": {
+          "begin": null,
+          "loop": "Attack",
+          "end": null,
+          "via": "attack",
+          "index": 0,
+          "idle": null
+        },
+        "die": "Die",
+        "move": null,
+        "stun": null
+      },
+      "animations": {
+        "Attack": 1.333,
+        "Default": 0,
+        "Die": 1,
+        "Idle": 2,
+        "Skill_3": 0,
+        "Skill_3_Begin": 0.6,
+        "Start": 1
+      },
+      "events": [
+        "OnAttack",
+        "OnStart"
+      ],
+      "hits": {
+        "Attack": [
+          0.033
+        ]
+      },
+      "bounds": null
+    }
+  }
+}

@@ -460,11 +460,11 @@
         "unaffectedByEnemyScale": true
       },
       "upgradePrices": [
+        1,
+        1,
         5,
         8,
-        11,
-        12,
-        13
+        10
       ],
       "maxShopLevel": 6,
       "shopSlots": {
@@ -2230,9 +2230,9 @@
       "upgradePrices": [
         5,
         8,
+        10,
         11,
-        12,
-        13
+        11
       ],
       "maxShopLevel": 6,
       "shopSlots": {

@@ -1,0 +1,204 @@
+{
+  "op": 1,
+  "charId": "char_x_limbus_company_heathcliff",
+  "name": "希斯克利夫",
+  "appellation": "Heathcliff",
+  "profession": "WARRIOR",
+  "subProfessionId": "lord",
+  "subProfessionName": "领主",
+  "position": "MELEE",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 3,
+    "bonds": [
+      "limbusShip",
+      "raidShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_limbus_heathcliff_a"
+      ],
+      "golden": [
+        "garrison_limbus_heathcliff_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2000,
+        "atk": 640,
+        "def": 320,
+        "bat": 1.3,
+        "blockCnt": 2,
+        "cost": 17,
+        "res": 10,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2900,
+        "atk": 870,
+        "def": 510,
+        "bat": 1.3,
+        "blockCnt": 2,
+        "cost": 17,
+        "res": 15,
+        "aspd": 110,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          2
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_limbus_company_heathcliff_1",
+      "name": "斩首",
+      "duration": 0,
+      "spCost": 7,
+      "initSp": 0,
+      "desc": "攻击力 +60%\n攻击时使目标获得 2 级凋亡损伤\n目标凋亡损伤不低于 6 级时，攻击力额外 +15%\n目标每有 3 层凋亡损伤，攻击力额外 +5%，至多 +10%",
+      "bb": {
+        "atk_pct": 0.6,
+        "apo": 2,
+        "apo6_req": 6,
+        "apo6_atk": 0.15,
+        "per3_atk": 0.05,
+        "per3_cap": 0.1
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_heathcliff_2",
+      "name": "追悼游行",
+      "duration": 0,
+      "spCost": 35,
+      "initSp": 12,
+      "desc": "攻击力 +100%，攻击目标数 +1\n攻击时使目标获得 2 级凋亡损伤\n自身每 4 层【棺】攻击目标数额外 +1，至多 +2\n攻击后使自身失去 10 点理智",
+      "bb": {
+        "atk_pct": 1,
+        "apo": 2,
+        "extra_targets": 1,
+        "coffin_per_target": 4,
+        "coffin_target_cap": 2,
+        "sanity_cost": 10,
+        "duration": 20
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_heathcliff_3",
+      "name": "镇魂曲",
+      "duration": 0,
+      "spCost": 50,
+      "initSp": 20,
+      "desc": "攻击力 +180%\n技能开启时使自身获得 1 层【棺】\n命中目标与其周围的敌人，使其获得 3 级凋亡损伤并额外施加 4 级凋亡损伤\n目标每有 3 级凋亡损伤，攻击力额外 +10%，至多 +40%\n击倒目标后获得 2 层【棺】",
+      "bb": {
+        "atk_pct": 1.8,
+        "apo": 3,
+        "apo_extra": 4,
+        "per3_atk": 0.1,
+        "per3_cap": 0.4,
+        "coffin_start": 1,
+        "splash_r": 2
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "棺",
+      "desc": "自身每有 1 层【棺】，攻击力 +12%，至多 +120%；击杀敌人后获得 2 层【棺】",
+      "bb": {
+        "atk_per": 0.12,
+        "max": 10,
+        "kill_gain": 2
+      }
+    },
+    {
+      "index": 1,
+      "name": "狂猎",
+      "desc": "攻击时使目标获得 1 级凋亡损伤；目标凋亡损伤不低于 6 级时，攻击力额外 +20%",
+      "bb": {
+        "apo": 1,
+        "req": 6,
+        "atk": 0.2
+      }
+    }
+  ],
+  "trait": {
+    "desc": "可以攻击到较远的敌人；击败敌人时使攻击范围内【边狱公司】友方回复技力",
+    "bb": {
+      "sp_gain": 2,
+      "sp_radius": 2.5
+    }
+  },
+  "kit": "generic",
+  "nationId": "limbus",
+  "art": {
+    "ref": "char_limbus_heathcliff"
+  }
+}

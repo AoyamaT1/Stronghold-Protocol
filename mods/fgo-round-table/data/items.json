@@ -1,0 +1,490 @@
+{
+  "chess_item_1_fgo_sqshard_a": {
+    "id": "chess_item_1_fgo_sqshard_a",
+    "baseId": "chess_item_1_fgo_sqshard_a",
+    "goldenId": "chess_item_1_fgo_sqshard_b",
+    "isGolden": false,
+    "trapId": "trap_fgo_sqshard",
+    "iconId": "trap_fgo_sqshard",
+    "identifier": 701,
+    "name": "圣晶石碎片",
+    "itemType": "EQUIP",
+    "tier": 1,
+    "shopSortId": 10,
+    "price": 1,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": true,
+    "upgradeNum": 2,
+    "upgradeChessId": "chess_item_1_fgo_sqshard_b",
+    "duration": -1,
+    "giveBondId": null,
+    "effectId": "eff_fgo_sqshard_a",
+    "effectName": "圣晶石碎片",
+    "desc": "装备时销毁，使携带者所属盟约层数+3，并有30%概率获得1次免费刷新",
+    "descRaw": "装备时销毁，使携带者所属盟约层数<@ba.vup>+3</>，并有<@ba.vup>30%</>概率获得1次免费刷新",
+    "buffs": [],
+    "params": {
+      "bond_layers": 3,
+      "reroll_chance": 0.3
+    },
+    "category": "CONSUME",
+    "kind": "consume",
+    "flavor": "蕴含异界魔力的结晶碎块，收集起来可以实现愿望。"
+  },
+  "chess_item_1_fgo_sqshard_b": {
+    "id": "chess_item_1_fgo_sqshard_b",
+    "baseId": "chess_item_1_fgo_sqshard_a",
+    "goldenId": "chess_item_1_fgo_sqshard_b",
+    "isGolden": true,
+    "trapId": "trap_fgo_sqshard",
+    "iconId": "trap_fgo_sqshard",
+    "identifier": 702,
+    "name": "圣晶石碎片·进阶",
+    "itemType": "EQUIP",
+    "tier": 1,
+    "shopSortId": 10,
+    "price": 2,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": false,
+    "upgradeNum": 0,
+    "duration": -1,
+    "giveBondId": null,
+    "effectId": "eff_fgo_sqshard_b",
+    "effectName": "圣晶石碎片·进阶",
+    "desc": "装备时销毁，使携带者所属盟约层数+6，并有60%概率获得1次免费刷新",
+    "descRaw": "装备时销毁，使携带者所属盟约层数<@ba.vup>+6</>，并有<@ba.vup>60%</>概率获得1次免费刷新",
+    "buffs": [],
+    "params": {
+      "bond_layers": 6,
+      "reroll_chance": 0.6
+    },
+    "category": "CONSUME",
+    "kind": "consume",
+    "flavor": "聚合的纯净魔力结晶，散发着诱人的彩虹微光。"
+  },
+  "chess_item_2_fgo_crestshield_a": {
+    "id": "chess_item_2_fgo_crestshield_a",
+    "baseId": "chess_item_2_fgo_crestshield_a",
+    "goldenId": "chess_item_2_fgo_crestshield_b",
+    "isGolden": false,
+    "trapId": "trap_fgo_crestshield",
+    "iconId": "trap_fgo_crestshield",
+    "identifier": 703,
+    "name": "圆桌纹章盾",
+    "itemType": "EQUIP",
+    "tier": 2,
+    "shopSortId": 20,
+    "price": 2,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": true,
+    "upgradeNum": 2,
+    "upgradeChessId": "chess_item_2_fgo_crestshield_b",
+    "duration": -1,
+    "giveBondId": "roundTable",
+    "effectId": "eff_fgo_crestshield_a",
+    "effectName": "圆桌纹章盾",
+    "desc": "防御力+20%，法术抗性+15。若与【变形同构体】一同携带，携带者直接获得【圆桌】盟约",
+    "descRaw": "防御力<@ba.vup>+20%</>，法术抗性<@ba.vup>+15</>。若与【变形同构体】一同携带，携带者直接获得【圆桌】盟约",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "def": 0.2,
+          "res": 15
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "def": 0.2,
+      "res": 15
+    },
+    "category": "STAT",
+    "kind": "passive",
+    "flavor": "刻有圆桌骑士十二席十字纹章的坚固防牌。"
+  },
+  "chess_item_2_fgo_crestshield_b": {
+    "id": "chess_item_2_fgo_crestshield_b",
+    "baseId": "chess_item_2_fgo_crestshield_a",
+    "goldenId": "chess_item_2_fgo_crestshield_b",
+    "isGolden": true,
+    "trapId": "trap_fgo_crestshield",
+    "iconId": "trap_fgo_crestshield",
+    "identifier": 704,
+    "name": "圆桌纹章盾·进阶",
+    "itemType": "EQUIP",
+    "tier": 2,
+    "shopSortId": 20,
+    "price": 4,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": false,
+    "upgradeNum": 0,
+    "duration": -1,
+    "giveBondId": "roundTable",
+    "effectId": "eff_fgo_crestshield_b",
+    "effectName": "圆桌纹章盾·进阶",
+    "desc": "防御力+35%，法术抗性+25。若与【变形同构体】一同携带，携带者直接获得【圆桌】盟约",
+    "descRaw": "防御力<@ba.vup>+35%</>，法术抗性<@ba.vup>+25</>。若与【变形同构体】一同携带，携带者直接获得【圆桌】盟约",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "def": 0.35,
+          "res": 25
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "def": 0.35,
+      "res": 25
+    },
+    "category": "STAT",
+    "kind": "passive",
+    "flavor": "白垩之城圣壁的缩影，无畏守护同伴的誓言。"
+  },
+  "chess_item_3_fgo_silverarmor_a": {
+    "id": "chess_item_3_fgo_silverarmor_a",
+    "baseId": "chess_item_3_fgo_silverarmor_a",
+    "goldenId": "chess_item_3_fgo_silverarmor_b",
+    "isGolden": false,
+    "trapId": "trap_fgo_silverarmor",
+    "iconId": "trap_fgo_silverarmor",
+    "identifier": 705,
+    "name": "卡美洛白银甲",
+    "itemType": "EQUIP",
+    "tier": 3,
+    "shopSortId": 30,
+    "price": 2,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": true,
+    "upgradeNum": 2,
+    "upgradeChessId": "chess_item_3_fgo_silverarmor_b",
+    "duration": -1,
+    "giveBondId": null,
+    "effectId": "eff_fgo_silverarmor_a",
+    "effectName": "卡美洛白银甲",
+    "desc": "生命值+30%，携带者获得抵抗",
+    "descRaw": "生命值<@ba.vup>+30%</>，携带者获得<@ba.vup>抵抗</>",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "max_hp": 0.3
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "max_hp": 0.3,
+      "buffres": 1
+    },
+    "category": "STAT",
+    "kind": "passive",
+    "flavor": "卡美洛近卫骑士披挂的白银全身铠甲，受圣堂圣水洗礼。"
+  },
+  "chess_item_3_fgo_silverarmor_b": {
+    "id": "chess_item_3_fgo_silverarmor_b",
+    "baseId": "chess_item_3_fgo_silverarmor_a",
+    "goldenId": "chess_item_3_fgo_silverarmor_b",
+    "isGolden": true,
+    "trapId": "trap_fgo_silverarmor",
+    "iconId": "trap_fgo_silverarmor",
+    "identifier": 706,
+    "name": "卡美洛白银甲·进阶",
+    "itemType": "EQUIP",
+    "tier": 3,
+    "shopSortId": 30,
+    "price": 4,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": false,
+    "upgradeNum": 0,
+    "duration": -1,
+    "giveBondId": null,
+    "effectId": "eff_fgo_silverarmor_b",
+    "effectName": "卡美洛白银甲·进阶",
+    "desc": "生命值+50%，携带者获得抵抗且受到物理与法术伤害-15%",
+    "descRaw": "生命值<@ba.vup>+50%</>，携带者获得<@ba.vup>抵抗</>且受到物理与法术伤害<@ba.vup>-15%</>",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "max_hp": 0.5
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "max_hp": 0.5,
+      "buffres": 1,
+      "damage_mitigate": 0.15
+    },
+    "category": "STAT",
+    "kind": "passive",
+    "flavor": "千锤百炼的理想乡秘银甲，诸邪退散。"
+  },
+  "chess_item_4_fgo_belt_a": {
+    "id": "chess_item_4_fgo_belt_a",
+    "baseId": "chess_item_4_fgo_belt_a",
+    "goldenId": "chess_item_4_fgo_belt_b",
+    "isGolden": false,
+    "trapId": "trap_fgo_belt",
+    "iconId": "trap_fgo_belt",
+    "identifier": 707,
+    "name": "柏希雷克腰带",
+    "itemType": "EQUIP",
+    "tier": 4,
+    "shopSortId": 40,
+    "price": 2,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": true,
+    "upgradeNum": 2,
+    "upgradeChessId": "chess_item_4_fgo_belt_b",
+    "duration": -1,
+    "giveBondId": null,
+    "effectId": "eff_fgo_belt_a",
+    "effectName": "柏希雷克腰带",
+    "desc": "部署后初始技力+10，使自身所在格及周围4格获得【阳光照射】",
+    "descRaw": "部署后初始技力<@ba.vup>+10</>，使自身所在格及周围4格获得<@ba.vup>【阳光照射】</>",
+    "buffs": [],
+    "params": {
+      "sp_init": 10,
+      "sun_radius": 1
+    },
+    "category": "SPECIAL",
+    "kind": "passive",
+    "flavor": "太阳骑士高文佩戴的腰带，即使无云之日也能聚引炽阳之力。"
+  },
+  "chess_item_4_fgo_belt_b": {
+    "id": "chess_item_4_fgo_belt_b",
+    "baseId": "chess_item_4_fgo_belt_a",
+    "goldenId": "chess_item_4_fgo_belt_b",
+    "isGolden": true,
+    "trapId": "trap_fgo_belt",
+    "iconId": "trap_fgo_belt",
+    "identifier": 708,
+    "name": "柏希雷克腰带·进阶",
+    "itemType": "EQUIP",
+    "tier": 4,
+    "shopSortId": 40,
+    "price": 4,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": false,
+    "upgradeNum": 0,
+    "duration": -1,
+    "giveBondId": null,
+    "effectId": "eff_fgo_belt_b",
+    "effectName": "柏希雷克腰带·进阶",
+    "desc": "部署后初始技力+18，周围8格获得【阳光照射】",
+    "descRaw": "部署后初始技力<@ba.vup>+18</>，周围8格获得<@ba.vup>【阳光照射】</>",
+    "buffs": [],
+    "params": {
+      "sp_init": 18,
+      "sun_radius": 1.5
+    },
+    "category": "SPECIAL",
+    "kind": "passive",
+    "flavor": "白昼正午升腾的炽日之光，普照全阵。"
+  },
+  "chess_item_5_fgo_staff_a": {
+    "id": "chess_item_5_fgo_staff_a",
+    "baseId": "chess_item_5_fgo_staff_a",
+    "goldenId": "chess_item_5_fgo_staff_b",
+    "isGolden": false,
+    "trapId": "trap_fgo_staff",
+    "iconId": "trap_fgo_staff",
+    "identifier": 709,
+    "name": "选定之杖",
+    "itemType": "EQUIP",
+    "tier": 5,
+    "shopSortId": 50,
+    "price": 3,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": true,
+    "upgradeNum": 2,
+    "upgradeChessId": "chess_item_5_fgo_staff_b",
+    "duration": -1,
+    "giveBondId": null,
+    "effectId": "eff_fgo_staff_a",
+    "effectName": "选定之杖",
+    "desc": "攻击力+30%，技力自然回复速度+0.25/秒。若携带者为阿尔托莉雅·卡斯特或摩根，首次开启技能时额外为全场干员回5点技力",
+    "descRaw": "攻击力<@ba.vup>+30%</>，技力自然回复速度<@ba.vup>+0.25/秒</>。若携带者为阿尔托莉雅·卡斯特或摩根，首次开启技能时额外为全场干员回5点技力",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "atk": 0.3
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "atk": 0.3,
+      "sp_recovery": 0.25,
+      "fgo_queen_sp": 5
+    },
+    "category": "STAT",
+    "kind": "passive",
+    "flavor": "引导救世巫女旅途的质朴木杖，铭刻着敲响钟声的誓约。"
+  },
+  "chess_item_5_fgo_staff_b": {
+    "id": "chess_item_5_fgo_staff_b",
+    "baseId": "chess_item_5_fgo_staff_a",
+    "goldenId": "chess_item_5_fgo_staff_b",
+    "isGolden": true,
+    "trapId": "trap_fgo_staff",
+    "iconId": "trap_fgo_staff",
+    "identifier": 710,
+    "name": "选定之杖·进阶",
+    "itemType": "EQUIP",
+    "tier": 5,
+    "shopSortId": 50,
+    "price": 6,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": false,
+    "upgradeNum": 0,
+    "duration": -1,
+    "giveBondId": null,
+    "effectId": "eff_fgo_staff_b",
+    "effectName": "选定之杖·进阶",
+    "desc": "攻击力+50%，技力自然回复速度+0.4/秒。若携带者为阿尔托莉雅·卡斯特或摩根，首次开启技能时额外为全场干员回5点技力",
+    "descRaw": "攻击力<@ba.vup>+50%</>，技力自然回复速度<@ba.vup>+0.4/秒</>。若携带者为阿尔托莉雅·卡斯特或摩根，首次开启技能时额外为全场干员回5点技力",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "atk": 0.5
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "atk": 0.5,
+      "sp_recovery": 0.4,
+      "fgo_queen_sp": 5
+    },
+    "category": "STAT",
+    "kind": "passive",
+    "flavor": "真圆之星的杖顶光华，驱散妖精国度的漫长寒冬。"
+  },
+  "chess_item_6_fgo_avalon_a": {
+    "id": "chess_item_6_fgo_avalon_a",
+    "baseId": "chess_item_6_fgo_avalon_a",
+    "goldenId": "chess_item_6_fgo_avalon_b",
+    "isGolden": false,
+    "trapId": "trap_fgo_avalon",
+    "iconId": "trap_fgo_avalon",
+    "identifier": 711,
+    "name": "遥远的理想乡",
+    "itemType": "EQUIP",
+    "tier": 6,
+    "shopSortId": 60,
+    "price": 4,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": true,
+    "upgradeNum": 2,
+    "upgradeChessId": "chess_item_6_fgo_avalon_b",
+    "duration": -1,
+    "giveBondId": null,
+    "effectId": "eff_fgo_avalon_a",
+    "effectName": "遥远的理想乡",
+    "desc": "最大生命值+50%，每秒回复4%最大生命值。若携带者为【圆桌】干员，受致命伤时进入5秒无敌并回复50%生命（每战1次）",
+    "descRaw": "最大生命值<@ba.vup>+50%</>，每秒回复<@ba.vup>4%</>最大生命值。若携带者为【圆桌】干员，受致命伤时进入5秒无敌并回复50%生命（每战1次）",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "max_hp": 0.5
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "max_hp": 0.5,
+      "hp_regen_pct": 0.04,
+      "undying_sec": 5,
+      "undying_heal_pct": 0.5
+    },
+    "category": "SPECIAL",
+    "kind": "passive",
+    "flavor": "金黄与深蓝交织的黄金圣剑之鞘，尘世一切侵害皆不可侵入的绝对防御。"
+  },
+  "chess_item_6_fgo_avalon_b": {
+    "id": "chess_item_6_fgo_avalon_b",
+    "baseId": "chess_item_6_fgo_avalon_a",
+    "goldenId": "chess_item_6_fgo_avalon_b",
+    "isGolden": true,
+    "trapId": "trap_fgo_avalon",
+    "iconId": "trap_fgo_avalon",
+    "identifier": 712,
+    "name": "遥远的理想乡·进阶",
+    "itemType": "EQUIP",
+    "tier": 6,
+    "shopSortId": 60,
+    "price": 8,
+    "hideInShop": false,
+    "shopExcluded": false,
+    "mergeable": false,
+    "upgradeNum": 0,
+    "duration": -1,
+    "giveBondId": null,
+    "effectId": "eff_fgo_avalon_b",
+    "effectName": "遥远的理想乡·进阶",
+    "desc": "最大生命值+80%，每秒回复7%最大生命值。若携带者为【圆桌】干员，受致命伤时进入5秒无敌并回复50%生命（每战1次）；若同时携带《卡美洛白银甲》，每秒额外回1点技力",
+    "descRaw": "最大生命值<@ba.vup>+80%</>，每秒回复<@ba.vup>7%</>最大生命值。若携带者为【圆桌】干员，受致命伤时进入5秒无敌并回复50%生命（每战1次）；若同时携带《卡美洛白银甲》，每秒额外回1点技力",
+    "buffs": [
+      {
+        "key": "env_gbuff_new_with_verify",
+        "countType": "NONE",
+        "bb": {
+          "max_hp": 0.8
+        },
+        "bbStr": {
+          "key": "attr_common_global_buff"
+        }
+      }
+    ],
+    "params": {
+      "max_hp": 0.8,
+      "hp_regen_pct": 0.07,
+      "undying_sec": 5,
+      "undying_heal_pct": 0.5,
+      "silverarmor_combo_sp": 1
+    },
+    "category": "SPECIAL",
+    "kind": "passive",
+    "flavor": "永世隔绝的乐园星海，王所长眠的安息之地。"
+  }
+}

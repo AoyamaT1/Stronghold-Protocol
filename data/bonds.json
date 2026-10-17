@@ -89,9 +89,7 @@
       "chess_char_5_12_a",
       "chess_char_5_23_a",
       "chess_char_6_03_a",
-      "chess_char_6_15_a",
-      "chess_custom_5_chen3_a",
-      "chess_custom_6_wang_a"
+      "chess_char_6_15_a"
     ],
     "visibleMembers": [
       "chess_char_1_03_a",
@@ -103,9 +101,7 @@
       "chess_char_5_12_a",
       "chess_char_5_23_a",
       "chess_char_6_03_a",
-      "chess_char_6_15_a",
-      "chess_custom_5_chen3_a",
-      "chess_custom_6_wang_a"
+      "chess_char_6_15_a"
     ],
     "spec": {
       "tiers": [
@@ -1202,10 +1198,7 @@
       "chess_char_6_01_a",
       "chess_char_6_05_a",
       "chess_char_6_08_a",
-      "chess_char_6_12_a",
-      "chess_char_6_21_a",
-      "chess_rhodes_closur_a",
-      "chess_char_5_limbus_outis_a"
+      "chess_char_6_12_a"
     ],
     "visibleMembers": [
       "chess_char_1_09_a",
@@ -1219,10 +1212,7 @@
       "chess_char_6_01_a",
       "chess_char_6_05_a",
       "chess_char_6_08_a",
-      "chess_char_6_12_a",
-      "chess_char_6_21_a",
-      "chess_rhodes_closur_a",
-      "chess_char_5_limbus_outis_a"
+      "chess_char_6_12_a"
     ],
     "spec": {
       "tiers": [
@@ -1335,10 +1325,7 @@
       "chess_char_5_22_a",
       "chess_char_6_05_a",
       "chess_char_6_10_a",
-      "chess_char_6_19_a",
-      "chess_char_3_22_a",
-      "chess_rhodes_monstr_a",
-      "chess_char_5_limbus_ryoshu_a"
+      "chess_char_6_19_a"
     ],
     "visibleMembers": [
       "chess_char_1_01_a",
@@ -1352,10 +1339,7 @@
       "chess_char_5_15_a",
       "chess_char_5_22_a",
       "chess_char_6_05_a",
-      "chess_char_6_19_a",
-      "chess_char_3_22_a",
-      "chess_rhodes_monstr_a",
-      "chess_char_5_limbus_ryoshu_a"
+      "chess_char_6_19_a"
     ],
     "spec": {
       "tiers": [
@@ -1461,9 +1445,7 @@
       "chess_char_4_21_a",
       "chess_char_5_06_a",
       "chess_char_5_16_a",
-      "chess_char_6_16_a",
-      "chess_char_2_20_a",
-      "chess_char_2_limbus_ishmael_a"
+      "chess_char_6_16_a"
     ],
     "visibleMembers": [
       "chess_char_1_14_a",
@@ -1476,9 +1458,7 @@
       "chess_char_4_13_a",
       "chess_char_4_21_a",
       "chess_char_5_06_a",
-      "chess_char_6_16_a",
-      "chess_char_2_20_a",
-      "chess_char_2_limbus_ishmael_a"
+      "chess_char_6_16_a"
     ],
     "spec": {
       "tiers": [
@@ -1596,11 +1576,7 @@
       "chess_char_5_07_a",
       "chess_char_5_12_a",
       "chess_char_6_02_a",
-      "chess_char_6_16_a",
-      "chess_char_1_limbus_yisang_a",
-      "chess_rhodes_logos_a",
-      "chess_char_2_limbus_faust_a",
-      "chess_char_4_limbus_honglu_a"
+      "chess_char_6_16_a"
     ],
     "visibleMembers": [
       "chess_char_1_17_a",
@@ -1611,11 +1587,7 @@
       "chess_char_5_07_a",
       "chess_char_5_12_a",
       "chess_char_6_02_a",
-      "chess_char_6_16_a",
-      "chess_char_1_limbus_yisang_a",
-      "chess_rhodes_logos_a",
-      "chess_char_2_limbus_faust_a",
-      "chess_char_4_limbus_honglu_a"
+      "chess_char_6_16_a"
     ],
     "spec": {
       "tiers": [
@@ -1736,8 +1708,7 @@
       "chess_char_3_16_a",
       "chess_char_4_01_a",
       "chess_char_5_11_a",
-      "chess_char_6_03_a",
-      "chess_char_3_limbus_rodion_a"
+      "chess_char_6_03_a"
     ],
     "visibleMembers": [
       "chess_char_1_02_a",
@@ -1749,8 +1720,7 @@
       "chess_char_3_16_a",
       "chess_char_4_01_a",
       "chess_char_5_11_a",
-      "chess_char_6_03_a",
-      "chess_char_3_limbus_rodion_a"
+      "chess_char_6_03_a"
     ],
     "spec": {
       "tiers": [
@@ -1870,9 +1840,7 @@
       "chess_char_4_24_a",
       "chess_char_5_16_a",
       "chess_char_6_14_a",
-      "chess_char_6_20_a",
-      "chess_char_3_22_a",
-      "chess_rhodes_amiya3_a"
+      "chess_char_6_20_a"
     ],
     "visibleMembers": [
       "chess_char_1_06_a",
@@ -1882,9 +1850,7 @@
       "chess_char_4_21_a",
       "chess_char_4_24_a",
       "chess_char_6_14_a",
-      "chess_char_6_20_a",
-      "chess_char_3_22_a",
-      "chess_rhodes_amiya3_a"
+      "chess_char_6_20_a"
     ],
     "spec": {
       "tiers": [
@@ -1995,8 +1961,7 @@
       "chess_char_4_07_a",
       "chess_char_5_01_a",
       "chess_char_5_21_a",
-      "chess_char_6_12_a",
-      "chess_char_5_24_a"
+      "chess_char_6_12_a"
     ],
     "visibleMembers": [
       "chess_char_2_02_a",
@@ -2006,8 +1971,7 @@
       "chess_char_4_07_a",
       "chess_char_5_01_a",
       "chess_char_5_21_a",
-      "chess_char_6_12_a",
-      "chess_char_5_24_a"
+      "chess_char_6_12_a"
     ],
     "spec": {
       "tiers": [
@@ -2227,15 +2191,13 @@
       "chess_char_2_19_a",
       "chess_char_3_04_a",
       "chess_char_5_14_a",
-      "chess_char_5_17_a",
-      "chess_rhodes_closur_a"
+      "chess_char_5_17_a"
     ],
     "visibleMembers": [
       "chess_char_2_19_a",
       "chess_char_3_04_a",
       "chess_char_5_14_a",
-      "chess_char_5_17_a",
-      "chess_rhodes_closur_a"
+      "chess_char_5_17_a"
     ],
     "spec": {
       "tiers": [
@@ -2347,10 +2309,7 @@
       "chess_char_4_16_a",
       "chess_char_5_07_a",
       "chess_char_6_15_a",
-      "chess_char_6_17_a",
-      "chess_char_1_limbus_sinclair_a",
-      "chess_char_6_limbus_donquixote_a",
-      "chess_char_3_limbus_heathcliff_a"
+      "chess_char_6_17_a"
     ],
     "visibleMembers": [
       "chess_char_1_18_a",
@@ -2361,10 +2320,7 @@
       "chess_char_4_16_a",
       "chess_char_5_07_a",
       "chess_char_6_15_a",
-      "chess_char_6_17_a",
-      "chess_char_1_limbus_sinclair_a",
-      "chess_char_6_limbus_donquixote_a",
-      "chess_char_3_limbus_heathcliff_a"
+      "chess_char_6_17_a"
     ],
     "spec": {
       "tiers": [
@@ -2468,10 +2424,7 @@
       "chess_char_4_07_a",
       "chess_char_5_06_a",
       "chess_char_5_13_a",
-      "chess_char_6_06_a",
-      "chess_char_4_27_a",
-      "chess_char_4_limbus_meursault_a",
-      "chess_char_6_limbus_gregor_a"
+      "chess_char_6_06_a"
     ],
     "visibleMembers": [
       "chess_char_1_20_a",
@@ -2480,10 +2433,7 @@
       "chess_char_4_07_a",
       "chess_char_5_06_a",
       "chess_char_5_13_a",
-      "chess_char_6_06_a",
-      "chess_char_4_27_a",
-      "chess_char_4_limbus_meursault_a",
-      "chess_char_6_limbus_gregor_a"
+      "chess_char_6_06_a"
     ],
     "spec": {
       "tiers": [
@@ -2632,18 +2582,14 @@
       "chess_char_4_25_a",
       "chess_char_5_09_a",
       "chess_char_5_10_a",
-      "chess_char_6_12_a",
-      "chess_custom_5_kalts2_a",
-      "chess_custom_5_wisdel_a"
+      "chess_char_6_12_a"
     ],
     "visibleMembers": [
       "chess_char_2_14_a",
       "chess_char_3_10_a",
       "chess_char_4_25_a",
       "chess_char_5_10_a",
-      "chess_char_6_12_a",
-      "chess_custom_5_kalts2_a",
-      "chess_custom_5_wisdel_a"
+      "chess_char_6_12_a"
     ],
     "spec": {
       "tiers": [
@@ -2722,8 +2668,7 @@
       "chess_char_3_17_a",
       "chess_char_4_09_a",
       "chess_char_4_18_a",
-      "chess_char_5_11_a",
-      "chess_rhodes_ascln_a"
+      "chess_char_5_11_a"
     ],
     "visibleMembers": [
       "chess_char_1_08_a",
@@ -2731,8 +2676,7 @@
       "chess_char_3_17_a",
       "chess_char_4_09_a",
       "chess_char_4_18_a",
-      "chess_char_5_11_a",
-      "chess_rhodes_ascln_a"
+      "chess_char_5_11_a"
     ],
     "spec": {
       "tiers": [
@@ -2831,202 +2775,6 @@
       ]
     }
   },
-  "limbusShip": {
-    "bondId": "limbusShip",
-    "name": "边狱公司",
-    "identifier": 25,
-    "isCore": true,
-    "bondType": "SEASON",
-    "bondOrder": 2,
-    "powerIdList": [
-      "limbus"
-    ],
-    "iconId": "icon_limbusShip",
-    "activeCount": 3,
-    "thresholds": [
-      3,
-      6
-    ],
-    "maxCount": null,
-    "thresholdTemplate": "count_threshold_upward",
-    "countMode": "BOARD",
-    "countsHand": false,
-    "countsGoldenOnly": false,
-    "activeType": "BATTLE",
-    "isActiveInDeck": false,
-    "noStack": false,
-    "weight": 10,
-    "maxInactiveBondCount": -1,
-    "layerMilestones": [],
-    "desc": "【边狱公司】干员造成的伤害随盟约层数提升（最高×2.2）\n<在场3名不同【边狱公司】干员>【精神值·个人轴】：干员攻击或造成元素损伤积攒【精神值】（-45~45）；正精神时攻击力最高提升18%、受到伤害降低15%；【辛克莱】【罗佳】为负精神人格，精神跌破0反而大幅增强攻击与攻速，其余罪人负精神则陷入虚弱。【金枝共鸣·团队池】：任意罪人将精神推至满值或跌破0，即为全队积攒【金枝共鸣】；金枝共鸣每点使全队攻击力+3%、攻击速度同步提升（上限15点），每积满5点引爆全场敌方的神经损伤、灼燃、流血与凋亡\n<在场6名不同【边狱公司】干员>战斗开始时全体获得20点精神；精神达到满值时攻击速度+30、技能技力消耗降低30%；全场敌方受到元素损伤效率+50%；受到致命伤害时【但丁】倒流时钟，保留1点生命并无敌3秒、精神清零（每场战斗生效一次）",
-    "descRaw": "【边狱公司】干员造成的<@ba.vup>伤害提升</>（最高<@ba.vup>×2.2</>）<@autochess.gray></>\n<在场<@autochess.dgreen>3</>名不同【边狱公司】干员><@ba.vup>【精神值·个人轴】</>：干员攻击或造成元素损伤积攒<@ba.vup>【精神值】</>（范围<@ba.vup>-45~45</>）；正精神时攻击力最高提升<@ba.vup>18%</>、受到伤害降低<@ba.vup>15%</>；【辛克莱】【罗佳】为负精神人格，精神跌破0反而大幅增强攻击与攻速，其余罪人负精神则陷入虚弱。<@ba.vup>【金枝共鸣·团队池】</>：任意罪人将精神推至满值或跌破0，即为全队积攒<@ba.vup>【金枝共鸣】</>；金枝共鸣每点使全队攻击力<@ba.vup>+3%</>、攻击速度同步提升（上限<@ba.vup>15</>点），每积满<@ba.vup>5</>点引爆全场敌方的神经损伤、灼燃、流血与凋亡\n<在场<@autochess.dgreen>6</>名不同【边狱公司】干员>战斗开始时全体获得<@ba.vup>20</>点精神；精神达到满值时攻击速度<@ba.vup>+30</>、技能技力消耗降低<@ba.vup>30%</>；全场敌方受到元素损伤效率<@ba.vup>+50%</>；受到致命伤害时【但丁】倒流时钟，保留1点生命并无敌<@ba.vup>3</>秒、精神清零（每场战斗生效一次）",
-    "effectId": "bondeffect_limbus_company",
-    "effectName": "边狱公司",
-    "effectDesc": "【边狱公司】干员造成的伤害提升至{0:0%}\n<在场3名不同【边狱公司】干员>攻击或造成元素损伤积攒【精神值】（-45~45）：正精神攻击力最高+18%、受伤-15%；辛克莱与罗佳负精神反而暴走，其余罪人负精神虚弱。任意罪人精神满值或跌破0为全队积攒【金枝共鸣】，每点全队攻击力+3%并提升攻速（上限15点），每满5点引爆敌方神经损伤/灼燃/流血/凋亡\n<在场6名不同【边狱公司】干员>初始20点精神；满精神攻击速度+30、技力消耗-30%；全场敌方元素损伤效率+50%；受致命伤害时保留1点生命并无敌3秒、精神清零（每场一次）",
-    "effectDescRaw": "【边狱公司】干员造成的伤害提升至<@ba.vup>{0:0%}</><@ba.acrem></>\n<在场<@ba.vup>3</>名不同【边狱公司】干员>攻击或造成元素损伤积攒【精神值】（-45~45）：正精神攻击力最高+18%、受伤-15%；辛克莱与罗佳负精神反而暴走，其余罪人负精神虚弱。任意罪人精神满值或跌破0为全队积攒【金枝共鸣】，每点全队攻击力+3%并提升攻速（上限15点），每满5点引爆敌方神经损伤/灼燃/流血/凋亡\n<在场<@ba.vup>6</>名不同【边狱公司】干员>初始20点精神；满精神攻击速度+30、技力消耗-30%；全场敌方元素损伤效率+50%；受致命伤害时保留1点生命并无敌3秒、精神清零（每场一次）",
-    "effectDescParams": [
-      {
-        "index": 0,
-        "format": "0%",
-        "base": "base_damage_scale",
-        "perStack": "damage_scale_per_stack"
-      }
-    ],
-    "bb": {
-      "base_damage_scale": 1.08,
-      "damage_scale_per_stack": 0.004,
-      "max_sanity": 45,
-      "atk_pct_max": 0.18,
-      "damage_reduction": 0.15,
-      "init_sanity": 20,
-      "dante_invuln_sec": 3,
-      "dante_heal_ratio": 0.3,
-      "full_sanity_aspd": 30,
-      "full_sanity_sp_ratio": 0.7,
-      "pierce_ratio": 0.3,
-      "power_bond_char_cnt": 6
-    },
-    "bbStr": {
-      "key": "act1autochess_bond_eff_limbus"
-    },
-    "buffs": [
-      {
-        "key": "env_gbuff_new",
-        "bb": {
-          "base_damage_scale": 1.08,
-          "damage_scale_per_stack": 0.004,
-          "max_sanity": 45,
-          "power_bond_char_cnt": 6
-        },
-        "bbStr": {
-          "key": "act1autochess_bond_eff_limbus"
-        }
-      }
-    ],
-    "baseParams": [
-      "base_damage_scale"
-    ],
-    "perStackParams": [
-      "damage_scale_per_stack"
-    ],
-    "members": [
-      "chess_char_1_limbus_yisang_a",
-      "chess_char_2_limbus_faust_a",
-      "chess_char_1_limbus_sinclair_a",
-      "chess_char_3_limbus_rodion_a",
-      "chess_char_6_limbus_donquixote_a",
-      "chess_char_4_limbus_meursault_a",
-      "chess_char_2_limbus_ishmael_a",
-      "chess_char_5_limbus_ryoshu_a",
-      "chess_char_5_limbus_outis_a",
-      "chess_char_3_limbus_heathcliff_a",
-      "chess_char_4_limbus_honglu_a",
-      "chess_char_6_limbus_gregor_a"
-    ],
-    "visibleMembers": [
-      "chess_char_1_limbus_yisang_a",
-      "chess_char_2_limbus_faust_a",
-      "chess_char_1_limbus_sinclair_a",
-      "chess_char_3_limbus_rodion_a",
-      "chess_char_6_limbus_donquixote_a",
-      "chess_char_4_limbus_meursault_a",
-      "chess_char_2_limbus_ishmael_a",
-      "chess_char_5_limbus_ryoshu_a",
-      "chess_char_5_limbus_outis_a",
-      "chess_char_3_limbus_heathcliff_a",
-      "chess_char_4_limbus_honglu_a",
-      "chess_char_6_limbus_gregor_a"
-    ]
-  },
-  "aveMujicaShip": {
-    "bondId": "aveMujicaShip",
-    "name": "Ave Mujica",
-    "identifier": 24,
-    "isCore": true,
-    "bondType": "SEASON",
-    "bondOrder": 2,
-    "powerIdList": [
-      "mujica"
-    ],
-    "iconId": "icon_aveMujicaShip",
-    "activeCount": 3,
-    "thresholds": [
-      3,
-      5
-    ],
-    "maxCount": null,
-    "thresholdTemplate": "count_threshold_upward",
-    "countMode": "BOARD",
-    "countsHand": false,
-    "countsGoldenOnly": false,
-    "activeType": "BATTLE",
-    "isActiveInDeck": false,
-    "noStack": false,
-    "weight": 10,
-    "maxInactiveBondCount": -1,
-    "layerMilestones": [],
-    "desc": "【Ave Mujica】干员造成的伤害提升（受层数影响）\n<在场5名不同【Ave Mujica】干员>战斗开始时，全体【Ave Mujica】干员技能所需技力-50%；且成员技能持续期间，造成的伤害额外提升30%，受到的物理和法术伤害降低30%",
-    "descRaw": "【Ave Mujica】干员造成的<@ba.vup>伤害提升</><@autochess.gray>（受层数影响）</>\n<在场<@autochess.dgreen>5</>名不同【Ave Mujica】干员>战斗开始时，全体【Ave Mujica】干员技能所需技力<@ba.vup>-50%</>；且成员技能持续期间，造成的伤害额外提升<@ba.vup>30%</>，受到的物理和法术伤害降低<@ba.vup>30%</>",
-    "effectId": "bondeffect_ave_mujica",
-    "effectName": "Ave Mujica",
-    "effectDesc": "【Ave Mujica】干员造成的伤害提升至{0:0%}（受层数影响）\n<在场5名不同【Ave Mujica】干员>战斗开始时全体【Ave Mujica】干员技能所需技力-50%；且成员技能持续期间造成的伤害额外提升30%，受到的物理和法术伤害降低30%",
-    "effectDescRaw": "【Ave Mujica】干员造成的伤害提升至<@ba.vup>{0:0%}</><@ba.acrem>（受层数影响）</>\n<在场<@ba.vup>5</>名不同【Ave Mujica】干员>战斗开始时全体【Ave Mujica】干员技能所需技力<@ba.vup>-50%</>；且成员技能持续期间造成的伤害额外提升<@ba.vup>30%</>，受到的物理和法术伤害降低<@ba.vup>30%</>",
-    "effectDescParams": [
-      {
-        "index": 0,
-        "format": "0%",
-        "base": "base_damage_scale",
-        "perStack": "damage_scale_per_stack"
-      }
-    ],
-    "bb": {
-      "base_damage_scale": 1.2,
-      "damage_scale_per_stack": 0.01,
-      "sp_cost_ratio": 0.5,
-      "skill_damage_scale": 1.3,
-      "damage_resistance": 0.3,
-      "power_bond_char_cnt": 5
-    },
-    "bbStr": {
-      "key": "act1autochess_bond_eff_ave_mujica"
-    },
-    "buffs": [
-      {
-        "key": "env_gbuff_new",
-        "bb": {
-          "base_damage_scale": 1.2,
-          "damage_scale_per_stack": 0.01,
-          "sp_cost_ratio": 0.5,
-          "skill_damage_scale": 1.3,
-          "damage_resistance": 0.3,
-          "power_bond_char_cnt": 5
-        },
-        "bbStr": {
-          "key": "act1autochess_bond_eff_ave_mujica"
-        }
-      }
-    ],
-    "baseParams": [
-      "base_damage_scale"
-    ],
-    "perStackParams": [
-      "damage_scale_per_stack"
-    ],
-    "members": [
-      "chess_char_2_20_a",
-      "chess_char_3_22_a",
-      "chess_char_4_27_a",
-      "chess_char_5_24_a",
-      "chess_char_6_21_a"
-    ],
-    "visibleMembers": [
-      "chess_char_2_20_a",
-      "chess_char_3_22_a",
-      "chess_char_4_27_a",
-      "chess_char_5_24_a",
-      "chess_char_6_21_a"
-    ]
-  },
   "rhodesShip": {
     "bondId": "rhodesShip",
     "name": "罗德岛",
@@ -3116,27 +2864,13 @@
       "chess_char_2_14_a",
       "chess_char_4_18_a",
       "chess_char_5_06_a",
-      "chess_char_6_12_a",
-      "chess_rhodes_closur_a",
-      "chess_rhodes_monstr_a",
-      "chess_rhodes_ascln_a",
-      "chess_rhodes_amiya3_a",
-      "chess_rhodes_kalts2_a",
-      "chess_rhodes_logos_a",
-      "chess_rhodes_savage_a"
+      "chess_char_6_12_a"
     ],
     "visibleMembers": [
       "chess_char_2_14_a",
       "chess_char_4_18_a",
       "chess_char_5_06_a",
-      "chess_char_6_12_a",
-      "chess_rhodes_closur_a",
-      "chess_rhodes_monstr_a",
-      "chess_rhodes_ascln_a",
-      "chess_rhodes_amiya3_a",
-      "chess_rhodes_kalts2_a",
-      "chess_rhodes_logos_a",
-      "chess_rhodes_savage_a"
+      "chess_char_6_12_a"
     ],
     "spec": {
       "tiers": [
@@ -3169,5 +2903,249 @@
         "HP-regen (生命回复) rides the same heal pipeline, so the received boost covers it and a full-HP member's regen overflows into the barrier too"
       ]
     }
+  },
+  "aveMujicaShip": {
+    "bondId": "aveMujicaShip",
+    "name": "Ave Mujica",
+    "identifier": 24,
+    "isCore": true,
+    "bondType": "SEASON",
+    "bondOrder": 2,
+    "powerIdList": [
+      "mujica"
+    ],
+    "iconId": "icon_aveMujicaShip",
+    "activeCount": 3,
+    "thresholds": [
+      3,
+      5
+    ],
+    "maxCount": null,
+    "thresholdTemplate": "count_threshold_upward",
+    "countMode": "BOARD",
+    "countsHand": false,
+    "countsGoldenOnly": false,
+    "activeType": "BATTLE",
+    "isActiveInDeck": false,
+    "noStack": false,
+    "weight": 10,
+    "maxInactiveBondCount": -1,
+    "layerMilestones": [],
+    "desc": "【Ave Mujica】干员造成的伤害提升（受层数影响）\n<在场5名不同【Ave Mujica】干员>战斗开始时，全体【Ave Mujica】干员技能所需技力-50%；且成员技能持续期间，造成的伤害额外提升30%，受到的物理和法术伤害降低30%",
+    "descRaw": "【Ave Mujica】干员造成的<@ba.vup>伤害提升</><@autochess.gray>（受层数影响）</>\n<在场<@autochess.dgreen>5</>名不同【Ave Mujica】干员>战斗开始时，全体【Ave Mujica】干员技能所需技力<@ba.vup>-50%</>；且成员技能持续期间，造成的伤害额外提升<@ba.vup>30%</>，受到的物理和法术伤害降低<@ba.vup>30%</>",
+    "effectId": "bondeffect_ave_mujica",
+    "effectName": "Ave Mujica",
+    "effectDesc": "【Ave Mujica】干员造成的伤害提升至{0:0%}（受层数影响）\n<在场5名不同【Ave Mujica】干员>战斗开始时全体【Ave Mujica】干员技能所需技力-50%；且成员技能持续期间造成的伤害额外提升30%，受到的物理和法术伤害降低30%",
+    "effectDescRaw": "【Ave Mujica】干员造成的伤害提升至<@ba.vup>{0:0%}</><@ba.acrem>（受层数影响）</>\n<在场<@ba.vup>5</>名不同【Ave Mujica】干员>战斗开始时全体【Ave Mujica】干员技能所需技力<@ba.vup>-50%</>；且成员技能持续期间造成的伤害额外提升<@ba.vup>30%</>，受到的物理和法术伤害降低<@ba.vup>30%</>",
+    "effectDescParams": [
+      {
+        "index": 0,
+        "format": "0%",
+        "base": "base_damage_scale",
+        "perStack": "damage_scale_per_stack"
+      }
+    ],
+    "bb": {
+      "base_damage_scale": 1.2,
+      "damage_scale_per_stack": 0.01,
+      "sp_cost_ratio": 0.5,
+      "skill_damage_scale": 1.3,
+      "damage_resistance": 0.3,
+      "power_bond_char_cnt": 5
+    },
+    "bbStr": {
+      "key": "act1autochess_bond_eff_ave_mujica"
+    },
+    "buffs": [
+      {
+        "key": "env_gbuff_new",
+        "bb": {
+          "base_damage_scale": 1.2,
+          "damage_scale_per_stack": 0.01,
+          "sp_cost_ratio": 0.5,
+          "skill_damage_scale": 1.3,
+          "damage_resistance": 0.3,
+          "power_bond_char_cnt": 5
+        },
+        "bbStr": {
+          "key": "act1autochess_bond_eff_ave_mujica"
+        }
+      }
+    ],
+    "baseParams": [
+      "base_damage_scale"
+    ],
+    "perStackParams": [
+      "damage_scale_per_stack"
+    ],
+    "members": [],
+    "visibleMembers": []
+  },
+  "limbusShip": {
+    "bondId": "limbusShip",
+    "name": "边狱公司",
+    "identifier": 25,
+    "isCore": true,
+    "bondType": "SEASON",
+    "bondOrder": 2,
+    "powerIdList": [
+      "limbus"
+    ],
+    "iconId": "icon_limbusShip",
+    "activeCount": 3,
+    "thresholds": [
+      3,
+      6
+    ],
+    "maxCount": null,
+    "thresholdTemplate": "count_threshold_upward",
+    "countMode": "BOARD",
+    "countsHand": false,
+    "countsGoldenOnly": false,
+    "activeType": "BATTLE",
+    "isActiveInDeck": false,
+    "noStack": false,
+    "weight": 10,
+    "maxInactiveBondCount": -1,
+    "layerMilestones": [],
+    "desc": "【边狱公司】干员造成的伤害随盟约层数提升（最高×2.2）\n<在场3名不同【边狱公司】干员>【精神值·个人轴】：干员攻击或造成元素损伤积攒【精神值】（-45~45）；正精神时攻击力最高提升18%、受到伤害降低15%；【辛克莱】【罗佳】为负精神人格，精神跌破0反而大幅增强攻击与攻速，其余罪人负精神则陷入虚弱。【金枝共鸣·团队池】：任意罪人将精神推至满值或跌破0，即为全队积攒【金枝共鸣】；金枝共鸣每点使全队攻击力+3%、攻击速度同步提升（上限15点），每积满5点引爆全场敌方的神经损伤、灼燃、流血与凋亡\n<在场6名不同【边狱公司】干员>战斗开始时全体获得20点精神；精神达到满值时攻击速度+30、技能技力消耗降低30%；全场敌方受到元素损伤效率+50%；受到致命伤害时【但丁】倒流时钟，保留1点生命并无敌3秒、精神清零（每场战斗生效一次）",
+    "descRaw": "【边狱公司】干员造成的<@ba.vup>伤害提升</>（最高<@ba.vup>×2.2</>）<@autochess.gray></>\n<在场<@autochess.dgreen>3</>名不同【边狱公司】干员><@ba.vup>【精神值·个人轴】</>：干员攻击或造成元素损伤积攒<@ba.vup>【精神值】</>（范围<@ba.vup>-45~45</>）；正精神时攻击力最高提升<@ba.vup>18%</>、受到伤害降低<@ba.vup>15%</>；【辛克莱】【罗佳】为负精神人格，精神跌破0反而大幅增强攻击与攻速，其余罪人负精神则陷入虚弱。<@ba.vup>【金枝共鸣·团队池】</>：任意罪人将精神推至满值或跌破0，即为全队积攒<@ba.vup>【金枝共鸣】</>；金枝共鸣每点使全队攻击力<@ba.vup>+3%</>、攻击速度同步提升（上限<@ba.vup>15</>点），每积满<@ba.vup>5</>点引爆全场敌方的神经损伤、灼燃、流血与凋亡\n<在场<@autochess.dgreen>6</>名不同【边狱公司】干员>战斗开始时全体获得<@ba.vup>20</>点精神；精神达到满值时攻击速度<@ba.vup>+30</>、技能技力消耗降低<@ba.vup>30%</>；全场敌方受到元素损伤效率<@ba.vup>+50%</>；受到致命伤害时【但丁】倒流时钟，保留1点生命并无敌<@ba.vup>3</>秒、精神清零（每场战斗生效一次）",
+    "effectId": "bondeffect_limbus_company",
+    "effectName": "边狱公司",
+    "effectDesc": "【边狱公司】干员造成的伤害提升至{0:0%}\n<在场3名不同【边狱公司】干员>攻击或造成元素损伤积攒【精神值】（-45~45）：正精神攻击力最高+18%、受伤-15%；辛克莱与罗佳负精神反而暴走，其余罪人负精神虚弱。任意罪人精神满值或跌破0为全队积攒【金枝共鸣】，每点全队攻击力+3%并提升攻速（上限15点），每满5点引爆敌方神经损伤/灼燃/流血/凋亡\n<在场6名不同【边狱公司】干员>初始20点精神；满精神攻击速度+30、技力消耗-30%；全场敌方元素损伤效率+50%；受致命伤害时保留1点生命并无敌3秒、精神清零（每场一次）",
+    "effectDescRaw": "【边狱公司】干员造成的伤害提升至<@ba.vup>{0:0%}</><@ba.acrem></>\n<在场<@ba.vup>3</>名不同【边狱公司】干员>攻击或造成元素损伤积攒【精神值】（-45~45）：正精神攻击力最高+18%、受伤-15%；辛克莱与罗佳负精神反而暴走，其余罪人负精神虚弱。任意罪人精神满值或跌破0为全队积攒【金枝共鸣】，每点全队攻击力+3%并提升攻速（上限15点），每满5点引爆敌方神经损伤/灼燃/流血/凋亡\n<在场<@ba.vup>6</>名不同【边狱公司】干员>初始20点精神；满精神攻击速度+30、技力消耗-30%；全场敌方元素损伤效率+50%；受致命伤害时保留1点生命并无敌3秒、精神清零（每场一次）",
+    "effectDescParams": [
+      {
+        "index": 0,
+        "format": "0%",
+        "base": "base_damage_scale",
+        "perStack": "damage_scale_per_stack"
+      }
+    ],
+    "bb": {
+      "base_damage_scale": 1.08,
+      "damage_scale_per_stack": 0.004,
+      "max_sanity": 45,
+      "atk_pct_max": 0.18,
+      "damage_reduction": 0.15,
+      "init_sanity": 20,
+      "dante_invuln_sec": 3,
+      "dante_heal_ratio": 0.3,
+      "full_sanity_aspd": 30,
+      "full_sanity_sp_ratio": 0.7,
+      "pierce_ratio": 0.3,
+      "power_bond_char_cnt": 6
+    },
+    "bbStr": {
+      "key": "act1autochess_bond_eff_limbus"
+    },
+    "buffs": [
+      {
+        "key": "env_gbuff_new",
+        "bb": {
+          "base_damage_scale": 1.08,
+          "damage_scale_per_stack": 0.004,
+          "max_sanity": 45,
+          "power_bond_char_cnt": 6
+        },
+        "bbStr": {
+          "key": "act1autochess_bond_eff_limbus"
+        }
+      }
+    ],
+    "baseParams": [
+      "base_damage_scale"
+    ],
+    "perStackParams": [
+      "damage_scale_per_stack"
+    ],
+    "members": [],
+    "visibleMembers": []
+  },
+  "roundTable": {
+    "bondId": "roundTable",
+    "name": "圆桌",
+    "identifier": 77,
+    "isCore": true,
+    "bondType": "FACTION",
+    "bondOrder": 1,
+    "powerIdList": [
+      "roundTable"
+    ],
+    "iconId": "icon_roundTable",
+    "activeCount": 3,
+    "thresholds": [
+      3,
+      6,
+      9
+    ],
+    "maxCount": null,
+    "thresholdTemplate": "count_threshold_upward",
+    "countMode": "BOARD",
+    "countsHand": false,
+    "countsGoldenOnly": false,
+    "activeType": "BATTLE",
+    "isActiveInDeck": false,
+    "noStack": false,
+    "weight": 12,
+    "maxInactiveBondCount": -1,
+    "layerMilestones": [
+      25,
+      50,
+      75,
+      100,
+      125,
+      150
+    ],
+    "desc": "【圆桌】干员随盟约层数强化攻防与战技回转。\n<在场3名不同【圆桌】干员>四重拘束解放：全体【圆桌】干员攻击力+(20+0.8×层数)%，防御力+(16+0.5×层数)%。【誓约共鸣】：战斗中任意【圆桌】干员开技能时全队回3点技力（每人每5秒至多1次），首次技能叠加2层盟约。每叠加25层获得1件专属装备。\n<在场6名不同【圆桌】干员>八重拘束解放：战斗开始时全体【圆桌】干员获得1层护盾与常驻抵抗。【圆桌议决】：战斗中累计开启6次技能或盟约达120层时解放议决，全体伤害转为弱点伤害，蓄力技能无需双倍SP直接以Overcharge释放。\n<在场9名不同【圆桌】干员>十三拘束全解放：开局直接完成【圆桌议决】，全体初始技力+20且技力消耗-25%。战场每22秒触发天际支援，为全场友方恢复25%最大生命与1层护盾，并对敌全场造成100%总攻击力的真实伤害与2.5秒晕眩。",
+    "descRaw": "【圆桌】干员随盟约层数强化攻防与战技回转。\n<在场<@autochess.dgreen>3</>名不同【圆桌】干员><@ba.vup>四重拘束解放</>：全体【圆桌】干员攻击力<@ba.vup>+(20+0.8×层数)%</>，防御力<@ba.vup>+(16+0.5×层数)%</>。<@ba.vup>【誓约共鸣】</>：战斗中任意【圆桌】干员开技能时全队回3点技力（每人每5秒至多1次），首次技能叠加2层盟约。每叠加25层获得1件专属装备。\n<在场<@autochess.dgreen>6</>名不同【圆桌】干员><@ba.vup>八重拘束解放</>：战斗开始时全体【圆桌】干员获得1层护盾与常驻抵抗。<@ba.vup>【圆桌议决】</>：战斗中累计开启6次技能或盟约达120层时解放议决，全体伤害转为弱点伤害，蓄力技能无需双倍SP直接以Overcharge释放。\n<在场<@autochess.dgreen>9</>名不同【圆桌】干员><@ba.vup>十三拘束全解放</>：开局直接完成【圆桌议决】，全体初始技力<@ba.vup>+20</>且技力消耗<@ba.vup>-25%</>。战场每22秒触发天际支援，为全场友方恢复25%最大生命与1层护盾，并对敌全场造成100%总攻击力的真实伤害与2.5秒晕眩。",
+    "effectId": "bondeffect_round_table",
+    "effectName": "圆桌",
+    "effectDesc": "【圆桌】干员攻击力与防御力随层数提升。\n<在场3人>攻防提升并开启誓约共鸣，技能回SP与叠层；每25层军备发放\n<在场6人>开局护盾与抵抗；圆桌议决弱点伤害与蓄力瞬发\n<在场9人>开局满议决，技力减免与全屏天际支援",
+    "effectDescRaw": "【圆桌】干员攻击力与防御力随层数提升。\n<在场3人>攻防提升并开启誓约共鸣，技能回SP与叠层；每25层军备发放\n<在场6人>开局护盾与抵抗；圆桌议决弱点伤害与蓄力瞬发\n<在场9人>开局满议决，技力减免与全屏天际支援",
+    "effectDescParams": [],
+    "bb": {
+      "atk_base": 0.2,
+      "atk_step": 0.008,
+      "def_base": 0.16,
+      "def_step": 0.005,
+      "resonance_sp": 3,
+      "resonance_cd": 5,
+      "resonance_layer": 2,
+      "decision_skills": 6,
+      "decision_layer": 120,
+      "t9_sp_init": 20,
+      "t9_sp_cost_pct": -0.25,
+      "t9_sky_interval": 22,
+      "t9_sky_heal": 0.25,
+      "t9_sky_stun": 2.5
+    },
+    "bbStr": {
+      "key": "act1autochess_bond_eff_round_table"
+    },
+    "buffs": [
+      {
+        "key": "env_gbuff_new",
+        "bb": {
+          "atk_base": 0.2,
+          "atk_step": 0.008,
+          "def_base": 0.16,
+          "def_step": 0.005
+        },
+        "bbStr": {
+          "key": "act1autochess_bond_eff_round_table"
+        }
+      }
+    ],
+    "baseParams": [
+      "atk_base",
+      "def_base"
+    ],
+    "perStackParams": [
+      "atk_step",
+      "def_step"
+    ],
+    "members": [],
+    "visibleMembers": []
   }
 }

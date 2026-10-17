@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>宝具横幅背景检查</title>
+  <style>body { margin: 0; background: #000; }</style>
+</head>
+<body>
+  <script type="module">
+    // 验证宝具解放横幅的背景是否已透明：底图铺满高对比色块模拟战场，横幅叠在上面。
+    // 横幅完全显示后停掉 ticker 定格，供 headless Chrome 截图。
+    const status = document.createElement('pre');
+    status.style.cssText = 'position:fixed;left:4px;top:4px;z-index:9;color:#0f0;font:12px monospace;background:#000a;padding:4px';
+    status.textContent = 'boot';
+    document.body.appendChild(status);
+    window.addEventListener('error', (e) => { status.textContent += '\nERR ' + e.message; });
+    window.addEventListener('unhandledrejection', (e) => { status.textContent += '\nREJ ' + (e.reason?.message || e.reason); });
+
+    import { ensurePixi } from '/js/render/app/pixi.js';
+    import { installFgoFx } from '/js/mods/fgo-fx-rig-audio.js';
+
+    status.textContent = 'loading pixi…';
+    const Pixi = await ensurePixi();
+    status.textContent = 'pixi ok: ' + !!Pixi;
+    const W = 900, H = 460;
+    const app = new Pixi.Application({ width: W, height: H, backgroundColor: 0x1d2a24, antialias: true });
+    document.body.appendChild(app.view);
+
+    // 假战场：高对比色块 + 斜纹，任何遮挡都会很明显
+    const bg = new Pixi.Graphics();
+    const colors = [0x4ed8af, 0xff9c33, 0xe05a5a, 0x6aa9ff, 0xffd700, 0x9c6aff];
+    for (let r = 0; r < 3; r++) {
+      for (let c = 0; c < 10; c++) {
+        bg.beginFill(colors[(r * 10 + c) % colors.length], 0.85);
+        bg.drawRect(c * 90 + 4, 60 + r * 120 + 4, 82, 112);
+        bg.endFill();
+      }
+    }
+    bg.beginFill(0xffffff, 0.9);
+    bg.drawRect(0, 172, W, 8);          // 一条白线：正好落在横幅中线附近，挡不挡一眼可见
+    bg.endFill();
+    app.stage.addChild(bg);
+
+    const layer = new Pixi.Container();
+    app.stage.addChild(layer);
+
+    const fx = installFgoFx({
+      P: Pixi,
+      layer,
+      screenSize: () => ({ width: W, height: H }),
+      ticker: app.ticker,
+      isPaused: () => false,
+      get audio() { return null; },
+    });
+
+    // 先停掉自动 ticker，等横幅的滑入时间（0.2s）真实过去，再手动推一帧 ——
+    // 这样定格的一定是「完全显示」状态，不受 virtual-time 快进的影响。
+    app.ticker.stop();
+    fx.showBanner('加雷斯', '狂暴少女狼');
+    setTimeout(() => {
+      if (app.ticker.started) app.ticker.stop();
+      app.ticker.update();          // 单帧推进：此刻 elapsed≈0.45s，横幅已在位
+      status.textContent += '\nFROZEN';
+      document.title = 'FROZEN';
+    }, 450);
+  </script>
+</body>
+</html>

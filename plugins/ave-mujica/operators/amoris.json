@@ -1,0 +1,119 @@
+{
+  "op": 1,
+  "charId": "char_x_ave_mujica_amoris",
+  "name": "祐天寺若麦",
+  "profession": "WARRIOR",
+  "subProfessionId": "hammer",
+  "position": "MELEE",
+  "rarity": 5,
+  "as": "both",
+  "chess": {
+    "tier": 2,
+    "bonds": [
+      "aveMujicaShip",
+      "skillfulShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_amoris_a"
+      ],
+      "golden": [
+        "garrison_amoris_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2800,
+        "atk": 710,
+        "def": 380,
+        "bat": 1.5,
+        "blockCnt": 2,
+        "cost": 22,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2850,
+        "atk": 715,
+        "def": 480,
+        "bat": 1.5,
+        "blockCnt": 2,
+        "cost": 22,
+        "res": 0,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_ave_mujica_amoris_1",
+      "name": "如焰般热烈",
+      "duration": 15,
+      "spCost": 23,
+      "initSp": 1,
+      "desc": "攻击变为特殊的三连击，其中第一次攻击的攻击力变为138%且溅射范围扩大；后两次攻击的攻击力变为20%",
+      "bb": {
+        "attack@atk_scale_heavy": 1.38,
+        "attack@atk_scale_light": 0.2
+      },
+      "default": true
+    },
+    {
+      "skillId": "skx_ave_mujica_amoris_2",
+      "name": "如麦般生长",
+      "duration": 24,
+      "spCost": 40,
+      "initSp": 21,
+      "desc": "攻击范围扩大，攻击变为特殊的八连击，其中第一、五次攻击的攻击力变为107%；其余攻击的攻击力变为10%。随机攻击范围内的目标",
+      "bb": {
+        "attack@atk_scale_heavy": 1.07,
+        "attack@atk_scale_light": 0.1
+      },
+      "default": false
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "节奏共振",
+      "desc": "攻击被阻挡的敌人时攻击力+15%",
+      "bb": {
+        "atk": 0.15
+      }
+    }
+  ],
+  "trait": {
+    "desc": "攻击对攻击范围内所有地面敌人造成相当于攻击力100%的物理伤害"
+  },
+  "kit": "generic",
+  "art": {
+    "ref": "char_4185_amoris"
+  },
+  "nationId": "aveMujica"
+}

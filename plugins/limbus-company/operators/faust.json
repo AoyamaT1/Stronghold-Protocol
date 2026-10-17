@@ -1,0 +1,149 @@
+{
+  "op": 1,
+  "charId": "char_x_limbus_company_faust",
+  "name": "浮士德",
+  "appellation": "Faust",
+  "profession": "PIONEER",
+  "subProfessionId": "charger",
+  "subProfessionName": "冲锋手",
+  "position": "MELEE",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 2,
+    "bonds": [
+      "limbusShip",
+      "arcaneShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_limbus_faust_a"
+      ],
+      "golden": [
+        "garrison_limbus_faust_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1620,
+        "atk": 440,
+        "def": 225,
+        "bat": 1.6,
+        "blockCnt": 1,
+        "cost": 13,
+        "res": 20,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2850,
+        "atk": 720,
+        "def": 360,
+        "bat": 1.6,
+        "blockCnt": 1,
+        "cost": 13,
+        "res": 25,
+        "aspd": 110,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_limbus_company_faust_1",
+      "name": "能源循环",
+      "duration": 0,
+      "spCost": 7,
+      "initSp": 0,
+      "desc": "攻击造成物理伤害\n使用技能与命中时，各使自身获得 2 层【充能】",
+      "bb": {
+        "atk_scale": 2,
+        "charge": 2
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_faust_2",
+      "name": "跃迁",
+      "duration": 0,
+      "spCost": 32,
+      "initSp": 12,
+      "desc": "使用技能与命中时，各使自身获得 3 层【充能】\n命中时若自身【充能】不低于 3 层，消耗 3 层使目标陷入【束缚】，无法移动",
+      "bb": {
+        "atk_scale": 2.4,
+        "charge": 3,
+        "bind_cost": 3,
+        "bind_dur": 2.5
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_faust_3",
+      "name": "过度充能",
+      "duration": 0,
+      "spCost": 45,
+      "initSp": 18,
+      "desc": "自身【充能】不低于 5 层时，本技能攻击力提升至 140%\n命中时消耗 5 层【充能】，使目标陷入【脆弱】与【麻痹】，此技能可对空",
+      "bb": {
+        "atk_scale": 2.6,
+        "overcharge_mul": 1.4,
+        "overcharge_cost": 5,
+        "fragile": 0.2,
+        "fragile_dur": 4,
+        "palsy": 2,
+        "palsy_dur": 8
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "充能回路",
+      "desc": "部署后立即获得 2 层【充能】，【充能】最多叠加 10 层",
+      "bb": {
+        "init_charge": 2,
+        "cap": 10
+      }
+    },
+    {
+      "index": 1,
+      "name": "W公司清扫协议",
+      "desc": "在场时，使相邻的【边狱公司】友方干员技力消耗降低 1 点",
+      "bb": {}
+    }
+  ],
+  "trait": {
+    "desc": "攻击造成物理伤害，并积攒【充能】；满【充能】时倾泻为控制效果",
+    "bb": {}
+  },
+  "kit": "generic",
+  "nationId": "limbus",
+  "art": {
+    "ref": "char_limbus_faust"
+  }
+}

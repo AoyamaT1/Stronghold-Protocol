@@ -34,8 +34,8 @@ export function unitInfo(u) {
     name: u.name,
     tier: d.tier ?? (d.rank === 'BOSS' ? 3 : d.rank === 'ELITE' ? 2 : 1),
     golden: !!d.golden,
-    spine: d.spine ?? d.charId ?? u.defId,
-    avatar: d.avatar ?? d.charId ?? u.defId,
+    spine: d.assets?.spine ?? d.spine ?? d.charId ?? u.defId,
+    avatar: d.assets?.avatar ?? d.avatar ?? d.charId ?? u.defId,
     x: r2(u.x),
     y: r2(u.y),
     facing: u.facing ?? 1,
@@ -127,9 +127,9 @@ export function unitTuple(u, t) {
 }
 
 /**
- * The three optional HUD readouts of b.snap (events.js snapshot(): `ammo`, `wolves`, `neg`; each only for a living,
- * deployed, visible unit and only when it has one). They ride beside the 9-field tuples — the tuple, and the SP
- * fraction the ammo skill still puts in it, stay as they are.
+ * The optional HUD readouts of b.snap (events.js snapshot(); each only for a living, deployed, visible unit and only
+ * when it has one). They ride beside the 9-field tuples — the tuple, and the SP fraction the ammo skill still puts in
+ * it, stay as they are.
  *
  * `ammoView(u)` = `[rounds left, rounds in the magazine]` of a running ammo skill (whole numbers; the magazine is the
  * activation's real total — extra bullets and refills included — that unitTuple's SP fraction runs on): the segmented
@@ -145,6 +145,19 @@ export function ammoView(u) {
 /** 琳琅诗怀雅's skill purse: zero is a balance; no purse is null. Display only. */
 export function coinView(u) {
   const n = u.mem?.coins, max = u.skill?.bb?.sp;
+  if (u.side !== 'ally' || !Number.isSafeInteger(n) || n < 0 || !Number.isSafeInteger(max) || max < 1) return null;
+  return [Math.min(n, max), max];
+}
+
+/**
+ * `mysticView(u)` = `[stored attack energies, the trait's maximum]` of a 秘术师 (professions.js installMystic keeps the
+ * count in `trait.stored` — the trait's storeEnergy adds one when the attack finds no target, releaseEnergy empties the
+ * lot into the next one — and the cap is `profile.storeMax`: the trait's 最多3个, 4 for 深靛's MSC-X module, TUNE
+ * mystic): the number under the HP bar. Zero is a count. Kits that keep a store of their own (维伊's 转置能量, 黑键's
+ * elite energies) replace `storeEnergy` and never set `trait.stored`: no row. Display only.
+ */
+export function mysticView(u) {
+  const n = u.trait?.stored, max = u.profile?.storeMax;
   if (u.side !== 'ally' || !Number.isSafeInteger(n) || n < 0 || !Number.isSafeInteger(max) || max < 1) return null;
   return [Math.min(n, max), max];
 }
@@ -172,23 +185,25 @@ export function negView(u) {
   return v > 0 ? Math.min(1, Math.max(0.01, r2(v))) : null;
 }
 
-/** 边狱公司【理智值】HUD readout: an ally op's `mem.limbusSanity` (−45..45), or null. */
-export function sanityView(u) {
-  const s = u && u.mem ? u.mem.limbusSanity : undefined;
-  if (!u || u.side !== 'ally' || typeof s !== 'number') return null;
-  return Math.max(-45, Math.min(45, Math.round(s)));
+/**
+ * `layerView(u)` = the hit-negating 护盾 layers a unit holds (the sum of its buffs' shieldHits — 泥岩's 沃土予身), null
+ * without any. Display only: render/vfx/talentfx.js shows the official effect of that many layers (mudrok_buff_03 / 02 /
+ * 01_start).
+ */
+export function layerView(u) {
+  let n = 0;
+  for (const b of u.buffs) if (b.shieldHits > 0) n += b.shieldHits;
+  return n >= 1 ? Math.min(999, Math.floor(n)) : null;
 }
 
 /**
- * 边狱公司【金枝共鸣】HUD readout (全队共享池): `[n, cap]` of a limbus op whose bond mirrors the team resonance onto
- * `mem.limbusResonance` / `mem.limbusResonanceCap` (sim/bonds.js applyResonance). Every fielded sinner carries the same
- * pair — the shared gauge shows under each of them. Null without an active covenant.
+ * `chargeView(u)` = `[charges stored, the skill's maximum]` of an ally whose skill stores charges (maxCharges > 1, 卡涅利安):
+ * the 技能充能 the official sand armour shows (render/vfx/skillfx.js, the `[eff_cond]` buffs). Display only.
  */
-export function resonanceView(u) {
-  const n = u && u.mem ? u.mem.limbusResonance : undefined;
-  const cap = u && u.mem ? u.mem.limbusResonanceCap : undefined;
-  if (!u || u.side !== 'ally' || typeof n !== 'number' || !(cap >= 1)) return null;
-  return [Math.max(0, Math.min(cap, Math.round(n))), Math.round(cap)];
+export function chargeView(u) {
+  const sk = u.skill;
+  if (u.side !== 'ally' || !sk || sk.noSkill || !(sk.maxCharges > 1)) return null;
+  return [Math.max(0, Math.min(sk.maxCharges, Math.floor(sk.charges || 0))), sk.maxCharges];
 }
 
 /** Units included in a snapshot: deployed & visible, plus recently dead ones (DIE animation). */

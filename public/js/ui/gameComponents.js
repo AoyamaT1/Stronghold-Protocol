@@ -12,9 +12,9 @@ import {
 
 const cx = (...p) => p.flat().filter(Boolean).join(' ');
 
-/** Data files the in-match screens use (`backups`: the 补位 stand-ins' bodies — cards, the board model, the detail card; `skins`: 皮肤 section). */
+/** Data files the in-match screens use (`backups`: the 补位 stand-ins' bodies — cards, the board model, the detail card). */
 export const GAME_FILES = ['config', 'assets', 'chess', 'bonds', 'items', 'bands', 'enemies', 'bosses', 'stages', 'tokens',
-  'choices', 'effects', 'garrisons', 'factions', 'local', 'backups', 'skins'];
+  'choices', 'effects', 'garrisons', 'factions', 'local', 'backups'];
 
 /**
  * Load every in-match data file; returns lookups (sync, null until loaded).

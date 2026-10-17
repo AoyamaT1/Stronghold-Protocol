@@ -1,0 +1,632 @@
+{
+  "garrison_fgo_gareth_a": {
+    "garrisonId": "garrison_fgo_gareth_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,indomShip,steadShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_1_gareth_a"
+    ]
+  },
+  "garrison_fgo_gareth_b": {
+    "garrisonId": "garrison_fgo_gareth_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,indomShip,steadShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_1_gareth_b"
+    ]
+  },
+  "garrison_fgo_bedivere_a": {
+    "garrisonId": "garrison_fgo_bedivere_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,deputShip,preciShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_2_bedivere_a"
+    ]
+  },
+  "garrison_fgo_bedivere_b": {
+    "garrisonId": "garrison_fgo_bedivere_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,deputShip,preciShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_2_bedivere_b"
+    ]
+  },
+  "garrison_fgo_tristan_a": {
+    "garrisonId": "garrison_fgo_tristan_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,preciShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_2_tristan_a"
+    ]
+  },
+  "garrison_fgo_tristan_b": {
+    "garrisonId": "garrison_fgo_tristan_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,preciShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_2_tristan_b"
+    ]
+  },
+  "garrison_fgo_percival_a": {
+    "garrisonId": "garrison_fgo_percival_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,miraShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_3_percival_a"
+    ]
+  },
+  "garrison_fgo_percival_b": {
+    "garrisonId": "garrison_fgo_percival_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,miraShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_3_percival_b"
+    ]
+  },
+  "garrison_fgo_baobhan_a": {
+    "garrisonId": "garrison_fgo_baobhan_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_3_baobhan_a"
+    ]
+  },
+  "garrison_fgo_baobhan_b": {
+    "garrisonId": "garrison_fgo_baobhan_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_3_baobhan_b"
+    ]
+  },
+  "garrison_fgo_gawain_a": {
+    "garrisonId": "garrison_fgo_gawain_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,indomShip,raidShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_gawain_a"
+    ]
+  },
+  "garrison_fgo_gawain_b": {
+    "garrisonId": "garrison_fgo_gawain_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,indomShip,raidShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_gawain_b"
+    ]
+  },
+  "garrison_fgo_barghest_a": {
+    "garrisonId": "garrison_fgo_barghest_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,indomShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_barghest_a"
+    ]
+  },
+  "garrison_fgo_barghest_b": {
+    "garrisonId": "garrison_fgo_barghest_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,indomShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_barghest_b"
+    ]
+  },
+  "garrison_fgo_mash_a": {
+    "garrisonId": "garrison_fgo_mash_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,maniShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_mash_a"
+    ]
+  },
+  "garrison_fgo_mash_b": {
+    "garrisonId": "garrison_fgo_mash_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,steadShip,maniShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_4_mash_b"
+    ]
+  },
+  "garrison_fgo_lancelot_a": {
+    "garrisonId": "garrison_fgo_lancelot_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_lancelot_a"
+    ]
+  },
+  "garrison_fgo_lancelot_b": {
+    "garrisonId": "garrison_fgo_lancelot_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,swiftShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_lancelot_b"
+    ]
+  },
+  "garrison_fgo_mordred_a": {
+    "garrisonId": "garrison_fgo_mordred_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,raidShip,soloShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_mordred_a"
+    ]
+  },
+  "garrison_fgo_mordred_b": {
+    "garrisonId": "garrison_fgo_mordred_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,raidShip,soloShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_mordred_b"
+    ]
+  },
+  "garrison_fgo_melusine_a": {
+    "garrisonId": "garrison_fgo_melusine_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,raidShip,preciShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_melusine_a"
+    ]
+  },
+  "garrison_fgo_melusine_b": {
+    "garrisonId": "garrison_fgo_melusine_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,raidShip,preciShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_5_melusine_b"
+    ]
+  },
+  "garrison_fgo_artoria_a": {
+    "garrisonId": "garrison_fgo_artoria_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,skillfulShip,deputShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_artoria_a"
+    ]
+  },
+  "garrison_fgo_artoria_b": {
+    "garrisonId": "garrison_fgo_artoria_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,skillfulShip,deputShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_artoria_b"
+    ]
+  },
+  "garrison_fgo_merlin_a": {
+    "garrisonId": "garrison_fgo_merlin_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,visiShip,miraShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_merlin_a"
+    ]
+  },
+  "garrison_fgo_merlin_b": {
+    "garrisonId": "garrison_fgo_merlin_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,visiShip,miraShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_merlin_b"
+    ]
+  },
+  "garrison_fgo_castoria_a": {
+    "garrisonId": "garrison_fgo_castoria_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,deputShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_castoria_a"
+    ]
+  },
+  "garrison_fgo_castoria_b": {
+    "garrisonId": "garrison_fgo_castoria_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,deputShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_castoria_b"
+    ]
+  },
+  "garrison_fgo_morgan_a": {
+    "garrisonId": "garrison_fgo_morgan_a",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 2
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,visiShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +2（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+2</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_morgan_a"
+    ]
+  },
+  "garrison_fgo_morgan_b": {
+    "garrisonId": "garrison_fgo_morgan_b",
+    "eventType": "SERVER_GAIN",
+    "eventTypeDesc": "单次叠加",
+    "eventTypeIcon": "icon_bond",
+    "effectType": "SERVER_ADD_BOND",
+    "effectKey": "SERVER_ADD_BOND",
+    "battleRuneKey": null,
+    "charLevel": 0,
+    "bb": {
+      "count": 4
+    },
+    "bbStr": {
+      "bond": "roundTable,arcaneShip,visiShip"
+    },
+    "desc": "<获得时>【圆桌】及自身所属盟约层数 +4（无需激活盟约）",
+    "descRaw": "<获得时>【圆桌】及自身所属盟约层数 <@ba.vup>+4</>（无需激活盟约）",
+    "owners": [
+      "chess_fgo_6_morgan_b"
+    ]
+  }
+}

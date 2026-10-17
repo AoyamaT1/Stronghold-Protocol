@@ -1,0 +1,159 @@
+{
+  "op": 1,
+  "charId": "char_x_limbus_company_ryoshu",
+  "name": "良秀",
+  "appellation": "Ryōshū",
+  "profession": "SPECIAL",
+  "subProfessionId": "executor",
+  "subProfessionName": "处决者",
+  "position": "MELEE",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 5,
+    "bonds": [
+      "limbusShip",
+      "swiftShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_limbus_ryoshu_a"
+      ],
+      "golden": [
+        "garrison_limbus_ryoshu_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1980,
+        "atk": 620,
+        "def": 320,
+        "bat": 1.25,
+        "blockCnt": 1,
+        "cost": 23,
+        "res": 10,
+        "aspd": 100,
+        "respawnTime": 18
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 3450,
+        "atk": 800,
+        "def": 510,
+        "bat": 1.25,
+        "blockCnt": 1,
+        "cost": 23,
+        "res": 15,
+        "aspd": 110,
+        "respawnTime": 18
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_limbus_company_ryoshu_1",
+      "name": "三连",
+      "duration": 0,
+      "spCost": 7,
+      "initSp": 0,
+      "desc": "攻击力 +50%\n攻击时使自身获得 2 层【呼吸法】\n攻击时使目标获得 1 层【流血】与 1 层灼燃损伤\n开启时使自身回复 5 点【精神值】",
+      "bb": {
+        "atk_pct_s1": 0.5,
+        "breath_gain": 2,
+        "bleed": 1,
+        "burn": 1,
+        "sanity_gain": 5
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_ryoshu_2",
+      "name": "三连-残",
+      "duration": 0,
+      "spCost": 32,
+      "initSp": 12,
+      "desc": "攻击力 +100%，攻击目标数 +1\n攻击时使自身获得 2 层【呼吸法】\n攻击时使目标获得 2 层【流血】与 2 层灼燃损伤",
+      "bb": {
+        "atk_pct_s2": 1,
+        "max_targets": 1,
+        "breath_gain": 2,
+        "bleed": 2,
+        "burn": 2,
+        "duration": 12
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_ryoshu_3",
+      "name": "空间斩",
+      "duration": 0,
+      "spCost": 48,
+      "initSp": 20,
+      "desc": "对面前直线 4 格内的敌人施加 1 秒【定身】，随后结算一次攻击力 400% 的物理伤害并无视部分防御力\n命中使目标获得 3 层【流血】与 3 层灼燃损伤\n开启时使自身获得 5 层【呼吸法】",
+      "bb": {
+        "line_tiles": 4,
+        "bind_sec": 1,
+        "s3_scale": 4,
+        "breath_gain": 5,
+        "s3_bleed": 3,
+        "s3_burn": 3,
+        "telegraph": 0.3
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "呼吸法",
+      "desc": "攻击时使自身获得 1 层【呼吸法】；自身每 1 级【呼吸法】，攻击力 +3%",
+      "bb": {
+        "breath_cap": 10,
+        "breath_atk": 0.03
+      }
+    },
+    {
+      "index": 1,
+      "name": "空间斩",
+      "desc": "攻击时使目标获得 1 层【流血】与 1 层灼燃损伤；目标【流血】与灼燃损伤层数之和每 6 级，造成伤害 +10%",
+      "bb": {
+        "mul_cap": 0.3
+      }
+    }
+  ],
+  "trait": {
+    "desc": "攻击造成物理伤害并无视目标部分防御力；【精神值】越高，攻击力与攻击速度越高；开启技能时大幅提升【边狱公司】盟约层数",
+    "bb": {
+      "def_ignore": 0.3,
+      "sanity_aspd_max": 30
+    }
+  },
+  "kit": "generic",
+  "nationId": "limbus",
+  "art": {
+    "ref": "char_limbus_ryoshu"
+  }
+}

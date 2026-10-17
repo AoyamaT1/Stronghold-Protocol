@@ -1,0 +1,168 @@
+{
+  "op": 1,
+  "charId": "char_x_limbus_company_rodion",
+  "name": "罗佳",
+  "appellation": "Rodion",
+  "profession": "TANK",
+  "subProfessionId": "shotprotector",
+  "subProfessionName": "哨戒铁卫",
+  "position": "MELEE",
+  "rarity": 6,
+  "as": "both",
+  "chess": {
+    "tier": 3,
+    "bonds": [
+      "limbusShip",
+      "steadShip"
+    ],
+    "garrisonIds": {
+      "normal": [
+        "garrison_limbus_rodion_a"
+      ],
+      "golden": [
+        "garrison_limbus_rodion_b"
+      ]
+    }
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 1900,
+        "atk": 430,
+        "def": 340,
+        "bat": 1.2,
+        "blockCnt": 3,
+        "cost": 18,
+        "res": 15,
+        "aspd": 100,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2900,
+        "atk": 780,
+        "def": 520,
+        "bat": 1.2,
+        "blockCnt": 3,
+        "cost": 18,
+        "res": 20,
+        "aspd": 105,
+        "respawnTime": 70
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skx_limbus_company_rodion_1",
+      "name": "骑士的护佑",
+      "duration": 0,
+      "spCost": 7,
+      "initSp": 0,
+      "desc": "攻击力 +40%\n攻击时使目标获得 1 级凋亡损伤，并获得 2 层【深泪】\n目标凋亡损伤不低于 6 级时，攻击力额外 +15%",
+      "bb": {
+        "atk_pct": 0.4,
+        "apo_thr": 6,
+        "apo_extra": 0.15,
+        "deep_gain": 2,
+        "deep_cap": 20
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_rodion_2",
+      "name": "以正义之力",
+      "duration": 0,
+      "spCost": 30,
+      "initSp": 12,
+      "desc": "攻击力 +80%\n技能开启时使自身失去 10 点理智\n若自身【深泪】不低于 15 层，消耗 5 层使本次伤害 +20%\n攻击时使目标获得 2 层凋亡损伤",
+      "bb": {
+        "atk_pct": 0.8,
+        "duration": 20,
+        "sanity_cost": 10,
+        "deep_req": 15,
+        "deep_cost": 5,
+        "deep_dmg": 0.2,
+        "apo_level": 2
+      },
+      "default": false
+    },
+    {
+      "skillId": "skx_limbus_company_rodion_3",
+      "name": "阿卡纳穿刺",
+      "duration": 0,
+      "spCost": 45,
+      "initSp": 20,
+      "desc": "攻击力 +120%\n技能开启时使自身失去 15 点理智\n若自身【深泪】不低于 10 层，消耗至多 20 层【深泪】，每消耗 1 层使造成伤害 +1.5%，每 5 层攻击力额外 +10%\n攻击时使目标获得 3 级凋亡损伤",
+      "bb": {
+        "atk_pct": 1.2,
+        "duration": 20,
+        "sanity_cost": 15,
+        "deep_req": 10,
+        "deep_max": 20,
+        "deep_dmg_per": 0.015,
+        "deep_dmg_cap": 0.3,
+        "deep_atk_per5": 0.1,
+        "deep_atk_cap": 0.4,
+        "apo_level": 3
+      },
+      "default": true
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "守护之剑",
+      "desc": "自身每有 2 层【守护之剑】，攻击力 +5%；攻击时使目标获得 1 级凋亡损伤",
+      "bb": {
+        "guard_cap": 10,
+        "atk_per_2": 0.05
+      }
+    },
+    {
+      "index": 1,
+      "name": "泪锋",
+      "desc": "自身每失去 15 点理智，获得 1 层【泪锋】；每层【泪锋】使自身攻击力 +8%，至多 3 层",
+      "bb": {
+        "sanity_per_stack": 15,
+        "atk_per_stack": 0.08,
+        "max_stack": 3
+      }
+    }
+  ],
+  "trait": {
+    "desc": "攻击造成法术伤害；每 6 秒消耗 8 点【精神值】为全体【边狱公司】生成护盾，并使自身获得 1 层【守护之剑】；【精神值】为负时自身伤害与减伤提升；作为稳定叠层手，持续攻击为【边狱公司】盟约叠层",
+    "bb": {
+      "shield_pct": 0.25,
+      "shield_interval": 6,
+      "shield_cost": 8,
+      "shield_dur": 8,
+      "neg_reduction_max": 0.25
+    }
+  },
+  "kit": "generic",
+  "nationId": "limbus",
+  "art": {
+    "ref": "char_limbus_rodion"
+  }
+}
