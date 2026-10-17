@@ -1,0 +1,196 @@
+{
+  "op": 1,
+  "charId": "char_x_recruits_chen3",
+  "name": "赤刃明霄陈",
+  "appellation": "Ch'en the Dawnstreak",
+  "profession": "WARRIOR",
+  "subProfessionId": "artsfghter",
+  "subProfessionName": "术战者",
+  "position": "MELEE",
+  "rarity": 6,
+  "as": "chess",
+  "chess": {
+    "tier": 5,
+    "bonds": [
+      "yanShip"
+    ],
+    "identifier": 10002,
+    "shopSortId": 1001,
+    "price": 4,
+    "sellPrice": 1,
+    "garrisonIds": []
+  },
+  "forms": {
+    "normal": {
+      "stats": {
+        "maxHp": 2211,
+        "atk": 670,
+        "def": 352,
+        "res": 15,
+        "cost": 19,
+        "blockCnt": 1,
+        "bat": 1.25,
+        "aspd": 100,
+        "respawnTime": 70,
+        "spRecovery": 1,
+        "hpRecoveryPerSec": 0,
+        "moveSpeed": 1,
+        "tauntLevel": 0,
+        "massLevel": 0,
+        "deployLimit": 1,
+        "deckStack": 0
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "elite": {
+      "stats": {
+        "maxHp": 2914,
+        "atk": 785,
+        "def": 400,
+        "res": 15,
+        "cost": 19,
+        "blockCnt": 1,
+        "bat": 1.25,
+        "aspd": 100,
+        "respawnTime": 70,
+        "spRecovery": 1,
+        "hpRecoveryPerSec": 0,
+        "moveSpeed": 1,
+        "tauntLevel": 0,
+        "massLevel": 0,
+        "deployLimit": 1,
+        "deckStack": 0
+      },
+      "rangeGrid": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "skills": [
+    {
+      "skillId": "skchr_chen3_3",
+      "name": "赤霄·天喟",
+      "default": true,
+      "desc": "技能开启时向前释放一道可转向的剑气，对穿过的敌人造成相当于其当前生命值6%的法术伤害（至少造成自身攻击力530%的法术伤害）；攻击范围扩大，每次攻击对最多3名地面敌人造成3次攻击力165%的法术伤害",
+      "descRaw": "技能开启时向前释放一道可转向的剑气，对穿过的敌人造成相当于其当前生命值<@ba.vup>6%</>的法术伤害（至少造成自身攻击力<@ba.vup>530%</>的法术伤害）；攻击范围扩大，每次攻击对最多<@ba.vup>3</>名地面敌人造成<@ba.vup>3</>次攻击力<@ba.vup>165%</>的法术伤害",
+      "bb": {
+        "hp_ratio": 0.06,
+        "projectile_min_atk_scale": 5.3,
+        "attack@atk_scale": 1.65,
+        "attack@max_target": 3
+      },
+      "duration": 20,
+      "durationType": "NONE",
+      "spCost": 29,
+      "initSp": 12,
+      "skillType": "MANUAL",
+      "spType": "INCREASE_WITH_TIME",
+      "maxChargeTime": 1,
+      "increment": 1,
+      "rangeGrid": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      "trigger": {
+        "rule": "DEFAULT",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": null
+      }
+    }
+  ],
+  "talents": [
+    {
+      "index": 0,
+      "name": "形意洞照",
+      "desc": "攻击力+16%（+3%），攻击速度+16（+3），攻击变为弱点伤害",
+      "descRaw": "攻击力+16%<@ba.talpu>（+3%）</>，攻击速度+16<@ba.talpu>（+3）</>，攻击变为<$ba.weaknessatk>弱点伤害</>",
+      "bb": {
+        "atk": 0.16,
+        "attack_speed": 16
+      },
+      "bbStr": {},
+      "rangeGrid": null,
+      "hidden": false,
+      "fromModule": false
+    },
+    {
+      "index": 1,
+      "name": "寒暑觉知",
+      "desc": "未受到伤害时，每7秒随机治疗自身一定（攻击力的35%（+5%）~165%（+5%））生命值，并闪避下次物理与法术攻击",
+      "descRaw": "未受到伤害时，每7秒随机治疗自身一定（攻击力的35%<@ba.talpu>（+5%）</>~165%<@ba.talpu>（+5%）</>）生命值，并闪避下次物理与法术攻击",
+      "bb": {
+        "stack_time": 7,
+        "heal_atk_scale_min": 35,
+        "heal_atk_scale_max": 166
+      },
+      "bbStr": {},
+      "rangeGrid": null,
+      "hidden": false,
+      "fromModule": false
+    }
+  ],
+  "trait": {
+    "desc": "攻击造成法术伤害",
+    "descRaw": "攻击造成<@ba.kw>法术伤害</>",
+    "bb": {},
+    "bbStr": {},
+    "rangeGrid": null
+  },
+  "kit": {
+    "ref": "char_1050_chen3"
+  },
+  "art": {
+    "ref": "char_1050_chen3"
+  },
+  "nationId": "yan",
+  "dmgType": "arts",
+  "attackKind": "melee",
+  "projectile": "none",
+  "canHitFly": false
+}

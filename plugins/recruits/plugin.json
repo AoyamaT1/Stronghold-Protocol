@@ -1,0 +1,28 @@
+{
+  "$schema": "../../schemas/plugin.schema.json",
+  "manifest": 2,
+  "id": "recruits",
+  "name": "社区额外招募干员包 (含【望】)",
+  "englishName": "Community Recruits",
+  "description": "来自 Lunac1a / 社区扩展：望、赤刃明霄陈、凯尔希·思衡托、维什戴尔的 0.3.0 插件包。",
+  "version": "1.0.0",
+  "app": ">=0.3.0 <0.4.0",
+  "api": 1,
+  "class": "content",
+  "scope": [
+    "room"
+  ],
+  "authors": [
+    "Lunac1a / llleeeqi"
+  ],
+  "license": "CC-BY-4.0",
+  "permissions": [
+    "data.add"
+  ],
+  "operators": [
+    "operators/wang.json",
+    "operators/chen3.json",
+    "operators/kalts2.json",
+    "operators/wisdel.json"
+  ]
+}
